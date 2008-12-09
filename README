@@ -1,0 +1,13 @@
+Here is a collection of matchers (for rspec) and steps (for Cucumber) for making testing emails a little easier.
+
+These were originally written for the Story Runner and later translated over...  
+
+This probably has a few rough edges.. any commits to smooth out the problems would be appreciated.
+
+
+To use these in your features put the following in your env.rb:
+
+require File.join(RAILS_ROOT, "vendor/plugins/email-spec/lib/email_spec_feature_setup.rb")
+ * Make sure this require is after you require cucumber/rails/world.
+
+The matchers and helpers should be available for your specs by default.
