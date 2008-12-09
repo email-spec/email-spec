@@ -10,4 +10,9 @@ To use these in your features put the following in your env.rb:
 require File.join(RAILS_ROOT, "vendor/plugins/email-spec/lib/email_spec_feature_setup.rb")
  * Make sure this require is after you require cucumber/rails/world.
 
-The matchers and helpers should be available for your specs by default.
+The matchers and helpers should be available for your specs by default, but you need to include them into the example groups you want to use them in.  To include them in all of your specs you can do this in your spec_helper.rb:
+
+Spec::Runner.configure do |config|
+  config.include(EmailSpec::Helpers)
+  config.include(EmailSpec::Matchers)
+end
