@@ -1,37 +1,51 @@
-
-Given "no emails have been sent" do
+Given "a clear email queue" do
   reset_mailer
 end
-  
-Then /^(\w+) should have received (\d+) emails*$/ do |actor, amount|
-  email = actor =~ /@/ ? actor : instance_variable_get(actor).email
-  emails_sent_to(email).size.should == amount.to_i
-end
-  
-Then /^(\w+) should receive an email$/ do |actor|
-  last_email_sent.to.should include(instance_variable_get(actor).email)
-end
-  
-Then /^(\w+) should not receive an email$/ do |actor|
-  #This is fragile because it depends on no previous steps sending a email to
-  # the said actor before this step.. A Given clause could be used to clean up the mailer but 
-  # it would not look good in the stories.. 
-  last_email_sent.to.should_not include(instance_variable_get(actor).email)
+
+# user perspective
+When %r{^'([^']*?)' opens (?:his)|(?:her) email with subject '([^']*?)'$} do |email, subject|
+  open_email(email, :with_subject => subject).should_not be_nil
 end
 
-Then /^an email should have been sent to (.+)$/ do |actor_or_email|
-  email = actor_or_email["@"] ? actor_or_email : instance_variable_get(actor_or_email).email
-  sent_email = ActionMailer::Base.deliveries.find{ |mail| mail.to.include? email }
-  sent_email.should_not be_nil
-  @current_email = sent_email
+When %r{^'([^']*?)' opens (?:his)|(?:her) email containing text '([^']*?)'$} do |email, text|
+  open_email(email, :with_text => text).should_not be_nil
+end
+
+When %r{^.*?follows '([^']*?)' in (?:his)|(?:her) email$} do |link_text|
+  current_email.should_not be_nil
+  link = parse_email_for_link(current_email, link_text)
+  get(link)
+end
+
+When %r{^.*?clicks on '([^']*?)' in (?:his)|(?:her) email$} do |link_text|
+  current_email.should_not be_nil
+  link = parse_email_for_link(current_email, link_text)
+  get_via_redirect(link)
+end
+
+Then %r{^'([^']*?)' should have (\d+) new emails?$} do |email, n|
+  unread_emails_for(email).size.should == n.to_i
+end
+
+Then %r{^'([^']*?)' should have (\d+) total emails?$} do |email, n|
+  mailbox_for(email).size.should == n.to_i
+end
+
+# system perspective
+Then %r{^an email should have been sent to '([^']*?)'$} do |email|
+  open_email(email).should_not be_nil
 end
   
-Then /^an email should not have been sent to (.+)/ do |actor_or_email|
-  email = actor_or_email["@"] ? actor_or_email : instance_variable_get(actor_or_email).email
-  sent_email = ActionMailer::Base.deliveries.find{ |mail| mail.to.include? email }
-  sent_email.should be_nil
+Then %r{^an email should not have been sent to '([^']*?)'$} do |email|
+  open_email(email).should be_nil
 end
-  
-Then /^email should include text: "(.*)"$/ do |text|
-  @current_email.body.should have_text(/#{text}/)
+
+Then %r{^.*?email should have subject with text '([^']*?)'$} do |text|
+  current_email.should_not be_nil
+  current_email.subject.should =~ Regexp.new(text)
+end
+
+Then %r{^.*?email should include text '([^']*?)'$} do |text|
+  current_email.should_not be_nil
+  current_email.body.should =~ Regexp.new(text)
 end

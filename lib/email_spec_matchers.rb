@@ -1,7 +1,9 @@
 module EmailSpec
+
     module Matchers
           
     class DeliverTo
+
       def initialize(expected_email_addresses)
         @expected_email_addresses = expected_email_addresses.sort
       end
@@ -23,12 +25,10 @@ module EmailSpec
     end
 
     def deliver_to(*expected_email_addresses_or_objects_that_respond_to_email)
-      emails  = expected_email_addresses_or_objects_that_respond_to_email.map do |email_or_object|
-                  email_or_object.kind_of?(String) ? email_or_object : email_or_object.email
-                end            
+      emails = expected_email_addresses_or_objects_that_respond_to_email.map do |email_or_object|
+        email_or_object.kind_of?(String) ? email_or_object : email_or_object.email
+      end
       DeliverTo.new(emails)
     end
-
-
   end
 end
