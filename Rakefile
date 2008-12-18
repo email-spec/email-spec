@@ -41,7 +41,15 @@ task :install_gem => [:clean, :package] do
 end
 
 # Testing
-task :features do
+
+desc "Run the generator on the tests"
+task :generate do
+  system "mkdir -p spec/rails_root/vendor/plugins/email_spec"
+  system "cp -R generators spec/rails_root/vendor/plugins/email_spec"
+  system "cd spec/rails_root; ./script/generate email_spec"
+end
+
+task :features => [:generate] do
   system("cd spec/rails_root; rake features; cd ../..")
 end
 
