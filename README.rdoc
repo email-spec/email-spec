@@ -21,6 +21,12 @@ To use the steps in features put the following in your env.rb:
   # Make sure this require is after you require cucumber/rails/world.
   require 'email_spec/cucumber'
 
+Then:
+
+  script/generate email_spec
+
+This will give you a bunch of steps to get started with in step_definitions/email_steps.rb
+
 === RSpec
 	
 The matchers and helpers should be available for your specs by default, but you need to include them into the example groups you want to use them in.  To include them in all of your specs you can do this in your spec_helper.rb:
