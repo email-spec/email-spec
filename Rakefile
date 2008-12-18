@@ -2,7 +2,7 @@
 
 # package + maintenance stuff
 spec = Gem::Specification.new do |s|
-  s.name         = "email-spec"
+  s.name         = "email_spec"
   s.version      = EmailSpec::VERSION
   s.platform     = Gem::Platform::RUBY
   s.authors      = ['Ben Mabrey', 'Aaron Gibralter', 'Mischa Fierer']
