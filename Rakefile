@@ -64,6 +64,10 @@ task :install_gem => [:clean, :package] do
   sh "sudo gem install --local #{gem}"
 end
 
+task :gemspec do
+  system "rake debug_gem | grep -v \"(in \" > email_spec.gemspec"
+end
+
 desc "Delete generated RDoc"
 task :clobber_docs do
   FileUtils.rm_rf("doc")
