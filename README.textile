@@ -1,16 +1,29 @@
-Here is a collection of matchers (for rspec) and steps (for Cucumber) for making testing emails a little easier.
+h1. Email Spec
 
-These were originally written for the Story Runner and later translated over...  
-
-This probably has a few rough edges.. any commits to smooth out the problems would be appreciated.
+A collection of RSpec matchers and Cucumber steps to make testing emails go smooth.
 
 
-To use these in your features put the following in your env.rb:
+h2. Setup
 
-require 'email_spec_feature_setup'
+<pre>
+<code>
+ script/plugin install git://github.com/bmabey/email-spec.git
+</code>
+</pre>
 
- * Make sure this require is after you require cucumber/rails/world.
+h3. Cucumber
 
+To use the steps in features put the following in your env.rb:
+
+<pre>
+<code>
+  # Make sure this require is after you require cucumber/rails/world.
+  require 'email_spec_feature_setup'
+</code>
+</pre>
+
+h3. RSpec
+	
 The matchers and helpers should be available for your specs by default, but you need to include them into the example groups you want to use them in.  To include them in all of your specs you can do this in your spec_helper.rb:
 
 Spec::Runner.configure do |config|
@@ -18,8 +31,9 @@ Spec::Runner.configure do |config|
   config.include(EmailSpec::Matchers)
 end
 
+h2. Usage
 
-For example:
+h3. Cucumber
 
 Scenario: A new person signs up
       Given I am at "/"
