@@ -67,7 +67,9 @@ module EmailSpec
           link_text
         elsif mail.body =~ %r{<a[^>]*href=['"]?([^'"]*)['"]?[^>]*?>[^<]*?#{link_text}[^<]*?</a>}
           # if it's an anchor tag
-          URI.split($~[1])[5..-1].compact!.join("?")
+          URI.split($~[1])[5..-1].compact!.join("?").gsub("&amp;", "&")
+	  # sub correct ampersand after rails switches it (http://dev.rubyonrails.org/ticket/4002) 
+	  # TODO: outsource this kind of parsing to webrat or someone else
         end
       end
     end

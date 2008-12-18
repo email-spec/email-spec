@@ -19,6 +19,10 @@ Then /^"([^']*?)" should receive (\d+) emails?$/ do |email, n|
   unread_emails_for(email).size.should == n.to_i 
 end
 
+Then /^I should receive (\d+) emails?$/ do |n|
+  unread_emails_for(current_email).size.should == n.to_i
+end
+
 Then /^"([^']*?)" should have (\d+) emails?$/ do |email, n|
   mailbox_for(email).size.should == n.to_i
 end

@@ -18,3 +18,19 @@ Scenario: A new person signs up
       When I follow "confirm" in the email
       Then I should see "Confirm your new account"
 
+
+Scenario: I sign up
+      Given I am at "/"
+      And no emails have been sent
+      When I fill in "Email" with "quentin@example.com"
+      And I press "Sign up"
+      Then "quentin@example.com" should receive 1 email
+      And "quentin@example.com" should have 1 email
+      And "foo@bar.com" should not receive an email
+      When I open the email
+      Then I should see "confirm" in the email
+      And I should see "Account confirmation" in the subject
+      When I follow "confirm" in the email
+      Then I should see "Confirm your new account"
+
+
