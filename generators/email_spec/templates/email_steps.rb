@@ -44,11 +44,11 @@ Then /^I should see "(.*)" in the email$/ do |text|
   current_email.body.should =~ Regexp.new(text)
 end
 
-When %r{^'([^']*?)' opens? the email with subject "([^']*?)"$} do |email, subject|
+When %r{^"([^']*?)" opens? the email with subject "([^']*?)"$} do |email, subject|
   open_email(email, :with_subject => subject).should_not be_nil
 end
 
-When %r{^'([^']*?)' opens? the email with text "([^']*?)"$} do |email, text|
+When %r{^"([^']*?)" opens? the email with text "([^']*?)"$} do |email, text|
   open_email(email, :with_text => text).should_not be_nil
 end
 
