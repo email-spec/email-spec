@@ -37,3 +37,5 @@ Scenario: A new person signs up
       When I follow "confirm" in the email
       Then I should see "Confirm your new account"
 
+To see the app that implements this feature check out:
+http://github.com/bmabey/email-spec-sample-app/tree/master
