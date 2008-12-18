@@ -17,3 +17,23 @@ Spec::Runner.configure do |config|
   config.include(EmailSpec::Helpers)
   config.include(EmailSpec::Matchers)
 end
+
+
+For example:
+
+Scenario: A new person signs up
+      Given I am at "/"
+      And a clear email queue
+      When I fill in "Email" with "quentin@example.com"
+      And I fill in "Password" with "monkey"
+      And I fill in "Password confirmation" with "monkey"
+      And I press "Sign up"
+      Then "quentin@example.com" should receive 1 email
+      And "quentin@example.com" should have 1 email
+      And "foo@bar.com" should not receive an email
+      When I open the email
+      Then I should see "confirm" in the email
+      And I should see "Account confirmation" in the subject
+      When I follow "confirm" in the email
+      Then I should see "Confirm your new account"
+
