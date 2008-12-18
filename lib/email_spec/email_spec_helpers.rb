@@ -17,6 +17,10 @@ module EmailSpec
     def reset_mailer
       ActionMailer::Base.deliveries.clear
     end
+
+    def visit_in_email(link_text)
+      visit(parse_email_for_link(current_email, link_text))
+    end
     
     def open_email(email_address, opts={})
       if opts[:with_subject]
@@ -34,6 +38,7 @@ module EmailSpec
 
     def open_last_email
       email = ActionMailer::Base.deliveries.last
+      raise "Last email was nil" unless email #TODO: fix
       read_emails_for(email.to) << email if email
       @email_spec_hash[:current_emails][email.to] = email
       @email_spec_hash[:current_email] = email
