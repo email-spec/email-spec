@@ -63,7 +63,5 @@ h2. TODO:
 
 H3. People
 
-Ben Mabey
-Aaron Gibralter
-Mischa Fierer
+Ben Mabey, Aaron Gibralter, Mischa Fierer
 
