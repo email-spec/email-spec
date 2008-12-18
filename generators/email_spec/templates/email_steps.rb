@@ -15,14 +15,14 @@ When /^I follow "(.*)" in the email$/ do |link|
   visit_in_email(link)
 end
 
-Then /^I should receive (\d+) emails?$/ do |n|
+Then /^I should receive (.*) emails?$/ do |n|
+  n = 1 if n == "an"
   unread_emails_for(current_email_address).size.should == n.to_i
 end
 
 Then /^"([^']*?)" should receive (\d+) emails?$/ do |email, n|
   unread_emails_for(email).size.should == n.to_i 
 end
-
 
 
 Then /^"([^']*?)" should have (\d+) emails?$/ do |email, n|
@@ -34,22 +34,19 @@ Then /^"([^']*?)" should not receive an email$/ do |email|
 end
 
 Then /^I should see "(.*)" in the subject$/ do |text|
-#  raise ArgumentError, "To check the subject, you must first open an e-mail" if current_email.nil?
-#  current_email.should_not be_nil
   current_email.subject.should =~ Regexp.new(text)
 end
 
 Then /^I should see "(.*)" in the email$/ do |text|
-#  current_email.should_not be_nil
   current_email.body.should =~ Regexp.new(text)
 end
 
 When %r{^"([^']*?)" opens? the email with subject "([^']*?)"$} do |email, subject|
-  open_email(email, :with_subject => subject).should_not be_nil
+  open_email(email, :with_subject => subject)
 end
 
 When %r{^"([^']*?)" opens? the email with text "([^']*?)"$} do |email, text|
-  open_email(email, :with_text => text).should_not be_nil
+  open_email(email, :with_text => text)
 end
 
 
