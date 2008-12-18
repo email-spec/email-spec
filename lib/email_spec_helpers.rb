@@ -28,8 +28,14 @@ module EmailSpec
       end
             
       read_emails_for(email_address) << email if email
-      
       @email_spec_hash[:current_emails][email_address] = email
+      @email_spec_hash[:current_email] = email
+    end
+
+    def open_last_email
+      email = ActionMailer::Base.deliveries.last
+      read_emails_for(email.to) << email if email
+      @email_spec_hash[:current_emails][email.to] = email
       @email_spec_hash[:current_email] = email
     end
     
