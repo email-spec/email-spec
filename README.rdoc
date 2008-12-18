@@ -42,7 +42,8 @@ The matchers and helpers should be available for your specs by default, but you 
       And I should see "Account confirmation" in the subject
       When I follow "confirm" in the email
       Then I should see "Confirm your new account"
-{Check out an app that implements these features here}[http://github.com/bmabey/email-spec-sample-app]
+
+Check out an app that implements these features at http://github.com/bmabey/email-spec-sample-app
 
 == TODO:
 
