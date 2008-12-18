@@ -7,12 +7,19 @@ A collection of RSpec matchers and Cucumber steps to make testing emails go smoo
 
   script/plugin install git://github.com/bmabey/email-spec.git
 
+=== Gem Setup  (may or may not work atm)
+  
+  gem install mischa-email_spec
+
+  # config/environments/test.rb
+  config.gem 'email_spec'
+  
 === Cucumber
 
 To use the steps in features put the following in your env.rb:
 
   # Make sure this require is after you require cucumber/rails/world.
-  require 'email_spec_feature_setup'
+  require 'email_spec/cucumber'
 
 === RSpec
 	
