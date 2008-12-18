@@ -1,8 +1,24 @@
 #Commonly used email steps
+#
+# To add your own steps make a custom_email_steps.rb
+# The provided methods are:
+#
+# reset_mailer 
+# open_last_email
+# visit_in_email
+# unread_emails_for
+# mailbox_for
+# current_email
+# open_email
+# read_emails_for
 
+
+def current_email_address
+  "quentin@example.com" # Replace with your a way to find your current_email. e.g current_user.email
+end
 # Use this step to reset the e-mail queue within a scenario.
 # This is done automatically before each scenario.
-Given /^(?:a clear email queue|no emails have been sent)$/ do
+Given /^no emails have been sent$/ do
   reset_mailer
 end
 
@@ -15,15 +31,14 @@ When /^I follow "(.*)" in the email$/ do |link|
   visit_in_email(link)
 end
 
-Then /^I should receive (.*) emails?$/ do |n|
-  n = 1 if n == "an"
-  unread_emails_for(current_email_address).size.should == n.to_i
+Then /^I should receive (.*) emails?$/ do |amount|
+  amount = 1 if amount == "an"
+  unread_emails_for(current_email_address).size.should == amount
 end
 
 Then /^"([^']*?)" should receive (\d+) emails?$/ do |email, n|
   unread_emails_for(email).size.should == n.to_i 
 end
-
 
 Then /^"([^']*?)" should have (\d+) emails?$/ do |email, n|
   mailbox_for(email).size.should == n.to_i

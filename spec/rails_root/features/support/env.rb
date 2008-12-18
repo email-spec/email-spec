@@ -10,7 +10,5 @@ require 'webrat/rspec-rails'
 
 require File.expand_path(File.dirname(__FILE__) + '../../../../../lib/email_spec/cucumber.rb')
 
-def current_email_address
-  "quentin@example.com"
-end
+
 

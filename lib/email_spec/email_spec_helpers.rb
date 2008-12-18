@@ -23,29 +23,17 @@ module EmailSpec
     end
     
     def open_email(email_address, opts={})
-      if opts[:with_subject]
-        email = mailbox_for(email_address).find { |m| m.subject =~ Regexp.new(opts[:with_subject]) }
-      elsif opts[:with_text]
-        email = mailbox_for(email_address).find { |m| m.body =~ Regexp.new(opts[:with_text]) }
-      else
-        email = mailbox_for(email_address).first
-      end
-            
-      read_emails_for(email_address) << email if email
-      @email_spec_hash[:current_emails][email_address] = email
-      @email_spec_hash[:current_email] = email
+      email = find_email(email_address, opts) 
+      set_current_email(email)
     end
 
     def open_last_email
       email = ActionMailer::Base.deliveries.last
       raise "Last email was nil" unless email #TODO: fix
-      read_emails_for(email.to) << email if email
-      @email_spec_hash[:current_emails][email.to] = email
-      @email_spec_hash[:current_email] = email
+      set_current_email(email)
     end
     
     def current_email(email_address=nil)
-      return get_current_email if defined?(get_current_email)
       email_address ? @email_spec_hash[:current_emails][email_address] : @email_spec_hash[:current_email]
     end
     
@@ -57,10 +45,29 @@ module EmailSpec
       @email_spec_hash[:read_emails][email_address] ||= []
     end
     
-    def mailbox_for(email)
-      ActionMailer::Base.deliveries.select { |m| m.to.include?(email) }
+    def mailbox_for(email_address)
+      ActionMailer::Base.deliveries.select { |m| m.to.include?(email_address) }
     end
     
+    private
+
+    def set_current_email(email=nil)
+      return unless email
+      read_emails_for(email.to) << email      
+      @email_spec_hash[:current_emails][email.to] = email
+      @email_spec_hash[:current_email] = email
+    end
+    
+    def find_email(email_address, opts)
+     if opts[:with_subject]
+        email = mailbox_for(email_address).find { |m| m.subject =~ Regexp.new(opts[:with_subject]) }
+      elsif opts[:with_text]
+        email = mailbox_for(email_address).find { |m| m.body =~ Regexp.new(opts[:with_text]) }
+      else
+        email = mailbox_for(email_address).first
+      end
+    end
+
     def parse_email_for_link(mail, link_text)
       if mail.body.include?(link_text)
         if link_text =~ %r{^/.*$}

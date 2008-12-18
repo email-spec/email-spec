@@ -24,7 +24,6 @@ Scenario: I sign up imperatively
       And no emails have been sent
       When I fill in "Email" with "quentin@example.com"
       And I press "Sign up"
-      Then I should receive 1 email
       And I should receive an email
       When I open the email
       Then I should see "confirm" in the email
