@@ -5,7 +5,11 @@ require 'cucumber/rails/world'
 Cucumber::Rails.use_transactional_fixtures
 
 require 'webrat/rails'
-#require 'email_spec_feature_setup'
-
 require 'cucumber/rails/rspec'
 require 'webrat/rspec-rails'
+
+require File.expand_path(File.dirname(__FILE__) + '../../../../../lib/email_spec/email_spec_feature_setup.rb')
+
+
+# /Users/mischa/Projects/Rails/cycle/vendor/plugins/email-spec/lib/email_spec/email_spec_feature_setup.rb 
+# /Users/mischa/Projects/Rails/cycle/vendor/plugins/email-spec/spec/lib/email_spec/email_spec_feature_setup.rb 

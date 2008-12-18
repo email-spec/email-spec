@@ -1,12 +1,6 @@
-require 'rubygems'
-require "rake/gempackagetask"
-require 'rake/rdoctask'
-require "rake/clean"
-require 'spec'
-require 'spec/rake/spectask'
-require File.expand_path('./lib/email_spec.rb')
+['rubygems',"rake/gempackagetask",'rake/rdoctask',"rake/clean",'spec', 'spec/rake/spectask', File.expand_path('./lib/email_spec.rb')].each {|file| require file}
 
-# Package && release
+# package + maintenance stuff
 spec = Gem::Specification.new do |s|
   s.name         = "email-spec"
   s.version      = EmailSpec::VERSION
@@ -29,6 +23,10 @@ task :debug_gem do
   puts spec.to_ruby
 end
 
+task :gemspec do
+  system "rake debug_gem | grep -v \"(in \" > email-spec.gemspec"
+end
+
 CLEAN.include ["pkg", "*.gem", "doc", "ri", "coverage", '**/.*.sw?', '*.gem', '.config', '**/.DS_Store', '**/*.class', '**/*.jar', '**/.*.swp' ]
 
 desc 'Install the package as a gem.'
@@ -37,10 +35,7 @@ task :install_gem => [:clean, :package] do
   sh "sudo gem install --local #{gem}"
 end
 
-task :gemspec do
-  system "rake debug_gem | grep -v \"(in \" > email-spec.gemspec"
-end
-
+# Testing
 task :features do
   system("cd spec/rails_root; rake features; cd ../..")
 end

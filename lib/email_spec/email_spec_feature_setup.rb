@@ -1,7 +1,9 @@
 # require this in your env.rb file after you require cucumber/rails/world
 
-%w[steps].each do |file|
-  require File.join(File.dirname(__FILE__), "email_spec_#{file}.rb")
+%w[steps helpers matchers].each do |file|
+  file =  File.join(File.dirname(__FILE__), "email_spec_#{file}.rb")
+  puts file.to_s
+  require file
 end
 
 # Global Setup
