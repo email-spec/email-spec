@@ -12,7 +12,7 @@ A collection of RSpec matchers and Cucumber steps to make testing emails go smoo
   gem install mischa-email_spec
 
   # config/environments/test.rb
-  config.gem 'email_spec'
+  config.gem 'mischa-email_spec', :lib => 'email_spec'
   
 === Cucumber
 
