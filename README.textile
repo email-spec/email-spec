@@ -1,6 +1,6 @@
 h1. Email Spec
 
-A collection of RSpec matchers and Cucumber steps to make testing emails go smooth.
+A collection of RSpec matchers and Cucumber steps to make testing emails go smoothly.
 
 
 h2. Setup
