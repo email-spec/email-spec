@@ -10,7 +10,7 @@ require File.expand_path('./lib/email_spec.rb')
 # Package && release
 ##############################################################################
 spec = Gem::Specification.new do |s|
-  s.name         = "email_spec"
+  s.name         = "email-spec"
   s.version      = EmailSpec::VERSION
   s.platform     = Gem::Platform::RUBY
   s.authors      = ['Ben Mabrey', 'Aaron Gibralter', 'Mischa Fierer']
@@ -65,7 +65,7 @@ task :install_gem => [:clean, :package] do
 end
 
 task :gemspec do
-  system "rake debug_gem | grep -v \"(in \" > email_spec.gemspec"
+  system "rake debug_gem | grep -v \"(in \" > email-spec.gemspec"
 end
 
 desc "Delete generated RDoc"
