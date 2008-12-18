@@ -13,10 +13,13 @@
 # read_emails_for
 # find_email
 
-
-def current_email_address
-  "quentin@example.com" # Replace with your a way to find your current_email. e.g current_user.email
+module EmailHelpers
+  def current_email_address
+    "quentin@example.com" # Replace with your a way to find your current_email. e.g current_user.email
+  end
 end
+World {|world| world.extend EmailHelpers }
+
 # Use this step to reset the e-mail queue within a scenario.
 # This is done automatically before each scenario.
 Given /^(?:a clear email queue|no emails have been sent)$/ do

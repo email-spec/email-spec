@@ -21,6 +21,9 @@ To use the steps in features put the following in your env.rb:
   # Make sure this require is after you require cucumber/rails/world.
   require 'email_spec/cucumber'
 
+This will load all the helpers that the steps rely on. 
+It will also add a Before hook for Cucumber so that emails are cleared at the start of each scenario.
+
 Then:
 
   script/generate email_spec
@@ -42,7 +45,7 @@ The matchers and helpers should be available for your specs by default, but you 
 
   Scenario: A new person signs up
       Given I am at "/"
-      And no emails have been sent
+      And no emails have been sent  # The mailer is cleared before each scenario so this step is really uneeded here expect for making things more clear.
       When I fill in "Email" with "quentin@example.com"
       And I press "Sign up"
       And I should receive an email
