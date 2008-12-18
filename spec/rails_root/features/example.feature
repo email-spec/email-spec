@@ -24,7 +24,8 @@ Scenario: I sign up
       And no emails have been sent
       When I fill in "Email" with "quentin@example.com"
       And I press "Sign up"
-      Then "quentin@example.com" should receive 1 email
+      Then I should receive 1 email
+      And "quentin@example.com" should receive 1 email
       And "quentin@example.com" should have 1 email
       And "foo@bar.com" should not receive an email
       When I open the email

@@ -15,13 +15,15 @@ When /^I follow "(.*)" in the email$/ do |link|
   visit_in_email(link)
 end
 
+Then /^I should receive (\d+) emails?$/ do |n|
+  unread_emails_for(current_email_address).size.should == n.to_i
+end
+
 Then /^"([^']*?)" should receive (\d+) emails?$/ do |email, n|
   unread_emails_for(email).size.should == n.to_i 
 end
 
-Then /^I should receive (\d+) emails?$/ do |n|
-  unread_emails_for(current_email).size.should == n.to_i
-end
+
 
 Then /^"([^']*?)" should have (\d+) emails?$/ do |email, n|
   mailbox_for(email).size.should == n.to_i
@@ -41,4 +43,13 @@ Then /^I should see "(.*)" in the email$/ do |text|
 #  current_email.should_not be_nil
   current_email.body.should =~ Regexp.new(text)
 end
+
+When %r{^'([^']*?)' opens? the email with subject "([^']*?)"$} do |email, subject|
+  open_email(email, :with_subject => subject).should_not be_nil
+end
+
+When %r{^'([^']*?)' opens? the email with text "([^']*?)"$} do |email, text|
+  open_email(email, :with_text => text).should_not be_nil
+end
+
 

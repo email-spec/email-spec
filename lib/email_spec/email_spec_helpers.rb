@@ -45,6 +45,7 @@ module EmailSpec
     end
     
     def current_email(email_address=nil)
+      return get_current_email if defined?(get_current_email)
       email_address ? @email_spec_hash[:current_emails][email_address] : @email_spec_hash[:current_email]
     end
     
