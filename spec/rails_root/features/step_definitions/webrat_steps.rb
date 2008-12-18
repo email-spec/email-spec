@@ -1,6 +1,11 @@
 # Commonly used webrat steps
 # http://github.com/brynary/webrat
 
+Given /^I am at "(.+)"$/ do |path|
+  visit path
+end
+
+
 When /^I press "(.*)"$/ do |button|
   click_button(button)
 end
@@ -91,3 +96,5 @@ end
 Then /^the "(.*)" checkbox should be checked$/ do |label|
   field_labeled(label).should be_checked
 end
+
+
