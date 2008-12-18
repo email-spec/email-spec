@@ -27,6 +27,11 @@ task :gemspec do
   system "rake debug_gem | grep -v \"(in \" > email-spec.gemspec"
 end
 
+Rake::GemPackageTask.new(spec) do |package|
+  package.gem_spec = spec
+end
+
+
 CLEAN.include ["pkg", "*.gem", "doc", "ri", "coverage", '**/.*.sw?', '*.gem', '.config', '**/.DS_Store', '**/*.class', '**/*.jar', '**/.*.swp' ]
 
 desc 'Install the package as a gem.'
