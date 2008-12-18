@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{email-spec}
+  s.name = %q{email_spec}
   s.version = "0.0.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.description = %q{Easily test email in rspec and cucumber}
   s.email = %q{f.mischa@gmail.com}
   s.extra_rdoc_files = ["README.rdoc", "MIT-LICENSE.txt"]
-  s.files = ["History.txt", "install.rb", "MIT-LICENSE.txt", "README.rdoc", "Rakefile", "lib/email_spec", "lib/email_spec/email_spec_feature_setup.rb", "lib/email_spec/email_spec_helpers.rb", "lib/email_spec/email_spec_matchers.rb", "lib/email_spec/email_spec_steps.rb", "lib/email_spec.rb"]
+  s.files = ["History.txt", "install.rb", "MIT-LICENSE.txt", "README.rdoc", "Rakefile", "lib/email_spec", "lib/email_spec/cucumber.rb", "lib/email_spec/email_spec_helpers.rb", "lib/email_spec/email_spec_matchers.rb", "lib/email_spec/email_spec_steps.rb", "lib/email_spec.rb", "generators/email_spec", "generators/email_spec/email_spec_generator.rb", "generators/email_spec/templates", "generators/email_spec/templates/email_steps.rb"]
   s.has_rdoc = true
   s.homepage = %q{http://github.com/bmabey/email-spec/}
   s.require_paths = ["lib"]
