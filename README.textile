@@ -26,10 +26,14 @@ h3. RSpec
 	
 The matchers and helpers should be available for your specs by default, but you need to include them into the example groups you want to use them in.  To include them in all of your specs you can do this in your spec_helper.rb:
 
-Spec::Runner.configure do |config|
-  config.include(EmailSpec::Helpers)
-  config.include(EmailSpec::Matchers)
-end
+<pre>
+<code>
+ Spec::Runner.configure do |config|
+   config.include(EmailSpec::Helpers)
+   config.include(EmailSpec::Matchers)
+ end
+</code>
+</pre>
 
 h2. Usage
 
