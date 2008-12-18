@@ -1,4 +1,4 @@
-Given "a clear email queue" do
+Given /^(?:a clear email queue|no emails have been sent)$/ do
   reset_mailer
 end
 
