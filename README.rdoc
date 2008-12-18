@@ -1,47 +1,33 @@
-h1. Email Spec
+= Email Spec
 
 A collection of RSpec matchers and Cucumber steps to make testing emails go smoothly.
 
 
-h2. Setup
+== Setup
 
-<pre>
-<code>
- script/plugin install git://github.com/bmabey/email-spec.git
-</code>
-</pre>
+  script/plugin install git://github.com/bmabey/email-spec.git
 
-h3. Cucumber
+=== Cucumber
 
 To use the steps in features put the following in your env.rb:
 
-<pre>
-<code>
   # Make sure this require is after you require cucumber/rails/world.
   require 'email_spec_feature_setup'
-</code>
-</pre>
 
-h3. RSpec
+=== RSpec
 	
 The matchers and helpers should be available for your specs by default, but you need to include them into the example groups you want to use them in.  To include them in all of your specs you can do this in your spec_helper.rb:
 
-<pre>
-<code>
- Spec::Runner.configure do |config|
-   config.include(EmailSpec::Helpers)
-   config.include(EmailSpec::Matchers)
- end
-</code>
-</pre>
+  Spec::Runner.configure do |config|
+    config.include(EmailSpec::Helpers)
+    config.include(EmailSpec::Matchers)
+  end
 
-h2. Usage
+== Usage
 
-h3. Cucumber
+=== Cucumber
 
-<pre>
-<code>
- Scenario: A new person signs up
+  Scenario: A new person signs up
       Given I am at "/"
       And a clear email queue
       When I fill in "Email" with "quentin@example.com"
@@ -56,17 +42,14 @@ h3. Cucumber
       And I should see "Account confirmation" in the subject
       When I follow "confirm" in the email
       Then I should see "Confirm your new account"
-</code>
-</pre>
+{Check out an app that implements these features here}[http://github.com/bmabey/email-spec-sample-app]
 
-"Check out an app that implements these features here":http://github.com/bmabey/email-spec-sample-app/tree/master
+== TODO:
 
-h2. TODO:
+- refactor!
+- provide custom matchers to give better messages
 
-  * refactor!
-  * provide custom matchers to give better messages
-
-h3. People
+== Authors
 
 Ben Mabey, Aaron Gibralter, Mischa Fierer
 

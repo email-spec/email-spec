@@ -4,7 +4,6 @@ require 'rake/rdoctask'
 require "rake/clean"
 require 'spec'
 require 'spec/rake/spectask'
-#require 'spec/rake/verify_rcov'
 require File.expand_path('./lib/email_spec.rb')
 
 ##############################################################################
