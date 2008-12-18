@@ -61,7 +61,7 @@ h2. TODO:
   * refactor!
   * provide custom matchers to give better messages
 
-H3. People
+h3. People
 
 Ben Mabey, Aaron Gibralter, Mischa Fierer
 
