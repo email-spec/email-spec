@@ -1,0 +1,64 @@
+= Email Spec
+
+A collection of RSpec matchers and Cucumber steps to make testing emails go smoothly.
+
+
+== Setup
+
+  script/plugin install git://github.com/bmabey/email-spec.git
+
+=== Gem Setup  (may or may not work atm)
+  
+  gem install bmabey-email_spec
+
+  # config/environments/test.rb
+  config.gem 'bmabey-email_spec', :lib => 'email_spec'
+  
+=== Cucumber
+
+To use the steps in features put the following in your env.rb:
+
+  # Make sure this require is after you require cucumber/rails/world.
+  require 'email_spec/cucumber'
+
+Then:
+
+  script/generate email_spec
+
+This will give you a bunch of steps to get started with in step_definitions/email_steps.rb
+
+=== RSpec
+	
+The matchers and helpers should be available for your specs by default, but you need to include them into the example groups you want to use them in.  To include them in all of your specs you can do this in your spec_helper.rb:
+
+  Spec::Runner.configure do |config|
+    config.include(EmailSpec::Helpers)
+    config.include(EmailSpec::Matchers)
+  end
+
+== Usage
+
+=== Cucumber
+
+  Scenario: A new person signs up
+      Given I am at "/"
+      And no emails have been sent
+      When I fill in "Email" with "quentin@example.com"
+      And I press "Sign up"
+      And I should receive an email
+      When I open the email
+      Then I should see "confirm" in the email
+      When I follow "confirm" in the email
+      Then I should see "Confirm your new account"
+
+For more examples, check out spec/rails_root in the source for a small example app that implements these steps.
+
+== TODO:
+
+- refactor!
+- provide custom matchers to give better messages
+
+== Authors
+
+Ben Mabey, Aaron Gibralter, Mischa Fierer
+
