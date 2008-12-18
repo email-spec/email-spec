@@ -35,7 +35,9 @@ h2. Usage
 
 h3. Cucumber
 
-Scenario: A new person signs up
+<pre>
+<code>
+ Scenario: A new person signs up
       Given I am at "/"
       And a clear email queue
       When I fill in "Email" with "quentin@example.com"
@@ -50,12 +52,18 @@ Scenario: A new person signs up
       And I should see "Account confirmation" in the subject
       When I follow "confirm" in the email
       Then I should see "Confirm your new account"
+</code>
+</pre>
 
-To see the app that implements this feature check out:
-http://github.com/bmabey/email-spec-sample-app/tree/master
+"Check out an app that implements these features here": http://github.com/bmabey/email-spec-sample-app/tree/master
 
-
-
-TODO:
+h2. TODO:
   * refactor!
-  * provide custom mathcers to give better messages
+  * provide custom matchers to give better messages
+
+H3. People
+
+Ben Mabey
+Aaron Gibralter
+Mischa Fierer
+
