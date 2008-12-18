@@ -56,7 +56,7 @@ module EmailSpec
           link_text
         elsif mail.body =~ %r{<a[^>]*href=['"]?([^'"]*)['"]?[^>]*?>[^<]*?#{link_text}[^<]*?</a>}
           # if it's an anchor tag
-          URI.parse($~[1]).path
+          URI.split($~[1])[5..-1].compact!.join("?")
         end
       end
     end
