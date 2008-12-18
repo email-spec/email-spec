@@ -11,13 +11,13 @@ end
 When /^I follow "(.*)" in the email$/ do |link_text|
   current_email.should_not be_nil
   link = parse_email_for_link(current_email, link_text)
-  get(link)
+  visit(link)
 end
 
 When /^I click "(.*)" in the email$/ do |link_text|
   current_email.should_not be_nil
   link = parse_email_for_link(current_email, link_text)
-  get_via_redirect(link)
+  visit(link)
 end
 
 
