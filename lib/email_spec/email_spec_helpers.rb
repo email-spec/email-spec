@@ -3,20 +3,11 @@ require 'uri'
 module EmailSpec
 
   module Helpers
-
-    def self.extended(base)
-      base.instance_eval do
-        @email_spec_hash = {}
-        @email_spec_hash[:read_emails] = {}
-        @email_spec_hash[:unread_emails] = {}
-        @email_spec_hash[:current_emails] = {}
-        @email_spec_hash[:current_email] = nil
-      end
-    end
     
     def reset_mailer
       ActionMailer::Base.deliveries.clear
     end
+
 
     def visit_in_email(link_text)
       visit(parse_email_for_link(current_email, link_text))
@@ -35,7 +26,7 @@ module EmailSpec
     end
     
     def current_email(address=nil)
-      email = address ? @email_spec_hash[:current_emails][address] : @email_spec_hash[:current_email]
+      email = address ? email_spec_hash[:current_emails][address] : email_spec_hash[:current_email]
       raise Spec::Expectations::ExpectationNotMetError, "Expected an open email but none was found. Did you forget to call open_email?" unless email  
       email
     end
@@ -45,7 +36,7 @@ module EmailSpec
     end
     
     def read_emails_for(address)
-      @email_spec_hash[:read_emails][address] ||= []
+      email_spec_hash[:read_emails][address] ||= []
     end
     
     def mailbox_for(address)
@@ -63,6 +54,10 @@ module EmailSpec
     end
 
     private
+
+    def email_spec_hash
+      @email_spec_hash ||= {:read_emails => {}, :unread_emails => {}, :current_emails => {}, :current_email => nil}
+    end
 	
     def find_email!(address, opts={})
       email = find_email(address, opts)
@@ -76,8 +71,8 @@ module EmailSpec
     def set_current_email(email)
       return unless email
       read_emails_for(email.to) << email      
-      @email_spec_hash[:current_emails][email.to] = email
-      @email_spec_hash[:current_email] = email
+      email_spec_hash[:current_emails][email.to] = email
+      email_spec_hash[:current_email] = email
     end
     
     def parse_email_for_link(email, link_text)
