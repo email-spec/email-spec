@@ -5,6 +5,9 @@ require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 require 'spec'
 require 'spec/rails'
 
+require File.expand_path(File.dirname(__FILE__) + '/../../../lib/email_spec/helpers.rb')
+require File.expand_path(File.dirname(__FILE__) + '/../../../lib/email_spec/matchers.rb')
+
 Spec::Runner.configure do |config|
   # If you're not using ActiveRecord you should remove these
   # lines, delete config/database.yml and disable :active_record
