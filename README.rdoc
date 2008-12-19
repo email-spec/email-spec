@@ -45,7 +45,6 @@ The matchers and helpers should be available for your specs by default, but you 
 
   Scenario: A new person signs up
       Given I am at "/"
-      And no emails have been sent  # The mailer is cleared before each scenario so this step is really uneeded here expect for making things more clear.
       When I fill in "Email" with "quentin@example.com"
       And I press "Sign up"
       And I should receive an email
