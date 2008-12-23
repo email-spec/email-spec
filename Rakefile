@@ -6,7 +6,7 @@ spec = Gem::Specification.new do |s|
   s.version      = EmailSpec::VERSION
   s.platform     = Gem::Platform::RUBY
   s.authors      = ['Ben Mabrey', 'Aaron Gibralter', 'Mischa Fierer']
-  s.email        = "f.mischa@gmail.com"
+  s.email        = "ben@benmabey.com"
   s.homepage     = "http://github.com/bmabey/email-spec/"
   s.summary      = "Easily test email in rspec and cucumber"
   s.bindir       = "bin"
@@ -50,7 +50,7 @@ task :generate do
 end
 
 task :features => [:generate] do
-  system("cd spec/rails_root; rake features; cd ../..")
+  system("cucumber spec/rails_root/features")
 end
 
 task :default => :features
