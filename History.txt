@@ -1,4 +1,12 @@
-== 0.0.1 2008-12-18
+(In Git)                                                                                                                                                                                                
+ === New features
 
-* 1 major enhancement:
-  * Initial release
+ === Bugfixes
+  * Removed sample app Rake Tasks to have it play nice with environments that use Cucumber as plugin- not gem. (Ben Mabey, Ivor- on github)
+
+== 0.0.6 2008-12-19
+ === New features
+  * Improved RSpec documentaioni and refactorings. (Ben Mabey)
+
+== 0.0.5 2008-12-18
+  * Initial release - see this post for full history and contributos: http://www.benmabey.com/2008/12/18/github-rocks/

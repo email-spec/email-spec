@@ -119,7 +119,9 @@ For more examples, check out spec/rails_root in the source for a small example a
       WRITE ME
       For now take a look at Email::Helpers to see what you can do.
 
-== Authors
+== Original Authors
 
 Ben Mabey, Aaron Gibralter, Mischa Fierer
+
+Please see History.txt for upcoming changsets and other contributors.
 
