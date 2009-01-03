@@ -4,15 +4,18 @@ module EmailSpec
           
     class DeliverTo
 
-      def initialize(expected_email_addresses)
-        @expected_email_addresses = expected_email_addresses.sort
+      def initialize(expected_email_addresses_or_objects_that_respond_to_email)
+        emails = expected_email_addresses_or_objects_that_respond_to_email.map do |email_or_object|
+          email_or_object.kind_of?(String) ? email_or_object : email_or_object.email
+        end
+
+        @expected_email_addresses = emails.sort
       end
 
       def matches?(email)
         @email = email
         @actual_recipients = (email.to || []).sort
-        @actual_recipients.should == @expected_email_addresses
-        true
+        @actual_recipients == @expected_email_addresses
       end
 
       def failure_message
@@ -25,10 +28,8 @@ module EmailSpec
     end
 
     def deliver_to(*expected_email_addresses_or_objects_that_respond_to_email)
-      emails = expected_email_addresses_or_objects_that_respond_to_email.map do |email_or_object|
-        email_or_object.kind_of?(String) ? email_or_object : email_or_object.email
-      end
-      DeliverTo.new(emails)
+      DeliverTo.new(expected_email_addresses_or_objects_that_respond_to_email)
     end
+
   end
 end
