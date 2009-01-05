@@ -12,7 +12,7 @@ spec = Gem::Specification.new do |s|
   s.bindir       = "bin"
   s.description  = s.summary
   s.require_path = "lib"
-  s.files        = %w(History.txt install.rb MIT-LICENSE.txt README.rdoc Rakefile) + Dir["lib/**/*"] + Dir["generators/**/*"] + Dir["spec/**/*"]
+  s.files        = %w(History.txt install.rb MIT-LICENSE.txt README.rdoc Rakefile) + Dir["lib/**/*"] + Dir["generators/**/*"] + Dir["spec/**/*"] + Dir["examples/**/*"]
   # rdoc
   s.has_rdoc         = true
   s.extra_rdoc_files = %w(README.rdoc MIT-LICENSE.txt)
@@ -44,13 +44,13 @@ end
 
 desc "Run the generator on the tests"
 task :generate do
-  system "mkdir -p spec/rails_root/vendor/plugins/email_spec"
-  system "cp -R generators spec/rails_root/vendor/plugins/email_spec"
-  system "cd spec/rails_root; ./script/generate email_spec"
+  system "mkdir -p examples/rails_root/vendor/plugins/email_spec"
+  system "cp -R generators examples/rails_root/vendor/plugins/email_spec"
+  system "cd examples/rails_root; ./script/generate email_spec"
 end
 
 task :features => [:generate] do
-  system("cucumber spec/rails_root/features")
+  system("cucumber examples/rails_root/features")
 end
 
 task :default => :features
