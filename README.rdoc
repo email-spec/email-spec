@@ -7,7 +7,7 @@ A collection of RSpec matchers and Cucumber steps to make testing emails go smoo
 
   script/plugin install git://github.com/bmabey/email-spec.git
 
-=== Gem Setup  (may or may not work atm)
+=== Gem Setup
   
   gem install bmabey-email_spec
 
@@ -124,4 +124,3 @@ For more examples, check out spec/rails_root in the source for a small example a
 Ben Mabey, Aaron Gibralter, Mischa Fierer
 
 Please see History.txt for upcoming changsets and other contributors.
-
