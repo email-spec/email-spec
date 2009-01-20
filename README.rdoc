@@ -7,7 +7,7 @@ A collection of RSpec matchers and Cucumber steps to make testing emails go smoo
 
   script/plugin install git://github.com/bmabey/email-spec.git
 
-=== Gem Setup  (may or may not work atm)
+=== Gem Setup
   
   gem install bmabey-email_spec
 
@@ -101,15 +101,15 @@ For more examples, check out spec/rails_root in the source for a small example a
       end
       
       it "should contain the user's message in the mail body" do
-        @email.body.should have_text(/Jojo Binks/)
+        @email.should have_text(/Jojo Binks/)
       end
 
       it "should contain a link to the confirmation link" do
-        @email.body.should have_text(/#{confirm_account_url}/)
+        @email.should have_text(/#{confirm_account_url}/)
       end
       
       it "should have the correct subject" do
-        @email.subject.should =~ /Account confirmation/
+        @email.should have_subject(/Account confirmation/)
       end
       
     end
@@ -124,4 +124,3 @@ For more examples, check out spec/rails_root in the source for a small example a
 Ben Mabey, Aaron Gibralter, Mischa Fierer
 
 Please see History.txt for upcoming changsets and other contributors.
-
