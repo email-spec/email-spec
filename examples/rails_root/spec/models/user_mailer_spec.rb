@@ -16,11 +16,13 @@ describe "Signup Email" do
   end
   
   it "should contain the user's message in the mail body" do
-    @email.body.should have_text(/Jojo Binks/)
+    @email.should have_text(/Jojo Binks/)
   end
 
+  it { should have_text(/Jojo Binks/) }
+
   it "should contain a link to the confirmation link" do
-    @email.body.should have_text(/#{confirm_account_url}/)
+    @email.should have_text(/#{confirm_account_url}/)
   end
   
   it { should have_subject(/Account confirmation/) }

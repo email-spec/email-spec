@@ -41,6 +41,7 @@ describe EmailSpec::Matchers do
         email = mock_email(:subject => ' -- The Subject --')
 
         have_subject(/The Subject/).matches?(email).should be_true
+        have_subject(/The Subject/).matches?(email).should be_true
         have_subject(/foo/).matches?(email).should be_false
       end
 

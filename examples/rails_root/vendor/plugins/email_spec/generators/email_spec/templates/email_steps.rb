@@ -53,7 +53,7 @@ Then /^"([^']*?)" should not receive an email$/ do |address|
 end
 
 Then /^I should see "(.*)" in the subject$/ do |text|
-  current_email.subject.should =~ Regexp.new(text)
+  current_email.should have_subject(Regexp.new(text))
 end
 
 Then /^I should see "(.*)" in the email$/ do |text|

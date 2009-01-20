@@ -8,6 +8,9 @@ module EmailSpec
       ActionMailer::Base.deliveries.clear
     end
 
+    def last_email_sent
+      ActionMailer::Base.deliveries.last || raise("No email has been sent!")
+    end
 
     def visit_in_email(link_text)
       visit(parse_email_for_link(current_email, link_text))
