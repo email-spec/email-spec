@@ -1,6 +1,9 @@
 (In Git)                                                                                                                                                                                                
   === New features
 
+== 0.0.7 2008-1-20
+ === New features
+  * have_subject matcher
 
 == 0.0.6 2008-12-23
  === New features
