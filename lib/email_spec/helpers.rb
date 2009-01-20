@@ -17,15 +17,11 @@ module EmailSpec
     end
     
     def open_email(address, opts={})
-      email = find_email!(address, opts) 
-      email.should_not be_nil
-      set_current_email(email)
+      set_current_email(find_email!(address, opts))
     end
 
     def open_last_email
-      email = ActionMailer::Base.deliveries.last
-      email.should_not be_nil
-      set_current_email(email)
+      set_current_email(last_email_sent)
     end
     
     def current_email(address=nil)
