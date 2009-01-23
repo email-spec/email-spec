@@ -5,23 +5,62 @@ module EmailSpec
   module Helpers
     
     def reset_mailer
-      ActionMailer::Base.deliveries.clear
+      if ActionMailer::Base.delivery_method == :activerecord
+        Email.delete_all
+      else
+        ActionMailer::Base.deliveries.clear
+      end
     end
 
     def last_email_sent
-      ActionMailer::Base.deliveries.last || raise("No email has been sent!")
+      if ActionMailer::Base.delivery_method == :activerecord
+        if email = Email.last
+          TMail::Mail.parse(email.mail)
+        else
+          raise("No email has been sent!")
+        end
+      else
+        ActionMailer::Base.deliveries.last || raise("No email has been sent!")
+      end
+    end
+    
+    def all_emails
+      if ActionMailer::Base.delivery_method == :activerecord
+        Email.all.map{|email| TMail::Mail.parse(email.mail)}
+      else
+        ActionMailer::Base.deliveries
+      end
     end
 
     def visit_in_email(link_text)
       visit(parse_email_for_link(current_email, link_text))
     end
     
+    def click_email_link_matching(regex, email = current_email)
+      url = links_in_email(email).detect { |link| link =~ regex }
+      raise "No link found matching #{regex.inspect} in #{email.body}" unless url
+      request_uri = URI::parse(url).request_uri
+      visit request_uri
+    end
+    
+    def click_first_link_in_email(email = current_email)
+      link = links_in_email(email).first
+      request_uri = URI::parse(link).request_uri
+      visit request_uri
+    end
+    
     def open_email(address, opts={})
       set_current_email(find_email!(address, opts))
     end
+    
+    alias_method :open_email_for, :open_email
 
     def open_last_email
       set_current_email(last_email_sent)
+    end
+
+    def open_last_email_for(address)
+      set_current_email(mailbox_for(address).last)
     end
     
     def current_email(address=nil)
@@ -39,7 +78,11 @@ module EmailSpec
     end
     
     def mailbox_for(address)
-      ActionMailer::Base.deliveries.select { |m| m.to.include?(address) }
+      if ActionMailer::Base.delivery_method == :activerecord
+        Email.all.select { |email| email.to.include?(address) }.map{ |email| TMail::Mail.parse(email.mail) }
+      else
+        ActionMailer::Base.deliveries.select { |m| m.to.include?(address) }
+      end
     end
     
     def find_email(address, opts={})
@@ -62,7 +105,7 @@ module EmailSpec
       email = find_email(address, opts)
       if email.nil?
 	error = "#{opts.keys.first.to_s.humanize unless opts.empty?} #{('"' + opts.values.first.to_s.humanize + '"') unless opts.empty?}"
-	raise Spec::Expectations::ExpectationNotMetError, "Could not find email #{error}. \n Found the following emails:\n\n #{ActionMailer::Base.deliveries.to_s}"
+	raise Spec::Expectations::ExpectationNotMetError, "Could not find email #{error}. \n Found the following emails:\n\n #{all_emails.to_s}"
        end
       email
     end
@@ -72,6 +115,10 @@ module EmailSpec
       read_emails_for(email.to) << email      
       email_spec_hash[:current_emails][email.to] = email
       email_spec_hash[:current_email] = email
+    end
+    
+    def links_in_email(email)
+      URI.extract(email.body, ['http', 'https'])
     end
     
     def parse_email_for_link(email, link_text)
