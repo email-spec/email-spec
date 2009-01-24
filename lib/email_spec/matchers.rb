@@ -12,6 +12,10 @@ module EmailSpec
         @expected_email_addresses = emails.sort
       end
 
+      def description
+        "be delivered to #{@expected_email_addresses.inspect}"
+      end
+
       def matches?(email)
         @email = email
         @actual_recipients = (email.to || []).sort
@@ -30,6 +34,8 @@ module EmailSpec
     def deliver_to(*expected_email_addresses_or_objects_that_respond_to_email)
       DeliverTo.new(expected_email_addresses_or_objects_that_respond_to_email)
     end
+
+    alias :be_delivered_to :deliver_to
 
     def have_subject(expected)
       simple_matcher do |given, matcher|
