@@ -22,8 +22,10 @@ config.action_controller.allow_forgery_protection    = false
 config.action_mailer.delivery_method = :test
 
 
-config.gem 'webrat' , :source => "http://gems.github.com"
-config.gem 'rspec', :lib => 'spec'
-config.gem 'rspec-rails', :lib => 'spec/rails'
-config.gem 'cucumber' , :source => "http://gems.github.com"
+# I HATE config.gem.. it doesn't work as advertised...
+config.gem 'webrat', :source => "http://gems.github.com"
+#config.gem 'rspec', :lib => 'spec'
+#config.gem 'rspec-rails', :lib => 'spec/rails'
+config.gem 'cucumber', :source => "http://gems.github.com" # aslakhellesoy-cucumber
+config.gem 'nakajima-fixjour', :lib => 'fixjour', :source => "http://gems.github.com" # nakajima-fixjour
 

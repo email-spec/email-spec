@@ -8,7 +8,10 @@ require 'webrat/rails'
 require 'cucumber/rails/rspec'
 require 'webrat/rspec-rails'
 
+
 require File.expand_path(File.dirname(__FILE__) + '../../../../../lib/email_spec/cucumber.rb')
 
+require (Rails.root + '/spec/model_factory.rb')
+World { |world| world.extend(Fixjour) }
 
 

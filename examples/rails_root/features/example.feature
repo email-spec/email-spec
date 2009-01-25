@@ -30,16 +30,16 @@ Scenario: A new person signs up imperatively
 
 
 Scenario: slightly more declarative, but still mostly imperative
-    Given I am at "/"
+    Given I'm on the signup page
 
     When I fill in "Email" with "quentin@example.com"
+    And I fill in "Name" with "Quentin Jones"
     And I press "Sign up"
 
     Then I should receive an email
 
     When I open the email
-
-    Then I should see "confirm" in the email
+    Then I should see "Account confirmation" in the subject
 
     When I follow "confirm" in the email
     Then I should see "Confirm your new account"

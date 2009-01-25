@@ -5,10 +5,12 @@ require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 require 'spec'
 require 'spec/rails'
 
+require (Rails.root + '/spec/model_factory.rb')
 require (Rails.root + '/../../lib/email_spec/helpers.rb')
 require (Rails.root + '/../../lib/email_spec/matchers.rb')
 
 Spec::Runner.configure do |config|
+  config.include(Fixjour)
   # If you're not using ActiveRecord you should remove these
   # lines, delete config/database.yml and disable :active_record
   # in your config/boot.rb
