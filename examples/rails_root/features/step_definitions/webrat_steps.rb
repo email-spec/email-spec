@@ -5,6 +5,10 @@ Given /^I am at "(.+)"$/ do |path|
   visit path
 end
 
+Given /^I'm on the (.+) page$/ do |page|
+  locations = {"signup" => "/"}
+  visit locations[page]
+end
 
 When /^I press "(.*)"$/ do |button|
   click_button(button)
