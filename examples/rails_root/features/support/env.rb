@@ -4,9 +4,14 @@ require File.expand_path(File.dirname(__FILE__) + '/../../config/environment')
 require 'cucumber/rails/world'
 Cucumber::Rails.use_transactional_fixtures
 
-require 'webrat/rails'
+require 'webrat'
 require 'cucumber/rails/rspec'
-require 'webrat/rspec-rails'
+require 'webrat/core/matchers'
+
+Webrat.configure do |config|
+  config.mode = :rails
+end
+
 
 
 require File.expand_path(File.dirname(__FILE__) + '../../../../../lib/email_spec/cucumber.rb')

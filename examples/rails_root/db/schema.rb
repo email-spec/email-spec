@@ -12,8 +12,10 @@
 ActiveRecord::Schema.define(:version => 20090125013728) do
 
   create_table "users", :force => true do |t|
-    t.string "email"
-    t.string "name"
+    t.string   "email"
+    t.string   "name"
+    t.string   "confirm_code"
+    t.datetime "confirmed_at"
   end
 
 end

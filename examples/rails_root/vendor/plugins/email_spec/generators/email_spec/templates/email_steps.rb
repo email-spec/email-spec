@@ -35,9 +35,9 @@ When /^I follow "(.*)" in the email$/ do |link|
   visit_in_email(link)
 end
 
-Then /^I should receive (.*) emails?$/ do |amount|
+Then /^I should receive (.+) emails?$/ do |amount|
   amount = 1 if amount == "an"
-  unread_emails_for(current_email_address).size.should == amount
+  unread_emails_for(current_email_address).size.should == amount.to_i
 end
 
 Then /^"([^']*?)" should receive (\d+) emails?$/ do |address, n|
