@@ -59,6 +59,10 @@ module EmailSpec
         email = mailbox_for(address).first
       end
     end
+    
+    def links_in_email(email)
+      URI.extract(email.body, ['http', 'https'])
+    end
 
     private
 
@@ -81,11 +85,7 @@ module EmailSpec
       email_spec_hash[:current_emails][email.to] = email
       email_spec_hash[:current_email] = email
     end
-    
-    def links_in_email(email)
-      URI.extract(email.body, ['http', 'https'])
-    end
-    
+        
     def parse_email_for_link(email, link_text)
       email.body.should include_text(link_text)
       if link_text =~ %r{^/.*$}
