@@ -13,6 +13,7 @@ module EmailSpec
     end
     
     def mailbox_for(address)
+      address = AddressConverter.instance.convert(address)
       ActionMailer::Base.deliveries.select { |m| m.to.include?(address) }
     end
   end
@@ -35,6 +36,7 @@ module EmailSpec
     end
     
     def mailbox_for(address)
+      address = AddressConverter.instance.convert(address)
       Email.all.select { |email| email.to.include?(address) }.map{ |email| parse_to_tmail(email) }
     end
     
