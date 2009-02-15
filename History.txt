@@ -1,7 +1,7 @@
 (In Git)
  === New features 
 
-== 0.0.8 2008-2-15
+== 0.0.9 2008-2-15
  === New features
   * have_body_text, have_header matchers (Luke Melia)
   * EmailViewer - opens all sent emails in a given scenario when the environment variables are set. (Luke Melia)
