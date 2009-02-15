@@ -9,7 +9,8 @@ As a site manager I want new users
 to verify their email address with a confirmation link
 
 Scenario: A new person signs up imperatively 
-    Given I am at "/"
+    Given I am a real person wanting to sign up for an account
+    And I am at "/"
 
     When I fill in "Email" with "quentin@example.com"
     And I fill in "Name" with "Quentin Jones"
@@ -30,7 +31,8 @@ Scenario: A new person signs up imperatively
 
 
 Scenario: slightly more declarative, but still mostly imperative
-    Given I'm on the signup page
+    Given I am a real person wanting to sign up for an account
+    And I'm on the signup page
 
     When I fill in "Email" with "quentin@example.com"
     And I fill in "Name" with "Quentin Jones"
@@ -45,8 +47,10 @@ Scenario: slightly more declarative, but still mostly imperative
     Then I should see "Confirm your new account"
 
 
- Scenario: more declarative
-    Given I'm on the signup page
+ Scenario: declarative
+    Given I am a real person wanting to sign up for an account
+    And I'm on the signup page
+
     When I submit my registration information
     Then I should receive an email with a link to a confirmation page
 

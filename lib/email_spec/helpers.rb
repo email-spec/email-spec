@@ -112,8 +112,10 @@ module EmailSpec
 
     def set_current_email(email)
       return unless email
-      read_emails_for(email.to) << email      
-      email_spec_hash[:current_emails][email.to] = email
+      email.to.each do |to|
+        read_emails_for(to) << email      
+        email_spec_hash[:current_emails][to] = email
+      end
       email_spec_hash[:current_email] = email
     end
     

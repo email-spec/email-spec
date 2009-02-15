@@ -1,8 +1,13 @@
-(In Git)                                                                                                                                                                                                
-  === New features
+(In Git)
+ === New features 
+
+== 0.0.8 2008-2-15
+ === New features
   * have_body_text, have_header matchers (Luke Melia)
   * EmailViewer - opens all sent emails in a given scenario when the environment variables are set. (Luke Melia)
   * Added compatibility with using ARMailer in test mode. (Luke Melia)
+ === Bugfixes
+  * set_current_email now works with multiple addresses in To field. (Brian McManus, Ben Mabey)
 
 == 0.0.7 2008-1-20
  === New features

@@ -1,3 +1,6 @@
+Given "I am a real person wanting to sign up for an account" do
+  # no-op.. for documentation purposes only!
+end
 
 When /^I submit my registration information$/ do
   fill_in "Name", :with => valid_user_attributes[:name]

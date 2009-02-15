@@ -29,3 +29,5 @@ config.gem 'webrat', :source => "http://gems.github.com"
 config.gem 'cucumber', :source => "http://gems.github.com" # aslakhellesoy-cucumber
 config.gem 'nakajima-fixjour', :lib => 'fixjour', :source => "http://gems.github.com" # nakajima-fixjour
 
+
+

@@ -5,7 +5,7 @@ require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 require 'spec'
 require 'spec/rails'
 
-require (Rails.root + '/spec/model_factory.rb')
+require File.expand_path(File.dirname(__FILE__) + "/model_factory.rb")
 require (Rails.root + '/../../lib/email_spec/helpers.rb')
 require (Rails.root + '/../../lib/email_spec/matchers.rb')
 
