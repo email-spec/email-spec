@@ -57,6 +57,25 @@ module EmailSpec
       end
      end
      
+     def include_email_with_subject(expected)
+       simple_matcher do |given_emails, matcher|
+         
+         if expected.is_a?(String)
+           matcher.description = "include email with subject of #{expected.inspect}"
+           matcher.failure_message = "expected at least one email to have the subject #{expected.inspect} but none did. Subjects were #{given_emails.map(&:subject).inspect}"
+           matcher.negative_failure_message = "expected no email with the subject #{expected.inspect} but found at least one. Subjects were #{given_emails.map(&:subject).inspect}"
+
+           given_emails.map(&:subject).include?(expected)
+         else
+           matcher.description = "include email with subject matching #{expected.inspect}"
+           matcher.failure_message = "expected at least one email to have a subject matching #{expected.inspect}, but none did. Subjects were #{given_emails.map(&:subject).inspect}"
+           matcher.negative_failure_message = "expected no email to have a subject matching #{expected.inspect} but found at least one. Subjects were #{given_emails.map(&:subject).inspect}"
+
+           !!(given_emails.any?{ |mail| mail.subject =~ expected })
+         end
+       end
+     end
+     
      def have_body_text(expected)
        simple_matcher do |given, matcher|
          

@@ -3,35 +3,8 @@ require 'uri'
 module EmailSpec
 
   module Helpers
+    include Deliveries
     
-    def reset_mailer
-      if ActionMailer::Base.delivery_method == :activerecord
-        Email.delete_all
-      else
-        ActionMailer::Base.deliveries.clear
-      end
-    end
-
-    def last_email_sent
-      if ActionMailer::Base.delivery_method == :activerecord
-        if email = Email.last
-          TMail::Mail.parse(email.mail)
-        else
-          raise("No email has been sent!")
-        end
-      else
-        ActionMailer::Base.deliveries.last || raise("No email has been sent!")
-      end
-    end
-    
-    def all_emails
-      if ActionMailer::Base.delivery_method == :activerecord
-        Email.all.map{|email| TMail::Mail.parse(email.mail)}
-      else
-        ActionMailer::Base.deliveries
-      end
-    end
-
     def visit_in_email(link_text)
       visit(parse_email_for_link(current_email, link_text))
     end
@@ -50,6 +23,7 @@ module EmailSpec
     end
     
     def open_email(address, opts={})
+      address = convert_address(address)
       set_current_email(find_email!(address, opts))
     end
     
@@ -60,32 +34,29 @@ module EmailSpec
     end
 
     def open_last_email_for(address)
+      address = convert_address(address)
       set_current_email(mailbox_for(address).last)
     end
     
     def current_email(address=nil)
+      address = convert_address(address)
       email = address ? email_spec_hash[:current_emails][address] : email_spec_hash[:current_email]
       raise Spec::Expectations::ExpectationNotMetError, "Expected an open email but none was found. Did you forget to call open_email?" unless email  
       email
     end
     
     def unread_emails_for(address)
+      address = convert_address(address)
       mailbox_for(address) - read_emails_for(address)
     end
     
     def read_emails_for(address)
+      address = convert_address(address)
       email_spec_hash[:read_emails][address] ||= []
     end
     
-    def mailbox_for(address)
-      if ActionMailer::Base.delivery_method == :activerecord
-        Email.all.select { |email| email.to.include?(address) }.map{ |email| TMail::Mail.parse(email.mail) }
-      else
-        ActionMailer::Base.deliveries.select { |m| m.to.include?(address) }
-      end
-    end
-    
     def find_email(address, opts={})
+      address = convert_address(address)
      if opts[:with_subject]
         email = mailbox_for(address).find { |m| m.subject =~ Regexp.new(opts[:with_subject]) }
       elsif opts[:with_text]
@@ -94,18 +65,23 @@ module EmailSpec
         email = mailbox_for(address).first
       end
     end
+    
+    def links_in_email(email)
+      URI.extract(email.body, ['http', 'https'])
+    end
 
     private
 
     def email_spec_hash
       @email_spec_hash ||= {:read_emails => {}, :unread_emails => {}, :current_emails => {}, :current_email => nil}
     end
-	
+
     def find_email!(address, opts={})
+      address = convert_address(address)
       email = find_email(address, opts)
       if email.nil?
-	error = "#{opts.keys.first.to_s.humanize unless opts.empty?} #{('"' + opts.values.first.to_s.humanize + '"') unless opts.empty?}"
-	raise Spec::Expectations::ExpectationNotMetError, "Could not find email #{error}. \n Found the following emails:\n\n #{all_emails.to_s}"
+        error = "#{opts.keys.first.to_s.humanize unless opts.empty?} #{('"' + opts.values.first.to_s.humanize + '"') unless opts.empty?}"
+        raise Spec::Expectations::ExpectationNotMetError, "Could not find email #{error}. \n Found the following emails:\n\n #{all_emails.to_s}"
        end
       email
     end
@@ -118,22 +94,28 @@ module EmailSpec
       end
       email_spec_hash[:current_email] = email
     end
-    
-    def links_in_email(email)
-      URI.extract(email.body, ['http', 'https'])
+        
+    def parse_email_for_link(email, link_text_or_regex)
+      email.should have_body_text(link_text_or_regex)
+      regex = link_text_or_regex
+      regex = /#{Regexp.escape(regex)}/ unless regex.is_a?(Regexp)
+      url = links_in_email(email).detect { |link| link =~ regex }
+      raise "No link found matching #{regex.inspect} in #{email}" unless url
+      URI::parse(url).request_uri
+      # 
+      # if link_text =~ %r{^/.*$}
+      #   # if it's an explicit link
+      #   link_text
+      # elsif email.body =~ %r{<a[^>]*href=['"]?([^'"]*)['"]?[^>]*?>[^<]*?#{link_text}[^<]*?</a>}
+      #   # if it's an anchor tag
+      #   URI.split($~[1])[5..-1].compact!.join("?").gsub("&amp;", "&")
+      #   # sub correct ampersand after rails switches it (http://dev.rubyonrails.org/ticket/4002) 
+      #   # TODO: outsource this kind of parsing to webrat or someone else
+      # end
     end
     
-    def parse_email_for_link(email, link_text)
-      email.body.should include_text(link_text)
-      if link_text =~ %r{^/.*$}
-	# if it's an explicit link
-	link_text
-      elsif email.body =~ %r{<a[^>]*href=['"]?([^'"]*)['"]?[^>]*?>[^<]*?#{link_text}[^<]*?</a>}
-	# if it's an anchor tag
-	URI.split($~[1])[5..-1].compact!.join("?").gsub("&amp;", "&")
-	# sub correct ampersand after rails switches it (http://dev.rubyonrails.org/ticket/4002) 
-	# TODO: outsource this kind of parsing to webrat or someone else
-      end
+    def convert_address(address)
+      AddressConverter.instance.convert(address)
     end
   end
 end
