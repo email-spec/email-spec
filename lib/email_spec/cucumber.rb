@@ -1,14 +1,10 @@
 # require this in your env.rb file after you require cucumber/rails/world
-%w[helpers matchers].each do |file|
-  require File.join(File.dirname(__FILE__), file)
-end
-require 'email_spec/email_viewer'
 
 # Global Setup
 ActionMailer::Base.delivery_method = :test unless ActionMailer::Base.delivery_method == :activerecord
 ActionMailer::Base.perform_deliveries = true
 
-Before do 
+Before do
   # Scenario setup
   ActionMailer::Base.deliveries.clear if ActionMailer::Base.delivery_method == :test
 end
@@ -21,5 +17,5 @@ end
 
 World do |world|
   world.extend EmailSpec::Helpers
-  world.extend EmailSpec::Matchers  
+  world.extend EmailSpec::Matchers
 end
