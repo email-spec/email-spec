@@ -1,7 +1,7 @@
 module EmailSpec
 
     module Matchers
-          
+
     class DeliverTo
 
       def initialize(expected_email_addresses_or_objects_that_respond_to_email)
@@ -56,10 +56,10 @@ module EmailSpec
         end
       end
      end
-     
+
      def include_email_with_subject(expected)
        simple_matcher do |given_emails, matcher|
-         
+
          if expected.is_a?(String)
            matcher.description = "include email with subject of #{expected.inspect}"
            matcher.failure_message = "expected at least one email to have the subject #{expected.inspect} but none did. Subjects were #{given_emails.map(&:subject).inspect}"
@@ -75,10 +75,10 @@ module EmailSpec
          end
        end
      end
-     
+
      def have_body_text(expected)
        simple_matcher do |given, matcher|
-         
+
          if expected.is_a?(String)
            normalized_body = given.body.gsub(/\s+/, " ")
            normalized_expected = expected.gsub(/\s+/, " ")
@@ -97,7 +97,7 @@ module EmailSpec
          end
        end
       end
-      
+
       def have_header(expected_name, expected_value)
         simple_matcher do |given, matcher|
           given_header = given.header
