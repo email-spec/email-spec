@@ -1,5 +1,25 @@
 (In Git)
+
  === New features 
+  * Added matcher for checking if a collection of emails includes an email with a particular subject (Luke Melia, Noah Davis)
+  * Introduced hook to convert objects to email addresses (Luke Melia and Lee Bankewitz)
+
+    This allows you, in your step matcher, to say something like:
+    maillbox_for(some_user)
+
+    Use it in your cucumber env.rb like so:
+
+      EmailSpec::AddressConverter.instance.conversion do |input|
+       if input.is_a?(User)
+         input.email
+       else
+         input
+       end
+      end
+
+=== Bufixes
+ * Isolated variances between using email-spec with an ARMailer project. (Luke Melia)
+ 
 
 == 0.0.9 2008-2-15
  === New features
