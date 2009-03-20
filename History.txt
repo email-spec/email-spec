@@ -1,6 +1,7 @@
 (In Git)
 
  === New features 
+  * Allow for array to be passed into deliver_to matcher. (Diego Carrion)
   * Added matcher for checking if a collection of emails includes an email with a particular subject (Luke Melia, Noah Davis)
   * Introduced hook to convert objects to email addresses (Luke Melia and Lee Bankewitz)
 
