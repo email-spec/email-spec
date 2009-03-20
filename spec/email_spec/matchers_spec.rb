@@ -59,6 +59,12 @@ describe EmailSpec::Matchers do
       deliver_to("karen@yahoo.com").should_not match(email)
     end
 
+    it "should match when an array of emails is exact same as all of the email's recipients" do
+      addresses = ["james@yahoo.com", "karen@yahoo.com"]
+      email = mock_email(:to => addresses)
+      deliver_to(addresses).should match(email)
+    end
+
     it "should use the passed in objects :email method if not a string" do
       email = mock_email(:to => "jimmy_bean@yahoo.com")
       user = mock("user", :email => "jimmy_bean@yahoo.com")

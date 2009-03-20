@@ -31,8 +31,9 @@ module EmailSpec
       end
     end
 
-    def deliver_to(*expected_email_addresses_or_objects_that_respond_to_email)
-      DeliverTo.new(expected_email_addresses_or_objects_that_respond_to_email)
+    def deliver_to(*addresses)
+      addresses = addresses.first if addresses.first.kind_of?(Array)
+      DeliverTo.new(addresses)
     end
 
     alias :be_delivered_to :deliver_to
