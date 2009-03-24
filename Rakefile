@@ -33,9 +33,19 @@ task :generate do
   system "cd #{current_dir}/examples/rails_root && ./script/generate email_spec"
 end
 
-task :features => [:generate] do
-  system("cucumber examples/rails_root/features")
+task :migrate do
+	system("cd examples/rails_root/ && rake db:test:prepare")
 end
 
-task :default => :features
+task :features => :generate do
+  system("cucumber examples/rails_root/")
+  puts "4 steps should fail.\n\n"
+end
+
+task :specs do
+  system("spec examples/rails_root -c --format nested")
+  system("spec spec -c --format nested")
+end
+
+task :default => [:migrate, :features, :specs]
 
