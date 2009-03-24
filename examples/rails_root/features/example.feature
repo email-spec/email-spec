@@ -26,7 +26,7 @@ Scenario: A new person signs up imperatively
     And I should see "Quentin Jones" in the email
     And I should see "Account confirmation" in the subject
 
-    When I follow "confirm" in the email
+    When I follow "Click here to confirm your account!" in the email
     Then I should see "Confirm your new account"
 
 
@@ -53,6 +53,7 @@ Scenario: slightly more declarative, but still mostly imperative
 
     When I submit my registration information
     Then I should receive an email with a link to a confirmation page
+
 
 
 
