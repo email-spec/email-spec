@@ -20,6 +20,7 @@
       end
 
 === Bufixes
+ * Revert parse_email_for_link helper method to allow for text links as well as explicit link finding. (Mischa Fierer)
  * Isolated variances between using email-spec with an ARMailer project. (Luke Melia)
  
 
