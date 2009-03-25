@@ -43,7 +43,7 @@ Scenario: slightly more declarative, but still mostly imperative
     When I open the email
     Then I should see "Account confirmation" in the subject
 
-    When I follow "confirm" in the email
+    When I follow "http:///confirm" in the email
     Then I should see "Confirm your new account"
 
 
