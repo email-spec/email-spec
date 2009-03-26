@@ -29,7 +29,7 @@ desc "Run the generator on the tests"
 task :generate do
   current_dir = File.expand_path(File.dirname(__FILE__))
   system "mkdir -p #{current_dir}/examples/rails_root/vendor/plugins/email_spec"
-  system "cp -R #{current_dir}/generators #{current_dir}/examples/rails_root/vendor/plugins/email_spec"
+  system "cp -R #{current_dir}/rails_generators #{current_dir}/examples/rails_root/vendor/plugins/email_spec"
   system "cd #{current_dir}/examples/rails_root && ./script/generate email_spec"
 end
 
