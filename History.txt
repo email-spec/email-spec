@@ -1,6 +1,10 @@
 (In Git)
 
  === New features 
+ === Bufixes
+
+ == 0.1.0 2008-3-25
+ === New features 
 	* Change Rakefile to run all specs and features, as well as prepare the db (Mischa Fierer)
   * Allow for array to be passed into deliver_to matcher. (Diego Carrion)
   * Added matcher for checking if a collection of emails includes an email with a particular subject (Luke Melia, Noah Davis)
