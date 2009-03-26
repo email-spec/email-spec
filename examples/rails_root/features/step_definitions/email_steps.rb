@@ -35,7 +35,7 @@ When /^I follow "(.*)" in the email$/ do |link|
   visit_in_email(link)
 end
 
-Then /^I should receive (.+) emails?$/ do |amount|
+Then /^I should receive (an|\d+) emails?$/ do |amount|
   amount = 1 if amount == "an"
   unread_emails_for(current_email_address).size.should == amount.to_i
 end
@@ -68,4 +68,7 @@ When %r{^"([^']*?)" opens? the email with text "([^']*?)"$} do |address, text|
   open_email(address, :with_text => text)
 end
 
+When /^I click the first link in the email$/ do
+  click_first_link_in_email
+end
 
