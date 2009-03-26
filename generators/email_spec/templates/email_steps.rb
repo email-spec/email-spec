@@ -68,4 +68,7 @@ When %r{^"([^']*?)" opens? the email with text "([^']*?)"$} do |address, text|
   open_email(address, :with_text => text)
 end
 
+When /^I click the first link in the email$/ do
+  click_first_link_in_email
+end
 
