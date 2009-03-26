@@ -3,6 +3,12 @@
  === New features 
  === Bufixes
 
+ == 0.1.1 2008-3-26
+ === New features 
+  * Switched dir structure over to support rubigen. (Dr. Nic)
+
+ === Bufixes
+
  == 0.1.0 2008-3-25
  === New features 
 	* Change Rakefile to run all specs and features, as well as prepare the db (Mischa Fierer)
