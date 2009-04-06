@@ -1,5 +1,5 @@
 # This generator adds email steps to the step definitions directory 
-class EmailSpecGenerator < Rails::Generator::Base
+class EmailSpecGenerator < RubiGen::Base#Rails::Generator::Base
   def manifest
     record do |m|
       m.directory 'features/step_definitions'
