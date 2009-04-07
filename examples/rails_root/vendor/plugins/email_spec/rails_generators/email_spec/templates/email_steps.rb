@@ -31,7 +31,7 @@ When /^I open the email$/ do
   open_email(current_email_address)
 end
 
-When /^I follow "(.*)" in the email$/ do |link|
+When %r{^I follow "([^"]*?)" in the email$} do |link|
   visit_in_email(link)
 end
 
@@ -40,31 +40,31 @@ Then /^I should receive (an|\d+) emails?$/ do |amount|
   unread_emails_for(current_email_address).size.should == amount.to_i
 end
 
-Then /^"([^']*?)" should receive (\d+) emails?$/ do |address, n|
+Then %r{^"([^"]*?)" should receive (\d+) emails?$} do |address, n|
   unread_emails_for(address).size.should == n.to_i 
 end
 
-Then /^"([^']*?)" should have (\d+) emails?$/ do |address, n|
+Then %r{^"([^"]*?)" should have (\d+) emails?$} do |address, n|
   mailbox_for(address).size.should == n.to_i
 end
 
-Then /^"([^']*?)" should not receive an email$/ do |address|
+Then %r{^"([^"]*?)" should not receive an email$} do |address|
   find_email(address).should be_nil
 end
 
-Then /^I should see "(.*)" in the subject$/ do |text|
+Then %r{^I should see "([^"]*?)" in the subject$} do |text|
   current_email.should have_subject(Regexp.new(text))
 end
 
-Then /^I should see "(.*)" in the email$/ do |text|
+Then %r{^I should see "([^"]*?)" in the email$} do |text|
   current_email.body.should =~ Regexp.new(text)
 end
 
-When %r{^"([^']*?)" opens? the email with subject "([^']*?)"$} do |address, subject|
+When %r{^"([^"]*?)" opens? the email with subject "([^"]*?)"$} do |address, subject|
   open_email(address, :with_subject => subject)
 end
 
-When %r{^"([^']*?)" opens? the email with text "([^']*?)"$} do |address, text|
+When %r{^"([^"]*?)" opens? the email with text "([^"]*?)"$} do |address, text|
   open_email(address, :with_text => text)
 end
 

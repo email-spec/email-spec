@@ -2,6 +2,7 @@
 
  === New features
  === Bufixes
+  * Fixed regular expressions in genertaed steps. (Ben Mabey)
 
  == 0.1.2 2009-4-05
 
