@@ -2,6 +2,7 @@
 
  === New features
  === Bufixes
+  * World semantics changed in cucumber (0.2.3.2), email_spec now uses the new API.
 
  == 0.1.2 2009-4-05
 

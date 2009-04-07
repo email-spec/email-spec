@@ -18,7 +18,7 @@ module EmailHelpers
     "quentin@example.com" # Replace with your a way to find your current_email. e.g current_user.email
   end
 end
-World {|world| world.extend EmailHelpers }
+World(EmailHelpers)
 
 # Use this step to reset the e-mail queue within a scenario.
 # This is done automatically before each scenario.
