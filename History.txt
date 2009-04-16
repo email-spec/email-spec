@@ -2,7 +2,12 @@
 
  === New features
  === Bufixes
+
+ == 0.1.3 2009-4-15
+
+ === Bufixes
   * Fixed regular expressions in genertaed steps. (Ben Mabey)
+  * World semantics changed in cucumber (0.2.3.2), email_spec now uses the new API. (Hector Morales)
 
  == 0.1.2 2009-4-05
 
