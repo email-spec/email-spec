@@ -67,7 +67,7 @@ This will give you a bunch of steps to get started with in step_definitions/emai
       When I follow "confirm" in the email
       Then I should see "Confirm your new account"
 
-For more examples, check out spec/rails_root in the source for a small example app that implements these steps.
+For more examples, check out examples/rails_root in the source for a small example app that implements these steps.
 
 === RSpec
 
@@ -116,8 +116,7 @@ For more examples, check out spec/rails_root in the source for a small example a
      
     ==== Using the helpers when not testing in isolation ==== 
 
-      WRITE ME
-      For now take a look at Email::Helpers to see what you can do.
+      Don't. :)  Seriously, if you do just take a look at the helpers and use them as you wish.
 
 == Original Authors
 
