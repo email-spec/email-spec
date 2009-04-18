@@ -23,23 +23,13 @@ rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
 end
 
-# Testing
-
-desc "Run the generator on the tests"
-task :generate do
-  current_dir = File.expand_path(File.dirname(__FILE__))
-  system "mkdir -p #{current_dir}/examples/rails_root/vendor/plugins/email_spec"
-  system "cp -R #{current_dir}/rails_generators #{current_dir}/examples/rails_root/vendor/plugins/email_spec"
-  system "cd #{current_dir}/examples/rails_root && ./script/generate email_spec"
-end
-
-task :migrate do
-	system("cd examples/rails_root/ && rake db:test:prepare")
-end
-
-task :features => :generate do
-  system("cucumber examples/rails_root/")
-  puts "4 steps should fail.\n\n"
+begin
+  require 'cucumber/rake/task'
+  Cucumber::Rake::Task.new(:features)
+rescue LoadError
+  task :features do
+    abort "Cucumber is not available. In order to run features, you must: sudo gem install cucumber"
+  end
 end
 
 require 'spec/rake/spectask'
@@ -56,5 +46,5 @@ namespace :example_app do
   end
 end
 
-task :default => [:migrate, :features, :spec]
+task :default => [:features, :spec, 'example_app:spec']
 
