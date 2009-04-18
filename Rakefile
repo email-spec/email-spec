@@ -42,10 +42,19 @@ task :features => :generate do
   puts "4 steps should fail.\n\n"
 end
 
-task :specs do
-  system("spec examples/rails_root -c --format nested")
-  system("spec spec -c --format nested")
+require 'spec/rake/spectask'
+Spec::Rake::SpecTask.new(:spec) do |spec|
+  spec.libs << 'lib' << 'spec'
+  spec.spec_files = FileList['spec/**/*_spec.rb']
 end
 
-task :default => [:migrate, :features, :specs]
+namespace :example_app do
+  Spec::Rake::SpecTask.new(:spec) do |spec|
+    desc "Specs for Example app"
+    spec.libs << 'lib' << 'spec'
+    spec.spec_files = FileList['examples/rails_root/spec/**/*_spec.rb']
+  end
+end
+
+task :default => [:migrate, :features, :spec]
 
