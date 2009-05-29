@@ -3,6 +3,11 @@
  === New features
  === Bufixes
 
+ == 0.1.4 2009-5-29
+
+ === Bufixes
+  * Require deliveries in the helpers so it doesn't blow up with RSpec. (Craig W)
+ 
  == 0.1.3 2009-4-15
 
  === Bufixes
