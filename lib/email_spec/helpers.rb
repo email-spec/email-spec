@@ -1,4 +1,5 @@
 require 'uri'
+require 'email_spec/deliveries'
 
 module EmailSpec
 
