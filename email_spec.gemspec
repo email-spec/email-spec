@@ -49,8 +49,6 @@ Gem::Specification.new do |s|
      "examples/rails_root/features/step_definitions/user_steps.rb",
      "examples/rails_root/features/step_definitions/webrat_steps.rb",
      "examples/rails_root/features/support/env.rb",
-     "examples/rails_root/log/development.log",
-     "examples/rails_root/log/test.log",
      "examples/rails_root/public/404.html",
      "examples/rails_root/public/422.html",
      "examples/rails_root/public/500.html",
