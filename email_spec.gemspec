@@ -42,7 +42,6 @@ Gem::Specification.new do |s|
      "examples/rails_root/cucumber.yml",
      "examples/rails_root/db/migrate/20090125013728_create_users.rb",
      "examples/rails_root/db/schema.rb",
-     "examples/rails_root/db/test.sqlite3",
      "examples/rails_root/doc/README_FOR_APP",
      "examples/rails_root/features/errors.feature",
      "examples/rails_root/features/example.feature",
@@ -111,6 +110,7 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://github.com/bmabey/email-spec/}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
+  s.rubyforge_project = %q{email-spec}
   s.rubygems_version = %q{1.3.3}
   s.summary = %q{Easily test email in rspec and cucumber}
   s.test_files = [
