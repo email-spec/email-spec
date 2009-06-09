@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{email_spec}
-  s.version = "0.1.4"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ben Mabey", "Aaron Gibralter", "Mischa Fierer"]
-  s.date = %q{2009-05-29}
+  s.date = %q{2009-06-08}
   s.description = %q{Easily test email in rspec and cucumber}
   s.email = %q{ben@benmabey.com}
   s.extra_rdoc_files = [
@@ -42,6 +42,7 @@ Gem::Specification.new do |s|
      "examples/rails_root/cucumber.yml",
      "examples/rails_root/db/migrate/20090125013728_create_users.rb",
      "examples/rails_root/db/schema.rb",
+     "examples/rails_root/db/test.sqlite3",
      "examples/rails_root/doc/README_FOR_APP",
      "examples/rails_root/features/errors.feature",
      "examples/rails_root/features/example.feature",
@@ -49,6 +50,8 @@ Gem::Specification.new do |s|
      "examples/rails_root/features/step_definitions/user_steps.rb",
      "examples/rails_root/features/step_definitions/webrat_steps.rb",
      "examples/rails_root/features/support/env.rb",
+     "examples/rails_root/log/development.log",
+     "examples/rails_root/log/test.log",
      "examples/rails_root/public/404.html",
      "examples/rails_root/public/422.html",
      "examples/rails_root/public/500.html",
@@ -91,6 +94,7 @@ Gem::Specification.new do |s|
      "examples/rails_root/vendor/plugins/email_spec/rails_generators/email_spec/email_spec_generator.rb",
      "examples/rails_root/vendor/plugins/email_spec/rails_generators/email_spec/templates/email_steps.rb",
      "install.rb",
+     "lib/email-spec.rb",
      "lib/email_spec.rb",
      "lib/email_spec/address_converter.rb",
      "lib/email_spec/cucumber.rb",

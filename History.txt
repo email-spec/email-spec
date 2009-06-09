@@ -3,6 +3,10 @@
  === New features
  === Bufixes
 
+== 0.2.0 2009-6-08
+No changes. Bumping version for RubyForge release.
+
+
  == 0.1.4 2009-5-29
 
  === Bufixes
