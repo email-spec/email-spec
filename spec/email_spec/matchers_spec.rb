@@ -74,6 +74,36 @@ describe EmailSpec::Matchers do
 
   end
 
+  describe "#bcc_to" do
+
+    it "should match when the email is set to deliver to the specidied address" do
+      email = mock_email(:bcc => "jimmy_bean@yahoo.com")
+
+      bcc_to("jimmy_bean@yahoo.com").should match(email)
+    end
+
+    it "should match when a list of emails is exact same as all of the email's recipients" do
+      email = mock_email(:bcc => ["james@yahoo.com", "karen@yahoo.com"])
+
+      bcc_to("karen@yahoo.com", "james@yahoo.com").should match(email)
+      bcc_to("karen@yahoo.com").should_not match(email)
+    end
+
+    it "should match when an array of emails is exact same as all of the email's recipients" do
+      addresses = ["james@yahoo.com", "karen@yahoo.com"]
+      email = mock_email(:bcc => addresses)
+      bcc_to(addresses).should match(email)
+    end
+
+    it "should use the passed in objects :email method if not a string" do
+      email = mock_email(:bcc => "jimmy_bean@yahoo.com")
+      user = mock("user", :email => "jimmy_bean@yahoo.com")
+
+      bcc_to(user).should match(email)
+    end
+
+  end
+
   describe "#have_subject" do
 
     describe "when regexps are used" do

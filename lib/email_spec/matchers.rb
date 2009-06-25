@@ -37,6 +37,39 @@ module EmailSpec
 
     alias :be_delivered_to :deliver_to
 
+    class BccTo
+
+      def initialize(expected_email_addresses_or_objects_that_respond_to_email)
+        emails = expected_email_addresses_or_objects_that_respond_to_email.map do |email_or_object|
+          email_or_object.kind_of?(String) ? email_or_object : email_or_object.email
+        end
+
+        @expected_email_addresses = emails.sort
+      end
+
+      def description
+        "be bcc'd to #{@expected_email_addresses.inspect}"
+      end
+
+      def matches?(email)
+        @email = email
+        @actual_recipients = (email.bcc || []).sort
+        @actual_recipients == @expected_email_addresses
+      end
+
+      def failure_message
+        "expected #{@email.inspect} to bcc to #{@expected_email_addresses.inspect}, but it was bcc'd to #{@actual_recipients.inspect}"
+      end
+
+      def negative_failure_message
+        "expected #{@email.inspect} not to bcc to #{@expected_email_addresses.inspect}, but it did"
+      end
+    end
+
+    def bcc_to(*expected_email_addresses_or_objects_that_respond_to_email)
+      BccTo.new(expected_email_addresses_or_objects_that_respond_to_email.flatten)
+    end
+
     def have_subject(expected)
       simple_matcher do |given, matcher|
         given_subject = given.subject
