@@ -49,3 +49,10 @@ end
 
 task :default => [:features, :spec, 'example_app:spec']
 
+desc "Cleans the project of any tmp file that should not be included in the gemspec."
+task :clean do
+  %w[*.sqlite3 *.log].each do |pattern|
+    `find . -name "#{pattern}" -delete`
+  end
+end
+
