@@ -40,6 +40,10 @@ Then /^I should receive (an|\d+) emails?$/ do |amount|
   unread_emails_for(current_email_address).size.should == amount.to_i
 end
 
+Then /^I should not receive any emails?$/ do
+  unread_emails_for(current_email_address).size.should == 0
+end
+
 Then %r{^"([^"]*?)" should receive (\d+) emails?$} do |address, n|
   unread_emails_for(address).size.should == n.to_i 
 end
@@ -58,6 +62,10 @@ end
 
 Then %r{^I should see "([^"]*?)" in the email$} do |text|
   current_email.body.should =~ Regexp.new(text)
+end
+
+When %r{^"([^"]*?)" opens? the email$} do |address|
+  open_email(address)
 end
 
 When %r{^"([^"]*?)" opens? the email with subject "([^"]*?)"$} do |address, subject|
