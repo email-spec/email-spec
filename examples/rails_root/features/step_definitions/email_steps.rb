@@ -16,7 +16,9 @@
 module EmailHelpers
   def current_email_address
     # Replace with your a way to find your current email. e.g @current_user.email
-    @current_email || "example@example.com"
+    # last_email_address will return the last email address used by email spec to find an email.
+    # Note that last_email_address will be reset after each Scenario.
+    last_email_address || "example@example.com"
   end
 end
 World(EmailHelpers)
@@ -28,26 +30,25 @@ Given /^(?:a clear email queue|no emails have been sent)$/ do
 end
 
 # Use this step to open the most recently sent e-mail. 
-When /^(I|they) open the email$/ do
+When /^(?:I|they) open the email$/ do
   open_email(current_email_address)
 end
 
-When %r{^I follow "([^"]*?)" in the email$} do |link|
+When %r{^(?:I|they) follow "([^"]*?)" in the email$} do |link|
   visit_in_email(link)
 end
 
-Then /^I should receive (an|\d+) emails?$/ do |amount|
+Then /^(?:I|they) should receive (an|\d+) emails?$/ do |amount|
   amount = 1 if amount == "an"
   unread_emails_for(current_email_address).size.should == amount.to_i
 end
 
-Then /^(I|they) should not receive any emails?$/ do
+Then /^(?:I|they) should not receive any emails?$/ do
   unread_emails_for(current_email_address).size.should == 0
 end
 
 Then %r{^"([^"]*?)" should receive (an|\d+) emails?$} do |address, amount|
   amount = 1 if amount == "an"
-  @current_email = address
   unread_emails_for(address).size.should == amount.to_i 
 end
 
@@ -59,11 +60,11 @@ Then %r{^"([^"]*?)" should not receive an email$} do |address|
   find_email(address).should be_nil
 end
 
-Then %r{^(I|they) should see "([^"]*?)" in the subject$} do |text|
+Then %r{^(?:I|they) should see "([^"]*?)" in the subject$} do |text|
   current_email.should have_subject(Regexp.new(text))
 end
 
-Then %r{^(I|they) should see "([^"]*?)" in the email$} do |text|
+Then %r{^(?:I|they) should see "([^"]*?)" in the email$} do |text|
   current_email.body.should =~ Regexp.new(text)
 end
 
@@ -79,7 +80,7 @@ When %r{^"([^"]*?)" opens? the email with text "([^"]*?)"$} do |address, text|
   open_email(address, :with_text => text)
 end
 
-When /^(I|they) click the first link in the email$/ do
+When /^(?:I|they) click the first link in the email$/ do
   click_first_link_in_email
 end
 

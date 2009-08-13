@@ -12,18 +12,18 @@ Scenario: A new person signs up imperatively
     Given I am a real person wanting to sign up for an account
     And I am at "/"
 
-    When I fill in "Email" with "quentin@example.com"
-    And I fill in "Name" with "Quentin Jones"
+    When I fill in "Email" with "example@example.com"
+    And I fill in "Name" with "example Jones"
     And I press "Sign up"
 
-    Then "quentin@example.com" should receive 1 email
-    And "quentin@example.com" should have 1 email
+    Then "example@example.com" should receive 1 email
+    And "example@example.com" should have 1 email
     And "foo@bar.com" should not receive an email
 
-    When "quentin@example.com" opens the email with subject "Account confirmation"
+    When "example@example.com" opens the email with subject "Account confirmation"
 
     Then I should see "confirm" in the email
-    And I should see "Quentin Jones" in the email
+    And I should see "example Jones" in the email
     And I should see "Account confirmation" in the subject
 
     When I follow "Click here to confirm your account!" in the email
@@ -34,8 +34,8 @@ Scenario: slightly more declarative, but still mostly imperative
     Given I am a real person wanting to sign up for an account
     And I'm on the signup page
 
-    When I fill in "Email" with "quentin@example.com"
-    And I fill in "Name" with "Quentin Jones"
+    When I fill in "Email" with "example@example.com"
+    And I fill in "Name" with "example Jones"
     And I press "Sign up"
 
     Then I should receive an email

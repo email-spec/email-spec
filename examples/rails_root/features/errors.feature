@@ -8,15 +8,15 @@ These scenarios should fail with helpful messages
     Scenario: I fail to receive an email
       Given I am at "/"
       And no emails have been sent
-      When I fill in "Email" with "quentin@example.com"
+      When I fill in "Email" with "example@example.com"
       And I press "Sign up"
       And I should receive an email
-      When "quentin@example.com" opens the email with subject "no email"
+      When "example@example.com" opens the email with subject "no email"
 
     Scenario: I fail to receive an email with the expected link
       Given I am at "/"
       And no emails have been sent
-      When I fill in "Email" with "quentin@example.com"
+      When I fill in "Email" with "example@example.com"
       And I press "Sign up"
       And I should receive an email
       When I open the email
@@ -25,7 +25,7 @@ These scenarios should fail with helpful messages
     Scenario: I attempt to operate on an email that is not opened
       Given I am at "/"
       And no emails have been sent
-      When I fill in "Email" with "quentin@example.com"
+      When I fill in "Email" with "example@example.com"
       And I press "Sign up"
       And I should receive an email
       When I follow "confirm" in the email
@@ -33,7 +33,7 @@ These scenarios should fail with helpful messages
     Scenario: I attempt to check out an unopened email
       Given I am at "/"
       And no emails have been sent
-      When I fill in "Email" with "quentin@example.com"
+      When I fill in "Email" with "example@example.com"
       And I press "Sign up"
       Then I should see "confirm" in the email
       And I should see "Account confirmation" in the subject

@@ -120,8 +120,11 @@ module EmailSpec
       # sub correct ampersand after rails switches it (http://dev.rubyonrails.org/ticket/4002) 
     end
 
+
+    attr_reader :last_email_address
     
     def convert_address(address)
+      @last_email_address = address
       AddressConverter.instance.convert(address)
     end
   end
