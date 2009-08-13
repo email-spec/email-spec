@@ -3,6 +3,24 @@
  === New features
  === Bufixes
 
+ == 0.3.0 2009-08-13
+
+ === New features
+  * New helper #last_email_address which returns the last address used by email-spec for that scenario. (Ben Mabey)
+  * Steps now support third person language. (Kieran P)
+  * "[email] should receive ... " now supports "an" instead of just an integer. (Kieran P)
+    With these changes, the following is now possible:
+    
+      Then "jack@example.com" should receive an email
+      When they open the email
+      Then they should see "Account has been created" in the subject
+
+  * Additional default steps (Balint Erdi)
+    * Then /^I should not receive any emails?$/
+    * When %r{^"([^"]*?)" opens? the email$} do |address|
+
+ === Bufixes
+
  == 0.2.1 2009-5-29
 
  === New Features
