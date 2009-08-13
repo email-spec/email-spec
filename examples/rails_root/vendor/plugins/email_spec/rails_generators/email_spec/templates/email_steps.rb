@@ -15,7 +15,8 @@
 
 module EmailHelpers
   def current_email_address
-    "quentin@example.com" # Replace with your a way to find your current_email. e.g current_user.email
+    # Replace with your a way to find your current email. e.g @current_user.email
+    @current_email || "example@example.com"
   end
 end
 World(EmailHelpers)
@@ -27,7 +28,7 @@ Given /^(?:a clear email queue|no emails have been sent)$/ do
 end
 
 # Use this step to open the most recently sent e-mail. 
-When /^I open the email$/ do
+When /^(I|they) open the email$/ do
   open_email(current_email_address)
 end
 
@@ -40,8 +41,14 @@ Then /^I should receive (an|\d+) emails?$/ do |amount|
   unread_emails_for(current_email_address).size.should == amount.to_i
 end
 
-Then %r{^"([^"]*?)" should receive (\d+) emails?$} do |address, n|
-  unread_emails_for(address).size.should == n.to_i 
+Then /^(I|they) should not receive any emails?$/ do
+  unread_emails_for(current_email_address).size.should == 0
+end
+
+Then %r{^"([^"]*?)" should receive (an|\d+) emails?$} do |address, amount|
+  amount = 1 if amount == "an"
+  @current_email = address
+  unread_emails_for(address).size.should == amount.to_i 
 end
 
 Then %r{^"([^"]*?)" should have (\d+) emails?$} do |address, n|
@@ -52,12 +59,16 @@ Then %r{^"([^"]*?)" should not receive an email$} do |address|
   find_email(address).should be_nil
 end
 
-Then %r{^I should see "([^"]*?)" in the subject$} do |text|
+Then %r{^(I|they) should see "([^"]*?)" in the subject$} do |text|
   current_email.should have_subject(Regexp.new(text))
 end
 
-Then %r{^I should see "([^"]*?)" in the email$} do |text|
+Then %r{^(I|they) should see "([^"]*?)" in the email$} do |text|
   current_email.body.should =~ Regexp.new(text)
+end
+
+When %r{^"([^"]*?)" opens? the email$} do |address|
+  open_email(address)
 end
 
 When %r{^"([^"]*?)" opens? the email with subject "([^"]*?)"$} do |address, subject|
@@ -68,7 +79,7 @@ When %r{^"([^"]*?)" opens? the email with text "([^"]*?)"$} do |address, text|
   open_email(address, :with_text => text)
 end
 
-When /^I click the first link in the email$/ do
+When /^(I|they) click the first link in the email$/ do
   click_first_link_in_email
 end
 
