@@ -1,6 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default_url_options[:host] = ''
-
+  default_url_options = {:host => 'example.com'}
   def signup(email, name)
     @recipients  = email
     @from        = "admin@example.com"

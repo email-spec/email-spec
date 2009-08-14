@@ -20,10 +20,10 @@ config.action_controller.allow_forgery_protection    = false
 # The :test delivery method accumulates sent emails in the
 # ActionMailer::Base.deliveries array.
 config.action_mailer.delivery_method = :test
+config.action_mailer.default_url_options = { :host => "example.com" }
 
-# I HATE config.gem.. it doesn't work as advertised...
 config.gem 'cucumber',         :lib => false
 config.gem 'webrat',           :lib => false
 config.gem 'rspec',            :lib => false
 config.gem 'rspec-rails',      :lib => 'spec/rails'
-config.gem 'nakajima-fixjour', :lib => 'fixjour', :source => "http://gems.github.com" # nakajima-fixjour
+config.gem 'fixjour', :lib => 'fixjour'

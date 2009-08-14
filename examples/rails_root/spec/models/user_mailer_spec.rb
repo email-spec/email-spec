@@ -3,12 +3,12 @@ require File.dirname(__FILE__) + '/../spec_helper'
 # These two example groups are specifying the exact same behavior.  However, the documentation style is different
 # and the value that each one provides is different with various trade-offs.  Run these examples with the specdoc 
 # formatter to get an idea of how they differ.
-
 # Example of documenting the behaviour explicitly and expressing the intent in the example's sentence.
 describe "Signup Email" do
   include EmailSpec::Helpers
   include EmailSpec::Matchers
   include ActionController::UrlWriter
+  default_url_options = {:host => 'example.com'}
 
   before(:all) do
     @email = UserMailer.create_signup("jojo@yahoo.com", "Jojo Binks")
@@ -25,7 +25,7 @@ describe "Signup Email" do
   end
 
   it "should contain a link to the confirmation page" do
-    @email.should have_body_text(/#{confirm_account_url}/)
+    @email.should have_body_text(/#{confirm_account_url(:host => 'example.com')}/)
   end
   
   it { should have_subject(/Account confirmation/) }
@@ -45,7 +45,7 @@ describe "Signup Email" do
 
   subject { @email }
 
-  it { should have_body_text(/#{confirm_account_url}/) }
+  it { should have_body_text(/#{confirm_account_url(:host => 'example.com')}/) }
   it { should have_subject(/Account confirmation/) }
 
   describe "sent with email address of 'jojo@yahoo.com', and users name 'Jojo Binks'" do

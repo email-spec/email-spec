@@ -6,7 +6,7 @@ require 'spec'
 require 'spec/rails'
 
 require File.expand_path(File.dirname(__FILE__) + "/model_factory.rb")
-require (Rails.root + '/../../lib/email_spec.rb')
+require (RAILS_ROOT + '/../../lib/email_spec.rb')
 
 Spec::Runner.configure do |config|
   config.include(Fixjour)
