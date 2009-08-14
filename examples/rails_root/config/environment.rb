@@ -5,7 +5,7 @@
 # ENV['RAILS_ENV'] ||= 'production'
 
 # Specifies gem version of Rails to use when vendor/rails is not present
-RAILS_GEM_VERSION = '2.2.2' unless defined? RAILS_GEM_VERSION
+RAILS_GEM_VERSION = '2.3.3' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
@@ -13,7 +13,7 @@ require File.join(File.dirname(__FILE__), 'boot')
 Rails::Initializer.run do |config|
 
   config.time_zone = 'UTC'
- 
+
   config.action_controller.session = {
     :session_key => '_es_session',
     :secret      => 'b9327c7967925fb36f8901e43f47e0a3e8fc7856ae1b4533ddeda776381548f9ac051721446fdbc4ccc88c7353124708e73d8b0950a30487571d8f8eb5b24732'

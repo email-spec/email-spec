@@ -3,3 +3,5 @@
 *.log
 *.sqlite3
 pkg
+examples/rails_root/features/step_definitions/email_steps.rb
+examples/rails_root/vendor/plugins/email_spec

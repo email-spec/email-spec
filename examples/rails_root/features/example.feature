@@ -1,59 +1,61 @@
 Feature: EmailSpec Example -- Prevent Bots from creating accounts
 
-In order to help alleviate email testing in apps
-As an email-spec contributor I want new users of the library
-to easily adopt email-spec in their app by following this example
+  In order to help alleviate email testing in apps
+  As an email-spec contributor I want new users of the library
+  to easily adopt email-spec in their app by following this example
 
-In order to prevent bots from setting up new accounts
-As a site manager I want new users
-to verify their email address with a confirmation link
+  In order to prevent bots from setting up new accounts
+  As a site manager I want new users
+  to verify their email address with a confirmation link
 
-Scenario: A new person signs up imperatively 
-    Given I am a real person wanting to sign up for an account
-    And I am at "/"
+  Background:
+    Given no emails have been sent
+    And I am a real person wanting to sign up for an account
+    And I am on the homepage
+    And I submit my registration information
 
-    When I fill in "Email" with "example@example.com"
-    And I fill in "Name" with "example Jones"
-    And I press "Sign up"
+  Scenario: First person signup (as myself) with two ways of opening email
+    Then I should receive an email
+    And I should have 1 email
+    And "foo@bar.com" should have no emails
 
-    Then "example@example.com" should receive 1 email
-    And "example@example.com" should have 1 email
-    And "foo@bar.com" should not receive an email
+    # Opening email #1
+    When I open the email
+    Then I should see "Account confirmation" in the email subject
+    And I should see "Joe Someone" in the email body
+    And I should see "confirm" in the email body
 
-    When "example@example.com" opens the email with subject "Account confirmation"
-
-    Then I should see "confirm" in the email
-    And I should see "example Jones" in the email
-    And I should see "Account confirmation" in the subject
+    # Opening email #2
+    When I open the email with subject "Account confirmation"
+    Then I should see "Account confirmation" in the email subject
+    And I should see "Joe Someone" in the email body
+    And I should see "confirm" in the email body
 
     When I follow "Click here to confirm your account!" in the email
     Then I should see "Confirm your new account"
 
+  Scenario: Third person signup (emails sent to others) with two ways of opening email
+    Then "example@example.com" should receive an email
+    And "example@example.com" should have 1 email
+    And "foo@bar.com" should have no emails
 
-Scenario: slightly more declarative, but still mostly imperative
-    Given I am a real person wanting to sign up for an account
-    And I'm on the signup page
+    # Opening email #1
+    When they open the email
+    Then they should see "Account confirmation" in the email subject
+    And they should see "Joe Someone" in the email body
+    And they should see "confirm" in the email body
 
-    When I fill in "Email" with "example@example.com"
-    And I fill in "Name" with "example Jones"
-    And I press "Sign up"
+    # Opening email #2
+    When "example@example.com" opens the email with subject "Account confirmation"
+    Then they should see "Account confirmation" in the email subject
+    And they should see "Joe Someone" in the email body
+    And they should see "confirm" in the email body
 
-    Then I should receive an email
+    When they follow "Click here to confirm your account!" in the email
+    Then they should see "Confirm your new account"
 
-    When I open the email
-    Then I should see "Account confirmation" in the subject
-
-    When I follow "http:///confirm" in the email
-    Then I should see "Confirm your new account"
-
-
- Scenario: declarative
-    Given I am a real person wanting to sign up for an account
-    And I'm on the signup page
-
-    When I submit my registration information
+  Scenario: Declarative First Person signup
     Then I should receive an email with a link to a confirmation page
 
-
-
-
+  Scenario: Declarative First Person signup
+    Then they should receive an email with a link to a confirmation page
