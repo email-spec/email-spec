@@ -24,6 +24,14 @@ rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
 end
 
+
+begin
+  gem 'fixjour'
+rescue Gem::LoadError
+  puts "Installing fixjour for the example rails app..."
+  puts `gem install fixjour --no-rdoc --no-ri`
+end
+
 begin
   require 'cucumber/rake/task'
   Cucumber::Rake::Task.new(:features)
