@@ -13,7 +13,6 @@ module EmailSpec
     end
 
     def mailbox_for(address)
-      address = AddressConverter.instance.convert(address)
       ActionMailer::Base.deliveries.select { |m| m.to.include?(address) || (m.bcc && m.bcc.include?(address)) || (m.cc && m.cc.include?(address)) }
     end
   end
@@ -36,7 +35,6 @@ module EmailSpec
     end
 
     def mailbox_for(address)
-      address = AddressConverter.instance.convert(address)
       Email.all.select { |email| email.to.include?(address) || email.bcc.include?(address) || email.cc.include?(address) }.map{ |email| parse_to_tmail(email) }
     end
 

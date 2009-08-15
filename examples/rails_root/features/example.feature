@@ -17,7 +17,6 @@ Feature: EmailSpec Example -- Prevent Bots from creating accounts
   Scenario: First person signup (as myself) with two ways of opening email
     Then I should receive an email
     And I should have 1 email
-    And "foo@bar.com" should have no emails
 
     # Opening email #1
     When I open the email
@@ -34,10 +33,12 @@ Feature: EmailSpec Example -- Prevent Bots from creating accounts
     When I follow "Click here to confirm your account!" in the email
     Then I should see "Confirm your new account"
 
-  Scenario: Third person signup (emails sent to others) with two ways of opening email
-    Then "example@example.com" should receive an email
-    And "example@example.com" should have 1 email
     And "foo@bar.com" should have no emails
+
+  Scenario: Third person signup (emails sent to others) with two ways of opening email
+    Then "foo@bar.com" should have no emails
+    And "example@example.com" should receive an email
+    And "example@example.com" should have 1 email
 
     # Opening email #1
     When they open the email

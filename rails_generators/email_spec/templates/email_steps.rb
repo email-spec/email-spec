@@ -14,8 +14,8 @@
 # read_emails_for
 # find_email
 #
-# General form for emails tests is:
-#   - clear the email queue
+# General form for email scenarios are:
+#   - clear the email queue (done automatically by email_spec)
 #   - execute steps that sends an email
 #   - check the user received an/no/[0-9] emails
 #   - open the email
@@ -32,6 +32,7 @@ module EmailHelpers
     last_email_address || "example@example.com"
   end
 end
+
 World(EmailHelpers)
 
 #
@@ -48,20 +49,20 @@ end
 #
 
 Then /^(?:I|they|"([^"]*?)") should receive (an|no|\d+) emails?$/ do |address, amount|
-  unread_emails_for(parse_current_email(address)).size.should == parse_email_count(amount)
+  unread_emails_for(address).size.should == parse_email_count(amount)
 end
 
 Then /^(?:I|they|"([^"]*?)") should have (an|no|\d+) emails?$/ do |address, amount|
-  mailbox_for(parse_current_email(address)).size.should == parse_email_count(amount)
+  mailbox_for(address).size.should == parse_email_count(amount)
 end
 
 # DEPRECATED
 # The following methods are left in for backwards compatibility and
 # should be removed by version 0.3.5.
 Then /^(?:I|they|"([^"]*?)") should not receive an email$/ do |address|
-  deprecation_notice "The step 'I/they/[email] should not receive an email' is no longer supported.
+  email_spec_deprecate "The step 'I/they/[email] should not receive an email' is no longer supported.
                       Please use 'I/they/[email] should receive no emails' instead."
-  unread_emails_for(parse_current_email(address)).size.should == 0
+  unread_emails_for(address).size.should == 0
 end
 
 #
@@ -70,15 +71,15 @@ end
 
 # Opens the most recently received email
 When /^(?:I|they|"([^"]*?)") opens? the email$/ do |address|
-  open_email(parse_current_email(address))
+  open_email(address)
 end
 
 When /^(?:I|they|"([^"]*?)") opens? the email with subject "([^"]*?)"$/ do |address, subject|
-  open_email(parse_current_email(address), :with_subject => subject)
+  open_email(address, :with_subject => subject)
 end
 
 When /^(?:I|they|"([^"]*?)") opens? the email with text "([^"]*?)"$/ do |address, text|
-  open_email(parse_current_email(address), :with_text => text)
+  open_email(address, :with_text => text)
 end
 
 #
@@ -97,12 +98,12 @@ end
 # The following methods are left in for backwards compatibility and
 # should be removed by version 0.3.5.
 Then /^(?:I|they) should see "([^"]*?)" in the subject$/ do |text|
-  deprecation_notice "The step 'I/they should see [text] in the subject' is no longer supported.
+  email_spec_deprecate "The step 'I/they should see [text] in the subject' is no longer supported.
                       Please use 'I/they should see [text] in the email subject' instead."
   current_email.should have_subject(Regexp.new(text))
 end
 Then /^(?:I|they) should see "([^"]*?)" in the email$/ do |text|
-  deprecation_notice "The step 'I/they should see [text] in the email' is no longer supported.
+  email_spec_deprecate "The step 'I/they should see [text] in the email' is no longer supported.
                       Please use 'I/they should see [text] in the email body' instead."
   current_email.body.should =~ Regexp.new(text)
 end
@@ -119,20 +120,3 @@ When /^(?:I|they) click the first link in the email$/ do
   click_first_link_in_email
 end
 
-private
-
-def deprecation_notice(text)
-  puts ""
-  puts "DEPRECATION: #{text.split.join(' ')}"
-  puts ""
-end
-
-def parse_current_email(address)
-  address.nil? ? current_email_address : address
-end
-
-def parse_email_count(amount)
-  amount = 0 if amount == "no"
-  amount = 1 if amount == "an"
-  amount.to_i
-end
