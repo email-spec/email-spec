@@ -15,7 +15,7 @@ Given /^the example rails app is setup with the latest generators$/ do
 end
 
 When /^I run "([^\"]*)"$/ do |cmd|
-  cmd.gsub!('cucumber', `which cucumber`)
+  cmd.gsub!('cucumber', "#{Cucumber::RUBY_BINARY} #{Cucumber::BINARY}")
   root_dir = File.join(File.expand_path(File.dirname(__FILE__)), "..")
   Dir.chdir(File.join(root_dir, 'examples', 'rails_root')) do
     @output = `#{cmd}`
