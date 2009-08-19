@@ -3,14 +3,24 @@
  === New features
  === Bufixes
 
+ == 0.3.1 2009-08-19
+This release is a general refactoring of the steps and helpers.
+The example rails app was also updated to use the lateset rails and webrat.  It also takes advantages
+and the newer step definistions including the new third-person forms.
+
+Some of the generated steps are being removed in favor of some of the newer ones.  The older ones
+will remain until 0.3.5 but will issue deprecation warnings.
+
+Big shoutout to Kieran Pilkington who did the majority of work for this release.
+
  == 0.3.0 2009-08-13
 
  === New features
   * New helper #last_email_address which returns the last address used by email-spec for that scenario. (Ben Mabey)
   * Steps now support third person language. (Kieran P)
-  * "[email] should receive ... " now supports "an" instead of just an integer. (Kieran P)
+  * "[email] should receive ... " now supports "an" instead of just an integer. (Kieran Pilkington)
     With these changes, the following is now possible:
-    
+
       Then "jack@example.com" should receive an email
       When they open the email
       Then they should see "Account has been created" in the subject
