@@ -87,7 +87,6 @@ Gem::Specification.new do |s|
      "examples/rails_root/features/support",
      "examples/rails_root/features/support/env.rb",
      "examples/rails_root/features/support/paths.rb",
-     "examples/rails_root/log",
      "examples/rails_root/public",
      "examples/rails_root/public/404.html",
      "examples/rails_root/public/422.html",
