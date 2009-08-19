@@ -82,7 +82,6 @@ Gem::Specification.new do |s|
      "examples/rails_root/features/errors.feature",
      "examples/rails_root/features/example.feature",
      "examples/rails_root/features/step_definitions",
-     "examples/rails_root/features/step_definitions/email_steps.rb",
      "examples/rails_root/features/step_definitions/user_steps.rb",
      "examples/rails_root/features/step_definitions/webrat_steps.rb",
      "examples/rails_root/features/support",

@@ -60,8 +60,12 @@ task :default => [:features, :spec, 'example_app:spec']
 
 desc "Cleans the project of any tmp file that should not be included in the gemspec."
 task :clean do
+  FileUtils.rm_f('examples/rails_root/features/step_definitions/email_steps.rb')
   %w[*.sqlite3 *.log].each do |pattern|
     `find . -name "#{pattern}" -delete`
   end
 end
+
+desc "Cleans the dir and builds the gem"
+task :prep => [:clean, :gemspec, :build]
 
