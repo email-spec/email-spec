@@ -133,18 +133,7 @@ Gem::Specification.new do |s|
      "examples/rails_root/spec/models/user_spec.rb",
      "examples/rails_root/spec/rcov.opts",
      "examples/rails_root/spec/spec.opts",
-     "examples/rails_root/spec/spec_helper.rb",
-     "examples/rails_root/stories",
-     "examples/rails_root/stories/all.rb",
-     "examples/rails_root/stories/helper.rb",
-     "examples/rails_root/vendor",
-     "examples/rails_root/vendor/plugins",
-     "examples/rails_root/vendor/plugins/email_spec",
-     "examples/rails_root/vendor/plugins/email_spec/rails_generators",
-     "examples/rails_root/vendor/plugins/email_spec/rails_generators/email_spec",
-     "examples/rails_root/vendor/plugins/email_spec/rails_generators/email_spec/email_spec_generator.rb",
-     "examples/rails_root/vendor/plugins/email_spec/rails_generators/email_spec/templates",
-     "examples/rails_root/vendor/plugins/email_spec/rails_generators/email_spec/templates/email_steps.rb"
+     "examples/rails_root/spec/spec_helper.rb"
   ]
 
   if s.respond_to? :specification_version then

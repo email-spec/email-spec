@@ -62,6 +62,7 @@ desc "Cleans the project of any tmp file that should not be included in the gems
 task :clean do
   FileUtils.rm_f('examples/rails_root/features/step_definitions/email_steps.rb')
   FileUtils.rm_rf('examples/rails_root/log')
+  FileUtils.rm_rf('examples/rails_root/vendor')
   %w[*.sqlite3 *.log].each do |pattern|
     `find . -name "#{pattern}" -delete`
   end
