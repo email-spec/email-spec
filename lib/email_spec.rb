@@ -1,5 +1,5 @@
-unless defined?(ActionMailer)
-  Kernel.warn("ActionMailer did not appear to be loaded so email-spec is requiring it.")
+unless defined?(Pony) or defined?(ActionMailer)
+  Kernel.warn("Neither Pony nor ActionMailer appear to be loaded so email-spec is requiring ActionMailer.")
   require 'actionmailer'
 end
 
