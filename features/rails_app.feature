@@ -10,6 +10,6 @@ I want to verify that the example rails app runs all of it's features as expecte
     And I run "cucumber features -q --no-color"
     Then I should see the following summary report:
     """
-    9 scenarios (5 failed, 4 passed)
-    75 steps (5 failed, 1 skipped, 69 passed)
+    10 scenarios (5 failed, 5 passed)
+    81 steps (5 failed, 1 skipped, 75 passed)
     """

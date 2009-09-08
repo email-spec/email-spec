@@ -8,4 +8,11 @@ class UserMailer < ActionMailer::Base
     @body[:name] = name
   end
 
+  def newsletter(email, name)
+    @recipients  = email
+    @from        = "admin@example.com"
+    @subject     = "Newsletter sent"
+    @sent_on     = Time.now
+    @body[:name] = name
+  end
 end

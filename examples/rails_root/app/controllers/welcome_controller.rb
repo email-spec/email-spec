@@ -6,4 +6,7 @@ class WelcomeController < ApplicationController
   def confirm
   end
 
+  def newsletter
+    UserMailer.send_later(:deliver_newsletter, params['Email'], params['Name'])
+  end
 end
