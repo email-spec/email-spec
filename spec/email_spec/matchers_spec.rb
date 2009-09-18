@@ -45,7 +45,6 @@ describe EmailSpec::Matchers do
   end
 
   describe "#deliver_to" do
-
     it "should match when the email is set to deliver to the specidied address" do
       email = mock_email(:to => "jimmy_bean@yahoo.com")
 
@@ -72,6 +71,18 @@ describe EmailSpec::Matchers do
       deliver_to(user).should match(email)
     end
 
+  end
+
+  describe "#deliver_from" do
+    it "should match when the email is set to deliver from the specidied address" do
+      email = mock_email(:from => ["jimmy_bean@yahoo.com"])
+      deliver_from("jimmy_bean@yahoo.com").should match(email)
+    end
+
+    it "should not match when the email is not set to deliver from the specified address" do
+      email = mock_email(:from => nil)
+      deliver_from("jimmy_bean@yahoo.com").should_not match(email)
+    end
   end
 
   describe "#bcc_to" do
@@ -182,7 +193,7 @@ describe EmailSpec::Matchers do
   describe "#have_body_text" do
     it "should have specs!"
   end
-  
+
   describe "#have_header" do
     it "should have specs!"
   end
