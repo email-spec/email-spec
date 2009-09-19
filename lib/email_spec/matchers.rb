@@ -66,6 +66,8 @@ module EmailSpec
       DeliverFrom.new(email)
     end
 
+    alias :be_delivered_from :deliver_from
+
     class BccTo
 
       def initialize(expected_email_addresses_or_objects_that_respond_to_email)
