@@ -3,6 +3,11 @@
  === New features
  === Bufixes
 
+ == 0.3.3 2009-09-18
+
+ === New features
+ * DeliverFrom matcher. i.e. email.should deliver_from(blah) or email.should be_delivered_from(blah) (Diego Carrion)
+
  == 0.3.2 2009-09-10
 
  === New features
