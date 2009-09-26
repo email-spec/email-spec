@@ -3,6 +3,11 @@
  === New features
  === Bufixes
 
+== 0.3.4 2009-09-26
+
+=== Bugfixes
+ * Typo and logic fixes for DeliverFrom matcher. (Yury Kotlyarov)
+
  == 0.3.3 2009-09-18
 
  === New features
