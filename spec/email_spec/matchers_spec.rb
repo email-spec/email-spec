@@ -71,6 +71,12 @@ describe EmailSpec::Matchers do
       deliver_to(user).should match(email)
     end
 
+    it "should give correct failure message when the email is not set to deliver to the specified address" do
+      lambda {
+        mock_email(:inspect => 'email', :to => 'freddy_noe@yahoo.com').should deliver_to("jimmy_bean@yahoo.com")
+      }.should raise_error(Spec::Expectations::ExpectationNotMetError, %{expected email to deliver to ["jimmy_bean@yahoo.com"], but it delivered to ["freddy_noe@yahoo.com"]})
+    end
+
   end
 
   describe "#deliver_from" do

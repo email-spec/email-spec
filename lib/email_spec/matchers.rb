@@ -23,7 +23,7 @@ module EmailSpec
       end
 
       def failure_message
-        "expected #{@email.inspect} to deliver to #{@expected_email_addresses.inspect}, but it delievered to #{@actual_recipients.inspect}"
+        "expected #{@email.inspect} to deliver to #{@expected_email_addresses.inspect}, but it delivered to #{@actual_recipients.inspect}"
       end
 
       def negative_failure_message
