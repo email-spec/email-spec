@@ -72,9 +72,9 @@ describe EmailSpec::Matchers do
     end
 
     it "should give correct failure message when the email is not set to deliver to the specified address" do
-      lambda {
-        mock_email(:inspect => 'email', :to => 'freddy_noe@yahoo.com').should deliver_to("jimmy_bean@yahoo.com")
-      }.should raise_error(Spec::Expectations::ExpectationNotMetError, %{expected email to deliver to ["jimmy_bean@yahoo.com"], but it delivered to ["freddy_noe@yahoo.com"]})
+      matcher = deliver_to("jimmy_bean@yahoo.com")
+      matcher.matches?(mock_email(:inspect => 'email', :to => 'freddy_noe@yahoo.com'))
+      matcher.failure_message.should == %{expected email to deliver to ["jimmy_bean@yahoo.com"], but it delivered to ["freddy_noe@yahoo.com"]}
     end
 
   end
@@ -91,9 +91,9 @@ describe EmailSpec::Matchers do
     end
 
     it "should give correct failure message when the email is not set to deliver from the specified address" do
-      lambda {
-        mock_email(:inspect => 'email', :from => ['freddy_noe@yahoo.com']).should deliver_from("jimmy_bean@yahoo.com")
-      }.should raise_error(Spec::Expectations::ExpectationNotMetError, %{expected email to deliver from "jimmy_bean@yahoo.com", but it delivered from "freddy_noe@yahoo.com"})
+      matcher = deliver_from("jimmy_bean@yahoo.com")
+      matcher.matches?(mock_email(:inspect => 'email', :from => ['freddy_noe@yahoo.com']))
+      matcher.failure_message.should == %{expected email to deliver from "jimmy_bean@yahoo.com", but it delivered from "freddy_noe@yahoo.com"}
     end
 
   end
