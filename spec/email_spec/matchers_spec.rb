@@ -83,6 +83,13 @@ describe EmailSpec::Matchers do
       email = mock_email(:from => nil)
       deliver_from("jimmy_bean@yahoo.com").should_not match(email)
     end
+
+    it "should give correct failure message when the email is not set to deliver from the specified address" do
+      lambda {
+        mock_email(:inspect => 'email', :from => ['freddy_noe@yahoo.com']).should deliver_from("jimmy_bean@yahoo.com")
+      }.should raise_error(Spec::Expectations::ExpectationNotMetError, %{expected email to deliver from "jimmy_bean@yahoo.com", but it delivered from "freddy_noe@yahoo.com"})
+    end
+
   end
 
   describe "#bcc_to" do
