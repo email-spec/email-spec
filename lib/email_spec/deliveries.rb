@@ -1,19 +1,19 @@
 module EmailSpec
-  module TestDeliveries
+  module MailerDeliveries
     def all_emails
-      ActionMailer::Base.deliveries
+      mailer.deliveries
     end
 
     def last_email_sent
-      ActionMailer::Base.deliveries.last || raise("No email has been sent!")
+      mailer.deliveries.last || raise("No email has been sent!")
     end
 
     def reset_mailer
-      ActionMailer::Base.deliveries.clear
+      mailer.deliveries.clear
     end
 
     def mailbox_for(address)
-      ActionMailer::Base.deliveries.select { |m| m.to.include?(address) || (m.bcc && m.bcc.include?(address)) || (m.cc && m.cc.include?(address)) }
+      mailer.deliveries.select { |m| m.to.include?(address) || (m.bcc && m.bcc.include?(address)) || (m.cc && m.cc.include?(address)) }
     end
   end
 
@@ -43,41 +43,27 @@ module EmailSpec
     end
   end
 
-  module PonyDeliveries
-    def all_emails
-      Pony.deliveries
-    end
+  if defined?(Pony)
+    module ::Pony
+      def self.deliveries
+        @deliveries ||= []
+      end
 
-    def last_email_sent
-      Pony.deliveries.last || raise("No email has been sent!")
-    end
-
-    def reset_mail
-      Pony.deliveries.clear
-    end
-
-    def mailbox_for(address)
-      Pony.deliveries.select { |m| m.to.include?(address) || (m.bcc && m.bcc.include?(address)) || (m.cc && m.cc.include?(address)) }
+      def self.mail(options)
+        deliveries << build_tmail(options)
+      end
     end
   end
 
   module Deliveries
     if defined?(Pony)
-      module ::Pony
-        def self.deliveries
-          @deliveries ||= []
-        end
-
-        def self.mail(options)
-          deliveries << build_tmail(options)
-        end
-      end
-
-      include EmailSpec::PonyDeliveries
+      def mailer; Pony; end
+      include EmailSpec::MailerDeliveries
     elsif ActionMailer::Base.delivery_method == :activerecord
       include EmailSpec::ARMailerDeliveries
     else
-      include EmailSpec::TestDeliveries
+      def mailer; ActionMailer::Base; end
+      include EmailSpec::MailerDeliveries
     end
     include EmailSpec::BackgroundProcesses::Compatibility
   end
