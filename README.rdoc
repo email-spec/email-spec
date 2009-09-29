@@ -8,12 +8,12 @@ A collection of RSpec matchers and Cucumber steps to make testing emails go smoo
   script/plugin install git://github.com/bmabey/email-spec.git
 
 === Gem Setup
-  
+
   gem install bmabey-email_spec
 
   # config/environments/test.rb
   config.gem 'bmabey-email_spec', :lib => 'email_spec'
-  
+
 === Cucumber
 
 To use the steps in features put the following in your env.rb:
@@ -21,7 +21,7 @@ To use the steps in features put the following in your env.rb:
   # Make sure this require is after you require cucumber/rails/world.
   require 'email_spec/cucumber'
 
-This will load all the helpers that the steps rely on. 
+This will load all the helpers that the steps rely on.
 It will also add a Before hook for Cucumber so that emails are cleared at the start of each scenario.
 
 Then:
@@ -32,7 +32,7 @@ This will give you a bunch of steps to get started with in step_definitions/emai
 
 === RSpec
 
-	First you need to require the helpers and matchers in your spec_helper.rb like so:
+  First you need to require the helpers and matchers in your spec_helper.rb like so:
 
   require "email_spec/helpers"
   require "email_spec/matchers"
@@ -95,11 +95,11 @@ For more examples, check out examples/rails_root in the source for a small examp
       before(:all) do
         @email = UserMailer.create_signup("jojo@yahoo.com", "Jojo Binks")
       end
-      
+
       it "should be set to be delivered to the email passed in" do
         @email.should deliver_to("jojo@yahoo.com")
       end
-      
+
       it "should contain the user's message in the mail body" do
         @email.should have_text(/Jojo Binks/)
       end
@@ -107,14 +107,14 @@ For more examples, check out examples/rails_root in the source for a small examp
       it "should contain a link to the confirmation link" do
         @email.should have_text(/#{confirm_account_url}/)
       end
-      
+
       it "should have the correct subject" do
         @email.should have_subject(/Account confirmation/)
       end
-      
+
     end
-     
-    ==== Using the helpers when not testing in isolation ==== 
+
+    ==== Using the helpers when not testing in isolation ====
 
       Don't. :)  Seriously, if you do just take a look at the helpers and use them as you wish.
 

@@ -22,8 +22,9 @@ config.action_controller.allow_forgery_protection    = false
 config.action_mailer.delivery_method = :test
 config.action_mailer.default_url_options = { :host => "example.com" }
 
-config.gem 'cucumber',         :lib => false
-config.gem 'webrat',           :lib => false
-config.gem 'rspec',            :lib => false
-config.gem 'rspec-rails',      :lib => 'spec/rails'
-config.gem 'fixjour', :lib => 'fixjour'
+config.gem 'cucumber',                   :lib => false
+config.gem 'webrat',                     :lib => false
+config.gem 'rspec',                      :lib => false
+config.gem 'rspec-rails',                :lib => 'spec/rails'
+config.gem 'fixjour',                    :lib => 'fixjour'
+config.gem 'collectiveidea-delayed_job', :lib => 'delayed_job', :source => 'http://gems.github.com'

@@ -23,7 +23,7 @@ module EmailSpec
       end
 
       def failure_message
-        "expected #{@email.inspect} to deliver to #{@expected_email_addresses.inspect}, but it delievered to #{@actual_recipients.inspect}"
+        "expected #{@email.inspect} to deliver to #{@expected_email_addresses.inspect}, but it delivered to #{@actual_recipients.inspect}"
       end
 
       def negative_failure_message
@@ -36,6 +36,37 @@ module EmailSpec
     end
 
     alias :be_delivered_to :deliver_to
+
+    class DeliverFrom
+
+      def initialize(email)
+        @expected_email_addresses = email
+      end
+
+      def description
+        "be delivered from #{@expected_email_addresses.inspect}"
+      end
+
+      def matches?(email)
+        @email = email
+        @actual_sender = (email.from || []).first
+        @actual_sender.eql? @expected_email_addresses
+      end
+
+      def failure_message
+        "expected #{@email.inspect} to deliver from #{@expected_email_addresses.inspect}, but it delivered from #{@actual_sender.inspect}"
+      end
+
+      def negative_failure_message
+        "expected #{@email.inspect} not to deliver from #{@expected_email_addresses.inspect}, but it did"
+      end
+    end
+
+    def deliver_from(email)
+      DeliverFrom.new(email)
+    end
+
+    alias :be_delivered_from :deliver_from
 
     class BccTo
 

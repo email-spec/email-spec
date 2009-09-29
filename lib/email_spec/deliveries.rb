@@ -79,6 +79,7 @@ module EmailSpec
     else
       include EmailSpec::TestDeliveries
     end
+    include EmailSpec::BackgroundProcesses::Compatibility
   end
 end
 

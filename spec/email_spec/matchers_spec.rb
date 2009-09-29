@@ -45,7 +45,6 @@ describe EmailSpec::Matchers do
   end
 
   describe "#deliver_to" do
-
     it "should match when the email is set to deliver to the specidied address" do
       email = mock_email(:to => "jimmy_bean@yahoo.com")
 
@@ -70,6 +69,31 @@ describe EmailSpec::Matchers do
       user = mock("user", :email => "jimmy_bean@yahoo.com")
 
       deliver_to(user).should match(email)
+    end
+
+    it "should give correct failure message when the email is not set to deliver to the specified address" do
+      matcher = deliver_to("jimmy_bean@yahoo.com")
+      matcher.matches?(mock_email(:inspect => 'email', :to => 'freddy_noe@yahoo.com'))
+      matcher.failure_message.should == %{expected email to deliver to ["jimmy_bean@yahoo.com"], but it delivered to ["freddy_noe@yahoo.com"]}
+    end
+
+  end
+
+  describe "#deliver_from" do
+    it "should match when the email is set to deliver from the specidied address" do
+      email = mock_email(:from => ["jimmy_bean@yahoo.com"])
+      deliver_from("jimmy_bean@yahoo.com").should match(email)
+    end
+
+    it "should not match when the email is not set to deliver from the specified address" do
+      email = mock_email(:from => nil)
+      deliver_from("jimmy_bean@yahoo.com").should_not match(email)
+    end
+
+    it "should give correct failure message when the email is not set to deliver from the specified address" do
+      matcher = deliver_from("jimmy_bean@yahoo.com")
+      matcher.matches?(mock_email(:inspect => 'email', :from => ['freddy_noe@yahoo.com']))
+      matcher.failure_message.should == %{expected email to deliver from "jimmy_bean@yahoo.com", but it delivered from "freddy_noe@yahoo.com"}
     end
 
   end
@@ -182,7 +206,7 @@ describe EmailSpec::Matchers do
   describe "#have_body_text" do
     it "should have specs!"
   end
-  
+
   describe "#have_header" do
     it "should have specs!"
   end

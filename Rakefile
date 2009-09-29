@@ -25,12 +25,13 @@ rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
 end
 
-
-begin
-  gem 'fixjour'
-rescue Gem::LoadError
-  puts "Installing fixjour for the example rails app..."
-  puts `gem install fixjour --no-rdoc --no-ri`
+%w[collectiveidea-delayed_job fixjour].each do |gem_name|
+  begin
+    gem gem_name
+  rescue Gem::LoadError
+    puts "Installing #{gem_name} for the example rails app..."
+    puts `gem install #{gem_name} --no-rdoc --no-ri`
+  end
 end
 
 begin

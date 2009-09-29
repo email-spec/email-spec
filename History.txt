@@ -3,6 +3,21 @@
  === New features
  === Bufixes
 
+== 0.3.4 2009-09-26
+
+=== Bugfixes
+ * Typo and logic fixes for DeliverFrom matcher. (Yury Kotlyarov)
+
+ == 0.3.3 2009-09-18
+
+ === New features
+ * DeliverFrom matcher. i.e. email.should deliver_from(blah) or email.should be_delivered_from(blah) (Diego Carrion)
+
+ == 0.3.2 2009-09-10
+
+ === New features
+  * Support for delayed_job. (Kieran Pilkington)
+
  == 0.3.1 2009-08-19
 This release is a general refactoring of the steps and helpers.
 The example rails app was also updated to use the lateset rails and webrat.  It also takes advantages
