@@ -1,3 +1,5 @@
+require 'singleton'
+
 module EmailSpec
   class AddressConverter
     include Singleton
