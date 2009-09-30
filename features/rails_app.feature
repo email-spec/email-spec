@@ -6,8 +6,8 @@ I want to verify that the example rails app runs all of it's features as expecte
 
   Scenario: regression test
     Given the example rails app is setup with the latest generators
-    When I run "rake db:migrate RAILS_ENV=test"
-    And I run "cucumber features -q --no-color"
+    When I run "rake db:migrate RAILS_ENV=test" in the rails root
+    And I run "cucumber features -q --no-color" in the rails root
     Then I should see the following summary report:
     """
     10 scenarios (5 failed, 5 passed)

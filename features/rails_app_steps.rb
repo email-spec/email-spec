@@ -14,15 +14,10 @@ Given /^the example rails app is setup with the latest generators$/ do
 
 end
 
-When /^I run "([^\"]*)"$/ do |cmd|
+When /^I run "([^\"]*)" in the rails root$/ do |cmd|
   cmd.gsub!('cucumber', "#{Cucumber::RUBY_BINARY} #{Cucumber::BINARY}")
   root_dir = File.join(File.expand_path(File.dirname(__FILE__)), "..")
   Dir.chdir(File.join(root_dir, 'examples', 'rails_root')) do
     @output = `#{cmd}`
   end
 end
-
-Then /^I should see the following summary report:$/ do |expected_report|
-  @output.should include(expected_report)
-end
-
