@@ -17,7 +17,7 @@ Then /^(?:I|they) should receive an email with a link to a confirmation page$/ d
   current_email.should have_body_text('Joe Someone')
 
   click_email_link_matching /confirm/
-  response.should include_text("Confirm your new account")
+  response_body.should contain("Confirm your new account")
 end
 
 # Basically aliases "I should see [text]", but for third person

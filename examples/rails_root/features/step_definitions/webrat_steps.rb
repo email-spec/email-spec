@@ -95,21 +95,21 @@ When /^I attach the file at "([^\"]*)" to "([^\"]*)"$/ do |path, field|
 end
 
 Then /^I should see "([^\"]*)"$/ do |text|
-  response.should contain(text)
+  response_body.should contain(text)
 end
 
 Then /^I should see \/([^\/]*)\/$/ do |regexp|
   regexp = Regexp.new(regexp)
-  response.should contain(regexp)
+  response_body.should contain(regexp)
 end
 
 Then /^I should not see "([^\"]*)"$/ do |text|
-  response.should_not contain(text)
+  response_body.should_not contain(text)
 end
 
 Then /^I should not see \/([^\/]*)\/$/ do |regexp|
   regexp = Regexp.new(regexp)
-  response.should_not contain(regexp)
+  response_body.should_not contain(regexp)
 end
 
 Then /^the "([^\"]*)" field should contain "([^\"]*)"$/ do |field, value|
