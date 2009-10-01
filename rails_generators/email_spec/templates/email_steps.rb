@@ -58,7 +58,7 @@ end
 
 # DEPRECATED
 # The following methods are left in for backwards compatibility and
-# should be removed by version 0.3.5.
+# should be removed by version 0.4.0
 Then /^(?:I|they|"([^"]*?)") should not receive an email$/ do |address|
   email_spec_deprecate "The step 'I/they/[email] should not receive an email' is no longer supported.
                       Please use 'I/they/[email] should receive no emails' instead."
@@ -96,7 +96,7 @@ end
 
 # DEPRECATED
 # The following methods are left in for backwards compatibility and
-# should be removed by version 0.3.5.
+# should be removed by version 0.4.0.
 Then /^(?:I|they) should see "([^"]*?)" in the subject$/ do |text|
   email_spec_deprecate "The step 'I/they should see [text] in the subject' is no longer supported.
                       Please use 'I/they should see [text] in the email subject' instead."

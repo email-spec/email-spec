@@ -3,6 +3,11 @@
  === New features
  === Bufixes
 
+== 0.3.5 2009-09-26 The Pony Release!
+
+ === New features
+ * Support for Pony mailer library. (Rob Holland)
+
 == 0.3.4 2009-09-26
 
 === Bugfixes
@@ -24,7 +29,7 @@ The example rails app was also updated to use the lateset rails and webrat.  It 
 and the newer step definistions including the new third-person forms.
 
 Some of the generated steps are being removed in favor of some of the newer ones.  The older ones
-will remain until 0.3.5 but will issue deprecation warnings.
+will remain until 0.4.0 but will issue deprecation warnings.
 
 Big shoutout to Kieran Pilkington who did the majority of work for this release.
 
