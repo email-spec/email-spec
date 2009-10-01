@@ -25,7 +25,8 @@ rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
 end
 
-%w[collectiveidea-delayed_job fixjour].each do |gem_name|
+# TODO: Maybe use geminstaller instead?
+%w[collectiveidea-delayed_job fixjour pony sinatra rack-test].each do |gem_name|
   begin
     gem gem_name
   rescue Gem::LoadError
