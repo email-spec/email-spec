@@ -3,7 +3,7 @@
  === New features
  === Bufixes
 
-== 0.3.5 2009-09-26 The Pony Release!
+== 0.3.5 2009-09-30 The Pony Release!
 
  === New features
  * Support for Pony mailer library. (Rob Holland)

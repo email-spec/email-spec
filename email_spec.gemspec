@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{email_spec}
-  s.version = "0.3.4"
+  s.version = "0.3.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ben Mabey", "Aaron Gibralter", "Mischa Fierer"]
-  s.date = %q{2009-09-26}
+  s.date = %q{2009-09-30}
   s.description = %q{Easily test email in rspec and cucumber}
   s.email = %q{ben@benmabey.com}
   s.extra_rdoc_files = [
@@ -142,7 +142,19 @@ Gem::Specification.new do |s|
      "examples/rails_root/spec/models/user_spec.rb",
      "examples/rails_root/spec/rcov.opts",
      "examples/rails_root/spec/spec.opts",
-     "examples/rails_root/spec/spec_helper.rb"
+     "examples/rails_root/spec/spec_helper.rb",
+     "examples/sinatra",
+     "examples/sinatra/app.rb",
+     "examples/sinatra/features",
+     "examples/sinatra/features/errors.feature",
+     "examples/sinatra/features/example.feature",
+     "examples/sinatra/features/step_definitions",
+     "examples/sinatra/features/step_definitions/email_steps.rb",
+     "examples/sinatra/features/step_definitions/user_steps.rb",
+     "examples/sinatra/features/step_definitions/webrat_steps.rb",
+     "examples/sinatra/features/support",
+     "examples/sinatra/features/support/env.rb",
+     "examples/sinatra/features/support/paths.rb"
   ]
 
   if s.respond_to? :specification_version then
