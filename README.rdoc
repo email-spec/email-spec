@@ -8,11 +8,11 @@ A collection of RSpec matchers and Cucumber steps to make testing emails go smoo
   script/plugin install git://github.com/bmabey/email-spec.git
 
 === Gem Setup
-
-  gem install bmabey-email_spec
+   
+  gem install email_spec
 
   # config/environments/test.rb
-  config.gem 'bmabey-email_spec', :lib => 'email_spec'
+  config.gem 'email_spec', :lib => 'email_spec'
 
 === Cucumber
 
