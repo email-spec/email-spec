@@ -32,20 +32,20 @@ This will give you a bunch of steps to get started with in step_definitions/emai
 
 === RSpec
 
-  First you need to require the helpers and matchers in your spec_helper.rb like so:
+First you need to require the helpers and matchers in your spec_helper.rb like so:
 
   require "email_spec/helpers"
   require "email_spec/matchers"
 
-  You will then need to include EmailSpec::Helpers and EmailSpec::Matchers in your example groups.
-  If you want to have access to the helpers and matchers in all of your examples you can do the following in your spec_helper.rb:
+You will then need to include EmailSpec::Helpers and EmailSpec::Matchers in your example groups.
+If you want to have access to the helpers and matchers in all of your examples you can do the following in your spec_helper.rb:
 
   Spec::Runner.configure do |config|
     config.include(EmailSpec::Helpers)
     config.include(EmailSpec::Matchers)
   end
 
-  Otherwise, you will need to include them in the example groups you wish to use them:
+Otherwise, you will need to include them in the example groups you wish to use them:
 
   describe "Signup Email" do
     include EmailSpec::Helpers
@@ -71,52 +71,52 @@ For more examples, check out examples/rails_root in the source for a small examp
 
 === RSpec
 
-  ==== Testing In Isolation ====
-    It is often useful to test your mailers in isolation.  You can accomplish this by using mocks to verify that the mailer is being called in the correct place and then write focued examples for the actual mailer.  This is a simple example from the sample app found in the gem:
+==== Testing In Isolation
+It is often useful to test your mailers in isolation.  You can accomplish this by using mocks to verify that the mailer is being called in the correct place and then write focued examples for the actual mailer.  This is a simple example from the sample app found in the gem:
 
-    Verify that the mailer is used correctly in the controller (this would apply to a model as well):
+Verify that the mailer is used correctly in the controller (this would apply to a model as well):
 
-     describe "POST /signup (#signup)" do
-        it "should deliver the signup email" do
-          # expect
-          UserMailer.should_receive(:deliver_signup).with("email@example.com", "Jimmy Bean")
-          # when
-          post :signup, "Email" => "email@example.com", "Name" => "Jimmy Bean"
-        end
-      end
+  describe "POST /signup (#signup)" do
+    it "should deliver the signup email" do
+      # expect
+      UserMailer.should_receive(:deliver_signup).with("email@example.com", "Jimmy Bean")
+      # when
+      post :signup, "Email" => "email@example.com", "Name" => "Jimmy Bean"
+    end
+  end
 
-    Examples for the #signup method in UserMailer:
+Examples for the #signup method in UserMailer:
 
-    describe "Signup Email" do
-      include EmailSpec::Helpers
-      include EmailSpec::Matchers
-      include ActionController::UrlWriter
+  describe "Signup Email" do
+    include EmailSpec::Helpers
+    include EmailSpec::Matchers
+    include ActionController::UrlWriter
 
-      before(:all) do
-        @email = UserMailer.create_signup("jojo@yahoo.com", "Jojo Binks")
-      end
-
-      it "should be set to be delivered to the email passed in" do
-        @email.should deliver_to("jojo@yahoo.com")
-      end
-
-      it "should contain the user's message in the mail body" do
-        @email.should have_text(/Jojo Binks/)
-      end
-
-      it "should contain a link to the confirmation link" do
-        @email.should have_text(/#{confirm_account_url}/)
-      end
-
-      it "should have the correct subject" do
-        @email.should have_subject(/Account confirmation/)
-      end
-
+    before(:all) do
+      @email = UserMailer.create_signup("jojo@yahoo.com", "Jojo Binks")
     end
 
-    ==== Using the helpers when not testing in isolation ====
+    it "should be set to be delivered to the email passed in" do
+      @email.should deliver_to("jojo@yahoo.com")
+    end
 
-      Don't. :)  Seriously, if you do just take a look at the helpers and use them as you wish.
+    it "should contain the user's message in the mail body" do
+      @email.should have_text(/Jojo Binks/)
+    end
+
+    it "should contain a link to the confirmation link" do
+      @email.should have_text(/#{confirm_account_url}/)
+    end
+
+    it "should have the correct subject" do
+      @email.should have_subject(/Account confirmation/)
+    end
+
+  end
+
+==== Using the helpers when not testing in isolation
+
+Don't. :)  Seriously, if you do just take a look at the helpers and use them as you wish.
 
 == Original Authors
 
