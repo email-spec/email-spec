@@ -87,12 +87,33 @@ end
 #
 
 Then /^(?:I|they) should see "([^"]*?)" in the email subject$/ do |text|
+  current_email.should have_subject(text)
+end
+
+Then /^(?:I|they) should see \/([^"]*?)\/ in the email subject$/ do |text|
   current_email.should have_subject(Regexp.new(text))
 end
 
 Then /^(?:I|they) should see "([^"]*?)" in the email body$/ do |text|
+  current_email.body.should include(text)
+end
+
+Then /^(?:I|they) should see \/([^"]*?)\/ in the email body$/ do |text|
   current_email.body.should =~ Regexp.new(text)
 end
+
+Then /^(?:I|they) should see the email delivered from "([^"]*?)"$/ do |text|
+  current_email.should be_delivered_from(text)
+end
+
+Then /^(?:I|they) should see "([^\"]*)" in the email "([^"]*?)" header$/ do |text, name|
+  current_email.should have_header(name, text)
+end
+
+Then /^(?:I|they) should see \/([^\"]*)\/ in the email "([^"]*?)" header$/ do |text, name|
+  current_email.should have_header(name, Regexp.new(text))
+end
+
 
 # DEPRECATED
 # The following methods are left in for backwards compatibility and
