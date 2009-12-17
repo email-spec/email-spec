@@ -4,6 +4,12 @@
 
  === Bufixes
 
+
+== 0.3.7 2009-12-17
+
+ === New features
+ * Matchers are now Ruby 1.9 compatible. (John Dewey)
+
 == 0.3.6 2009-12-16
 
  === New features
