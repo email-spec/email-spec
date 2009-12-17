@@ -18,7 +18,7 @@ module EmailSpec
 
       def matches?(email)
         @email = email
-        @actual_recipients = (email.to || []).sort
+        @actual_recipients = (Array(email.to) || []).sort
         @actual_recipients == @expected_email_addresses
       end
 
@@ -84,7 +84,7 @@ module EmailSpec
 
       def matches?(email)
         @email = email
-        @actual_recipients = (email.bcc || []).sort
+        @actual_recipients = (Array(email.bcc) || []).sort
         @actual_recipients == @expected_email_addresses
       end
 
