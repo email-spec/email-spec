@@ -1,8 +1,14 @@
 (In Git)
 
  === New features
- * Cucumber steps for be_delivered_from, have_header matchers. Explicit regular expression steps. i.e. "I should see /foo/ in the email body" (Joseph Holsten)
+
  === Bufixes
+
+== 0.3.6 2009-12-16
+
+ === New features
+ * Cucumber steps for be_delivered_from, have_header matchers. (Joseph Holsten)
+ * Explicit regular expression steps. i.e. "I should see /foo/ in the email body" (Joseph Holsten)
 
 == 0.3.5 2009-09-30 The Pony Release!
 

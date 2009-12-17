@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{email_spec}
-  s.version = "0.3.5"
+  s.version = "0.3.6"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ben Mabey", "Aaron Gibralter", "Mischa Fierer"]
-  s.date = %q{2009-10-08}
+  s.date = %q{2009-12-16}
   s.description = %q{Easily test email in rspec and cucumber}
   s.email = %q{ben@benmabey.com}
   s.extra_rdoc_files = [
@@ -38,7 +38,7 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubyforge_project = %q{email-spec}
-  s.rubygems_version = %q{1.3.3}
+  s.rubygems_version = %q{1.3.5}
   s.summary = %q{Easily test email in rspec and cucumber}
   s.test_files = [
     "spec/email_spec",
