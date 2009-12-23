@@ -35,7 +35,10 @@ module EmailSpec
     end
 
     def mailbox_for(address)
-      Email.all.select { |email| email.to.include?(address) || email.bcc.include?(address) || email.cc.include?(address) }.map{ |email| parse_to_tmail(email) }
+      Email.all.select { |email|
+        (email.to && email.to.include?(address)) ||
+        (email.bcc && email.bcc.include?(address)) ||
+        (email.cc && email.cc.include?(address)) }.map{ |email| parse_to_tmail(email) }
     end
 
     def parse_to_tmail(email)
