@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{email_spec}
-  s.version = "0.3.7"
+  s.version = "0.3.8"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ben Mabey", "Aaron Gibralter", "Mischa Fierer"]
-  s.date = %q{2009-12-17}
+  s.date = %q{2009-12-23}
   s.description = %q{Easily test email in rspec and cucumber}
   s.email = %q{ben@benmabey.com}
   s.extra_rdoc_files = [
@@ -162,7 +162,6 @@ Gem::Specification.new do |s|
      "examples/sinatra/features/errors.feature",
      "examples/sinatra/features/example.feature",
      "examples/sinatra/features/step_definitions",
-     "examples/sinatra/features/step_definitions/email_steps.rb",
      "examples/sinatra/features/step_definitions/user_steps.rb",
      "examples/sinatra/features/step_definitions/webrat_steps.rb",
      "examples/sinatra/features/support",

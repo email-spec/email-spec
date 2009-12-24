@@ -4,6 +4,10 @@
 
  === Bufixes
 
+== 0.3.8 2009-12-23
+
+ === Bufixes
+    * Guard against cc and bcc fields being nil for ActionMailer. (Piotr Sarnacki)
 
 == 0.3.7 2009-12-17
 
