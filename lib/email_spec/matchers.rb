@@ -40,25 +40,28 @@ module EmailSpec
     class DeliverFrom
 
       def initialize(email)
-        @expected_email_addresses = email
+        @expected_sender = TMail::Address.parse(email)
       end
 
       def description
-        "be delivered from #{@expected_email_addresses.inspect}"
+        "be delivered from #{@expected_sender.to_s}"
       end
 
       def matches?(email)
         @email = email
-        @actual_sender = (email.from || []).first
-        @actual_sender.eql? @expected_email_addresses
+        @actual_sender = (email.from_addrs || []).first
+        
+        !@actual_sender.nil? &&
+          @actual_sender.address == @expected_sender.address &&
+          @actual_sender.name == @expected_sender.name
       end
 
       def failure_message
-        "expected #{@email.inspect} to deliver from #{@expected_email_addresses.inspect}, but it delivered from #{@actual_sender.inspect}"
+        %(expected #{@email.inspect} to deliver from "#{@expected_sender.to_s}", but it delivered from "#{@actual_sender.to_s}")
       end
 
       def negative_failure_message
-        "expected #{@email.inspect} not to deliver from #{@expected_email_addresses.inspect}, but it did"
+        %(expected #{@email.inspect} not to deliver from "#{@expected_sender.to_s}", but it did)
       end
     end
 
