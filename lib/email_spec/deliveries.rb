@@ -1,19 +1,29 @@
 module EmailSpec
   module MailerDeliveries
     def all_emails
-      mailer.deliveries
+      deliveries
     end
 
     def last_email_sent
-      mailer.deliveries.last || raise("No email has been sent!")
+      deliveries.last || raise("No email has been sent!")
     end
 
     def reset_mailer
-      mailer.deliveries.clear
+      deliveries.clear
     end
 
     def mailbox_for(address)
-      mailer.deliveries.select { |m| m.to.include?(address) || (m.bcc && m.bcc.include?(address)) || (m.cc && m.cc.include?(address)) }
+      deliveries.select { |m| m.to.include?(address) || (m.bcc && m.bcc.include?(address)) || (m.cc && m.cc.include?(address)) }
+    end
+
+    protected
+
+    def deliveries
+      if ActionMailer::Base.delivery_method == :cache
+        mailer.cached_deliveries
+      else
+        mailer.deliveries
+      end
     end
   end
 
