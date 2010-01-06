@@ -23,6 +23,7 @@ config.action_mailer.delivery_method = :test
 config.action_mailer.default_url_options = { :host => "example.com" }
 
 config.gem 'cucumber',                   :lib => false
+config.gem 'cucumber-rails',                   :lib => false
 config.gem 'webrat',                     :lib => false
 config.gem 'rspec',                      :lib => false
 config.gem 'rspec-rails',                :lib => 'spec/rails'
