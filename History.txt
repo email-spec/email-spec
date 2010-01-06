@@ -1,8 +1,11 @@
 (In Git)
 
  === New features
+    * Added support for action_mailer_cache_delivery plugin. (Dan Dofter)
+      You must use the fork at: http://github.com/liangzan/action_mailer_cache_delivery
 
  === Bufixes
+    * be_delivered_from matcher now compares both sender name and email address. (Dan Dofter)
 
 == 0.3.8 2009-12-23
 
