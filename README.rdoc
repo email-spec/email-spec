@@ -8,7 +8,7 @@ A collection of RSpec matchers and Cucumber steps to make testing emails go smoo
   script/plugin install git://github.com/bmabey/email-spec.git
 
 === Gem Setup
-   
+
   gem install email_spec
 
   # config/environments/test.rb
@@ -32,10 +32,9 @@ This will give you a bunch of steps to get started with in step_definitions/emai
 
 === RSpec
 
-First you need to require the helpers and matchers in your spec_helper.rb like so:
+First you need to require email_spec in your spec_helper.rb:
 
-  require "email_spec/helpers"
-  require "email_spec/matchers"
+  require "email_spec"
 
 You will then need to include EmailSpec::Helpers and EmailSpec::Matchers in your example groups.
 If you want to have access to the helpers and matchers in all of your examples you can do the following in your spec_helper.rb:
