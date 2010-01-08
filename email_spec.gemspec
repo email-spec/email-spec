@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{email_spec}
-  s.version = "0.3.8"
+  s.version = "0.4.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ben Mabey", "Aaron Gibralter", "Mischa Fierer"]
-  s.date = %q{2009-12-23}
+  s.date = %q{2010-01-07}
   s.description = %q{Easily test email in rspec and cucumber}
   s.email = %q{ben@benmabey.com}
   s.extra_rdoc_files = [
@@ -83,7 +83,6 @@ Gem::Specification.new do |s|
      "examples/rails_root/db/migrate/20090125013728_create_users.rb",
      "examples/rails_root/db/migrate/20090908054656_create_delayed_jobs.rb",
      "examples/rails_root/db/schema.rb",
-     "examples/rails_root/db/test.sqlite3",
      "examples/rails_root/doc",
      "examples/rails_root/doc/README_FOR_APP",
      "examples/rails_root/features",
@@ -91,15 +90,11 @@ Gem::Specification.new do |s|
      "examples/rails_root/features/errors.feature",
      "examples/rails_root/features/example.feature",
      "examples/rails_root/features/step_definitions",
-     "examples/rails_root/features/step_definitions/email_steps.rb",
      "examples/rails_root/features/step_definitions/user_steps.rb",
      "examples/rails_root/features/step_definitions/webrat_steps.rb",
      "examples/rails_root/features/support",
      "examples/rails_root/features/support/env.rb",
      "examples/rails_root/features/support/paths.rb",
-     "examples/rails_root/log",
-     "examples/rails_root/log/development.log",
-     "examples/rails_root/log/test.log",
      "examples/rails_root/public",
      "examples/rails_root/public/404.html",
      "examples/rails_root/public/422.html",
@@ -148,14 +143,6 @@ Gem::Specification.new do |s|
      "examples/rails_root/spec/rcov.opts",
      "examples/rails_root/spec/spec.opts",
      "examples/rails_root/spec/spec_helper.rb",
-     "examples/rails_root/vendor",
-     "examples/rails_root/vendor/plugins",
-     "examples/rails_root/vendor/plugins/email_spec",
-     "examples/rails_root/vendor/plugins/email_spec/rails_generators",
-     "examples/rails_root/vendor/plugins/email_spec/rails_generators/email_spec",
-     "examples/rails_root/vendor/plugins/email_spec/rails_generators/email_spec/email_spec_generator.rb",
-     "examples/rails_root/vendor/plugins/email_spec/rails_generators/email_spec/templates",
-     "examples/rails_root/vendor/plugins/email_spec/rails_generators/email_spec/templates/email_steps.rb",
      "examples/sinatra",
      "examples/sinatra/app.rb",
      "examples/sinatra/features",
@@ -166,8 +153,7 @@ Gem::Specification.new do |s|
      "examples/sinatra/features/step_definitions/webrat_steps.rb",
      "examples/sinatra/features/support",
      "examples/sinatra/features/support/env.rb",
-     "examples/sinatra/features/support/paths.rb",
-     "examples/sinatra/webrat.log"
+     "examples/sinatra/features/support/paths.rb"
   ]
 
   if s.respond_to? :specification_version then
