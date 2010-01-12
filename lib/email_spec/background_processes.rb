@@ -2,22 +2,30 @@ module EmailSpec
   module BackgroundProcesses
     module DelayedJob
       def all_emails
-        Delayed::Job.work_off
+        Delayed::Worker.send :public, :work_off
+        @worker = Delayed::Worker.new(:max_priority => nil, :min_priority => nil, :quiet => true)
+        @worker.work_off
         super
       end
 
       def last_email_sent
-        Delayed::Job.work_off
+        Delayed::Worker.send :public, :work_off
+        @worker = Delayed::Worker.new(:max_priority => nil, :min_priority => nil, :quiet => true)
+        @worker.work_off
         super
       end
 
       def reset_mailer
-        Delayed::Job.work_off
+        Delayed::Worker.send :public, :work_off
+        @worker = Delayed::Worker.new(:max_priority => nil, :min_priority => nil, :quiet => true)
+        @worker.work_off
         super
       end
 
       def mailbox_for(address)
-        Delayed::Job.work_off
+        Delayed::Worker.send :public, :work_off
+        @worker = Delayed::Worker.new(:max_priority => nil, :min_priority => nil, :quiet => true)
+        @worker.work_off
         super
       end
     end
