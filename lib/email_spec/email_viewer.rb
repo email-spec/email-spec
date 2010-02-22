@@ -1,7 +1,7 @@
 module EmailSpec
   class EmailViewer
     extend Deliveries
-    
+
     def self.save_and_open_all_raw_emails
       filename = "#{RAILS_ROOT}/tmp/email-#{Time.now.to_i}.txt"
 
@@ -44,7 +44,7 @@ module EmailSpec
 
       open_in_text_editor(filename)
     end
-  
+
     def self.save_and_open_email(mail)
       filename = "#{RAILS_ROOT}/tmp/email-#{Time.now.to_i}.txt"
 
@@ -54,15 +54,15 @@ module EmailSpec
 
       open_in_text_editor(filename)
     end
-    
+
     def self.open_in_text_editor(filename)
       `mate #{filename}`
     end
-    
+
     def self.open_in_browser(filename)
       `open #{filename}`
     end
-    
+
     def self.tmp_email_filename(extension = '.txt')
       "#{RAILS_ROOT}/tmp/email-#{Time.now.to_i}#{extension}"
     end
