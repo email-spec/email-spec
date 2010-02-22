@@ -8,6 +8,12 @@
 
  === New features
   * "should receive <x> emails with subject <the_subject>" step definition (Balint Erdi)
+  * "should recieve an email with the following body:" step definition (Ben Mabey)
+  * Debugging steps that tie into EmailViewer: (Ben Mabey)
+    * "save and open current email"
+    * "save and open all text emails"
+    * "save and open all html emails"
+    * "save and open all raw emails"
 
  === Bufixes
   * Gracefuly handle cases where emails do not have a 'to' value. (Kieran Pilkington)

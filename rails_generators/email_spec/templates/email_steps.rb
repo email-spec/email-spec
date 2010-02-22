@@ -60,6 +60,11 @@ Then /^(?:I|they|"([^"]*?)") should receive (an|no|\d+) emails? with subject "([
   unread_emails_for(address).select { |m| m.subject =~ Regexp.new(subject) }.size.should == parse_email_count(amount)
 end
 
+Then /^(?:I|they|"([^"]*?)") should recieve an email with the following body:$/ do |address, expected_body|
+  open_email(address, :with_text => expected_body)
+end
+
+
 # DEPRECATED
 # The following methods are left in for backwards compatibility and
 # should be removed by version 0.4.0
@@ -145,3 +150,24 @@ When /^(?:I|they) click the first link in the email$/ do
   click_first_link_in_email
 end
 
+#
+# Debugging
+# These only work with Rails and OSx ATM since EmailViewer uses RAILS_ROOT and OSx's 'open' command.
+# Patches accepted. ;)
+#
+
+Then /^save and open current email$/ do
+  EmailSpec::EmailViewer::save_and_open_email(current_email)
+end
+
+Then /^save and open all text emails$/ do
+  EmailSpec::EmailViewer::save_and_open_all_text_emails
+end
+
+Then /^save and open all html emails$/ do
+  EmailSpec::EmailViewer::save_and_open_all_html_emails
+end
+
+Then /^save and open all raw emails$/ do
+  EmailSpec::EmailViewer::save_and_open_all_raw_emails
+end
