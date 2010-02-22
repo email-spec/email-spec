@@ -4,6 +4,13 @@
 
  === Bufixes
 
+== 0.5.0 2010-02-22
+
+ === New features
+  * "should receive <x> emails with subject <the_subject>" step definition (Balint Erdi)
+
+ === Bufixes
+
 == 0.4.0 2010-01-07
 
  === New features
