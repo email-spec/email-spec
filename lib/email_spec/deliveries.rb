@@ -13,7 +13,10 @@ module EmailSpec
     end
 
     def mailbox_for(address)
-      deliveries.select { |m| m.to.include?(address) || (m.bcc && m.bcc.include?(address)) || (m.cc && m.cc.include?(address)) }
+      deliveries.select { |email|
+        (email.to && email.to.include?(address)) ||
+        (email.bcc && email.bcc.include?(address)) ||
+        (email.cc && email.cc.include?(address)) }
     end
 
     protected
