@@ -10,6 +10,9 @@
   * "should receive <x> emails with subject <the_subject>" step definition (Balint Erdi)
 
  === Bufixes
+  * Gracefuly handle cases where emails do not have a 'to' value. (Kieran Pilkington)
+
+ === Bufixes
 
 == 0.4.0 2010-01-07
 
