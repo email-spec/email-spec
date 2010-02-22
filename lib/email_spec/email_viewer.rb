@@ -56,7 +56,7 @@ module EmailSpec
     end
 
     def self.open_in_text_editor(filename)
-      `mate #{filename}`
+      `open #{filename}`
     end
 
     def self.open_in_browser(filename)
