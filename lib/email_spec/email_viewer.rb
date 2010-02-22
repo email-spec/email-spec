@@ -55,6 +55,7 @@ module EmailSpec
       open_in_text_editor(filename)
     end
 
+    # TODO: use the launchy gem for this stuff...
     def self.open_in_text_editor(filename)
       `open #{filename}`
     end
