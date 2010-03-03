@@ -28,4 +28,4 @@ config.gem 'webrat',                     :lib => false
 config.gem 'rspec',                      :lib => false
 config.gem 'rspec-rails',                :lib => 'spec/rails'
 config.gem 'fixjour',                    :lib => 'fixjour'
-config.gem 'collectiveidea-delayed_job', :lib => 'delayed_job', :source => 'http://gems.github.com'
+config.gem 'delayed_job', :lib => 'delayed_job'

@@ -25,13 +25,15 @@ rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
 end
 
-# TODO: Maybe use geminstaller instead?
-%w[collectiveidea-delayed_job fixjour pony sinatra rack-test].each do |gem_name|
+# TODO: switch to gem bundler
+([['delayed_job', '1.8.4']] + %w[fixjour pony sinatra rack-test].map{|g| [g]}).each do |gem_args|
+  gem_name = gem_args.first
+  gem_version = gem_args.size > 1 ? gem_args[1] : nil
   begin
-    gem gem_name
+    gem(*[gem_args].flatten)
   rescue Gem::LoadError
     puts "Installing #{gem_name} for the example rails app..."
-    puts `gem install #{gem_name} --no-rdoc --no-ri`
+    puts `gem install #{gem_name} #{gem_version ? ('--version='+gem_version) : ''} --no-rdoc --no-ri`
   end
 end
 
