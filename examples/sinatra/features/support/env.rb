@@ -1,19 +1,22 @@
-# Sets up the Rails environment for Cucumber
-ENV["RACK_ENV"] ||= "test"
-require File.expand_path(File.dirname(__FILE__) + '/../../app.rb')
+# Sinatra configuration - http://wiki.github.com/aslakhellesoy/cucumber/sinatra
+ENV["RAILS_ENV"] ||= "cucumber"
+app_file = File.expand_path(File.dirname(__FILE__) + '/../../app.rb')
+require app_file
+# Force the application name because polyglot breaks the auto-detection logic.
+Sinatra::Application.app_file = app_file
 
-# Comment out the next line if you don't want Cucumber Unicode support
-require 'cucumber/formatter/unicode'
+require 'cucumber/formatter/unicode' # Remove this line if you don't want Cucumber Unicode support
+require 'cucumber/web/tableish'
 
+require 'spec/expectations'
 require 'rack/test'
+require 'test/unit'
 require 'webrat'
-require 'cucumber/webrat/table_locator' # Lets you do table.diff!(table_at('#my_table').to_a)
 
 Webrat.configure do |config|
   config.mode = :rack
+  config.open_error_files = false # Set to true if you want error pages to pop up in the browser
 end
-
-require 'webrat/core/matchers'
 
 # email testing in cucumber
 require 'activesupport'
@@ -22,8 +25,11 @@ require 'email_spec/cucumber'
 
 class AppWorld
   include Rack::Test::Methods
+  include Test::Unit::Assertions
   include Webrat::Methods
   include Webrat::Matchers
+
+  Webrat::Methods.delegate_to_session :response_code, :response_body
 
   def app
     Sinatra::Application.new
