@@ -64,16 +64,6 @@ Then /^(?:I|they|"([^"]*?)") should recieve an email with the following body:$/ 
   open_email(address, :with_text => expected_body)
 end
 
-
-# DEPRECATED
-# The following methods are left in for backwards compatibility and
-# should be removed by version 0.4.0
-Then /^(?:I|they|"([^"]*?)") should not receive an email$/ do |address|
-  email_spec_deprecate "The step 'I/they/[email] should not receive an email' is no longer supported.
-                      Please use 'I/they/[email] should receive no emails' instead."
-  unread_emails_for(address).size.should == 0
-end
-
 #
 # Accessing emails
 #
@@ -121,21 +111,6 @@ end
 
 Then /^(?:I|they) should see \/([^\"]*)\/ in the email "([^"]*?)" header$/ do |text, name|
   current_email.should have_header(name, Regexp.new(text))
-end
-
-
-# DEPRECATED
-# The following methods are left in for backwards compatibility and
-# should be removed by version 0.4.0.
-Then /^(?:I|they) should see "([^"]*?)" in the subject$/ do |text|
-  email_spec_deprecate "The step 'I/they should see [text] in the subject' is no longer supported.
-                      Please use 'I/they should see [text] in the email subject' instead."
-  current_email.should have_subject(Regexp.new(text))
-end
-Then /^(?:I|they) should see "([^"]*?)" in the email$/ do |text|
-  email_spec_deprecate "The step 'I/they should see [text] in the email' is no longer supported.
-                      Please use 'I/they should see [text] in the email body' instead."
-  current_email.body.should =~ Regexp.new(text)
 end
 
 #
