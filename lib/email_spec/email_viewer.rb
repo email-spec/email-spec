@@ -55,6 +55,22 @@ module EmailSpec
       open_in_text_editor(filename)
     end
 
+    def self.save_and_open_email_attachments_list(mail)
+      filename = tmp_email_filename
+
+      File.open(filename, "w") do |f|
+        mail.attachments.each_with_index do |attachment, index|
+          info = "#{index + 1}:"
+          info += "\n\tfilename: #{attachment.original_filename}"
+          info += "\n\tcontent type: #{attachment.content_type}"
+          info += "\n\tsize: #{attachment.size}"
+          f.write info + "\n"
+        end
+      end
+
+      open_in_text_editor(filename)
+    end
+
     # TODO: use the launchy gem for this stuff...
     def self.open_in_text_editor(filename)
       `open #{filename}`
