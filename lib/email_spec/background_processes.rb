@@ -2,36 +2,42 @@ module EmailSpec
   module BackgroundProcesses
     module DelayedJob
       def all_emails
-        Delayed::Worker.send :public, :work_off
-        @worker = Delayed::Worker.new(:max_priority => nil, :min_priority => nil, :quiet => true)
-        @worker.work_off
+        work_off_queue
         super
       end
 
       def last_email_sent
-        Delayed::Worker.send :public, :work_off
-        @worker = Delayed::Worker.new(:max_priority => nil, :min_priority => nil, :quiet => true)
-        @worker.work_off
+        work_off_queue
         super
       end
 
       def reset_mailer
-        Delayed::Worker.send :public, :work_off
-        @worker = Delayed::Worker.new(:max_priority => nil, :min_priority => nil, :quiet => true)
-        @worker.work_off
+        work_off_queue
         super
       end
 
       def mailbox_for(address)
-        Delayed::Worker.send :public, :work_off
-        @worker = Delayed::Worker.new(:max_priority => nil, :min_priority => nil, :quiet => true)
-        @worker.work_off
+        work_off_queue
         super
+      end
+
+      private
+
+      # Later versions of DelayedJob switch from using Delayed::Job to Delayed::Worker
+      # Support both versions for those who haven't upgraded yet
+      def work_off_queue
+        if defined?(Delayed::Job)
+          Delayed::Job.work_off
+        else
+          Delayed::Worker.send :public, :work_off
+          worker = Delayed::Worker.new(:max_priority => nil, :min_priority => nil, :quiet => true)
+          worker.work_off
+        end
       end
     end
 
     module Compatibility
-      if defined?(Delayed)
+      if defined?(Delayed) && (defined?(Delayed::Job) || defined?(Delayed::Worker))
         include EmailSpec::BackgroundProcesses::DelayedJob
       end
     end
