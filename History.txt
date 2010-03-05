@@ -6,6 +6,7 @@
   * Ability to open a list of attachments on an email (with corresponding steps and EmailViewer support). (Kieran Pilkington)
 
  === Bugfixes
+  * Spelling mistake in steps. (Ben Mabey)
   * Delayed Job background processor fixes
     * Narrow delayed job collisions with other apps defining Delayed constant. (Kieran Pilkington)
     * Fix compatibility with earlier versions of DelayedJob (Michael Baumgarten and Kieran Pilkington)
@@ -19,7 +20,7 @@
 
  === New features
   * "should receive <x> emails with subject <the_subject>" step definition (Balint Erdi)
-  * "should recieve an email with the following body:" step definition (Ben Mabey)
+  * "should receive an email with the following body:" step definition (Ben Mabey)
   * Debugging steps that tie into EmailViewer: (Ben Mabey)
     * "save and open current email"
     * "save and open all text emails"
@@ -27,7 +28,7 @@
     * "save and open all raw emails"
 
  === Bufixes
-  * Gracefuly handle cases where emails do not have a 'to' value. (Kieran Pilkington)
+  * Gracefully handle cases where emails do not have a 'to' value. (Kieran Pilkington)
 
  === Bufixes
 
