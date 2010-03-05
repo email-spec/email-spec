@@ -1,6 +1,17 @@
 (In Git)
 
+== 0.6.0 2010-03-05
+
  === New features
+  * Ability to open a list of attachments on an email (with corresponding steps and EmailViewer support). (Kieran Pilkington)
+
+ === Bugfixes
+  * Delayed Job background processor fixes
+    * Narrow delayed job collisions with other apps defining Delayed constant. (Kieran Pilkington)
+    * Fix compatibility with earlier versions of DelayedJob (Michael Baumgarten and Kieran Pilkington)
+
+ === Changes
+  * Deprecated steps were removed. (Kieran Pilkington)
 
  === Bufixes
 
