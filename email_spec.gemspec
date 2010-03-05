@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{email_spec}
-  s.version = "0.5.0"
+  s.version = "0.6.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ben Mabey", "Aaron Gibralter", "Mischa Fierer"]
-  s.date = %q{2010-02-22}
+  s.date = %q{2010-03-05}
   s.description = %q{Easily test email in rspec and cucumber}
   s.email = %q{ben@benmabey.com}
   s.extra_rdoc_files = [
@@ -67,9 +67,11 @@ Gem::Specification.new do |s|
      "examples/rails_root/app/views/welcome/signup.html.erb",
      "examples/rails_root/config",
      "examples/rails_root/config/boot.rb",
+     "examples/rails_root/config/cucumber.yml",
      "examples/rails_root/config/database.yml",
      "examples/rails_root/config/environment.rb",
      "examples/rails_root/config/environments",
+     "examples/rails_root/config/environments/cucumber.rb",
      "examples/rails_root/config/environments/development.rb",
      "examples/rails_root/config/environments/production.rb",
      "examples/rails_root/config/environments/test.rb",
@@ -91,10 +93,14 @@ Gem::Specification.new do |s|
      "examples/rails_root/features/example.feature",
      "examples/rails_root/features/step_definitions",
      "examples/rails_root/features/step_definitions/user_steps.rb",
-     "examples/rails_root/features/step_definitions/webrat_steps.rb",
+     "examples/rails_root/features/step_definitions/web_steps.rb",
      "examples/rails_root/features/support",
      "examples/rails_root/features/support/env.rb",
+     "examples/rails_root/features/support/env_ext.rb",
      "examples/rails_root/features/support/paths.rb",
+     "examples/rails_root/lib",
+     "examples/rails_root/lib/tasks",
+     "examples/rails_root/lib/tasks/cucumber.rake",
      "examples/rails_root/public",
      "examples/rails_root/public/404.html",
      "examples/rails_root/public/422.html",
@@ -111,6 +117,7 @@ Gem::Specification.new do |s|
      "examples/rails_root/public/javascripts/prototype.js",
      "examples/rails_root/public/robots.txt",
      "examples/rails_root/Rakefile",
+     "examples/rails_root/rerun.txt",
      "examples/rails_root/script",
      "examples/rails_root/script/about",
      "examples/rails_root/script/autospec",
@@ -150,7 +157,7 @@ Gem::Specification.new do |s|
      "examples/sinatra/features/example.feature",
      "examples/sinatra/features/step_definitions",
      "examples/sinatra/features/step_definitions/user_steps.rb",
-     "examples/sinatra/features/step_definitions/webrat_steps.rb",
+     "examples/sinatra/features/step_definitions/web_steps.rb",
      "examples/sinatra/features/support",
      "examples/sinatra/features/support/env.rb",
      "examples/sinatra/features/support/paths.rb"
