@@ -44,6 +44,10 @@ module EmailSpec
       email
     end
 
+    def current_email_attachments(address=nil)
+      current_email(address).attachments || Array.new
+    end
+
     def unread_emails_for(address)
       mailbox_for(address) - read_emails_for(address)
     end

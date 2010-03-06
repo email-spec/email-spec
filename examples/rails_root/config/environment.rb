@@ -16,6 +16,7 @@ Rails::Initializer.run do |config|
 
   config.gem 'fixjour',     :lib => 'fixjour'
   config.gem 'delayed_job', :lib => 'delayed_job'
+  config.gem 'mimetype-fu', :lib => 'mimetype_fu'
 
   config.time_zone = 'UTC'
 

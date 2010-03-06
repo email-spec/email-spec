@@ -117,28 +117,28 @@ end
 # Inspect the Email Attachments
 #
 
-Then /^(?:I|they) should see (\d+) attachments? with the email$/ do |amount|
-  current_email.attachments.size.should == amount.to_i
+Then /^(?:I|they) should see (an|no|\d+) attachments? with the email$/ do |amount|
+  current_email_attachments.size.should == parse_email_count(amount)
 end
 
 Then /^there should be (an|no|\d+) attachments? named "([^"]*?)"$/ do |amount, filename|
-  current_email.attachments.select { |a| a.original_filename == filename }.size.should == parse_email_count(amount)
+  current_email_attachments.select { |a| a.original_filename == filename }.size.should == parse_email_count(amount)
 end
 
 Then /^attachment (\d+) should be named "([^"]*?)"$/ do |index, filename|
-  current_email.attachments[(index.to_i - 1)].original_filename.should == filename
+  current_email_attachments[(index.to_i - 1)].original_filename.should == filename
 end
 
 Then /^there should be (an|no|\d+) attachments? of type "([^"]*?)"$/ do |amount, content_type|
-  current_email.attachments.select { |a| a.content_type == content_type }.size.should == parse_email_count(amount)
+  current_email_attachments.select { |a| a.content_type == content_type }.size.should == parse_email_count(amount)
 end
 
 Then /^attachment (\d+) should be of type "([^"]*?)"$/ do |index, content_type|
-  current_email.attachments[(index.to_i - 1)].content_type.should == content_type
+  current_email_attachments[(index.to_i - 1)].content_type.should == content_type
 end
 
 Then /^all attachments should not be blank$/ do
-  current_email.attachments.each do |attachment|
+  current_email_attachments.each do |attachment|
     attachment.size.should_not == 0
   end
 end

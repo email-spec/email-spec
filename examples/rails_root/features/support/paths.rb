@@ -20,6 +20,9 @@ module NavigationHelpers
     when /request a newsletter/
       request_newsletter_url('Name' => 'Joe Someone', 'Email' => 'example@example.com')
 
+    when /request attachments be sent to me/
+      request_attachments_url('Name' => 'Joe Someone', 'Email' => 'example@example.com')
+
     else
       raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
         "Now, go and add a mapping in #{__FILE__}"

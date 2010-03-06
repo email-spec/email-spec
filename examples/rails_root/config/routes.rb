@@ -34,6 +34,7 @@ ActionController::Routing::Routes.draw do |map|
   map.root :controller => "welcome", :action => "index"
   map.confirm_account "/confirm", :controller => "welcome", :action => "confirm"
   map.request_newsletter "/newsletter", :controller => "welcome", :action => "newsletter"
+  map.request_attachments "/attachments", :controller => "welcome", :action => "attachments"
   # See how all your routes lay out with "rake routes"
 
   # Install the default routes as the lowest priority.
