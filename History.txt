@@ -1,5 +1,8 @@
 (In Git)
 
+ === New features
+  * Ability to click image links via the image alt tag. (Tim Harper)
+
 == 0.6.0 2010-03-05
 
  === New features

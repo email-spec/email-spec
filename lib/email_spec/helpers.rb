@@ -114,9 +114,16 @@ module EmailSpec
 
     # e.g. Click here in  <a href="http://confirm">Click here</a>
     def parse_email_for_anchor_text_link(email, link_text)
-      email.body =~ %r{<a[^>]*href=['"]?([^'"]*)['"]?[^>]*?>[^<]*?#{link_text}[^<]*?</a>}
-      URI.split($~[1])[5..-1].compact!.join("?").gsub("&amp;", "&")
-      # sub correct ampersand after rails switches it (http://dev.rubyonrails.org/ticket/4002)
+      if textify_images(email.body) =~ %r{<a[^>]*href=['"]?([^'"]*)['"]?[^>]*?>[^<]*?#{link_text}[^<]*?</a>}
+        URI.split($1)[5..-1].compact!.join("?").gsub("&amp;", "&")
+        # sub correct ampersand after rails switches it (http://dev.rubyonrails.org/ticket/4002)
+      else
+        return nil
+      end
+    end
+
+    def textify_images(email_body)
+      email_body.gsub(%r{<img[^>]*alt=['"]?([^'"]*)['"]?[^>]*?/>}) { $1 }
     end
 
     def parse_email_count(amount)
