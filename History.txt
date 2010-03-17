@@ -1,5 +1,7 @@
 (In Git)
 
+== 0.6.1 2010-03-17
+
  === New features
   * Ability to click image links via the image alt tag. (Tim Harper)
 
@@ -149,7 +151,7 @@ No changes. Bumping version for RubyForge release.
  === New features
   * Change Rakefile to run all specs and features, as well as prepare the db (Mischa Fierer)
   * Allow for array to be passed into deliver_to matcher. (Diego Carrion)
-  * Added matcher for checking if a collection of emails includes an email with a particular subject (Luke Melia, Noah Davis)
+  * Added matcher for checking if a collision of emails includes an email with a particular subject (Luke Melia, Noah Davis)
   * Introduced hook to convert objects to email addresses (Luke Melia and Lee Bankewitz)
 
     This allows you, in your step matcher, to say something like:

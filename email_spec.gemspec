@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{email_spec}
-  s.version = "0.6.0"
+  s.version = "0.6.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ben Mabey", "Aaron Gibralter", "Mischa Fierer"]
-  s.date = %q{2010-03-05}
+  s.date = %q{2010-03-17}
   s.description = %q{Easily test email in rspec and cucumber}
   s.email = %q{ben@benmabey.com}
   s.extra_rdoc_files = [
@@ -42,6 +42,7 @@ Gem::Specification.new do |s|
   s.summary = %q{Easily test email in rspec and cucumber}
   s.test_files = [
     "spec/email_spec",
+     "spec/email_spec/helpers_spec.rb",
      "spec/email_spec/matchers_spec.rb",
      "spec/spec.opts",
      "spec/spec_helper.rb",
@@ -58,13 +59,18 @@ Gem::Specification.new do |s|
      "examples/rails_root/app/models/user_mailer.rb",
      "examples/rails_root/app/views",
      "examples/rails_root/app/views/user_mailer",
+     "examples/rails_root/app/views/user_mailer/attachments.erb",
      "examples/rails_root/app/views/user_mailer/newsletter.erb",
      "examples/rails_root/app/views/user_mailer/signup.erb",
      "examples/rails_root/app/views/welcome",
+     "examples/rails_root/app/views/welcome/attachments.html.erb",
      "examples/rails_root/app/views/welcome/confirm.html.erb",
      "examples/rails_root/app/views/welcome/index.html.erb",
      "examples/rails_root/app/views/welcome/newsletter.html.erb",
      "examples/rails_root/app/views/welcome/signup.html.erb",
+     "examples/rails_root/attachments",
+     "examples/rails_root/attachments/document.pdf",
+     "examples/rails_root/attachments/image.png",
      "examples/rails_root/config",
      "examples/rails_root/config/boot.rb",
      "examples/rails_root/config/cucumber.yml",
@@ -88,6 +94,7 @@ Gem::Specification.new do |s|
      "examples/rails_root/doc",
      "examples/rails_root/doc/README_FOR_APP",
      "examples/rails_root/features",
+     "examples/rails_root/features/attachments.feature",
      "examples/rails_root/features/delayed_job.feature",
      "examples/rails_root/features/errors.feature",
      "examples/rails_root/features/example.feature",
@@ -117,7 +124,6 @@ Gem::Specification.new do |s|
      "examples/rails_root/public/javascripts/prototype.js",
      "examples/rails_root/public/robots.txt",
      "examples/rails_root/Rakefile",
-     "examples/rails_root/rerun.txt",
      "examples/rails_root/script",
      "examples/rails_root/script/about",
      "examples/rails_root/script/autospec",
