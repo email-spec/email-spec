@@ -38,6 +38,25 @@ describe EmailSpec::Matchers do
     mock("email", stubs)
   end
 
+  describe "#reply_to" do
+    it "should match when the email is set to deliver to the specified address" do
+      email = mock_email(:reply_to => ["test@gmail.com"])
+      reply_to("test@gmail.com").should match(email)
+    end
+
+    it "should match given a name and address" do
+      email = mock_email(:reply_to => ["test@gmail.com"])
+      reply_to("David Balatero <test@gmail.com>").should match(email)
+    end
+
+    it "should give correct failure message when the email is not set to deliver to the specified address" do
+      matcher = reply_to("jimmy_bean@yahoo.com")
+      matcher.matches?(mock_email(:inspect => 'email', :reply_to => ['freddy_noe@yahoo.com']))
+      matcher.failure_message.should == %{expected email to reply to "jimmy_bean@yahoo.com", but it replied to "freddy_noe@yahoo.com"}
+    end
+
+  end
+
   describe "#deliver_to" do
     it "should match when the email is set to deliver to the specidied address" do
       email = mock_email(:to => "jimmy_bean@yahoo.com")

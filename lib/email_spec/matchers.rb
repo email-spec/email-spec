@@ -1,5 +1,36 @@
 module EmailSpec
   module Matchers
+    class ReplyTo
+      def initialize(email)
+        @expected_reply_to = TMail::Address.parse(email)
+      end
+
+      def description
+        "have reply to as #{@expected_reply_to.address.to_s}"
+      end
+
+      def matches?(email)
+        @email = email
+        @actual_reply_to = (email.reply_to || []).first
+        !@actual_reply_to.nil? &&
+          @actual_reply_to == @expected_reply_to.address
+      end
+
+      def failure_message
+        "expected #{@email.inspect} to reply to #{@expected_reply_to.address.inspect}, but it replied to #{@actual_reply_to.inspect}"
+      end
+
+      def negative_failure_message
+        "expected #{@email.inspect} not to deliver to #{@expected_reply_to.inspect}, but it did"
+      end
+    end
+
+    def reply_to(email)
+      ReplyTo.new(email)
+    end
+
+    alias :have_reply_to :reply_to
+
     class DeliverTo
       def initialize(expected_email_addresses_or_objects_that_respond_to_email)
         emails = expected_email_addresses_or_objects_that_respond_to_email.map do |email_or_object|
