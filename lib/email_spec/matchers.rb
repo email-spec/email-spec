@@ -1,9 +1,6 @@
 module EmailSpec
-
-    module Matchers
-
+  module Matchers
     class DeliverTo
-
       def initialize(expected_email_addresses_or_objects_that_respond_to_email)
         emails = expected_email_addresses_or_objects_that_respond_to_email.map do |email_or_object|
           email_or_object.kind_of?(String) ? email_or_object : email_or_object.email
@@ -50,7 +47,7 @@ module EmailSpec
       def matches?(email)
         @email = email
         @actual_sender = (email.from_addrs || []).first
-        
+
         !@actual_sender.nil? &&
           @actual_sender.address == @expected_sender.address &&
           @actual_sender.name == @expected_sender.name
@@ -122,68 +119,68 @@ module EmailSpec
           !!(given_subject =~ expected)
         end
       end
-     end
+    end
 
-     def include_email_with_subject(expected)
-       simple_matcher do |given_emails, matcher|
+    def include_email_with_subject(expected)
+      simple_matcher do |given_emails, matcher|
 
-         if expected.is_a?(String)
-           matcher.description = "include email with subject of #{expected.inspect}"
-           matcher.failure_message = "expected at least one email to have the subject #{expected.inspect} but none did. Subjects were #{given_emails.map(&:subject).inspect}"
-           matcher.negative_failure_message = "expected no email with the subject #{expected.inspect} but found at least one. Subjects were #{given_emails.map(&:subject).inspect}"
+        if expected.is_a?(String)
+          matcher.description = "include email with subject of #{expected.inspect}"
+          matcher.failure_message = "expected at least one email to have the subject #{expected.inspect} but none did. Subjects were #{given_emails.map(&:subject).inspect}"
+          matcher.negative_failure_message = "expected no email with the subject #{expected.inspect} but found at least one. Subjects were #{given_emails.map(&:subject).inspect}"
 
-           given_emails.map(&:subject).include?(expected)
-         else
-           matcher.description = "include email with subject matching #{expected.inspect}"
-           matcher.failure_message = "expected at least one email to have a subject matching #{expected.inspect}, but none did. Subjects were #{given_emails.map(&:subject).inspect}"
-           matcher.negative_failure_message = "expected no email to have a subject matching #{expected.inspect} but found at least one. Subjects were #{given_emails.map(&:subject).inspect}"
+          given_emails.map(&:subject).include?(expected)
+        else
+          matcher.description = "include email with subject matching #{expected.inspect}"
+          matcher.failure_message = "expected at least one email to have a subject matching #{expected.inspect}, but none did. Subjects were #{given_emails.map(&:subject).inspect}"
+          matcher.negative_failure_message = "expected no email to have a subject matching #{expected.inspect} but found at least one. Subjects were #{given_emails.map(&:subject).inspect}"
 
-           !!(given_emails.any?{ |mail| mail.subject =~ expected })
-         end
-       end
-     end
-
-     def have_body_text(expected)
-       simple_matcher do |given, matcher|
-
-         if expected.is_a?(String)
-           normalized_body = given.body.gsub(/\s+/, " ")
-           normalized_expected = expected.gsub(/\s+/, " ")
-           matcher.description = "have body including #{normalized_expected.inspect}"
-           matcher.failure_message = "expected the body to contain #{normalized_expected.inspect} but was #{normalized_body.inspect}"
-           matcher.negative_failure_message = "expected the body not to contain #{normalized_expected.inspect} but was #{normalized_body.inspect}"
-
-           normalized_body.include?(normalized_expected)
-         else
-           given_body = given.body
-           matcher.description = "have body matching #{expected.inspect}"
-           matcher.failure_message = "expected the body to match #{expected.inspect}, but did not.  Actual body was: #{given_body.inspect}"
-           matcher.negative_failure_message = "expected the body not to match #{expected.inspect} but #{given_body.inspect} does match it."
-
-           !!(given_body =~ expected)
-         end
-       end
-      end
-
-      def have_header(expected_name, expected_value)
-        simple_matcher do |given, matcher|
-          given_header = given.header
-
-          if expected_value.is_a?(String)
-            matcher.description = "have header #{expected_name}: #{expected_value}"
-            matcher.failure_message = "expected the headers to include '#{expected_name}: #{expected_value}' but they were #{given_header.inspect}"
-            matcher.negative_failure_message = "expected the headers not to include '#{expected_name}: #{expected_value}' but they were #{given_header.inspect}"
-
-            given_header[expected_name].to_s == expected_value
-          else
-            matcher.description = "have header #{expected_name} with value matching #{expected_value.inspect}"
-            matcher.failure_message = "expected the headers to include '#{expected_name}' with a value matching #{expected_value.inspect} but they were #{given_header.inspect}"
-            matcher.negative_failure_message = "expected the headers not to include '#{expected_name}' with a value matching #{expected_value.inspect} but they were #{given_header.inspect}"
-
-            given_header[expected_name].to_s =~ expected_value
-          end
+          !!(given_emails.any?{ |mail| mail.subject =~ expected })
         end
       end
+    end
+
+    def have_body_text(expected)
+      simple_matcher do |given, matcher|
+
+        if expected.is_a?(String)
+          normalized_body = given.body.gsub(/\s+/, " ")
+          normalized_expected = expected.gsub(/\s+/, " ")
+          matcher.description = "have body including #{normalized_expected.inspect}"
+          matcher.failure_message = "expected the body to contain #{normalized_expected.inspect} but was #{normalized_body.inspect}"
+          matcher.negative_failure_message = "expected the body not to contain #{normalized_expected.inspect} but was #{normalized_body.inspect}"
+
+          normalized_body.include?(normalized_expected)
+        else
+          given_body = given.body
+          matcher.description = "have body matching #{expected.inspect}"
+          matcher.failure_message = "expected the body to match #{expected.inspect}, but did not.  Actual body was: #{given_body.inspect}"
+          matcher.negative_failure_message = "expected the body not to match #{expected.inspect} but #{given_body.inspect} does match it."
+
+          !!(given_body =~ expected)
+        end
+      end
+    end
+
+    def have_header(expected_name, expected_value)
+      simple_matcher do |given, matcher|
+        given_header = given.header
+
+        if expected_value.is_a?(String)
+          matcher.description = "have header #{expected_name}: #{expected_value}"
+          matcher.failure_message = "expected the headers to include '#{expected_name}: #{expected_value}' but they were #{given_header.inspect}"
+          matcher.negative_failure_message = "expected the headers not to include '#{expected_name}: #{expected_value}' but they were #{given_header.inspect}"
+
+          given_header[expected_name].to_s == expected_value
+        else
+          matcher.description = "have header #{expected_name} with value matching #{expected_value.inspect}"
+          matcher.failure_message = "expected the headers to include '#{expected_name}' with a value matching #{expected_value.inspect} but they were #{given_header.inspect}"
+          matcher.negative_failure_message = "expected the headers not to include '#{expected_name}' with a value matching #{expected_value.inspect} but they were #{given_header.inspect}"
+
+          given_header[expected_name].to_s =~ expected_value
+        end
+      end
+    end
 
   end
 end

@@ -1,42 +1,36 @@
-
 require File.dirname(__FILE__) + '/../spec_helper'
 
-
-
 describe EmailSpec::Matchers do
-
-
-    class MatcherMatch
-
-      def initialize(object_to_test_match)
-        @object_to_test_match = object_to_test_match
-      end
-
-      def description
-        "match when provided #{@object_to_test_match.inspect}"
-      end
-
-      def matches?(matcher)
-        @matcher = matcher
-        matcher.matches?(@object_to_test_match)
-      end
-
-      def failure_message
-        "expected #{@matcher.inspect} to match when provided #{@object_to_test_match.inspect}, but it did not"
-      end
-
-      def negative_failure_message
-        "expected #{@matcher.inspect} not to match when provided #{@object_to_test_match.inspect}, but it did"
-      end
+  class MatcherMatch
+    def initialize(object_to_test_match)
+      @object_to_test_match = object_to_test_match
     end
 
-    def match(object_to_test_match)
-      if object_to_test_match.is_a?(Regexp)
-        super # delegate to rspec's built in 'match' matcher
-      else
-        MatcherMatch.new(object_to_test_match)
-      end
+    def description
+      "match when provided #{@object_to_test_match.inspect}"
     end
+
+    def matches?(matcher)
+      @matcher = matcher
+      matcher.matches?(@object_to_test_match)
+    end
+
+    def failure_message
+      "expected #{@matcher.inspect} to match when provided #{@object_to_test_match.inspect}, but it did not"
+    end
+
+    def negative_failure_message
+      "expected #{@matcher.inspect} not to match when provided #{@object_to_test_match.inspect}, but it did"
+    end
+  end
+
+  def match(object_to_test_match)
+    if object_to_test_match.is_a?(Regexp)
+      super # delegate to rspec's built in 'match' matcher
+    else
+      MatcherMatch.new(object_to_test_match)
+    end
+  end
 
   include EmailSpec::Matchers
 
@@ -84,7 +78,7 @@ describe EmailSpec::Matchers do
       email = mock_email(:from_addrs => [TMail::Address.parse("jimmy_bean@yahoo.com")])
       deliver_from("jimmy_bean@yahoo.com").should match(email)
     end
-    
+
     it "should match when the email is set to deliver from the specified name and address" do
       email = mock_email(:from_addrs => [TMail::Address.parse("Jimmy Bean <jimmy_bean@yahoo.com>")])
       deliver_from("Jimmy Bean <jimmy_bean@yahoo.com>").should match(email)
@@ -94,7 +88,7 @@ describe EmailSpec::Matchers do
       email = mock_email(:from_addrs => nil)
       deliver_from("jimmy_bean@yahoo.com").should_not match(email)
     end
-    
+
     it "should not match when the email addresses match but the names do not" do
       email = mock_email(:from_addrs => [TMail::Address.parse("Jimmy Bean <jimmy_bean@yahoo.com>")])
       deliver_from("Freddy Noe <jimmy_bean@yahoo.com>").should_not match(email)
@@ -109,7 +103,7 @@ describe EmailSpec::Matchers do
       email = mock_email(:from_addrs => [TMail::Address.parse("freddy_noe@yahoo.com")])
       deliver_from("jimmy_bean@yahoo.com").should_not match(email)
     end
-    
+
     it "should give correct failure message when the email is not set to deliver from the specified address" do
       matcher = deliver_from("jimmy_bean@yahoo.com")
       matcher.matches?(mock_email(:inspect => 'email', :from_addrs => [TMail::Address.parse("freddy_noe@yahoo.com")]))
@@ -180,11 +174,9 @@ describe EmailSpec::Matchers do
 
         matcher.negative_failure_message.should == 'expected the subject not to match /b/ but "bar" does match it.'
       end
-
     end
 
     describe "when strings are used" do
-
       it "should match when the subject equals the passed in string exactly" do
         email = mock_email(:subject => 'foo')
 
@@ -206,17 +198,13 @@ describe EmailSpec::Matchers do
         matcher.failure_message.should == 'expected the subject to be "foo" but was "bar"'
       end
 
-
       it "should offer helpful negative failing messages" do
         matcher = have_subject("bar")
         matcher.matches?(mock_email(:subject => "bar"))
 
         matcher.negative_failure_message.should == 'expected the subject not to be "bar" but was'
       end
-
     end
-
-
   end
 
   describe "#include_email_with_subject" do
