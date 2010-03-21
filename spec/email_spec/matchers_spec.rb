@@ -1,6 +1,8 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe EmailSpec::Matchers do
+  include EmailSpec::Matchers
+
   class MatcherMatch
     def initialize(object_to_test_match)
       @object_to_test_match = object_to_test_match
@@ -31,8 +33,6 @@ describe EmailSpec::Matchers do
       MatcherMatch.new(object_to_test_match)
     end
   end
-
-  include EmailSpec::Matchers
 
   def mock_email(stubs)
     mock("email", stubs)
