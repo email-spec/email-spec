@@ -1,5 +1,10 @@
 (In Git)
 
+== 0.6.2 2010-03-21
+
+ === New features
+  * New reply_to matcher. (David Balatero)
+
 == 0.6.1 2010-03-17
 
  === New features
