@@ -1,5 +1,5 @@
 require 'rubygems'
-require 'spec/rake/spectask'
+require 'rspec/core/rake_task'
 
 
 begin
@@ -34,17 +34,13 @@ rescue LoadError
   end
 end
 
-require 'spec/rake/spectask'
-Spec::Rake::SpecTask.new(:spec) do |spec|
-  spec.libs << 'lib' << 'spec'
-  spec.spec_files = FileList['spec/**/*_spec.rb']
-end
+require 'rspec/core/rake_task'
+Rspec::Core::RakeTask.new
 
 namespace :example_app do
-  Spec::Rake::SpecTask.new(:spec) do |spec|
+  Rspec::Core::RakeTask.new do |spec|
     desc "Specs for Example app"
-    spec.libs << 'lib' << 'spec'
-    spec.spec_files = FileList['examples/rails_root/spec/**/*_spec.rb']
+    spec.pattern = './examples/rails_root/spec/**/*_spec.rb'
   end
 end
 
