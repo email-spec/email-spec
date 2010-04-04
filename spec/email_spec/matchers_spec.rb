@@ -165,10 +165,9 @@ describe EmailSpec::Matchers do
 
     describe "when regexps are used" do
 
-      it "should match when the subject mathches regexp" do
+      it "should match when the subject matches regexp" do
         email = mock_email(:subject => ' -- The Subject --')
 
-        have_subject(/The Subject/).should match(email)
         have_subject(/The Subject/).should match(email)
         have_subject(/foo/).should_not match(email)
       end
@@ -227,14 +226,192 @@ describe EmailSpec::Matchers do
   end
 
   describe "#include_email_with_subject" do
-    it "should have specs!"
+    
+    describe "when regexps are used" do
+      
+      it "should match when any email's subject matches passed in regexp" do
+        emails = [mock_email(:subject => "foobar"), mock_email(:subject => "bazqux")]
+        
+        include_email_with_subject(/foo/).should match(emails)
+        include_email_with_subject(/quux/).should_not match(emails)
+      end
+
+      it "should have a helpful description" do
+        matcher = include_email_with_subject(/foo/)
+        matcher.matches?([])
+        
+        matcher.description.should == 'include email with subject matching /foo/'
+      end
+
+      it "should offer helpful failing messages" do
+        matcher = include_email_with_subject(/foo/)
+        matcher.matches?([mock_email(:subject => "bar")])
+        
+        matcher.failure_message.should == 'expected at least one email to have a subject matching /foo/, but none did. Subjects were ["bar"]'
+      end
+
+      it "should offer helpful negative failing messages" do
+        matcher = include_email_with_subject(/foo/)
+        matcher.matches?([mock_email(:subject => "foo")])
+        
+        matcher.negative_failure_message.should == 'expected no email to have a subject matching /foo/ but found at least one. Subjects were ["foo"]'
+      end
+    end
+    
+    describe "when strings are used" do
+      it "should match when any email's subject equals passed in subject exactly" do
+        emails = [mock_email(:subject => "foobar"), mock_email(:subject => "bazqux")]
+        
+        include_email_with_subject("foobar").should match(emails)
+        include_email_with_subject("foo").should_not match(emails)
+      end
+      
+      it "should have a helpful description" do
+        matcher = include_email_with_subject("foo")
+        matcher.matches?([])
+        
+        matcher.description.should == 'include email with subject of "foo"'
+      end
+      
+      it "should offer helpful failing messages" do
+        matcher = include_email_with_subject("foo")
+        matcher.matches?([mock_email(:subject => "bar")])
+        
+        matcher.failure_message.should == 'expected at least one email to have the subject "foo" but none did. Subjects were ["bar"]'
+      end
+      
+      it "should offer helpful negative failing messages" do
+        matcher = include_email_with_subject("foo")
+        matcher.matches?([mock_email(:subject => "foo")])
+        
+        matcher.negative_failure_message.should == 'expected no email with the subject "foo" but found at least one. Subjects were ["foo"]'
+      end
+    end
   end
 
   describe "#have_body_text" do
-    it "should have specs!"
+    describe "when regexps are used" do
+      it "should match when the body matches regexp" do
+        email = mock_email(:body => 'foo bar baz')
+
+        have_body_text(/bar/).should match(email)
+        have_body_text(/qux/).should_not match(email)
+      end
+
+      it "should have a helpful description" do
+        matcher = have_body_text(/qux/)
+        matcher.matches?(mock_email(:body => 'foo bar baz'))
+        
+        matcher.description.should == 'have body matching /qux/'
+      end
+
+      it "should offer helpful failing messages" do
+        matcher = have_body_text(/qux/)
+        matcher.matches?(mock_email(:body => 'foo bar baz'))
+        
+        matcher.failure_message.should == 'expected the body to match /qux/, but did not.  Actual body was: "foo bar baz"'
+      end
+
+      it "should offer helpful negative failing messages" do
+        matcher = have_body_text(/bar/)
+        matcher.matches?(mock_email(:body => 'foo bar baz'))
+
+        matcher.negative_failure_message.should == 'expected the body not to match /bar/ but "foo bar baz" does match it.'
+      end
+    end
+    
+    describe "when strings are used" do
+      it "should match when the body includes the text" do
+        email = mock_email(:body => 'foo bar baz')
+        
+        have_body_text('bar').should match(email)
+        have_body_text('qux').should_not match(email)
+      end
+      
+      it "should have a helpful description" do
+        matcher = have_body_text('qux')
+        matcher.matches?(mock_email(:body => 'foo bar baz'))
+        
+        matcher.description.should == 'have body including "qux"'
+      end
+      
+      it "should offer helpful failing messages" do
+        matcher = have_body_text('qux')
+        matcher.matches?(mock_email(:body => 'foo bar baz'))
+        
+        matcher.failure_message.should == 'expected the body to contain "qux" but was "foo bar baz"'
+      end
+      
+      it "should offer helpful negative failing messages" do
+        matcher = have_body_text('bar')
+        matcher.matches?(mock_email(:body => 'foo bar baz'))
+        
+        matcher.negative_failure_message.should == 'expected the body not to contain "bar" but was "foo bar baz"'
+      end
+    end
   end
 
   describe "#have_header" do
-    it "should have specs!"
+    describe "when regexps are used" do
+      it "should match when header matches passed in regexp" do
+        email = mock_email(:header => {:content_type => "text/html"})
+        
+        have_header(:content_type, /text/).should match(email)
+        have_header(:foo, /text/).should_not match(email)
+        have_header(:content_type, /bar/).should_not match(email)
+      end
+
+      it "should have a helpful description" do
+        matcher = have_header(:content_type, /bar/)
+        matcher.matches?(mock_email(:header => {:content_type => "text/html"}))
+        
+        matcher.description.should == 'have header content_type with value matching /bar/'
+      end
+
+      it "should offer helpful failing messages" do
+        matcher = have_header(:content_type, /bar/)
+        matcher.matches?(mock_email(:header => {:content_type => "text/html"}))
+        
+        matcher.failure_message.should == 'expected the headers to include \'content_type\' with a value matching /bar/ but they were {:content_type=>"text/html"}'
+      end
+
+      it "should offer helpful negative failing messages" do
+        matcher = have_header(:content_type, /text/)
+        matcher.matches?(mock_email(:header => {:content_type => "text/html"}))
+        
+        matcher.negative_failure_message.should == 'expected the headers not to include \'content_type\' with a value matching /text/ but they were {:content_type=>"text/html"}'
+      end
+    end
+    
+    describe "when strings are used" do
+      it "should match when header equals passed in value exactly" do
+        email = mock_email(:header => {:content_type => "text/html"})
+        
+        have_header(:content_type, 'text/html').should match(email)
+        have_header(:foo, 'text/html').should_not match(email)
+        have_header(:content_type, 'text').should_not match(email)
+      end
+      
+      it "should have a helpful description" do
+        matcher = have_header(:content_type, 'text')
+        matcher.matches?(mock_email(:header => {:content_type => "text/html"}))
+        
+        matcher.description.should == 'have header content_type: text'
+      end
+      
+      it "should offer helpful failing messages" do
+        matcher = have_header(:content_type, 'text')
+        matcher.matches?(mock_email(:header => {:content_type => "text/html"}))
+        
+        matcher.failure_message.should == 'expected the headers to include \'content_type: text\' but they were {:content_type=>"text/html"}'
+      end
+      
+      it "should offer helpful negative failing messages" do
+        matcher = have_header(:content_type, 'text/html')
+        matcher.matches?(mock_email(:header => {:content_type => "text/html"}))
+        
+        matcher.negative_failure_message == 'expected the headers not to include \'content_type: text/html\' but they were {:content_type=>"text/html"}'
+      end
+    end
   end
 end
