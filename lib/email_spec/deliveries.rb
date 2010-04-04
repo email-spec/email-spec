@@ -32,12 +32,12 @@ module EmailSpec
 
   module ARMailerDeliveries
     def all_emails
-      Email.all.map{ |email| parse_to_tmail(email) }
+      Email.all.map{ |email| parse_to_mail(email) }
     end
 
     def last_email_sent
       if email = Email.last
-        TMail::Mail.parse(email.mail)
+        Mail.read(email.mail)
       else
         raise("No email has been sent!")
       end
@@ -51,11 +51,11 @@ module EmailSpec
       Email.all.select { |email|
         (email.to && email.to.include?(address)) ||
         (email.bcc && email.bcc.include?(address)) ||
-        (email.cc && email.cc.include?(address)) }.map{ |email| parse_to_tmail(email) }
+        (email.cc && email.cc.include?(address)) }.map{ |email| parse_to_mail(email) }
     end
 
-    def parse_to_tmail(email)
-      TMail::Mail.parse(email.mail)
+    def parse_to_mail(email)
+      Mail.read(email.mail)
     end
   end
 
@@ -66,7 +66,7 @@ module EmailSpec
       end
 
       def self.mail(options)
-        deliveries << build_tmail(options)
+        deliveries << build_mail(options)
       end
     end
   end

@@ -2,11 +2,11 @@ module EmailSpec
   module Matchers
     class ReplyTo
       def initialize(email)
-        @expected_reply_to = TMail::Address.parse(email)
+        @expected_reply_to = Mail::ReplyToField.new(email).addrs.first
       end
 
       def description
-        "have reply to as #{@expected_reply_to.address.to_s}"
+        "have reply to as #{@expected_reply_to.address}"
       end
 
       def matches?(email)
@@ -21,7 +21,7 @@ module EmailSpec
       end
 
       def negative_failure_message
-        "expected #{@email.inspect} not to deliver to #{@expected_reply_to.inspect}, but it did"
+        "expected #{@email.inspect} not to deliver to #{@expected_reply_to.address.inspect}, but it did"
       end
     end
 
@@ -68,20 +68,20 @@ module EmailSpec
     class DeliverFrom
 
       def initialize(email)
-        @expected_sender = TMail::Address.parse(email)
+        @expected_sender = Mail::FromField.new(email).addrs.first
       end
 
       def description
-        "be delivered from #{@expected_sender.to_s}"
+        "be delivered from #{@expected_sender}"
       end
 
       def matches?(email)
         @email = email
-        @actual_sender = (email.from_addrs || []).first
+        @actual_sender = (email.from || []).first
 
         !@actual_sender.nil? &&
           @actual_sender.address == @expected_sender.address &&
-          @actual_sender.name == @expected_sender.name
+          @actual_sender.display_name == @expected_sender.display_name
       end
 
       def failure_message
