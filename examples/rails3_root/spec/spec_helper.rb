@@ -7,12 +7,9 @@ require 'rspec/rails'
 # Requires supporting files with custom matchers and macros, etc,
 # in ./support/ and its subdirectories.
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
-
-require File.expand_path(File.dirname(__FILE__) + "/model_factory.rb")
 require ("#{Rails.root}/../../lib/email_spec.rb")
 
 Rspec.configure do |config|
-  config.include(Fixjour)
   # == Mock Framework
   #
   # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:

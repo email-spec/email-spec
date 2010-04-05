@@ -44,6 +44,4 @@ describe "Signup Email" do
     it { should deliver_to("jojo@yahoo.com") }
     it { should have_body_text(/Jojo Binks/) }
   end
-  
-  
 end
