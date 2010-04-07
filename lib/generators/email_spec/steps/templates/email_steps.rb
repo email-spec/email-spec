@@ -130,11 +130,11 @@ Then /^attachment (\d+) should be named "([^"]*?)"$/ do |index, filename|
 end
 
 Then /^there should be (an|no|\d+) attachments? of type "([^"]*?)"$/ do |amount, content_type|
-  current_email_attachments.select { |a| a.content_type == content_type }.size.should == parse_email_count(amount)
+  current_email_attachments.select { |a| a.content_type.include?(content_type) }.size.should == parse_email_count(amount)
 end
 
 Then /^attachment (\d+) should be of type "([^"]*?)"$/ do |index, content_type|
-  current_email_attachments[(index.to_i - 1)].content_type.should == content_type
+  current_email_attachments[(index.to_i - 1)].content_type.should include(content_type)
 end
 
 Then /^all attachments should not be blank$/ do
