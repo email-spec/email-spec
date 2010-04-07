@@ -68,7 +68,7 @@ module EmailSpec
     end
 
     def links_in_email(email)
-      URI.extract(email.body, ['http', 'https'])
+      URI.extract(email.body.to_s, ['http', 'https'])
     end
 
     private
@@ -123,7 +123,7 @@ module EmailSpec
     end
 
     def textify_images(email_body)
-      email_body.gsub(%r{<img[^>]*alt=['"]?([^'"]*)['"]?[^>]*?/>}) { $1 }
+      email_body.to_s.gsub(%r{<img[^>]*alt=['"]?([^'"]*)['"]?[^>]*?/>}) { $1 }
     end
 
     def parse_email_count(amount)
