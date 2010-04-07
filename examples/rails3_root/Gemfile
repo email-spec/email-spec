@@ -3,17 +3,21 @@ source 'http://gemcutter.org'
 gem 'rails', '3.0.0.beta2'
 gem 'sqlite3-ruby', :require => 'sqlite3'
 
-gem 'delayed_job', ">=2.0.1"
+gem 'delayed_job', '>=2.0.1'
 gem 'mimetype-fu', :require => 'mimetype_fu'
 
 group :test do
   gem "test-unit"
-  gem "cucumber-rails"
   
-  # Freezing here for now. Has AR adapters superclass fixes. 
+  # Freezing here to include fix for Rspec::Rails::Matchers.
+  gem "cucumber-rails", :git => "git://github.com/aslakhellesoy/cucumber-rails.git",
+                        :ref => "50992ea1d6ba314e6ead6e568ab0d7d509332632"
+  
+  # Freezing here for AR adapters superclass fixes.
   gem "database_cleaner", :git => "git://github.com/bmabey/database_cleaner.git",
                           :ref => "b83d58d81c7f580649ae96f71ec91e275dadbeed"
-  gem 'webrat'
+  gem 'launchy'
+  gem 'capybara'
   gem "rspec", ">= 2.0.0.beta.4"
   gem "rspec-rails", ">= 2.0.0.beta.4"
   gem "email_spec", :path => "../../"
