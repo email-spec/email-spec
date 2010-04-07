@@ -139,7 +139,7 @@ end
 
 Then /^all attachments should not be blank$/ do
   current_email_attachments.each do |attachment|
-    attachment.size.should_not == 0
+    attachment.read.size.should_not == 0
   end
 end
 
