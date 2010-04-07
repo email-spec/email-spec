@@ -3,6 +3,7 @@ source 'http://gemcutter.org'
 group :test do
   gem "rake", ">= 0.8.7"
   gem "jeweler"
+  gem "cucumber"
   gem "rspec", ">= 2.0.0.beta.4"
   gem "rspec-rails", ">= 2.0.0.beta.4"
   gem "growl-glue", :require => "growl_glue"
