@@ -1,6 +1,5 @@
-== Running email-spec Rails 3 examples application
+== Running features in this app
 
-1. In email-spec directory run `rake build` to generate gem files.
-2. Make sure you have latest bundler gem.
-3. cd into rails3_root and run `bundle install`
-4. run script/rails generate email_spec:steps
+1. Make sure you have latest bundler gem.
+2. cd into rails3_root and run `bundle install`
+3. run script/rails generate email_spec:steps
