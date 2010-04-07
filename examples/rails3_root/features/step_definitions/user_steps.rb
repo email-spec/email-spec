@@ -5,7 +5,7 @@ end
 When /^I submit my registration information$/ do
   fill_in "Name", :with => 'Joe Someone'
   fill_in "Email", :with => 'example@example.com'
-  click_button
+  click_button "Sign up"
 end
 
 Then /^(?:I|they) should receive an email with a link to a confirmation page$/ do
@@ -17,7 +17,7 @@ Then /^(?:I|they) should receive an email with a link to a confirmation page$/ d
   current_email.should have_body_text('Joe Someone')
 
   click_email_link_matching /confirm/
-  response_body.should contain("Confirm your new account")
+  page.should have_content("Confirm your new account")
 end
 
 # Basically aliases "I should see [text]", but for third person
