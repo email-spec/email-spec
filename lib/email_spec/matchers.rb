@@ -178,7 +178,7 @@ module EmailSpec
         expected_text = expected.first
         
         if expected_text.is_a?(String)
-          normalized_body = given.body.gsub(/\s+/, " ")
+          normalized_body = given.body.to_s.gsub(/\s+/, " ")
           normalized_expected = expected_text.gsub(/\s+/, " ")
           description { "have body including #{normalized_expected.inspect}" }
           failure_message_for_should { "expected the body to contain #{normalized_expected.inspect} but was #{normalized_body.inspect}" }
