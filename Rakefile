@@ -1,4 +1,7 @@
 require 'rubygems'
+require 'bundler'
+Bundler.setup
+
 require 'rspec/core/rake_task'
 
 
