@@ -7,10 +7,10 @@ class WelcomeController < ApplicationController
   end
 
   def newsletter
-    UserMailer.sign_up(params['Email'], params['Name']).send_later(:deliver)
+    UserMailer.signup(params['Email'], params['Name']).send_later(:deliver)
   end
 
   def attachments
-    UserMailer.attachments(params['Email'], params['Name']).deliver
+    UserMailer.attachments_mail(params['Email'], params['Name']).deliver
   end
 end

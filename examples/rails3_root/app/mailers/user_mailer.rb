@@ -17,12 +17,14 @@ class UserMailer < ActionMailer::Base
          :subject => "Newsletter sent"
   end
 
-  def attachments(email, name)
-    @recipients  = email
-    @subject     = "Attachments test"
-    @body[:name] = name
+  def attachments_mail(email, name)
+    @name = name
+    
     add_attachment 'image.png'
     add_attachment 'document.pdf'
+    
+    mail :to => email,
+         :subject => "Attachments test"
   end
 
   private
