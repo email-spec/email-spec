@@ -122,11 +122,11 @@ Then /^(?:I|they) should see (an|no|\d+) attachments? with the email$/ do |amoun
 end
 
 Then /^there should be (an|no|\d+) attachments? named "([^"]*?)"$/ do |amount, filename|
-  current_email_attachments.select { |a| a.original_filename == filename }.size.should == parse_email_count(amount)
+  current_email_attachments.select { |a| a.filename == filename }.size.should == parse_email_count(amount)
 end
 
 Then /^attachment (\d+) should be named "([^"]*?)"$/ do |index, filename|
-  current_email_attachments[(index.to_i - 1)].original_filename.should == filename
+  current_email_attachments[(index.to_i - 1)].filename.should == filename
 end
 
 Then /^there should be (an|no|\d+) attachments? of type "([^"]*?)"$/ do |amount, content_type|
