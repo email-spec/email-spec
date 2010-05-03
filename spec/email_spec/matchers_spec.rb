@@ -94,39 +94,39 @@ describe EmailSpec::Matchers do
 
   describe "#deliver_from" do
     it "should match when the email is set to deliver from the specified address" do
-      email = mock_email(:from => [Mail::FromField.new("jimmy_bean@yahoo.com").addrs.first])
+      email = Mail::Message.new(:from => "jimmy_bean@yahoo.com")
       deliver_from("jimmy_bean@yahoo.com").should match(email)
     end
 
     it "should match when the email is set to deliver from the specified name and address" do
-      email = mock_email(:from => [Mail::FromField.new("Jimmy Bean <jimmy_bean@yahoo.com>").addrs.first])
+      email = Mail::Message.new(:from => "Jimmy Bean <jimmy_bean@yahoo.com>")
       deliver_from("Jimmy Bean <jimmy_bean@yahoo.com>").should match(email)
     end
 
     it "should not match when the email does not have a sender" do
-      email = mock_email(:from => nil)
+      email = Mail::Message.new(:from => nil)
       deliver_from("jimmy_bean@yahoo.com").should_not match(email)
     end
 
     it "should not match when the email addresses match but the names do not" do
-      email = mock_email(:from => [Mail::FromField.new("Jimmy Bean <jimmy_bean@yahoo.com>").addrs.first])
+      email = Mail::Message.new(:from => "Jimmy Bean <jimmy_bean@yahoo.com>")
       deliver_from("Freddy Noe <jimmy_bean@yahoo.com>").should_not match(email)
     end
 
     it "should not match when the names match but the email addresses do not" do
-      email = mock_email(:from => [Mail::FromField.new("Jimmy Bean <jimmy_bean@yahoo.com>").addrs.first])
+      email = Mail::Message.new(:from => "Jimmy Bean <jimmy_bean@yahoo.com>")
       deliver_from("Jimmy Bean <freddy_noe@yahoo.com>").should_not match(email)
     end
 
     it "should not match when the email is not set to deliver from the specified address" do
-      email = mock_email(:from => [Mail::FromField.new("freddy_noe@yahoo.com").addrs.first])
+      email = Mail::Message.new(:from => "freddy_noe@yahoo.com")
       deliver_from("jimmy_bean@yahoo.com").should_not match(email)
     end
 
     it "should give correct failure message when the email is not set to deliver from the specified address" do
       matcher = deliver_from("jimmy_bean@yahoo.com")
-      matcher.matches?(mock_email(:inspect => 'email', :from => [Mail::FromField.new("freddy_noe@yahoo.com").addrs.first]))
-      matcher.failure_message.should == %{expected email to deliver from "jimmy_bean@yahoo.com", but it delivered from "freddy_noe@yahoo.com"}
+      matcher.matches?(Mail::Message.new(:from => "freddy_noe@yahoo.com"))
+      matcher.failure_message.should =~ /expected .+ to deliver from "jimmy_bean@yahoo\.com", but it delivered from "freddy_noe@yahoo\.com"/
     end
 
   end

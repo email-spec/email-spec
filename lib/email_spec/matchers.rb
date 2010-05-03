@@ -77,7 +77,7 @@ module EmailSpec
 
       def matches?(email)
         @email = email
-        @actual_sender = (email.from || []).first
+        @actual_sender = (email.header[:from].addrs || []).first
 
         !@actual_sender.nil? &&
           @actual_sender.address == @expected_sender.address &&
