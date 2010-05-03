@@ -186,7 +186,7 @@ module EmailSpec
     
           normalized_body.include?(normalized_expected)
         else
-          given_body = given.body
+          given_body = given.body.to_s
           description { "have body matching #{expected_text.inspect}" }
           failure_message_for_should { "expected the body to match #{expected_text.inspect}, but did not.  Actual body was: #{given_body.inspect}" }
           failure_message_for_should_not { "expected the body not to match #{expected_text.inspect} but #{given_body.inspect} does match it." }
@@ -196,21 +196,26 @@ module EmailSpec
       end
     end
 
+    def mail_headers_hash(email_headers)
+      email_headers.fields.inject({}) { |hash, field| hash[field.field.class::FIELD_NAME] = field.to_s; hash }
+    end
+
     Rspec::Matchers.define :have_header do
       match do |given|
         given_header = given.header
         expected_name, expected_value = *expected
-        
+
         if expected_value.is_a?(String)
           description { "have header #{expected_name}: #{expected_value}" }
-          failure_message_for_should { "expected the headers to include '#{expected_name}: #{expected_value}' but they were #{given_header.inspect}" }
-          failure_message_for_should_not { "expected the headers not to include '#{expected_name}: #{expected_value}' but they were #{given_header.inspect}" }
+
+          failure_message_for_should { "expected the headers to include '#{expected_name}: #{expected_value}' but they were #{mail_headers_hash(given_header).inspect}" }
+          failure_message_for_should_not { "expected the headers not to include '#{expected_name}: #{expected_value}' but they were #{mail_headers_hash(given_header).inspect}" }
     
           given_header[expected_name].to_s == expected_value
         else
           description { "have header #{expected_name} with value matching #{expected_value.inspect}" }
-          failure_message_for_should { "expected the headers to include '#{expected_name}' with a value matching #{expected_value.inspect} but they were #{given_header.inspect}" }
-          failure_message_for_should_not { "expected the headers not to include '#{expected_name}' with a value matching #{expected_value.inspect} but they were #{given_header.inspect}" }
+          failure_message_for_should { "expected the headers to include '#{expected_name}' with a value matching #{expected_value.inspect} but they were #{mail_headers_hash(given_header).inspect}" }
+          failure_message_for_should_not { "expected the headers not to include '#{expected_name}' with a value matching #{expected_value.inspect} but they were #{mail_headers_hash(given_header).inspect}" }
     
           given_header[expected_name].to_s =~ expected_value
         end
