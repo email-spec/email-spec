@@ -34,24 +34,20 @@ describe EmailSpec::Matchers do
     end
   end
 
-  def mock_email(stubs)
-    mock("email", stubs)
-  end
-
   describe "#reply_to" do
     it "should match when the email is set to deliver to the specified address" do
-      email = mock_email(:reply_to => ["test@gmail.com"])
+      email = Mail::Message.new(:reply_to => ["test@gmail.com"])
       reply_to("test@gmail.com").should match(email)
     end
 
     it "should match given a name and address" do
-      email = mock_email(:reply_to => ["test@gmail.com"])
+      email = Mail::Message.new(:reply_to => ["test@gmail.com"])
       reply_to("David Balatero <test@gmail.com>").should match(email)
     end
 
     it "should give correct failure message when the email is not set to deliver to the specified address" do
       matcher = reply_to("jimmy_bean@yahoo.com")
-      matcher.matches?(mock_email(:inspect => 'email', :reply_to => ['freddy_noe@yahoo.com']))
+      matcher.matches?(Mail::Message.new(:reply_to => ['freddy_noe@yahoo.com']).with_inspect_stub)
       matcher.failure_message.should == %{expected email to reply to "jimmy_bean@yahoo.com", but it replied to "freddy_noe@yahoo.com"}
     end
 
@@ -59,13 +55,13 @@ describe EmailSpec::Matchers do
 
   describe "#deliver_to" do
     it "should match when the email is set to deliver to the specidied address" do
-      email = mock_email(:to => "jimmy_bean@yahoo.com")
+      email = Mail::Message.new(:to => "jimmy_bean@yahoo.com")
 
       deliver_to("jimmy_bean@yahoo.com").should match(email)
     end
 
     it "should match when a list of emails is exact same as all of the email's recipients" do
-      email = mock_email(:to => ["james@yahoo.com", "karen@yahoo.com"])
+      email = Mail::Message.new(:to => ["james@yahoo.com", "karen@yahoo.com"])
 
       deliver_to("karen@yahoo.com", "james@yahoo.com").should match(email)
       deliver_to("karen@yahoo.com").should_not match(email)
@@ -73,12 +69,12 @@ describe EmailSpec::Matchers do
 
     it "should match when an array of emails is exact same as all of the email's recipients" do
       addresses = ["james@yahoo.com", "karen@yahoo.com"]
-      email = mock_email(:to => addresses)
+      email = Mail::Message.new(:to => addresses)
       deliver_to(addresses).should match(email)
     end
 
     it "should use the passed in objects :email method if not a string" do
-      email = mock_email(:to => "jimmy_bean@yahoo.com")
+      email = Mail::Message.new(:to => "jimmy_bean@yahoo.com")
       user = mock("user", :email => "jimmy_bean@yahoo.com")
 
       deliver_to(user).should match(email)
@@ -86,7 +82,9 @@ describe EmailSpec::Matchers do
 
     it "should give correct failure message when the email is not set to deliver to the specified address" do
       matcher = deliver_to("jimmy_bean@yahoo.com")
-      matcher.matches?(mock_email(:inspect => 'email', :to => 'freddy_noe@yahoo.com'))
+      message = Mail::Message.new(:to => 'freddy_noe@yahoo.com')
+      message.stub(:inspect).and_return("email")
+      matcher.matches?(message)
       matcher.failure_message.should == %{expected email to deliver to ["jimmy_bean@yahoo.com"], but it delivered to ["freddy_noe@yahoo.com"]}
     end
 
@@ -134,13 +132,13 @@ describe EmailSpec::Matchers do
   describe "#bcc_to" do
 
     it "should match when the email is set to deliver to the specidied address" do
-      email = mock_email(:bcc => "jimmy_bean@yahoo.com")
+      email = Mail::Message.new(:bcc => "jimmy_bean@yahoo.com")
 
       bcc_to("jimmy_bean@yahoo.com").should match(email)
     end
 
     it "should match when a list of emails is exact same as all of the email's recipients" do
-      email = mock_email(:bcc => ["james@yahoo.com", "karen@yahoo.com"])
+      email = Mail::Message.new(:bcc => ["james@yahoo.com", "karen@yahoo.com"])
 
       bcc_to("karen@yahoo.com", "james@yahoo.com").should match(email)
       bcc_to("karen@yahoo.com").should_not match(email)
@@ -148,12 +146,12 @@ describe EmailSpec::Matchers do
 
     it "should match when an array of emails is exact same as all of the email's recipients" do
       addresses = ["james@yahoo.com", "karen@yahoo.com"]
-      email = mock_email(:bcc => addresses)
+      email = Mail::Message.new(:bcc => addresses)
       bcc_to(addresses).should match(email)
     end
 
     it "should use the passed in objects :email method if not a string" do
-      email = mock_email(:bcc => "jimmy_bean@yahoo.com")
+      email = Mail::Message.new(:bcc => "jimmy_bean@yahoo.com")
       user = mock("user", :email => "jimmy_bean@yahoo.com")
 
       bcc_to(user).should match(email)
@@ -166,7 +164,7 @@ describe EmailSpec::Matchers do
     describe "when regexps are used" do
 
       it "should match when the subject matches regexp" do
-        email = mock_email(:subject => ' -- The Subject --')
+        email = Mail::Message.new(:subject => ' -- The Subject --')
 
         have_subject(/The Subject/).should match(email)
         have_subject(/foo/).should_not match(email)
@@ -174,21 +172,21 @@ describe EmailSpec::Matchers do
 
       it "should have a helpful description" do
         matcher = have_subject(/foo/)
-        matcher.matches?(mock_email(:subject => "bar"))
+        matcher.matches?(Mail::Message.new(:subject => "bar"))
 
         matcher.description.should == "have subject matching /foo/"
       end
 
       it "should offer helpful failing messages" do
         matcher = have_subject(/foo/)
-        matcher.matches?(mock_email(:subject => "bar"))
+        matcher.matches?(Mail::Message.new(:subject => "bar"))
 
         matcher.failure_message.should == 'expected the subject to match /foo/, but did not.  Actual subject was: "bar"'
       end
 
       it "should offer helpful negative failing messages" do
         matcher = have_subject(/b/)
-        matcher.matches?(mock_email(:subject => "bar"))
+        matcher.matches?(Mail::Message.new(:subject => "bar"))
 
         matcher.negative_failure_message.should == 'expected the subject not to match /b/ but "bar" does match it.'
       end
@@ -196,7 +194,7 @@ describe EmailSpec::Matchers do
 
     describe "when strings are used" do
       it "should match when the subject equals the passed in string exactly" do
-        email = mock_email(:subject => 'foo')
+        email = Mail::Message.new(:subject => 'foo')
 
         have_subject("foo").should match(email)
         have_subject(" - foo -").should_not match(email)
@@ -204,21 +202,21 @@ describe EmailSpec::Matchers do
 
       it "should have a helpful description" do
         matcher = have_subject("foo")
-        matcher.matches?(mock_email(:subject => "bar"))
+        matcher.matches?(Mail::Message.new(:subject => "bar"))
 
         matcher.description.should == 'have subject of "foo"'
       end
 
       it "should offer helpful failing messages" do
         matcher = have_subject("foo")
-        matcher.matches?(mock_email(:subject => "bar"))
+        matcher.matches?(Mail::Message.new(:subject => "bar"))
 
         matcher.failure_message.should == 'expected the subject to be "foo" but was "bar"'
       end
 
       it "should offer helpful negative failing messages" do
         matcher = have_subject("bar")
-        matcher.matches?(mock_email(:subject => "bar"))
+        matcher.matches?(Mail::Message.new(:subject => "bar"))
 
         matcher.negative_failure_message.should == 'expected the subject not to be "bar" but was'
       end
@@ -230,7 +228,7 @@ describe EmailSpec::Matchers do
     describe "when regexps are used" do
       
       it "should match when any email's subject matches passed in regexp" do
-        emails = [mock_email(:subject => "foobar"), mock_email(:subject => "bazqux")]
+        emails = [Mail::Message.new(:subject => "foobar"), Mail::Message.new(:subject => "bazqux")]
         
         include_email_with_subject(/foo/).should match(emails)
         include_email_with_subject(/quux/).should_not match(emails)
@@ -245,14 +243,14 @@ describe EmailSpec::Matchers do
 
       it "should offer helpful failing messages" do
         matcher = include_email_with_subject(/foo/)
-        matcher.matches?([mock_email(:subject => "bar")])
+        matcher.matches?([Mail::Message.new(:subject => "bar")])
         
         matcher.failure_message.should == 'expected at least one email to have a subject matching /foo/, but none did. Subjects were ["bar"]'
       end
 
       it "should offer helpful negative failing messages" do
         matcher = include_email_with_subject(/foo/)
-        matcher.matches?([mock_email(:subject => "foo")])
+        matcher.matches?([Mail::Message.new(:subject => "foo")])
         
         matcher.negative_failure_message.should == 'expected no email to have a subject matching /foo/ but found at least one. Subjects were ["foo"]'
       end
@@ -260,7 +258,7 @@ describe EmailSpec::Matchers do
     
     describe "when strings are used" do
       it "should match when any email's subject equals passed in subject exactly" do
-        emails = [mock_email(:subject => "foobar"), mock_email(:subject => "bazqux")]
+        emails = [Mail::Message.new(:subject => "foobar"), Mail::Message.new(:subject => "bazqux")]
         
         include_email_with_subject("foobar").should match(emails)
         include_email_with_subject("foo").should_not match(emails)
@@ -275,14 +273,14 @@ describe EmailSpec::Matchers do
       
       it "should offer helpful failing messages" do
         matcher = include_email_with_subject("foo")
-        matcher.matches?([mock_email(:subject => "bar")])
+        matcher.matches?([Mail::Message.new(:subject => "bar")])
         
         matcher.failure_message.should == 'expected at least one email to have the subject "foo" but none did. Subjects were ["bar"]'
       end
       
       it "should offer helpful negative failing messages" do
         matcher = include_email_with_subject("foo")
-        matcher.matches?([mock_email(:subject => "foo")])
+        matcher.matches?([Mail::Message.new(:subject => "foo")])
         
         matcher.negative_failure_message.should == 'expected no email with the subject "foo" but found at least one. Subjects were ["foo"]'
       end
@@ -292,7 +290,7 @@ describe EmailSpec::Matchers do
   describe "#have_body_text" do
     describe "when regexps are used" do
       it "should match when the body matches regexp" do
-        email = mock_email(:body => 'foo bar baz')
+        email = Mail::Message.new(:body => 'foo bar baz')
 
         have_body_text(/bar/).should match(email)
         have_body_text(/qux/).should_not match(email)
@@ -300,21 +298,21 @@ describe EmailSpec::Matchers do
 
       it "should have a helpful description" do
         matcher = have_body_text(/qux/)
-        matcher.matches?(mock_email(:body => 'foo bar baz'))
+        matcher.matches?(Mail::Message.new(:body => 'foo bar baz'))
         
         matcher.description.should == 'have body matching /qux/'
       end
 
       it "should offer helpful failing messages" do
         matcher = have_body_text(/qux/)
-        matcher.matches?(mock_email(:body => 'foo bar baz'))
+        matcher.matches?(Mail::Message.new(:body => 'foo bar baz'))
         
         matcher.failure_message.should == 'expected the body to match /qux/, but did not.  Actual body was: "foo bar baz"'
       end
 
       it "should offer helpful negative failing messages" do
         matcher = have_body_text(/bar/)
-        matcher.matches?(mock_email(:body => 'foo bar baz'))
+        matcher.matches?(Mail::Message.new(:body => 'foo bar baz'))
 
         matcher.negative_failure_message.should == 'expected the body not to match /bar/ but "foo bar baz" does match it.'
       end
@@ -322,7 +320,7 @@ describe EmailSpec::Matchers do
     
     describe "when strings are used" do
       it "should match when the body includes the text" do
-        email = mock_email(:body => 'foo bar baz')
+        email = Mail::Message.new(:body => 'foo bar baz')
         
         have_body_text('bar').should match(email)
         have_body_text('qux').should_not match(email)
@@ -330,21 +328,21 @@ describe EmailSpec::Matchers do
       
       it "should have a helpful description" do
         matcher = have_body_text('qux')
-        matcher.matches?(mock_email(:body => 'foo bar baz'))
+        matcher.matches?(Mail::Message.new(:body => 'foo bar baz'))
         
         matcher.description.should == 'have body including "qux"'
       end
       
       it "should offer helpful failing messages" do
         matcher = have_body_text('qux')
-        matcher.matches?(mock_email(:body => 'foo bar baz'))
+        matcher.matches?(Mail::Message.new(:body => 'foo bar baz'))
         
         matcher.failure_message.should == 'expected the body to contain "qux" but was "foo bar baz"'
       end
       
       it "should offer helpful negative failing messages" do
         matcher = have_body_text('bar')
-        matcher.matches?(mock_email(:body => 'foo bar baz'))
+        matcher.matches?(Mail::Message.new(:body => 'foo bar baz'))
         
         matcher.negative_failure_message.should == 'expected the body not to contain "bar" but was "foo bar baz"'
       end
@@ -354,7 +352,7 @@ describe EmailSpec::Matchers do
   describe "#have_header" do
     describe "when regexps are used" do
       it "should match when header matches passed in regexp" do
-        email = mock_email(:header => {:content_type => "text/html"})
+        email = Mail::Message.new(:content_type => "text/html")
         
         have_header(:content_type, /text/).should match(email)
         have_header(:foo, /text/).should_not match(email)
@@ -363,29 +361,29 @@ describe EmailSpec::Matchers do
 
       it "should have a helpful description" do
         matcher = have_header(:content_type, /bar/)
-        matcher.matches?(mock_email(:header => {:content_type => "text/html"}))
+        matcher.matches?(Mail::Message.new(:content_type => "text/html"))
         
         matcher.description.should == 'have header content_type with value matching /bar/'
       end
 
       it "should offer helpful failing messages" do
         matcher = have_header(:content_type, /bar/)
-        matcher.matches?(mock_email(:header => {:content_type => "text/html"}))
+        matcher.matches?(Mail::Message.new(:content_type => "text/html"))
         
-        matcher.failure_message.should == 'expected the headers to include \'content_type\' with a value matching /bar/ but they were {:content_type=>"text/html"}'
+        matcher.failure_message.should == 'expected the headers to include \'content_type\' with a value matching /bar/ but they were {"content-type"=>"text/html"}'
       end
 
       it "should offer helpful negative failing messages" do
         matcher = have_header(:content_type, /text/)
-        matcher.matches?(mock_email(:header => {:content_type => "text/html"}))
+        matcher.matches?(Mail::Message.new(:content_type => "text/html"))
         
-        matcher.negative_failure_message.should == 'expected the headers not to include \'content_type\' with a value matching /text/ but they were {:content_type=>"text/html"}'
+        matcher.negative_failure_message.should == 'expected the headers not to include \'content_type\' with a value matching /text/ but they were {"content-type"=>"text/html"}'
       end
     end
     
     describe "when strings are used" do
       it "should match when header equals passed in value exactly" do
-        email = mock_email(:header => {:content_type => "text/html"})
+        email = Mail::Message.new(:content_type => "text/html")
         
         have_header(:content_type, 'text/html').should match(email)
         have_header(:foo, 'text/html').should_not match(email)
@@ -394,21 +392,21 @@ describe EmailSpec::Matchers do
       
       it "should have a helpful description" do
         matcher = have_header(:content_type, 'text')
-        matcher.matches?(mock_email(:header => {:content_type => "text/html"}))
+        matcher.matches?(Mail::Message.new(:content_type => "text/html"))
         
         matcher.description.should == 'have header content_type: text'
       end
       
       it "should offer helpful failing messages" do
         matcher = have_header(:content_type, 'text')
-        matcher.matches?(mock_email(:header => {:content_type => "text/html"}))
+        matcher.matches?(Mail::Message.new(:content_type => "text/html"))
         
-        matcher.failure_message.should == 'expected the headers to include \'content_type: text\' but they were {:content_type=>"text/html"}'
+        matcher.failure_message.should == 'expected the headers to include \'content_type: text\' but they were {"content-type"=>"text/html"}'
       end
       
       it "should offer helpful negative failing messages" do
         matcher = have_header(:content_type, 'text/html')
-        matcher.matches?(mock_email(:header => {:content_type => "text/html"}))
+        matcher.matches?(Mail::Message.new(:content_type => "text/html"))
         
         matcher.negative_failure_message == 'expected the headers not to include \'content_type: text/html\' but they were {:content_type=>"text/html"}'
       end
