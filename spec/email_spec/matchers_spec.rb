@@ -349,7 +349,7 @@ describe EmailSpec::Matchers do
     end
 
     describe "when dealing with multipart messages" do
-      it "should default to use the html part" do
+      it "should look at the html part" do
         email = Mail.new do
           text_part do
             body "This is text"

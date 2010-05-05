@@ -173,16 +173,12 @@ module EmailSpec
       end
     end
 
-    def select_part(email)
-      email.html_part || email.text_part || email.body
-    end
-
     Rspec::Matchers.define :have_body_text do
       match do |given|
         expected_text = expected.first
         
         if expected_text.is_a?(String)
-          normalized_body = select_part(given).to_s.gsub(/\s+/, " ")
+          normalized_body = given.default_part_body.to_s.gsub(/\s+/, " ")
           normalized_expected = expected_text.gsub(/\s+/, " ")
           description { "have body including #{normalized_expected.inspect}" }
           failure_message_for_should { "expected the body to contain #{normalized_expected.inspect} but was #{normalized_body.inspect}" }
@@ -190,7 +186,7 @@ module EmailSpec
     
           normalized_body.include?(normalized_expected)
         else
-          given_body = select_part(given).to_s
+          given_body = given.default_part_body.to_s
           description { "have body matching #{expected_text.inspect}" }
           failure_message_for_should { "expected the body to match #{expected_text.inspect}, but did not.  Actual body was: #{given_body.inspect}" }
           failure_message_for_should_not { "expected the body not to match #{expected_text.inspect} but #{given_body.inspect} does match it." }
