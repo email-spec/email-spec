@@ -347,6 +347,21 @@ describe EmailSpec::Matchers do
         matcher.negative_failure_message.should == 'expected the body not to contain "bar" but was "foo bar baz"'
       end
     end
+
+    describe "when dealing with multipart messages" do
+      it "should default to use the html part" do
+        email = Mail.new do
+          text_part do
+            body "This is text"
+          end
+          html_part do
+            body "This is html"
+          end
+        end
+        have_body_text(/This is html/).should match(email)
+        have_body_text(/This is text/).should_not match(email)
+      end
+    end
   end
 
   describe "#have_header" do
