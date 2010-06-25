@@ -9,7 +9,7 @@ gem 'mimetype-fu', :require => 'mimetype_fu'
 group :test do
   gem "test-unit"
   
-  # Freezing here to include fix for Rspec::Rails::Matchers.
+  # Freezing here to include fix for   RSpec::Rails::Matchers.
   gem "cucumber-rails", :git => "git://github.com/aslakhellesoy/cucumber-rails.git",
                         :ref => "50992ea1d6ba314e6ead6e568ab0d7d509332632"
   

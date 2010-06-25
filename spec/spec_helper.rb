@@ -11,6 +11,6 @@ class Mail::Message
   end
 end
 
-Rspec.configure do |config|
+  RSpec.configure do |config|
   config.mock_with :rspec
 end

@@ -38,10 +38,10 @@ rescue LoadError
 end
 
 require 'rspec/core/rake_task'
-Rspec::Core::RakeTask.new
+  RSpec::Core::RakeTask.new
 
 namespace :example_app do
-  Rspec::Core::RakeTask.new do |spec|
+    RSpec::Core::RakeTask.new do |spec|
     desc "Specs for Example app"
     spec.pattern = './examples/rails_root/spec/**/*_spec.rb'
   end
