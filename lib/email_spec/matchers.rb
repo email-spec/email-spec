@@ -132,7 +132,7 @@ module EmailSpec
       BccTo.new(expected_email_addresses_or_objects_that_respond_to_email.flatten)
     end
 
-    Rspec::Matchers.define :have_subject do
+      RSpec::Matchers.define :have_subject do
       match do |given|
         given_subject = given.subject
         expected_subject = expected.first
@@ -153,7 +153,7 @@ module EmailSpec
       end
     end
     
-    Rspec::Matchers.define :include_email_with_subject do
+      RSpec::Matchers.define :include_email_with_subject do
       match do |given_emails|
         expected_subject = expected.first
         
@@ -173,7 +173,7 @@ module EmailSpec
       end
     end
 
-    Rspec::Matchers.define :have_body_text do
+      RSpec::Matchers.define :have_body_text do
       match do |given|
         expected_text = expected.first
         
@@ -200,7 +200,7 @@ module EmailSpec
       email_headers.fields.inject({}) { |hash, field| hash[field.field.class::FIELD_NAME] = field.to_s; hash }
     end
 
-    Rspec::Matchers.define :have_header do
+      RSpec::Matchers.define :have_header do
       match do |given|
         given_header = given.header
         expected_name, expected_value = *expected
