@@ -81,7 +81,7 @@ module EmailSpec
     end
 
     def self.tmp_email_filename(extension = '.txt')
-      "#{RAILS_ROOT}/tmp/email-#{Time.now.to_i}#{extension}"
+      "#{Rails.root}/tmp/email-#{Time.now.to_i}#{extension}"
     end
   end
 end
