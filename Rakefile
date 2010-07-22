@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'bundler'
-Bundler.setup
+Bundler.setup(:test)
 
 require 'rspec/core/rake_task'
 
@@ -51,9 +51,13 @@ task :default => [:features, :spec, 'example_app:spec']
 
 desc "Cleans the project of any tmp file that should not be included in the gemspec."
 task :clean do
-  FileUtils.rm_f('examples/rails_root/features/step_definitions/email_steps.rb')
-  FileUtils.rm_rf('examples/rails_root/log')
-  FileUtils.rm_rf('examples/rails_root/vendor')
+  #remove stuff from example rails apps
+  %w[ rails rails3 ].each do |ver|
+    FileUtils.rm_f("examples/#{ver}_root/features/step_definitions/email_steps.rb")
+    FileUtils.rm_rf("examples/#{ver}_root/log")
+    FileUtils.rm_rf("examples/#{ver}_root/vendor")
+  end
+
   %w[*.sqlite3 *.log].each do |pattern|
     `find . -name "#{pattern}" -delete`
   end
@@ -61,4 +65,3 @@ end
 
 desc "Cleans the dir and builds the gem"
 task :prep => [:clean, :gemspec, :build]
-

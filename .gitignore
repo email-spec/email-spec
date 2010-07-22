@@ -13,3 +13,4 @@ examples/sinatra/features/step_definitions/email_steps.rb
 pkg
 rerun.txt
 .bundle
+.rvmrc
