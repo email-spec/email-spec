@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ben Mabey", "Aaron Gibralter", "Mischa Fierer"]
-  s.date = %q{2010-04-05}
+  s.date = %q{2010-07-15}
   s.description = %q{Easily test email in rspec and cucumber}
   s.email = %q{ben@benmabey.com}
   s.extra_rdoc_files = [
@@ -30,6 +30,7 @@ Gem::Specification.new do |s|
      "lib/email_spec/deliveries.rb",
      "lib/email_spec/email_viewer.rb",
      "lib/email_spec/helpers.rb",
+     "lib/email_spec/mail_ext.rb",
      "lib/email_spec/matchers.rb",
      "lib/generators/email_spec/steps/USAGE",
      "lib/generators/email_spec/steps/steps_generator.rb",
@@ -41,11 +42,12 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubyforge_project = %q{email-spec}
-  s.rubygems_version = %q{1.3.6}
+  s.rubygems_version = %q{1.3.7}
   s.summary = %q{Easily test email in rspec and cucumber}
   s.test_files = [
     "spec/email_spec",
      "spec/email_spec/helpers_spec.rb",
+     "spec/email_spec/mail_ext_spec.rb",
      "spec/email_spec/matchers_spec.rb",
      "spec/spec_helper.rb",
      "examples/rails3_root",
@@ -86,6 +88,7 @@ Gem::Specification.new do |s|
      "examples/rails3_root/config/initializers",
      "examples/rails3_root/config/initializers/backtrace_silencers.rb",
      "examples/rails3_root/config/initializers/cookie_verification_secret.rb",
+     "examples/rails3_root/config/initializers/delayed_job.rb",
      "examples/rails3_root/config/initializers/inflections.rb",
      "examples/rails3_root/config/initializers/mime_types.rb",
      "examples/rails3_root/config/initializers/rspec_generator.rb",
@@ -273,7 +276,7 @@ Gem::Specification.new do |s|
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
-    if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
+    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
     else
     end
   else

@@ -7,7 +7,11 @@ Given /^the (\w+) app is setup with the latest generators$/ do |app_name|
   FileUtils.cp_r("#{root_dir}/rails_generators", "#{root_dir}/examples/#{app_name}/vendor/plugins/email_spec/")
 
   Dir.chdir(File.join(root_dir, 'examples', app_name)) do
-    system "ruby ./script/generate email_spec"
+    if File.exists?('./script/rails')
+      system "ruby ./script/rails g email_spec:steps"
+    else
+      system "ruby ./script/generate email_spec"
+    end
   end
 end
 
