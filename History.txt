@@ -1,4 +1,9 @@
-(In Git)
+
+
+== 0.6.x (git)
+
+ === Bugfixes
+  * Further checks for older DelayedJob versions to fix compatibility issues. (Andrea Longhi)
 
 == 0.6.2 2010-03-21
 
