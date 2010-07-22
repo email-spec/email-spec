@@ -39,7 +39,7 @@ It will also add a Before hook for Cucumber so that emails are cleared at the st
 
 Then:
 
-  rails generate aemail_spec:steps
+  rails generate email_spec:steps
 
 This will give you a bunch of steps to get started with in step_definitions/email_steps.rb
 
