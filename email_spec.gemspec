@@ -259,17 +259,17 @@ Gem::Specification.new do |s|
      "examples/rails_root/spec/rcov.opts",
      "examples/rails_root/spec/spec.opts",
      "examples/rails_root/spec/spec_helper.rb",
-     "examples/sinatra",
-     "examples/sinatra/app.rb",
-     "examples/sinatra/features",
-     "examples/sinatra/features/errors.feature",
-     "examples/sinatra/features/example.feature",
-     "examples/sinatra/features/step_definitions",
-     "examples/sinatra/features/step_definitions/user_steps.rb",
-     "examples/sinatra/features/step_definitions/web_steps.rb",
-     "examples/sinatra/features/support",
-     "examples/sinatra/features/support/env.rb",
-     "examples/sinatra/features/support/paths.rb"
+     "examples/sinatra_root",
+     "examples/sinatra_root/app.rb",
+     "examples/sinatra_root/features",
+     "examples/sinatra_root/features/errors.feature",
+     "examples/sinatra_root/features/example.feature",
+     "examples/sinatra_root/features/step_definitions",
+     "examples/sinatra_root/features/step_definitions/user_steps.rb",
+     "examples/sinatra_root/features/step_definitions/web_steps.rb",
+     "examples/sinatra_root/features/support",
+     "examples/sinatra_root/features/support/env.rb",
+     "examples/sinatra_root/features/support/paths.rb"
   ]
 
   if s.respond_to? :specification_version then
