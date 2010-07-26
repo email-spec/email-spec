@@ -7,7 +7,7 @@ class WelcomeController < ApplicationController
   end
 
   def newsletter
-    UserMailer.signup(params['Email'], params['Name']).send_later(:deliver)
+    Delayed::Job.enqueue(NotifierJob.new(:newsletter,params['Email'], params['Name']))
   end
 
   def attachments

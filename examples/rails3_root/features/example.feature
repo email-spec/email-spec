@@ -60,3 +60,12 @@ Feature: EmailSpec Example -- Prevent Bots from creating accounts
 
   Scenario: Declarative First Person signup
     Then they should receive an email with a link to a confirmation page
+  
+  Scenario: Checking for text in different parts
+    Then I should receive an email
+    And I should have 1 email
+
+    # Opening email #1
+    When I open the email
+    Then I should see "This is the HTML part" in the email html part body
+    And I should see "This is the text part" in the email text part body
