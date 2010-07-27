@@ -3,6 +3,8 @@ source 'http://gemcutter.org'
 gem "rake", ">= 0.8.7"
 gem "jeweler"
 gem "cucumber"
+gem "cucumber-rails"
+gem "cucumber-sinatra"
 gem "rspec", ">= 2.0.0.beta.19"
 gem "rspec-rails", ">= 2.0.0.beta.19"
 gem "growl-glue", :require => "growl_glue"
