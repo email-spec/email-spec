@@ -1,9 +1,9 @@
 source 'http://gemcutter.org'
 
-gem 'rails', '3.0.0.beta4'
+gem 'rails', '3.0.0.rc'
 gem 'sqlite3-ruby', :require => 'sqlite3'
 
-gem 'delayed_job', '>=2.0.1'
+gem 'delayed_job', '>=2.0.3'
 gem 'mimetype-fu', :require => 'mimetype_fu'
 
 group :test do
@@ -12,7 +12,7 @@ group :test do
   gem "database_cleaner"
   gem 'launchy'
   gem 'capybara'
-  gem "rspec", ">= 2.0.0.beta.17"
-  gem "rspec-rails", ">= 2.0.0.beta.17"
+  gem "rspec", ">= 2.0.0.beta.19"
+  gem "rspec-rails", ">= 2.0.0.beta.19"
   gem "email_spec", :path => "../../"
 end
