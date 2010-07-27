@@ -7,10 +7,12 @@ describe WelcomeController do
       lambda {
         post :signup, "Email" => "email@example.com", "Name" => "Jimmy Bean"
       }.should change(ActionMailer::Base.deliveries, :size).by(1)
-      
-      last_delivery = ActionMailer::Base.deliveries.last      
+
+      last_delivery = ActionMailer::Base.deliveries.last
       last_delivery.to.should include "email@example.com"
-      last_delivery.body.to_s.should include "Jimmy Bean"
+      #message is now multipart, make sure both parts include Jimmy Bean
+      last_delivery.parts[0].body.to_s.should include "Jimmy Bean"
+      last_delivery.parts[1].body.to_s.should include "Jimmy Bean"
     end
 
   end
