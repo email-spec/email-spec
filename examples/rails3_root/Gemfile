@@ -10,7 +10,6 @@ group :test do
   gem "test-unit"
   gem "cucumber-rails"
   gem "database_cleaner"
-  gem 'launchy'
   gem 'capybara'
   gem "rspec", ">= 2.0.0.beta.19"
   gem "rspec-rails", ">= 2.0.0.beta.19"
