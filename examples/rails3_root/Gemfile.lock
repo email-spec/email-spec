@@ -1,5 +1,5 @@
 PATH
-  remote: /Users/doon/email-spec
+  remote: /Users/bmabey/Programming/ruby/email-spec
   specs:
     email_spec (0.6.2)
 
