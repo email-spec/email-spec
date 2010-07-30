@@ -1,9 +1,13 @@
 
+This is the Rails 2 compatible branch/gem.
 
 == 0.6.x (git)
 
+== 0.6.3
+
  === Bugfixes
-  * Further checks for older DelayedJob versions to fix compatibility issues. (Andrea Longhi)
+  * Checks to prevent deprecation warnings on DelayedJob. (Patrick Muldoon)
+  * Further checks for older DelayedJob versions to fix compatibility issues. (Andrea Longhi and others)
 
 == 0.6.2 2010-03-21
 

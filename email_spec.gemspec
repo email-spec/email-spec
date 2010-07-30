@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{email_spec}
-  s.version = "0.6.2"
+  s.version = "0.6.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ben Mabey", "Aaron Gibralter", "Mischa Fierer"]
-  s.date = %q{2010-03-21}
+  s.date = %q{2010-07-30}
   s.description = %q{Easily test email in rspec and cucumber}
   s.email = %q{ben@benmabey.com}
   s.extra_rdoc_files = [
@@ -38,7 +38,7 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubyforge_project = %q{email-spec}
-  s.rubygems_version = %q{1.3.5}
+  s.rubygems_version = %q{1.3.7}
   s.summary = %q{Easily test email in rspec and cucumber}
   s.test_files = [
     "spec/email_spec",
@@ -46,6 +46,13 @@ Gem::Specification.new do |s|
      "spec/email_spec/matchers_spec.rb",
      "spec/spec.opts",
      "spec/spec_helper.rb",
+     "examples/rails3_root",
+     "examples/rails3_root/db",
+     "examples/rails3_root/features",
+     "examples/rails3_root/features/step_definitions",
+     "examples/rails3_root/features/step_definitions/email_steps.rb",
+     "examples/rails3_root/log",
+     "examples/rails3_root/rerun.txt",
      "examples/rails_root",
      "examples/rails_root/app",
      "examples/rails_root/app/controllers",
@@ -168,14 +175,18 @@ Gem::Specification.new do |s|
      "examples/sinatra/features/step_definitions/web_steps.rb",
      "examples/sinatra/features/support",
      "examples/sinatra/features/support/env.rb",
-     "examples/sinatra/features/support/paths.rb"
+     "examples/sinatra/features/support/paths.rb",
+     "examples/sinatra_root",
+     "examples/sinatra_root/features",
+     "examples/sinatra_root/features/step_definitions",
+     "examples/sinatra_root/features/step_definitions/email_steps.rb"
   ]
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
-    if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
+    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
     else
     end
   else
