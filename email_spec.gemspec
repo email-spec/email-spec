@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{email_spec}
-  s.version = "0.6.2"
+  s.version = "1.0.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ben Mabey", "Aaron Gibralter", "Mischa Fierer"]
-  s.date = %q{2010-07-27}
+  s.date = %q{2010-07-29}
   s.description = %q{Easily test email in rspec and cucumber}
   s.email = %q{ben@benmabey.com}
   s.extra_rdoc_files = [
@@ -143,6 +143,7 @@ Gem::Specification.new do |s|
      "examples/rails3_root/public/robots.txt",
      "examples/rails3_root/Rakefile",
      "examples/rails3_root/README",
+     "examples/rails3_root/rerun.txt",
      "examples/rails3_root/script",
      "examples/rails3_root/script/cucumber",
      "examples/rails3_root/script/rails",
@@ -152,11 +153,25 @@ Gem::Specification.new do |s|
      "examples/rails3_root/spec/models",
      "examples/rails3_root/spec/models/user_mailer_spec.rb",
      "examples/rails3_root/spec/spec_helper.rb",
-     "examples/rails3_root/tmp",
-     "examples/rails3_root/tmp/cache",
-     "examples/rails3_root/tmp/pids",
-     "examples/rails3_root/tmp/sessions",
-     "examples/rails3_root/tmp/sockets",
+     "examples/rails_root",
+     "examples/rails_root/db",
+     "examples/rails_root/features",
+     "examples/rails_root/features/step_definitions",
+     "examples/rails_root/features/step_definitions/email_steps.rb",
+     "examples/rails_root/log",
+     "examples/rails_root/rerun.txt",
+     "examples/rails_root/vendor",
+     "examples/rails_root/vendor/plugins",
+     "examples/rails_root/vendor/plugins/email_spec",
+     "examples/rails_root/vendor/plugins/email_spec/rails_generators",
+     "examples/rails_root/vendor/plugins/email_spec/rails_generators/email_spec",
+     "examples/rails_root/vendor/plugins/email_spec/rails_generators/email_spec/email_spec_generator.rb",
+     "examples/rails_root/vendor/plugins/email_spec/rails_generators/email_spec/templates",
+     "examples/rails_root/vendor/plugins/email_spec/rails_generators/email_spec/templates/email_steps.rb",
+     "examples/sinatra",
+     "examples/sinatra/features",
+     "examples/sinatra/features/step_definitions",
+     "examples/sinatra/features/step_definitions/email_steps.rb",
      "examples/sinatra_root",
      "examples/sinatra_root/config.ru",
      "examples/sinatra_root/features",

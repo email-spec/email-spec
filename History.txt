@@ -1,6 +1,18 @@
+== 1.x (git)
 
+== 1.0 Rails 3.0 Release
+  This release makes email-spec compatible with Rails 3 and RSpec 2.x.
 
-== 0.6.x (git)
+  IMPORTANT: As of 1.0 email-spec is no longer backwards compatible wit Rails 2.x.  I will be maintaining a 0.6
+  branch on github/rubygems for Rails 2 compatibility if anyone wants new features backported.
+
+  This was truly a community effort and I appreciate all of time and effort donated by those involved. Specifically:
+    * Maxim Chernyak for the initial conversion work to Rails 3
+    * Tim Harper for ironing out various matcher bugs
+    * Patrick Muldoon for doing a fantastic job of cleaning up the features and specs.  He also fixed the
+      DelayedJob support and worked through all the bundler issues the project was facing.
+
+== 0.6.x
 
  === Bugfixes
   * Further checks for older DelayedJob versions to fix compatibility issues. (Andrea Longhi)
