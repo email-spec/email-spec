@@ -26,7 +26,7 @@ rescue LoadError
 end
 
 # TODO: switch to gem bundler
-([['delayed_job', '1.8.4']] + %w[mimetype-fu fixjour pony sinatra rack-test].map{|g| [g]}).each do |gem_args|
+([['delayed_job', '2.0.3']] + %w[mimetype-fu fixjour pony sinatra rack-test].map{|g| [g]}).each do |gem_args|
   gem_name = gem_args.first
   gem_version = gem_args.size > 1 ? gem_args[1] : nil
   begin
