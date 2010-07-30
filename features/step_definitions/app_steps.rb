@@ -41,11 +41,16 @@ end
 When /^I run "([^\"]*)" in the (\w+) app$/ do |cmd, app_name|
   cmd.gsub!('cucumber', "#{Cucumber::RUBY_BINARY} #{Cucumber::BINARY}")
   app_path = File.join(root_dir, 'examples', "#{app_name}_root")
+  app_specific_gemfile = File.join(app_path,'Gemfile')
   Dir.chdir(app_path) do
     #hack to fight competing bundles (email specs vs rails3_root's
-    orig_gemfile = ENV['BUNDLE_GEMFILE']
-    ENV['BUNDLE_GEMFILE'] = "#{app_path}/Gemfile" if app_name == 'rails3'
-    @output = `#{cmd}`
-    ENV['BUNDLE_GEMFILE'] = orig_gemfile if app_name == 'rails3'
+    if File.exists? app_specific_gemfile
+      orig_gemfile = ENV['BUNDLE_GEMFILE']
+      ENV['BUNDLE_GEMFILE'] = app_specific_gemfile
+      @output = `#{cmd}`
+      ENV['BUNDLE_GEMFILE'] = orig_gemfile
+    else
+      @output = `#{cmd}`
+    end
   end
 end
