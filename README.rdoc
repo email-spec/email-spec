@@ -24,7 +24,7 @@ you generally don't want to include those projects unless you need them in produ
 
   # Gemfile
   group :test do
-    gem 'email_spec', :git=>'git://github.com/bmabey/email-spec.git', :branch=>'rails3'
+    gem 'email_spec'
   end
 
 === Cucumber
