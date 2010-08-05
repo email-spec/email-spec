@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ben Mabey", "Aaron Gibralter", "Mischa Fierer"]
-  s.date = %q{2010-07-29}
+  s.date = %q{2010-08-05}
   s.description = %q{Easily test email in rspec and cucumber}
   s.email = %q{ben@benmabey.com}
   s.extra_rdoc_files = [
@@ -154,20 +154,7 @@ Gem::Specification.new do |s|
      "examples/rails3_root/spec/models/user_mailer_spec.rb",
      "examples/rails3_root/spec/spec_helper.rb",
      "examples/rails_root",
-     "examples/rails_root/db",
-     "examples/rails_root/features",
-     "examples/rails_root/features/step_definitions",
-     "examples/rails_root/features/step_definitions/email_steps.rb",
-     "examples/rails_root/log",
      "examples/rails_root/rerun.txt",
-     "examples/rails_root/vendor",
-     "examples/rails_root/vendor/plugins",
-     "examples/rails_root/vendor/plugins/email_spec",
-     "examples/rails_root/vendor/plugins/email_spec/rails_generators",
-     "examples/rails_root/vendor/plugins/email_spec/rails_generators/email_spec",
-     "examples/rails_root/vendor/plugins/email_spec/rails_generators/email_spec/email_spec_generator.rb",
-     "examples/rails_root/vendor/plugins/email_spec/rails_generators/email_spec/templates",
-     "examples/rails_root/vendor/plugins/email_spec/rails_generators/email_spec/templates/email_steps.rb",
      "examples/sinatra",
      "examples/sinatra/features",
      "examples/sinatra/features/step_definitions",
