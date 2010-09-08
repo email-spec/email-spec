@@ -88,7 +88,7 @@ module EmailSpec
 
     def set_current_email(email)
       return unless email
-      email.to.each do |to|
+      [email.to, email.cc, email.bcc].compact.flatten.each do |to|
         read_emails_for(to) << email
         email_spec_hash[:current_emails][to] = email
       end
