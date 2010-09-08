@@ -1,5 +1,10 @@
 == 1.x (git)
 
+
+ === Bugfixes
+  * set_current_email handles cases where To to blank but may contain CC, or BCC recipients (Murray Steele)
+
+
 == 1.0 2010-07-31 Rails 3.0 Release
   This release makes email-spec compatible with Rails 3 and RSpec 2.x.
 
