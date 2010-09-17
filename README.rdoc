@@ -76,7 +76,7 @@ Otherwise, you will need to include them in the example groups you wish to use t
       And I press "Sign up"
       And I should receive an email
       When I open the email
-      Then I should see "confirm" in the email
+      Then I should see "confirm" in the email body
       When I follow "confirm" in the email
       Then I should see "Confirm your new account"
 
