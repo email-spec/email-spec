@@ -32,6 +32,7 @@ you generally don't want to include those projects unless you need them in produ
 To use the steps in features put the following in your env.rb:
 
   # Make sure this require is after you require cucumber/rails/world.
+  require 'email_spec' # add this line if you use spork
   require 'email_spec/cucumber'
 
 This will load all the helpers that the steps rely on.
