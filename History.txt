@@ -3,6 +3,7 @@
 
  === Bugfixes
   * set_current_email handles cases where To to blank but may contain CC, or BCC recipients (Murray Steele)
+  * Doc fixes (Florent Guilleux)
 
 
 == 1.0 2010-07-31 Rails 3.0 Release
