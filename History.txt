@@ -45,7 +45,7 @@
  === Changes
   * Deprecated steps were removed. (Kieran Pilkington)
 
- === Bufixes
+ === Bugfixes
 
 == 0.5.0 2010-02-22
 
@@ -58,10 +58,10 @@
     * "save and open all html emails"
     * "save and open all raw emails"
 
- === Bufixes
+ === Bugfixes
   * Gracefully handle cases where emails do not have a 'to' value. (Kieran Pilkington)
 
- === Bufixes
+ === Bugfixes
 
 == 0.4.0 2010-01-07
 
@@ -69,12 +69,12 @@
     * Added support for action_mailer_cache_delivery plugin. (Dan Dofter)
       You must use the fork at: http://github.com/liangzan/action_mailer_cache_delivery
 
- === Bufixes
+ === Bugfixes
     * be_delivered_from matcher now compares both sender name and email address. (Dan Dofter)
 
 == 0.3.8 2009-12-23
 
- === Bufixes
+ === Bugfixes
     * Guard against cc and bcc fields being nil for ActionMailer. (Piotr Sarnacki)
 
 == 0.3.7 2009-12-17
@@ -134,7 +134,7 @@ Big shoutout to Kieran Pilkington who did the majority of work for this release.
     * Then /^I should not receive any emails?$/
     * When %r{^"([^"]*?)" opens? the email$} do |address|
 
- === Bufixes
+ === Bugfixes
 
  == 0.2.1 2009-5-29
 
@@ -150,19 +150,19 @@ No changes. Bumping version for RubyForge release.
 
  == 0.1.4 2009-5-29
 
- === Bufixes
+ === Bugfixes
   * Require deliveries in the helpers so it doesn't blow up with RSpec. (Craig Webster)
 
  == 0.1.3 2009-4-15
 
- === Bufixes
+ === Bugfixes
   * Fixed regular expressions in genertaed steps. (Ben Mabey)
   * World semantics changed in cucumber (0.2.3.2), email_spec now uses the new API. (Hector Morales)
 
  == 0.1.2 2009-4-05
 
  === New features
- === Bufixes
+ === Bugfixes
   * Actually added the renamed generators to the gem so people could use it! D'oh! (Ben Mabey)
     * You can either use "./script generate email_spec" or "rubigen rails email_spec"
   * Removed Rake tasks from example application to prevent conflicts when used as a plugin. (Ben Mabey)
@@ -171,7 +171,7 @@ No changes. Bumping version for RubyForge release.
  === New features
   * Switched dir structure over to support rubigen. (Dr. Nic)
 
- === Bufixes
+ === Bugfixes
 
  == 0.1.0 2009-3-25
  === New features
@@ -193,7 +193,7 @@ No changes. Bumping version for RubyForge release.
        end
       end
 
-=== Bufixes
+=== Bugfixes
  * Revert parse_email_for_link helper method to allow for text links as well as explicit link finding. (Mischa Fierer)
  * Isolated variances between using email-spec with an ARMailer project. (Luke Melia)
 
