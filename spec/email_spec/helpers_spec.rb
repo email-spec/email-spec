@@ -16,7 +16,7 @@ describe EmailSpec::Helpers do
     end
 
     it "causes a spec to fail if the body doesn't contain the text specified to click" do
-      email = stub(:has_body_text? => false)
+      email = stub(:has_body_text? => false, :body => "hello")
       lambda { parse_email_for_link(email, "non-existent text") }.should raise_error(Spec::Expectations::ExpectationNotMetError)
     end
   end
