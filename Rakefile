@@ -22,6 +22,7 @@ begin
     s.has_rdoc         = true
     s.extra_rdoc_files = %w(README.rdoc MIT-LICENSE.txt)
     s.rubyforge_project = 'email-spec'
+    gem.add_dependency('rspec')
   end
 rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
