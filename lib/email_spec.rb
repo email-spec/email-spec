@@ -1,6 +1,6 @@
 unless defined?(Pony) or defined?(ActionMailer)
   Kernel.warn("Neither Pony nor ActionMailer appear to be loaded so email-spec is requiring ActionMailer.")
-  require 'actionmailer'
+  require 'action_mailer'
 end
 
 $LOAD_PATH.unshift(File.expand_path(File.dirname(__FILE__))) unless $LOAD_PATH.include?(File.expand_path(File.dirname(__FILE__)))
