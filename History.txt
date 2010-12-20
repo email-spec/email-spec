@@ -1,7 +1,9 @@
-== 1.x (git)
+== 1.2 (git)
 
+== 1.1 (git)
 
  === Bugfixes
+  * anchor tags are no longer ignored when clicking links in emails (Anders Törnqist and Nicklas Ramhöj)
   * set_current_email handles cases where To to blank but may contain CC, or BCC recipients (Murray Steele)
   * Doc fixes (Florent Guilleux)
 
