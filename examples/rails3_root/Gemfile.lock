@@ -1,7 +1,8 @@
 PATH
-  remote: /Users/bmabey/Programming/ruby/email-spec
+  remote: ../../
   specs:
-    email_spec (0.6.2)
+    email_spec (1.0.0)
+      rspec (~> 2.0.0)
 
 GEM
   remote: http://gemcutter.org/

@@ -52,8 +52,11 @@ task :default => [:features, :spec, 'example_app:spec']
 desc "Cleans the project of any tmp file that should not be included in the gemspec."
 task :clean do
   #remove stuff from example rails apps
+  FileUtils.rm_rf("examples/rails_root")
+  FileUtils.rm_rf("examples/sinatra")
   %w[ rails3 sinatra ].each do |ver|
     FileUtils.rm_f("examples/#{ver}_root/features/step_definitions/email_steps.rb")
+    FileUtils.rm_f("examples/#{ver}_root/rerun.txt")
     FileUtils.rm_rf("examples/#{ver}_root/log")
     FileUtils.rm_rf("examples/#{ver}_root/vendor")
   end

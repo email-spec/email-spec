@@ -17,7 +17,7 @@ gem "rack-test"
 gem "mail"
 gem 'rails', '3.0.0.rc'
 gem 'sqlite3-ruby', :require=>'sqlite3'
-gem 'email_spec', :path => '.'
+#gem 'email_spec', :path => '.'
 gem 'capybara'
 gem 'database_cleaner'
 
