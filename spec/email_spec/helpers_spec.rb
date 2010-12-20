@@ -89,6 +89,26 @@ describe EmailSpec::Helpers do
       end
     end
 
+    describe "#request_uri(link)" do
+      context "without query and anchor" do
+        it "returns the path" do
+          request_uri('http://www.path.se/to/page').should == '/to/page'
+        end
+      end
+
+      context "with query and anchor" do
+        it "returns the path and query and the anchor" do
+          request_uri('http://www.path.se/to/page?q=adam#task').should == '/to/page?q=adam#task'
+        end
+      end
+
+      context "with anchor" do
+        it "returns the path and query and the anchor" do
+          request_uri('http://www.path.se/to/page#task').should == '/to/page#task'
+        end
+      end
+    end
+
     describe 'for mails with recipients in the to address' do
       before do
         @recipient_type = :to
