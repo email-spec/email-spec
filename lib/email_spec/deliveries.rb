@@ -9,7 +9,11 @@ module EmailSpec
     end
 
     def reset_mailer
-      deliveries.clear
+      if ActionMailer::Base.delivery_method == :cache
+        mailer.clear_cache
+      else
+        deliveries.clear
+      end
     end
 
     def mailbox_for(address)
