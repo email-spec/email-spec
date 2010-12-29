@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ben Mabey", "Aaron Gibralter", "Mischa Fierer"]
-  s.date = %q{2010-12-20}
+  s.date = %q{2010-12-29}
   s.description = %q{Easily test email in rspec and cucumber}
   s.email = %q{ben@benmabey.com}
   s.extra_rdoc_files = [
@@ -172,12 +172,12 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<rspec>, ["~> 2.0.0"])
+      s.add_runtime_dependency(%q<rspec>, ["~> 2.0"])
     else
-      s.add_dependency(%q<rspec>, ["~> 2.0.0"])
+      s.add_dependency(%q<rspec>, ["~> 2.0"])
     end
   else
-    s.add_dependency(%q<rspec>, ["~> 2.0.0"])
+    s.add_dependency(%q<rspec>, ["~> 2.0"])
   end
 end
 
