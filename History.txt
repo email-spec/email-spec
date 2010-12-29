@@ -1,6 +1,10 @@
 == 1.2 (git)
 
-== 1.1 (git)
+== 1.1.1 2010-12-29
+  * Require "action_mailer" to avoid deprecation warnings. (Ryan Bigg)
+  * Relaxes pessimistic version dependency on RSpec. (GH-41 Dan Pickett)
+
+== 1.1.0 2010-12-20
 
  === Bugfixes
   * anchor tags are no longer ignored when clicking links in emails (Anders Törnqist and Nicklas Ramhöj)
