@@ -39,6 +39,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.rubyforge_project = %q{email-spec}
   s.rubygems_version = %q{1.3.7}
+  s.add_dependency "rspec"
   s.summary = %q{Easily test email in rspec and cucumber}
   s.test_files = [
     "spec/email_spec",
