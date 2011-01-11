@@ -3,6 +3,9 @@ This is the Rails 2 compatible branch/gem.
 
 == 0.6.x (git)
 
+== 0.6.5
+  * Fixes gemspec by adding RSpec as a dependency. (Ben Hutchison)
+
 == 0.6.4
 
  === Bugfixes
