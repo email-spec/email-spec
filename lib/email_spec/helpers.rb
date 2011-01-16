@@ -6,8 +6,8 @@ module EmailSpec
   module Helpers
     include Deliveries
 
-    def visit_in_email(link_text)
-      visit(parse_email_for_link(current_email, link_text))
+    def visit_in_email(link_text, opts={})
+      visit(parse_email_for_link(current_email, link_text, opts))
     end
 
     def click_email_link_matching(regex, email = current_email)
@@ -16,9 +16,9 @@ module EmailSpec
       visit request_uri(url)
     end
 
-    def click_first_link_in_email(email = current_email)
+    def click_first_link_in_email(email = current_email, opts={})
       link = links_in_email(email).first
-      visit request_uri(link)
+      visit request_uri(link, opts)
     end
 
     def open_email(address, opts={})
@@ -93,34 +93,38 @@ module EmailSpec
       email_spec_hash[:current_email] = email
     end
 
-    def parse_email_for_link(email, text_or_regex)
+    def parse_email_for_link(email, text_or_regex, opts={})
       email.should have_body_text(text_or_regex)
 
-      url = parse_email_for_explicit_link(email, text_or_regex)
-      url ||= parse_email_for_anchor_text_link(email, text_or_regex)
+      url = parse_email_for_explicit_link(email, text_or_regex, opts)
+      url ||= parse_email_for_anchor_text_link(email, text_or_regex, opts)
 
       raise "No link found matching #{text_or_regex.inspect} in #{email}" unless url
       url
     end
 
-    def request_uri(link)
+    def request_uri(link, opts={})
       return unless link
       url = URI::parse(link)
-      url.fragment ? (url.request_uri + "#" + url.fragment) : url.request_uri
+             # url.fragment ? (url.request_uri + "#" + url.fragment) : url.request_uri
+      path = url.fragment ? (url.request_uri + "#" + url.fragment) : url.request_uri
+      opts[:path_only] != false ? path : url.to_s
     end
 
     # e.g. confirm in http://confirm
-    def parse_email_for_explicit_link(email, regex)
+    def parse_email_for_explicit_link(email, regex, opts={})
       regex = /#{Regexp.escape(regex)}/ unless regex.is_a?(Regexp)
       url = links_in_email(email).detect { |link| link =~ regex }
-      request_uri(url)
+      request_uri(url, opts)
     end
 
     # e.g. Click here in  <a href="http://confirm">Click here</a>
-    def parse_email_for_anchor_text_link(email, link_text)
+    def parse_email_for_anchor_text_link(email, link_text, opts={})
       if textify_images(email.default_part_body) =~ %r{<a[^>]*href=['"]?([^'"]*)['"]?[^>]*?>[^<]*?#{link_text}[^<]*?</a>}
-        URI.split($1)[5..-1].compact!.join("?").gsub("&amp;", "&")
-        # sub correct ampersand after rails switches it (http://dev.rubyonrails.org/ticket/4002)
+        url = $1.to_s
+        path = URI.split(url)[5..-1].compact!.join("?").gsub("&amp;", "&")
+        # sub correct ampersand after rails switches it (http://dev.rubyonrails.org/ticket/4002) dead link now, found it here http://webcache.googleusercontent.com/search?q=cache:TF7WyF2lHG0J:dev.rubyonrails.org/ticket/4002+%22dev.rubyonrails.org/ticket/4002%22&cd=1&hl=en&ct=clnk&gl=us
+        opts[:path_only] != false ? path : url
       else
         return nil
       end
