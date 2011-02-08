@@ -48,19 +48,19 @@ end
 # Check how many emails have been sent/received
 #
 
-Then /^(?:I|they|"([^"]*?)") should receive (an|no|\d+) emails?$/ do |address, amount|
+Then /^(?:I|they|he|she|"([^"]*?)") should receive (an|no|\d+) emails?$/ do |address, amount|
   unread_emails_for(address).size.should == parse_email_count(amount)
 end
 
-Then /^(?:I|they|"([^"]*?)") should have (an|no|\d+) emails?$/ do |address, amount|
+Then /^(?:I|they|he|she|"([^"]*?)") should have (an|no|\d+) emails?$/ do |address, amount|
   mailbox_for(address).size.should == parse_email_count(amount)
 end
 
-Then /^(?:I|they|"([^"]*?)") should receive (an|no|\d+) emails? with subject "([^"]*?)"$/ do |address, amount, subject|
+Then /^(?:I|they|he|she|"([^"]*?)") should receive (an|no|\d+) emails? with subject "([^"]*?)"$/ do |address, amount, subject|
   unread_emails_for(address).select { |m| m.subject =~ Regexp.new(Regexp.escape(subject)) }.size.should == parse_email_count(amount)
 end
 
-Then /^(?:I|they|"([^"]*?)") should receive an email with the following body:$/ do |address, expected_body|
+Then /^(?:I|they|he|she|"([^"]*?)") should receive an email with the following body:$/ do |address, expected_body|
   open_email(address, :with_text => expected_body)
 end
 
@@ -69,15 +69,15 @@ end
 #
 
 # Opens the most recently received email
-When /^(?:I|they|"([^"]*?)") opens? the email$/ do |address|
+When /^(?:I|they|he|she|"([^"]*?)") opens? the email$/ do |address|
   open_email(address)
 end
 
-When /^(?:I|they|"([^"]*?)") opens? the email with subject "([^"]*?)"$/ do |address, subject|
+When /^(?:I|they|he|she|"([^"]*?)") opens? the email with subject "([^"]*?)"$/ do |address, subject|
   open_email(address, :with_subject => subject)
 end
 
-When /^(?:I|they|"([^"]*?)") opens? the email with text "([^"]*?)"$/ do |address, text|
+When /^(?:I|they|he|she|"([^"]*?)") opens? the email with text "([^"]*?)"$/ do |address, text|
   open_email(address, :with_text => text)
 end
 
@@ -85,31 +85,31 @@ end
 # Inspect the Email Contents
 #
 
-Then /^(?:I|they) should see "([^"]*?)" in the email subject$/ do |text|
+Then /^(?:I|they|he|she) should see "([^"]*?)" in the email subject$/ do |text|
   current_email.should have_subject(text)
 end
 
-Then /^(?:I|they) should see \/([^"]*?)\/ in the email subject$/ do |text|
+Then /^(?:I|they|he|she) should see \/([^"]*?)\/ in the email subject$/ do |text|
   current_email.should have_subject(Regexp.new(text))
 end
 
-Then /^(?:I|they) should see "([^"]*?)" in the email body$/ do |text|
+Then /^(?:I|they|he|she) should see "([^"]*?)" in the email body$/ do |text|
   current_email.body.should include(text)
 end
 
-Then /^(?:I|they) should see \/([^"]*?)\/ in the email body$/ do |text|
+Then /^(?:I|they|he|she) should see \/([^"]*?)\/ in the email body$/ do |text|
   current_email.body.should =~ Regexp.new(text)
 end
 
-Then /^(?:I|they) should see the email delivered from "([^"]*?)"$/ do |text|
+Then /^(?:I|they|he|she) should see the email delivered from "([^"]*?)"$/ do |text|
   current_email.should be_delivered_from(text)
 end
 
-Then /^(?:I|they) should see "([^\"]*)" in the email "([^"]*?)" header$/ do |text, name|
+Then /^(?:I|they|he|she) should see "([^\"]*)" in the email "([^"]*?)" header$/ do |text, name|
   current_email.should have_header(name, text)
 end
 
-Then /^(?:I|they) should see \/([^\"]*)\/ in the email "([^"]*?)" header$/ do |text, name|
+Then /^(?:I|they|he|she) should see \/([^\"]*)\/ in the email "([^"]*?)" header$/ do |text, name|
   current_email.should have_header(name, Regexp.new(text))
 end
 
@@ -117,7 +117,7 @@ end
 # Inspect the Email Attachments
 #
 
-Then /^(?:I|they) should see (an|no|\d+) attachments? with the email$/ do |amount|
+Then /^(?:I|they|he|she) should see (an|no|\d+) attachments? with the email$/ do |amount|
   current_email_attachments.size.should == parse_email_count(amount)
 end
 
@@ -151,11 +151,11 @@ end
 # Interact with Email Contents
 #
 
-When /^(?:I|they) follow "([^"]*?)" in the email$/ do |link|
+When /^(?:I|they|he|she) follow "([^"]*?)" in the email$/ do |link|
   visit_in_email(link)
 end
 
-When /^(?:I|they) click the first link in the email$/ do
+When /^(?:I|they|he|she) click the first link in the email$/ do
   click_first_link_in_email
 end
 
