@@ -22,7 +22,7 @@ begin
     s.rubyforge_project = 'email-spec'
   end
 rescue LoadError
-  puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
+  puts "Jeweler not available. Install it with: sudo gem install jeweler"
 end
 
 # TODO: switch to gem bundler
