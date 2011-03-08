@@ -89,8 +89,21 @@ Then /^(?:I|they|he|she) should see "([^"]*?)" in the email subject$/ do |text|
   current_email.should have_subject(text)
 end
 
-Then /^(?:I|they|he|she) should see \/([^"]*?)\/ in the email subject$/ do |text|
-  current_email.should have_subject(Regexp.new(text))
+Then /^(?:I|they|he|she) should see "([^"]*?)" in the email body$/ do |text|
+  if current_email.multipart?
+    Then %(I should see "#{text}" in the html part of the email body)
+    Then %(I should see "#{text}" in the text part of the email body)
+  else
+    current_email.body.should =~ Regexp.new(text)
+  end
+end
+
+Then /^(?:I|they|he|she) should see "([^"]*?)" in the html part of the email body$/ do |text|
+  current_email.html_part.body.should =~ Regexp.new(text)
+end
+
+Then /^(?:I|they|he|she) should see "([^"]*?)" in the text part of the email body$/ do |text|
+  current_email.text_part.body.should =~ Regexp.new(text)
 end
 
 Then /^(?:I|they|he|she) should see "([^"]*?)" in the email body$/ do |text|
