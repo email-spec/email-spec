@@ -132,6 +132,39 @@ module EmailSpec
       BccTo.new(expected_email_addresses_or_objects_that_respond_to_email.flatten)
     end
 
+    class CcTo
+
+      def initialize(expected_email_addresses_or_objects_that_respond_to_email)
+        emails = expected_email_addresses_or_objects_that_respond_to_email.map do |email_or_object|
+          email_or_object.kind_of?(String) ? email_or_object : email_or_object.email
+        end
+
+        @expected_email_addresses = emails.sort
+      end
+
+      def description
+        "be cc'd to #{@expected_email_addresses.inspect}"
+      end
+
+      def matches?(email)
+        @email = email
+        @actual_recipients = (Array(email.cc) || []).sort
+        @actual_recipients == @expected_email_addresses
+      end
+
+      def failure_message
+        "expected #{@email.inspect} to cc to #{@expected_email_addresses.inspect}, but it was cc'd to #{@actual_recipients.inspect}"
+      end
+
+      def negative_failure_message
+        "expected #{@email.inspect} not to cc to #{@expected_email_addresses.inspect}, but it did"
+      end
+    end
+
+    def cc_to(*expected_email_addresses_or_objects_that_respond_to_email)
+      CcTo.new(expected_email_addresses_or_objects_that_respond_to_email.flatten)
+    end
+
       RSpec::Matchers.define :have_subject do
       match do |given|
         given_subject = given.subject

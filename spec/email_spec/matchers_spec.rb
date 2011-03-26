@@ -159,6 +159,36 @@ describe EmailSpec::Matchers do
 
   end
 
+  describe "#cc_to" do
+
+    it "should match when the email is set to deliver to the specified address" do
+      email = Mail::Message.new(:cc => "jimmy_bean@yahoo.com")
+
+      cc_to("jimmy_bean@yahoo.com").should match(email)
+    end
+
+    it "should match when a list of emails is exact same as all of the email's recipients" do
+      email = Mail::Message.new(:cc => ["james@yahoo.com", "karen@yahoo.com"])
+
+      cc_to("karen@yahoo.com", "james@yahoo.com").should match(email)
+      cc_to("karen@yahoo.com").should_not match(email)
+    end
+
+    it "should match when an array of emails is exact same as all of the email's recipients" do
+      addresses = ["james@yahoo.com", "karen@yahoo.com"]
+      email = Mail::Message.new(:cc => addresses)
+      cc_to(addresses).should match(email)
+    end
+
+    it "should use the passed in objects :email method if not a string" do
+      email = Mail::Message.new(:cc => "jimmy_bean@yahoo.com")
+      user = mock("user", :email => "jimmy_bean@yahoo.com")
+
+      cc_to(user).should match(email)
+    end
+
+  end
+
   describe "#have_subject" do
 
     describe "when regexps are used" do
