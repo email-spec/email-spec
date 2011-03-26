@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{email_spec}
-  s.version = "0.6.5"
+  s.version = "0.6.6"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ben Mabey", "Aaron Gibralter", "Mischa Fierer"]
-  s.date = %q{2011-01-11}
+  s.date = %q{2011-03-26}
   s.description = %q{Easily test email in rspec and cucumber}
   s.email = %q{ben@benmabey.com}
   s.extra_rdoc_files = [
@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
      "install.rb",
      "lib/email-spec.rb",
      "lib/email_spec.rb",
+     "lib/email_spec/#helpers.rb#",
      "lib/email_spec/address_converter.rb",
      "lib/email_spec/background_processes.rb",
      "lib/email_spec/cucumber.rb",
@@ -46,6 +47,12 @@ Gem::Specification.new do |s|
      "spec/email_spec/matchers_spec.rb",
      "spec/spec.opts",
      "spec/spec_helper.rb",
+     "examples/rails3_root",
+     "examples/rails3_root/db",
+     "examples/rails3_root/features",
+     "examples/rails3_root/features/step_definitions",
+     "examples/rails3_root/features/step_definitions/email_steps.rb",
+     "examples/rails3_root/log",
      "examples/rails_root",
      "examples/rails_root/app",
      "examples/rails_root/app/controllers",
@@ -162,11 +169,16 @@ Gem::Specification.new do |s|
      "examples/sinatra/features/errors.feature",
      "examples/sinatra/features/example.feature",
      "examples/sinatra/features/step_definitions",
+     "examples/sinatra/features/step_definitions/email_steps.rb",
      "examples/sinatra/features/step_definitions/user_steps.rb",
      "examples/sinatra/features/step_definitions/web_steps.rb",
      "examples/sinatra/features/support",
      "examples/sinatra/features/support/env.rb",
-     "examples/sinatra/features/support/paths.rb"
+     "examples/sinatra/features/support/paths.rb",
+     "examples/sinatra_root",
+     "examples/sinatra_root/features",
+     "examples/sinatra_root/features/step_definitions",
+     "examples/sinatra_root/features/step_definitions/email_steps.rb"
   ]
 
   if s.respond_to? :specification_version then
@@ -174,9 +186,12 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<rsepc>, [">= 0"])
     else
+      s.add_dependency(%q<rsepc>, [">= 0"])
     end
   else
+    s.add_dependency(%q<rsepc>, [">= 0"])
   end
 end
 
