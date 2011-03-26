@@ -54,10 +54,15 @@ describe EmailSpec::Matchers do
   end
 
   describe "#deliver_to" do
-    it "should match when the email is set to deliver to the specidied address" do
+    it "should match when the email is set to deliver to the specified address" do
       email = Mail::Message.new(:to => "jimmy_bean@yahoo.com")
 
       deliver_to("jimmy_bean@yahoo.com").should match(email)
+    end
+
+    it "should match when the email is set to deliver to the specified name and address" do
+      email = Mail::Message.new(:to => "Jimmy Bean <jimmy_bean@yahoo.com>")
+      deliver_to("Jimmy Bean <jimmy_bean@yahoo.com>").should match(email)
     end
 
     it "should match when a list of emails is exact same as all of the email's recipients" do
@@ -72,12 +77,33 @@ describe EmailSpec::Matchers do
       email = Mail::Message.new(:to => addresses)
       deliver_to(addresses).should match(email)
     end
+    
+    it "should match when the names and email addresses match in any order" do
+      addresses = ["James <james@yahoo.com>", "Karen <karen@yahoo.com>"]
+      email = Mail::Message.new(:to => addresses.reverse)
+      deliver_to(addresses).should match(email)
+    end
 
     it "should use the passed in objects :email method if not a string" do
       email = Mail::Message.new(:to => "jimmy_bean@yahoo.com")
       user = mock("user", :email => "jimmy_bean@yahoo.com")
 
       deliver_to(user).should match(email)
+    end
+
+    it "should not match when the email does not have a recipient" do
+      email = Mail::Message.new(:to => nil)
+      deliver_to("jimmy_bean@yahoo.com").should_not match(email)
+    end
+
+    it "should not match when the email addresses match but the names do not" do
+      email = Mail::Message.new(:to => "Jimmy Bean <jimmy_bean@yahoo.com>")
+      deliver_to("Freddy Noe <jimmy_bean@yahoo.com>").should_not match(email)
+    end
+
+    it "should not match when the names match but the email addresses do not" do
+      email = Mail::Message.new(:to => "Jimmy Bean <jimmy_bean@yahoo.com>")
+      deliver_to("Jimmy Bean <freddy_noe@yahoo.com>").should_not match(email)
     end
 
     it "should give correct failure message when the email is not set to deliver to the specified address" do

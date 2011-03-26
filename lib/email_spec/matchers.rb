@@ -37,25 +37,25 @@ module EmailSpec
           email_or_object.kind_of?(String) ? email_or_object : email_or_object.email
         end
 
-        @expected_email_addresses = emails.sort
+        @expected_recipients = Mail::ToField.new(emails).addrs.map(&:to_s).sort
       end
 
       def description
-        "be delivered to #{@expected_email_addresses.inspect}"
+        "be delivered to #{@expected_recipients.inspect}"
       end
 
       def matches?(email)
         @email = email
-        @actual_recipients = (Array(email.to) || []).sort
-        @actual_recipients == @expected_email_addresses
+        @actual_recipients = (email.header[:to].addrs || []).map(&:to_s).sort
+        @actual_recipients == @expected_recipients
       end
 
       def failure_message
-        "expected #{@email.inspect} to deliver to #{@expected_email_addresses.inspect}, but it delivered to #{@actual_recipients.inspect}"
+        "expected #{@email.inspect} to deliver to #{@expected_recipients.inspect}, but it delivered to #{@actual_recipients.inspect}"
       end
 
       def negative_failure_message
-        "expected #{@email.inspect} not to deliver to #{@expected_email_addresses.inspect}, but it did"
+        "expected #{@email.inspect} not to deliver to #{@expected_recipients.inspect}, but it did"
       end
     end
 
@@ -80,8 +80,7 @@ module EmailSpec
         @actual_sender = (email.header[:from].addrs || []).first
 
         !@actual_sender.nil? &&
-          @actual_sender.address == @expected_sender.address &&
-          @actual_sender.display_name == @expected_sender.display_name
+          @actual_sender.to_s == @expected_sender.to_s
       end
 
       def failure_message
