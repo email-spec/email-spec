@@ -1,7 +1,8 @@
 == 1.2 (git)
 
  === New features
-  * he|she options for steps (Dan Croak)
+  * [he|she] options for steps (Dan Croak)
+  * cc_to RSpec matcher (Arie on github)
 
 
 == 1.1.1 2010-12-29
