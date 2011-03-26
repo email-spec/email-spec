@@ -3,6 +3,7 @@
  === New features
   * [he|she] options for steps (Dan Croak)
   * cc_to RSpec matcher (Arie on github)
+  * Check both html and text parts of multipart emails in Cucumber step. (Charles Barbier)
 
  === Bugfixes
   * delivered_to matcher now compares both sender name and email address (Jason Garber)
