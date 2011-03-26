@@ -20,6 +20,7 @@ begin
     s.has_rdoc         = true
     s.extra_rdoc_files = %w(README.rdoc MIT-LICENSE.txt)
     s.rubyforge_project = 'email-spec'
+    s.add_dependency 'rsepc'
   end
 rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install jeweler"
