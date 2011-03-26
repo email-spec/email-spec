@@ -40,14 +40,7 @@ end
 require 'rspec/core/rake_task'
   RSpec::Core::RakeTask.new
 
-namespace :example_app do
-    RSpec::Core::RakeTask.new do |spec|
-    desc "Specs for Example app"
-    spec.pattern = './examples/rails3_root/spec/**/*_spec.rb'
-  end
-end
-
-task :default => [:features, :spec, 'example_app:spec']
+task :default => [:features, :spec]
 
 desc "Cleans the project of any tmp file that should not be included in the gemspec."
 task :clean do

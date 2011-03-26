@@ -1,8 +1,8 @@
 PATH
   remote: ../../
   specs:
-    email_spec (1.0.0)
-      rspec (~> 2.0.0)
+    email_spec (1.1.1)
+      rspec (~> 2.0)
 
 GEM
   remote: http://gemcutter.org/

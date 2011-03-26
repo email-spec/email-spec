@@ -39,7 +39,7 @@ Given /^the (\w+) app is setup with the latest generators$/ do |app_name|
 end
 
 When /^I run "([^\"]*)" in the (\w+) app$/ do |cmd, app_name|
-  cmd.gsub!('cucumber', "#{Cucumber::RUBY_BINARY} #{Cucumber::BINARY}")
+  #cmd.gsub!('cucumber', "#{Cucumber::RUBY_BINARY} #{Cucumber::BINARY}")
   app_path = File.join(root_dir, 'examples', "#{app_name}_root")
   app_specific_gemfile = File.join(app_path,'Gemfile')
   Dir.chdir(app_path) do

@@ -9,7 +9,7 @@ module EmailSpec
     end
 
     def reset_mailer
-      if ActionMailer::Base.delivery_method == :cache
+      if defined?(ActionMailer) && ActionMailer::Base.delivery_method == :cache
         mailer.clear_cache
       else
         deliveries.clear
