@@ -4,6 +4,9 @@
   * [he|she] options for steps (Dan Croak)
   * cc_to RSpec matcher (Arie on github)
 
+ === Bugfixes
+  * delivered_to matcher now compares both sender name and email address (Jason Garber)
+
 
 == 1.1.1 2010-12-29
   * Require "action_mailer" to avoid deprecation warnings. (Ryan Bigg)
