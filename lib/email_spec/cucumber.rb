@@ -3,9 +3,10 @@
 # Global Setup
 if defined?(ActionMailer)
   ## I don't like email_spec being too smart about this, I want to use mocksmtp so want to be able to still have an smtp delivery method
-  #unless [:test, :activerecord, :cache, :file].include?(ActionMailer::Base.delivery_method)
+  unless [:test, :activerecord, :cache, :file].include?(ActionMailer::Base.delivery_method)
   #  ActionMailer::Base.delivery_method = :test
-  #end
+    ActionMailer::Base.register_observer(EmailSpec::TestObserver)
+  end
   ActionMailer::Base.perform_deliveries = true
 
   Before do
