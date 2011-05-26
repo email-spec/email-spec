@@ -167,6 +167,8 @@ Gem::Specification.new do |s|
      "examples/sinatra_root/lib/example_sinatra_app.rb"
   ]
 
+  spec.add_dependency('mail', '~> 2.3.0') 
+
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
