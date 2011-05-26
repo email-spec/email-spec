@@ -22,6 +22,7 @@ begin
     s.has_rdoc         = true
     s.extra_rdoc_files = %w(README.rdoc MIT-LICENSE.txt)
     s.rubyforge_project = 'email-spec'
+    s.add_runtime_dependency "mail", "~> 2.3.0"
     s.add_runtime_dependency "rspec", "~> 2.0"
   end
 rescue LoadError
@@ -54,7 +55,7 @@ task :clean do
     FileUtils.rm_rf("examples/#{ver}_root/vendor")
   end
 
-  %w[*.sqlite3 *.log].each do |pattern|
+  %w[*.sqlite3 *.log #*#].each do |pattern|
     `find . -name "#{pattern}" -delete`
   end
 end
