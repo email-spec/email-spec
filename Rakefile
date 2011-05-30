@@ -22,7 +22,7 @@ begin
     s.has_rdoc         = true
     s.extra_rdoc_files = %w(README.rdoc MIT-LICENSE.txt)
     s.rubyforge_project = 'email-spec'
-    s.add_runtime_dependency "mail", "~> 2.3.0"
+    s.add_runtime_dependency "mail", "~> 2.2"
     s.add_runtime_dependency "rspec", "~> 2.0"
   end
 rescue LoadError
