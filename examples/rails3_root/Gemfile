@@ -11,7 +11,7 @@ group :test do
   gem "cucumber-rails"
   gem "database_cleaner"
   gem 'capybara'
-  gem "rspec", ">= 2.0.0.beta.19"
-  gem "rspec-rails", ">= 2.0.0.beta.19"
+  gem "rspec", ">= 2.0.1"
+  gem "rspec-rails", ">= 2.0.1"
   gem "email_spec", :path => "../../"
 end

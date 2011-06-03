@@ -57,9 +57,9 @@ module EmailSpec
     def find_email(address, opts={})
       address = convert_address(address)
       if opts[:with_subject]
-        mailbox_for(address).find { |m| m.subject =~ Regexp.new(opts[:with_subject]) }
+        mailbox_for(address).find { |m| m.subject =~ Regexp.new(Regexp.escape(opts[:with_subject])) }
       elsif opts[:with_text]
-        mailbox_for(address).find { |m| m.default_part_body =~ Regexp.new(opts[:with_text]) }
+        mailbox_for(address).find { |m| m.default_part_body =~ Regexp.new(Regexp.escape(opts[:with_text])) }
       else
         mailbox_for(address).first
       end
