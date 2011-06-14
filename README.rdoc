@@ -44,6 +44,16 @@ Then:
 
 This will give you a bunch of steps to get started with in step_definitions/email_steps.rb
 
+By default, the generated file will look for email to example@example.com. You can either change this
+by editing the current_email_address method in email_steps.rb, or by simply specifying the target
+email in your features:
+
+  Scenario: A new person signs up
+      Given I am at "/"
+      When I fill in "Email" with "quentin@example.com"
+      And I press "Sign up"
+      And "quentin@example.com" should receive an email   # Specify who should receive the email
+
 === RSpec
 
 First you need to require email_spec in your spec_helper.rb:
@@ -85,7 +95,7 @@ For more examples, check out examples/rails_root in the source for a small examp
 === RSpec
 
 ==== Testing In Isolation
-It is often useful to test your mailers in isolation.  You can accomplish this by using mocks to verify that the mailer is being called in the correct place and then write focued examples for the actual mailer.  This is a simple example from the sample app found in the gem:
+It is often useful to test your mailers in isolation.  You can accomplish this by using mocks to verify that the mailer is being called in the correct place and then write focused examples for the actual mailer.  This is a simple example from the sample app found in the gem:
 
 Verify that the mailer is used correctly in the controller (this would apply to a model as well):
 
