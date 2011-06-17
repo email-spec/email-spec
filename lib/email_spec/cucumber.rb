@@ -3,7 +3,7 @@
 # Global Setup
 if defined?(ActionMailer)
   unless [:test, :activerecord, :cache, :file].include?(ActionMailer::Base.delivery_method)
-    ActionMailer::Base.delivery_method = :test
+    ActionMailer::Base.register_observer(EmailSpec::TestObserver)
   end
   ActionMailer::Base.perform_deliveries = true
 
