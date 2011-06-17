@@ -164,8 +164,8 @@ DEPENDENCIES
   rack-test
   rails (= 3.0.0.rc)
   rake (>= 0.8.7)
-  rspec (>= 2.0.0.beta.19)
-  rspec-rails (>= 2.0.0.beta.19)
+  rspec (>= 2.0.1)
+  rspec-rails (>= 2.0.1)
   sinatra
   sqlite3-ruby
   test-unit

@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.version = "1.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Ben Mabey", "Aaron Gibralter", "Mischa Fierer"]
-  s.date = %q{2011-05-30}
+  s.authors = [%q{Ben Mabey}, %q{Aaron Gibralter}, %q{Mischa Fierer}]
+  s.date = %q{2011-06-03}
   s.description = %q{Easily test email in rspec and cucumber}
   s.email = %q{ben@benmabey.com}
   s.extra_rdoc_files = [
@@ -39,10 +39,10 @@ Gem::Specification.new do |s|
      "rails_generators/email_spec/templates/email_steps.rb"
   ]
   s.homepage = %q{http://github.com/bmabey/email-spec/}
-  s.rdoc_options = ["--charset=UTF-8"]
-  s.require_paths = ["lib"]
+  s.rdoc_options = [%q{--charset=UTF-8}]
+  s.require_paths = [%q{lib}]
   s.rubyforge_project = %q{email-spec}
-  s.rubygems_version = %q{1.3.7}
+  s.rubygems_version = %q{1.8.5}
   s.summary = %q{Easily test email in rspec and cucumber}
   s.test_files = [
     "spec/email_spec",
@@ -113,6 +113,7 @@ Gem::Specification.new do |s|
      "examples/rails3_root/features/errors.feature",
      "examples/rails3_root/features/example.feature",
      "examples/rails3_root/features/step_definitions",
+     "examples/rails3_root/features/step_definitions/email_steps.rb",
      "examples/rails3_root/features/step_definitions/user_steps.rb",
      "examples/rails3_root/features/step_definitions/web_steps.rb",
      "examples/rails3_root/features/support",
@@ -158,6 +159,7 @@ Gem::Specification.new do |s|
      "examples/sinatra_root/features/errors.feature",
      "examples/sinatra_root/features/example.feature",
      "examples/sinatra_root/features/step_definitions",
+     "examples/sinatra_root/features/step_definitions/email_steps.rb",
      "examples/sinatra_root/features/step_definitions/user_steps.rb",
      "examples/sinatra_root/features/step_definitions/web_steps.rb",
      "examples/sinatra_root/features/support",
@@ -168,7 +170,6 @@ Gem::Specification.new do |s|
   ]
 
   if s.respond_to? :specification_version then
-    current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then

@@ -133,4 +133,68 @@ describe EmailSpec::Helpers do
       it_should_behave_like 'something that sets the current email for recipients'
     end
   end
+
+  describe '#open_email' do
+    describe 'with subject' do
+      shared_examples_for 'something that opens the email with subject' do
+        before do
+          @to = "jimmy_bean@yahoo.com"
+          @email = Mail::Message.new(:to => @to, :subject => @subject)
+          stub!(:mailbox_for).with(@to).and_return([@email])
+        end
+
+        it "should open the email with subject" do
+          open_email(@to, :with_subject => @subject).should == @email
+        end
+      end
+
+      describe 'simple subject' do
+        before do
+          @subject = 'This is a simple subject'
+        end
+
+        it_should_behave_like 'something that opens the email with subject'
+      end
+
+      describe 'with regex sensitive characters' do
+        before do
+          @subject = '[app name] Contains regex characters?'
+        end
+
+        it_should_behave_like 'something that opens the email with subject'
+      end
+    end
+
+    describe 'with text' do
+      shared_examples_for 'something that opens the email with text' do
+        before do
+          @to = "jimmy_bean@yahoo.com"
+          @email = Mail::Message.new(:to => @to, :body => @body)
+          stub!(:mailbox_for).with(@to).and_return([@email])
+        end
+
+        it "should open the email with text" do
+          open_email(@to, :with_text => @text).should == @email
+        end
+      end
+
+      describe 'simple text' do
+        before do
+          @body = 'This is an email body that is very simple'
+          @text = 'email body'
+        end
+
+        it_should_behave_like 'something that opens the email with text'
+      end
+
+      describe 'with regex sensitive characters' do
+        before do
+          @body = 'This is an email body. It contains some [regex] characters?'
+          @text = '[regex] characters?'
+        end
+
+        it_should_behave_like 'something that opens the email with text'
+      end
+    end
+  end
 end
