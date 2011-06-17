@@ -1,13 +1,14 @@
 == 1.2 (git)
 
  === New features
-  * [he|she] options for steps (Dan Croak)
-  * cc_to RSpec matcher (Arie on github)
+  * [he|she] options for steps. (Dan Croak)
+  * cc_to RSpec matcher. (Arie on github)
   * Check both html and text parts of multipart emails in Cucumber step. (Charles Barbier)
 
  === Bugfixes
-  * delivered_to matcher now compares both sender name and email address (Jason Garber)
+  * delivered_to matcher now compares both sender name and email address. (Jason Garber)
   * find_email now matches with_subject and with_text containing text with regex sensitive characters. Issue #31. (Curtis Miller)
+  * current_email_address to work outside of the context of Cucumber. (Szymon Przybył)
 
 == 1.1.1 2010-12-29
   * Require "action_mailer" to avoid deprecation warnings. (Ryan Bigg)
