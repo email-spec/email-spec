@@ -4,6 +4,7 @@
   * [he|she] options for steps. (Dan Croak)
   * cc_to RSpec matcher. (Arie on github)
   * Check both html and text parts of multipart emails in Cucumber step. (Charles Barbier)
+  * delivery_method is not set by email_spec to allow for SMTP (e.g. MockSMTP) delivery (Donald Piret)
 
  === Bugfixes
   * delivered_to matcher now compares both sender name and email address. (Jason Garber)
