@@ -1,4 +1,6 @@
-== 1.2 (git)
+== 1.2.x (git)
+
+== 1.2 2011-06-16
 
  === New features
   * [he|she] options for steps. (Dan Croak)
