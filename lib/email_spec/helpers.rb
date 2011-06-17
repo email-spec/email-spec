@@ -148,6 +148,12 @@ module EmailSpec
       AddressConverter.instance.convert(@last_email_address)
     end
 
+    # Overwrite this method to set default email address, for example:
+    # last_email_address || @current_user.email
+    def current_email_address
+      last_email_address
+    end
+
 
     def mailbox_for(address)
       super(convert_address(address)) # super resides in Deliveries
