@@ -54,12 +54,15 @@ module EmailSpec
       email_spec_hash[:read_emails][convert_address(address)] ||= []
     end
 
+    # Should be able to accept String or Regexp options.
     def find_email(address, opts={})
       address = convert_address(address)
       if opts[:with_subject]
-        mailbox_for(address).find { |m| m.subject =~ Regexp.new(Regexp.escape(opts[:with_subject])) }
+        expected_subject = (opts[:with_subject].is_a?(String) ? Regexp.escape(opts[:with_subject]) : opts[:with_subject])
+        mailbox_for(address).find { |m| m.subject =~ Regexp.new(expected_subject) }
       elsif opts[:with_text]
-        mailbox_for(address).find { |m| m.default_part_body =~ Regexp.new(Regexp.escape(opts[:with_text])) }
+        expected_text = (opts[:with_text].is_a?(String) ? Regexp.escape(opts[:with_text]) : opts[:with_text])
+        mailbox_for(address).find { |m| m.default_part_body =~ Regexp.new(expected_text) }
       else
         mailbox_for(address).first
       end

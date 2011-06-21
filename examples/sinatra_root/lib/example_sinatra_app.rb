@@ -16,15 +16,25 @@ class ExampleSinatraApp < Sinatra::Base
 
   post '/signup' do
     user = params[:user]
-    body = <<-EOHTML
+    body = <<-EOTEXT
+  Hello #{user['name']}!
+
+  Copy and paste this URL into your browser to confirm your account!
+
+  http://www.example.com/confirm
+  This is the text part.
+    EOTEXT
+    html_body = <<-EOHTML
   Hello #{user['name']}!
 
   <a href="http://www.example.com/confirm">Click here to confirm your account!</a>
+  This is the HTML part.
     EOHTML
     Pony.mail(:from => 'admin@example.com',
               :to => user['email'],
               :subject => 'Account confirmation',
-              :body => body
+              :body => body,
+              :html_body => html_body
              )
              'Thanks!  Go check your email!'
   end

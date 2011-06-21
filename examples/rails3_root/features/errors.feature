@@ -14,9 +14,17 @@ Feature: Email-spec errors example
     Then I should receive an email
     When "example@example.com" opens the email with subject "no email"
 
+  Scenario: I fail to open an email with incorrect subject
+    Then I should receive an email
+    When "example@example.com" opens the email with subject /no email/
+
   Scenario: I fail to open an email with incorrect text
     Then I should receive an email
     When "example@example.com" opens the email with text "no email"
+
+  Scenario: I fail to open an email with incorrect text
+    Then I should receive an email
+    When "example@example.com" opens the email with text /no email/
 
   Scenario: I fail to receive an email with the expected link
     Then I should receive an email
