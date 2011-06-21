@@ -14,8 +14,8 @@ I want to verify that the example rails 3 app runs all of it's features as expec
     And I run "bundle exec cucumber features -q --no-color" in the rails3 app
     Then I should see the following summary report:
     """
-    13 scenarios (5 failed, 8 passed)
-    110 steps (5 failed, 1 skipped, 104 passed)
+    15 scenarios (7 failed, 8 passed)
+    136 steps (7 failed, 1 skipped, 128 passed)
     """
 
    When I run "rake spec RAILS_ENV=test" in the rails3 app

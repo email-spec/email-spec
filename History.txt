@@ -1,5 +1,8 @@
 == 1.2.x (git)
 
+  === Bugfixes
+  * find_email now allows with_subject and with_text to be either a String or Regexp. Issue #67. (Curtis Miller)
+
 == 1.2 2011-06-16
 
  === New features

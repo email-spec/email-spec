@@ -144,21 +144,32 @@ describe EmailSpec::Helpers do
         end
 
         it "should open the email with subject" do
-          open_email(@to, :with_subject => @subject).should == @email
+          open_email(@to, :with_subject => @expected).should == @email
         end
       end
 
-      describe 'simple subject' do
+      describe 'simple string subject' do
         before do
-          @subject = 'This is a simple subject'
+          @subject  = 'This is a simple subject'
+          @expected = 'a simple'
         end
 
         it_should_behave_like 'something that opens the email with subject'
       end
 
-      describe 'with regex sensitive characters' do
+      describe 'string with regex sensitive characters' do
         before do
-          @subject = '[app name] Contains regex characters?'
+          @subject  = '[app name] Contains regex characters?'
+          @expected = 'regex characters?'
+        end
+
+        it_should_behave_like 'something that opens the email with subject'
+      end
+
+      describe 'regular expression' do
+        before do
+          @subject = "This is a simple subject"
+          @expected = /a simple/
         end
 
         it_should_behave_like 'something that opens the email with subject'
@@ -178,7 +189,7 @@ describe EmailSpec::Helpers do
         end
       end
 
-      describe 'simple text' do
+      describe 'simple string text' do
         before do
           @body = 'This is an email body that is very simple'
           @text = 'email body'
@@ -187,10 +198,19 @@ describe EmailSpec::Helpers do
         it_should_behave_like 'something that opens the email with text'
       end
 
-      describe 'with regex sensitive characters' do
+      describe 'string with regex sensitive characters' do
         before do
           @body = 'This is an email body. It contains some [regex] characters?'
           @text = '[regex] characters?'
+        end
+
+        it_should_behave_like 'something that opens the email with text'
+      end
+
+      describe 'regular expression' do
+        before do
+          @body = 'This is an email body.'
+          @text = /an\ email/
         end
 
         it_should_behave_like 'something that opens the email with text'
