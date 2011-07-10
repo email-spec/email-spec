@@ -63,7 +63,7 @@ First you need to require email_spec in your spec_helper.rb:
 You will then need to include EmailSpec::Helpers and EmailSpec::Matchers in your example groups.
 If you want to have access to the helpers and matchers in all of your examples you can do the following in your spec_helper.rb:
 
-  Spec::Runner.configure do |config|
+  RSpec.configure do |config|
     config.include(EmailSpec::Helpers)
     config.include(EmailSpec::Matchers)
   end
