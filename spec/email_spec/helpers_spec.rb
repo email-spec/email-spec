@@ -216,5 +216,59 @@ describe EmailSpec::Helpers do
         it_should_behave_like 'something that opens the email with text'
       end
     end
+
+    describe "when the email isn't found" do
+      it "includes the mailbox that was looked in when an address was provided" do
+        @email_address = "foo@bar.com"
+        expect { open_email(@email_address, :with_subject => "baz") }.to raise_error(EmailSpec::CouldNotFindEmailError) { |error| error.message.should include(@email_address) }
+      end
+
+      it "includes a warning that no mailboxes were searched when no address was provided" do
+        subject.stub(:last_email_address).and_return nil
+        expect { open_email(nil, :with_subject => "baz") }.to raise_error(EmailSpec::NoEmailAddressProvided) { |error| error.message.should == "No email address has been provided. Make sure current_email_address is returning something." }        
+      end
+
+      describe "search by with_subject" do
+        before do
+          @email_subject = "Subject of 'Nonexistent Email'"
+          begin
+            open_email("foo@bar.com", :with_subject => @email_subject)
+          rescue EmailSpec::CouldNotFindEmailError => e
+            @error = e
+          end
+
+          @error.should_not be_nil, "expected an error to get thrown so we could test against it, but didn't catch one"
+        end
+
+        it "includes the subject that wasn't found in the error message" do
+          @error.message.should include(@email_subject)
+        end
+
+        it "includes 'with subject' in the error message" do
+          @error.message.should include('with subject')
+        end
+      end
+
+      describe "search by with_text" do
+        before do
+          @email_text = "This is a line of text from a 'Nonexistent Email'."
+          begin
+            open_email("foo@bar.com", :with_text => @email_text)
+          rescue EmailSpec::CouldNotFindEmailError => e
+            @error = e
+          end
+
+          @error.should_not be_nil, "expected an error to get thrown so we could test against it, but didn't catch one"
+        end
+
+        it "includes the text that wasn't found in the error message" do
+          @error.message.should include(@email_text)
+        end
+
+        it "includes 'with text' in the error message" do
+          @error.message.should include('with text')
+        end
+      end
+    end
   end
 end
