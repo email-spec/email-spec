@@ -22,3 +22,5 @@ gem 'capybara'
 gem 'database_cleaner'
 
 gem "test-unit"
+
+gemspec
