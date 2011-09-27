@@ -73,11 +73,11 @@ module EmailSpec
 
     # TODO: use the launchy gem for this stuff...
     def self.open_in_text_editor(filename)
-      `open #{filename}`
+      Launchy.open(URI.parse("file://#{File.expand_path(filename)}"), :application => :editor)
     end
 
     def self.open_in_browser(filename)
-      `open #{filename}`
+      Launchy.open(URI.parse("file://#{File.expand_path(filename)}"))
     end
 
     def self.tmp_email_filename(extension = '.txt')

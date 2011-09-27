@@ -1,3 +1,11 @@
+PATH
+  remote: .
+  specs:
+    email_spec (1.2.1)
+      launchy (~> 2.0)
+      mail (~> 2.2)
+      rspec (~> 2.0)
+
 GEM
   remote: http://gemcutter.org/
   specs:
@@ -28,6 +36,7 @@ GEM
       activemodel (= 3.0.0.rc)
       activesupport (= 3.0.0.rc)
     activesupport (3.0.0.rc)
+    addressable (2.2.6)
     arel (0.4.0)
       activesupport (>= 3.0.0.beta)
     autotest (4.3.2)
@@ -79,6 +88,8 @@ GEM
       rubyforge (>= 2.0.0)
     json (1.4.6)
     json_pure (1.4.6)
+    launchy (2.0.5)
+      addressable (~> 2.2.6)
     mail (2.2.9)
       activesupport (>= 2.3.6)
       i18n (~> 0.4.1)
@@ -156,6 +167,7 @@ DEPENDENCIES
   cucumber-sinatra
   database_cleaner
   delayed_job (>= 2.0.3)
+  email_spec!
   growl-glue
   jeweler
   mail

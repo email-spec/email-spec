@@ -1,7 +1,8 @@
 PATH
   remote: ../../
   specs:
-    email_spec (1.2.0)
+    email_spec (1.2.1)
+      launchy (~> 2.0)
       mail (~> 2.2)
       rspec (~> 2.0)
 
@@ -35,6 +36,7 @@ GEM
       activemodel (= 3.0.0.rc)
       activesupport (= 3.0.0.rc)
     activesupport (3.0.0.rc)
+    addressable (2.2.6)
     arel (0.4.0)
       activesupport (>= 3.0.0.beta)
     builder (2.1.2)
@@ -67,6 +69,8 @@ GEM
       trollop (~> 1.16.2)
     i18n (0.4.1)
     json_pure (1.4.3)
+    launchy (2.0.5)
+      addressable (~> 2.2.6)
     mail (2.2.5)
       activesupport (>= 2.3.6)
       mime-types
