@@ -15,11 +15,12 @@ gem "pony"
 gem "sinatra"
 gem "rack-test"
 gem "mail"
-gem 'rails', '3.0.0.rc'
+gem 'rails', '3.0.0'
 gem 'sqlite3-ruby', :require=>'sqlite3'
 #gem 'email_spec', :path => '.'
 gem 'capybara'
 gem 'database_cleaner'
+gem 'ammeter', '~> 0.1.3'
 
 gem "test-unit"
 
