@@ -113,7 +113,8 @@ Examples for the #signup method in UserMailer:
   describe "Signup Email" do
     include EmailSpec::Helpers
     include EmailSpec::Matchers
-    include ActionController::UrlWriter
+    # include ActionController::UrlWriter - old rails
+    include Rails.application.routes.url_helpers
 
     before(:all) do
       @email = UserMailer.create_signup("jojo@yahoo.com", "Jojo Binks")
