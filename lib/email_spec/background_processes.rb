@@ -31,7 +31,7 @@ module EmailSpec
           worker = Delayed::Worker.new(:max_priority => nil, :min_priority => nil, :quiet => true)
           worker.work_off
         else
-          Delayed::Job.work_off
+          Delayed::Job.new.work_off
         end
       end
     end
