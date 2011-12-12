@@ -17,7 +17,7 @@ module EmailSpec
 
     def self.save_and_open_all_html_emails
       all_emails.each_with_index do |m, index|
-        if m.multipart? && html_part = m.parts.detect{ |p| p.content_type == 'text/html' }
+        if m.multipart? && html_part = m.parts.detect{ |p| p.content_type.include?('text/html') }
           filename = tmp_email_filename("-#{index}.html")
           File.open(filename, "w") do |f|
             f.write m.parts[1].body
@@ -32,7 +32,7 @@ module EmailSpec
 
       File.open(filename, "w") do |f|
         all_emails.each do |m|
-          if m.multipart? && text_part = m.parts.detect{ |p| p.content_type == 'text/plain' }
+          if m.multipart? && text_part = m.parts.detect{ |p| p.content_type.include?('text/plain') }
             m.ordered_each{|k,v| f.write "#{k}: #{v}\n" }
             f.write text_part.body
           else
