@@ -33,7 +33,12 @@ module EmailSpec
       File.open(filename, "w") do |f|
         all_emails.each do |m|
           if m.multipart? && text_part = m.parts.detect{ |p| p.content_type.include?('text/plain') }
-            m.ordered_each{|k,v| f.write "#{k}: #{v}\n" }
+            if m.respond_to?(:ordered_each) # Rails 2 / TMail
+              m.ordered_each{|k,v| f.write "#{k}: #{v}\n" }
+            else # Rails 3 / Mail
+              f.write(text_part.header.to_s + "\n")
+            end
+
             f.write text_part.body
           else
             f.write m.to_s
