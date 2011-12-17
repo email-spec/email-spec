@@ -6,7 +6,10 @@ This library works with ActionMailer and Pony.  When using it with ActionMailer 
 DelayedJob, ActiveRecord Mailer, and action_mailer_cache_delivery.
 
 When using the action_mailer_cache_delivery library you must use this fork:
-http://github.com/liangzan/action_mailer_cache_delivery
+http://github.com/ragaskar/action_mailer_cache_delivery.git
+, e.g. place this in your Gemfile:
+
+  gem "action_mailer_cache_delivery", git: "git://github.com/ragaskar/action_mailer_cache_delivery.git"
 
 If you are testing emails in conjunction with an automated browser solution, like Selenium,
 you will want to use action_mailer_cache_delivery in your test environment.  (This is
