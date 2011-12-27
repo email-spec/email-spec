@@ -1,4 +1,5 @@
 require 'uri'
+require 'nokogiri'
 require 'email_spec/deliveries'
 
 module EmailSpec
@@ -69,7 +70,7 @@ module EmailSpec
     end
 
     def links_in_email(email)
-      URI.extract(email.default_part_body.to_s, ['http', 'https'])
+      Nokogiri::HTML.parse(email.default_part_body.to_s).css('a').map { |link| link['href'] }
     end
 
     private
