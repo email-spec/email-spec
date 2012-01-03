@@ -19,13 +19,6 @@ describe EmailSpec::Helpers do
     end
   end
 
-  describe '#links_in_email' do
-    it "properly finds links surrounded by single quotes" do
-      email = Mail.new(:body => %{<a href='http://www.example.com/test'>Click Here</a>})
-      links_in_email(email).should include %{http://www.example.com/test}
-    end
-  end
-
   describe "#set_current_email" do
     it "should cope with a nil email" do
       lambda do
