@@ -6,7 +6,7 @@ This library works with ActionMailer and Pony.  When using it with ActionMailer 
 DelayedJob, ActiveRecord Mailer, and action_mailer_cache_delivery.
 
 If you are testing emails in conjunction with an automated browser solution, like Selenium,
-you will want to use action_mailer_cache_delivery[http:/http://rubygems.org/gems/action_mailer_cache_delivery] in your test environment.  (This is
+you will want to use action_mailer_cache_delivery[http://rubygems.org/gems/action_mailer_cache_delivery] in your test environment.  (This is
 because your test process and server processes are distinct and therefore need an
 intermediate store for the emails.) DelayedJob and ActiveRecord Mailer will also work but
 you generally don't want to include those projects unless you need them in production.
