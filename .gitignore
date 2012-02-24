@@ -10,6 +10,7 @@ examples/rails_root/vendor/plugins/email_spec
 examples/rails3_root/features/step_definitions/email_steps.rb
 examples/rails3_root/vendor/plugins/email_spec
 examples/sinatra_root/features/step_definitions/email_steps.rb
+tmp
 pkg
 rerun.txt
 .bundle
