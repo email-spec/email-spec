@@ -170,6 +170,7 @@ DEPENDENCIES
   email_spec!
   growl-glue
   jeweler
+  launchy
   mail
   mimetype-fu
   pony
