@@ -89,6 +89,10 @@ Otherwise, you will need to include them in the example groups you wish to use t
 
 For more examples, check out examples/rails_root in the source for a small example app that implements these steps.
 
+=== Cucumber Matchers (Ruby)
+
+See RSpec Matchers (they are the same)
+
 === RSpec
 
 ==== Testing In Isolation
@@ -134,6 +138,99 @@ Examples for the #signup method in UserMailer:
     end
 
   end
+
+==== RSpec Matchers
+
+reply_to(email)
+alias: have_reply_to
+
+This checks that the Reply-To header's email address (the bob@example.com of
+"Bob Saget <bob@example.com>") is set to the given string.
+
+  email = UserMailer.create_signup("jojo@yahoo.com", "Jojo Binks")
+  email.should reply_to("support@myapp.com")
+
+
+
+deliver_to(*email_addresses)
+alias: be_delivered_to
+
+This checks that the To header's email addresses (the bob@example.com of
+"Bob Saget <bob@example.com>") are set to the addresses.
+
+  email = UserMailer.create_signup("jojo@yahoo.com", "Jojo Binks")
+  email.should deliver_to("jojo@yahoo.com")
+
+
+
+deliver_from(email)
+alias: be_delivered_from
+
+This checks that the From header's email address (the bob@example.com of
+"Bob Saget <bob@example.com>") is set to the given string.
+
+  email = UserMailer.create_signup("jojo@yahoo.com", "Jojo Binks")
+  email.should deliver_from("sally@yahoo.com")
+
+
+
+bcc_to(*email_addresses)
+
+This checks that the BCC header's email addresses (the bob@example.com of
+"Bob Saget <bob@example.com>") are set to the addresses.
+
+  email = UserMailer.create_signup("jojo@yahoo.com", "Jojo Binks")
+  email.should bcc_to("sue@yahoo.com", "bill@yahoo.com")
+
+
+
+cc_to(*email_addresses)
+
+This checks that the CC header's email addresses (the bob@example.com of
+"Bob Saget <bob@example.com>") are set to the addresses.
+
+  email = UserMailer.create_signup("jojo@yahoo.com", "Jojo Binks")
+  email.should cc_to("sue@yahoo.com", "bill@yahoo.com")
+
+
+
+have_subject(subject)
+
+This checks that the Subject header's value is set to the given subject.
+
+  email = UserMailer.create_signup("jojo@yahoo.com", "Jojo Binks")
+  email.should have_subject("Welcome!")
+
+
+
+include_email_with_subject(subject)
+Note: subject can be either a String or a Regexp
+
+This checks that one of the given emails' subjects includes the subject.
+
+  email = UserMailer.create_signup("jojo@yahoo.com", "Jojo Binks")
+  email2 = UserMailer.forgot_password("jojo@yahoo.com", "Jojo Binks")
+  [email, email2].should include_email_with_subject("Welcome!")
+
+
+
+have_body_text(text)
+Note: text can be either a String or a Regexp
+
+This checks that the text of the body has the given body.
+
+  email = UserMailer.create_signup("jojo@yahoo.com", "Jojo Binks")
+  email.should have_body_text(/Hi Jojo Binks,/)
+
+
+
+have_header(key, value)
+
+This checks that the expected key/value pair is in the headers of the email.
+
+  email = UserMailer.create_signup("jojo@yahoo.com", "Jojo Binks")
+  email.should have_header("X-Campaign", "1234abc")
+
 
 ==== Using the helpers when not testing in isolation
 
