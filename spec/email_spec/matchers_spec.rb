@@ -48,7 +48,7 @@ describe EmailSpec::Matchers do
     it "should give correct failure message when the email is not set to deliver to the specified address" do
       matcher = reply_to("jimmy_bean@yahoo.com")
       matcher.matches?(Mail::Message.new(:reply_to => ['freddy_noe@yahoo.com']).with_inspect_stub)
-      matcher.failure_message.should == %{expected email to reply to "jimmy_bean@yahoo.com", but it replied to "freddy_noe@yahoo.com"}
+      matcher_failure_message(matcher).should == %{expected email to reply to "jimmy_bean@yahoo.com", but it replied to "freddy_noe@yahoo.com"}
     end
 
   end
@@ -111,7 +111,7 @@ describe EmailSpec::Matchers do
       message = Mail::Message.new(:to => 'freddy_noe@yahoo.com')
       message.stub(:inspect).and_return("email")
       matcher.matches?(message)
-      matcher.failure_message.should == %{expected email to deliver to ["jimmy_bean@yahoo.com"], but it delivered to ["freddy_noe@yahoo.com"]}
+      matcher_failure_message(matcher).should == %{expected email to deliver to ["jimmy_bean@yahoo.com"], but it delivered to ["freddy_noe@yahoo.com"]}
     end
 
   end
@@ -150,7 +150,7 @@ describe EmailSpec::Matchers do
     it "should give correct failure message when the email is not set to deliver from the specified address" do
       matcher = deliver_from("jimmy_bean@yahoo.com")
       matcher.matches?(Mail::Message.new(:from => "freddy_noe@yahoo.com"))
-      matcher.failure_message.should =~ /expected .+ to deliver from "jimmy_bean@yahoo\.com", but it delivered from "freddy_noe@yahoo\.com"/
+      matcher_failure_message(matcher).should =~ /expected .+ to deliver from "jimmy_bean@yahoo\.com", but it delivered from "freddy_noe@yahoo\.com"/
     end
 
   end
@@ -237,14 +237,14 @@ describe EmailSpec::Matchers do
         matcher = have_subject(/foo/)
         matcher.matches?(Mail::Message.new(:subject => "bar"))
 
-        matcher.failure_message.should == 'expected the subject to match /foo/, but did not.  Actual subject was: "bar"'
+        matcher_failure_message(matcher).should == 'expected the subject to match /foo/, but did not.  Actual subject was: "bar"'
       end
 
       it "should offer helpful negative failing messages" do
         matcher = have_subject(/b/)
         matcher.matches?(Mail::Message.new(:subject => "bar"))
 
-        matcher.negative_failure_message.should == 'expected the subject not to match /b/ but "bar" does match it.'
+        matcher_negative_failure_message(matcher).should == 'expected the subject not to match /b/ but "bar" does match it.'
       end
     end
 
@@ -267,14 +267,14 @@ describe EmailSpec::Matchers do
         matcher = have_subject("foo")
         matcher.matches?(Mail::Message.new(:subject => "bar"))
 
-        matcher.failure_message.should == 'expected the subject to be "foo" but was "bar"'
+        matcher_failure_message(matcher).should == 'expected the subject to be "foo" but was "bar"'
       end
 
       it "should offer helpful negative failing messages" do
         matcher = have_subject("bar")
         matcher.matches?(Mail::Message.new(:subject => "bar"))
 
-        matcher.negative_failure_message.should == 'expected the subject not to be "bar" but was'
+        matcher_negative_failure_message(matcher).should == 'expected the subject not to be "bar" but was'
       end
     end
   end
@@ -301,14 +301,14 @@ describe EmailSpec::Matchers do
         matcher = include_email_with_subject(/foo/)
         matcher.matches?([Mail::Message.new(:subject => "bar")])
         
-        matcher.failure_message.should == 'expected at least one email to have a subject matching /foo/, but none did. Subjects were ["bar"]'
+        matcher_failure_message(matcher).should == 'expected at least one email to have a subject matching /foo/, but none did. Subjects were ["bar"]'
       end
 
       it "should offer helpful negative failing messages" do
         matcher = include_email_with_subject(/foo/)
         matcher.matches?([Mail::Message.new(:subject => "foo")])
         
-        matcher.negative_failure_message.should == 'expected no email to have a subject matching /foo/ but found at least one. Subjects were ["foo"]'
+        matcher_negative_failure_message(matcher).should == 'expected no email to have a subject matching /foo/ but found at least one. Subjects were ["foo"]'
       end
     end
     
@@ -331,14 +331,14 @@ describe EmailSpec::Matchers do
         matcher = include_email_with_subject("foo")
         matcher.matches?([Mail::Message.new(:subject => "bar")])
         
-        matcher.failure_message.should == 'expected at least one email to have the subject "foo" but none did. Subjects were ["bar"]'
+        matcher_failure_message(matcher).should == 'expected at least one email to have the subject "foo" but none did. Subjects were ["bar"]'
       end
       
       it "should offer helpful negative failing messages" do
         matcher = include_email_with_subject("foo")
         matcher.matches?([Mail::Message.new(:subject => "foo")])
         
-        matcher.negative_failure_message.should == 'expected no email with the subject "foo" but found at least one. Subjects were ["foo"]'
+        matcher_negative_failure_message(matcher).should == 'expected no email with the subject "foo" but found at least one. Subjects were ["foo"]'
       end
     end
   end
@@ -363,14 +363,14 @@ describe EmailSpec::Matchers do
         matcher = have_body_text(/qux/)
         matcher.matches?(Mail::Message.new(:body => 'foo bar baz'))
         
-        matcher.failure_message.should == 'expected the body to match /qux/, but did not.  Actual body was: "foo bar baz"'
+        matcher_failure_message(matcher).should == 'expected the body to match /qux/, but did not.  Actual body was: "foo bar baz"'
       end
 
       it "should offer helpful negative failing messages" do
         matcher = have_body_text(/bar/)
         matcher.matches?(Mail::Message.new(:body => 'foo bar baz'))
 
-        matcher.negative_failure_message.should == 'expected the body not to match /bar/ but "foo bar baz" does match it.'
+        matcher_negative_failure_message(matcher).should == 'expected the body not to match /bar/ but "foo bar baz" does match it.'
       end
     end
     
@@ -393,14 +393,14 @@ describe EmailSpec::Matchers do
         matcher = have_body_text('qux')
         matcher.matches?(Mail::Message.new(:body => 'foo bar baz'))
         
-        matcher.failure_message.should == 'expected the body to contain "qux" but was "foo bar baz"'
+        matcher_failure_message(matcher).should == 'expected the body to contain "qux" but was "foo bar baz"'
       end
       
       it "should offer helpful negative failing messages" do
         matcher = have_body_text('bar')
         matcher.matches?(Mail::Message.new(:body => 'foo bar baz'))
         
-        matcher.negative_failure_message.should == 'expected the body not to contain "bar" but was "foo bar baz"'
+        matcher_negative_failure_message(matcher).should == 'expected the body not to contain "bar" but was "foo bar baz"'
       end
     end
 
@@ -441,14 +441,14 @@ describe EmailSpec::Matchers do
         matcher = have_header(:content_type, /bar/)
         matcher.matches?(Mail::Message.new(:content_type => "text/html"))
         
-        matcher.failure_message.should == 'expected the headers to include \'content_type\' with a value matching /bar/ but they were {"content-type"=>"text/html"}'
+        matcher_failure_message(matcher).should == 'expected the headers to include \'content_type\' with a value matching /bar/ but they were {"content-type"=>"text/html"}'
       end
 
       it "should offer helpful negative failing messages" do
         matcher = have_header(:content_type, /text/)
         matcher.matches?(Mail::Message.new(:content_type => "text/html"))
         
-        matcher.negative_failure_message.should == 'expected the headers not to include \'content_type\' with a value matching /text/ but they were {"content-type"=>"text/html"}'
+        matcher_negative_failure_message(matcher).should == 'expected the headers not to include \'content_type\' with a value matching /text/ but they were {"content-type"=>"text/html"}'
       end
     end
     
@@ -472,14 +472,14 @@ describe EmailSpec::Matchers do
         matcher = have_header(:content_type, 'text')
         matcher.matches?(Mail::Message.new(:content_type => "text/html"))
         
-        matcher.failure_message.should == 'expected the headers to include \'content_type: text\' but they were {"content-type"=>"text/html"}'
+        matcher_failure_message(matcher).should == 'expected the headers to include \'content_type: text\' but they were {"content-type"=>"text/html"}'
       end
       
       it "should offer helpful negative failing messages" do
         matcher = have_header(:content_type, 'text/html')
         matcher.matches?(Mail::Message.new(:content_type => "text/html"))
         
-        matcher.negative_failure_message == 'expected the headers not to include \'content_type: text/html\' but they were {:content_type=>"text/html"}'
+        matcher_negative_failure_message(matcher) == 'expected the headers not to include \'content_type: text/html\' but they were {:content_type=>"text/html"}'
       end
     end
   end
