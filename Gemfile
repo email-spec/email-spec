@@ -9,7 +9,7 @@ gem "rspec", ">= 2.0.1"
 gem "rspec-rails", ">= 2.0.1"
 gem "growl-glue", :require => "growl_glue"
 gem "autotest"
-gem "delayed_job", ">=2.0.3"
+gem 'delayed_job', '~> 2.0'
 gem "mimetype-fu", :require=> 'mimetype_fu'
 gem "pony"
 gem "sinatra"
