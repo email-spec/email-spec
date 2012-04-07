@@ -1,7 +1,7 @@
 PATH
   remote: ../../
   specs:
-    email_spec (1.2.2)
+    gardelea-email_spec (1.2.2)
       launchy (~> 2.0)
       mail (~> 2.2)
       rspec (~> 2.0)
@@ -142,7 +142,7 @@ DEPENDENCIES
   cucumber-rails
   database_cleaner
   delayed_job (~> 2.0)
-  email_spec!
+  gardelea-email_spec!
   mimetype-fu
   rails (= 3.0.7)
   rspec (>= 2.0.1)
