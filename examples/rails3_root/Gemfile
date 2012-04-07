@@ -1,9 +1,9 @@
 source 'http://gemcutter.org'
 
-gem 'rails', '3.0.0.rc'
+gem 'rails', '3.0.7'
 gem 'sqlite3-ruby', :require => 'sqlite3'
 
-gem 'delayed_job', '>=2.0.3'
+gem 'delayed_job', '~> 2.0'
 gem 'mimetype-fu', :require => 'mimetype_fu'
 
 group :test do

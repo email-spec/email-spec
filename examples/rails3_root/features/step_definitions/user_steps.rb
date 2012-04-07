@@ -22,5 +22,5 @@ end
 
 # Basically aliases "I should see [text]", but for third person
 Then /^they should see "([^\"]*)"$/ do |text|
-  Then "I should see \"#{text}\""
+  step "I should see \"#{text}\""
 end
