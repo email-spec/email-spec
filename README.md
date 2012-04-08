@@ -1,5 +1,5 @@
 
-[![Build Status](https://secure.travis-ci.org/gardelea/email-spec.png)](http://travis-ci.org/gardelea/email-spec)
+[![Build Status](https://secure.travis-ci.org/bmabey/email-spec.png)](http://travis-ci.org/bmabey/email-spec)
 
 ## Email Spec
 
