@@ -1,5 +1,2 @@
 rvm:
   - 1.9.2
-branches:
-  only:
-    - rails-3.0.7-update
