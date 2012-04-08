@@ -17,6 +17,7 @@ gem 'sqlite3-ruby', :require=>'sqlite3'
 #gem 'email_spec', :path => '.'
 gem 'capybara'
 gem 'database_cleaner'
+gem 'ammeter', '~> 0.2.0' # allows you to test rails generators
 
 gem "test-unit"
 

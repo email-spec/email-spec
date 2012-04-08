@@ -2,7 +2,6 @@ PATH
   remote: .
   specs:
     email_spec (1.3.0)
-      autotest
       capybara
       cucumber
       cucumber-rails
@@ -10,9 +9,8 @@ PATH
       database_cleaner
       delayed_job (~> 2.0)
       email_spec
-      growl-glue
       jeweler
-      launchy
+      launchy (~> 2.1)
       mail
       mail (~> 2.2)
       mimetype-fu
@@ -20,7 +18,6 @@ PATH
       rack-test
       rails (= 3.0.7)
       rake (>= 0.8.7)
-      rspec (>= 2.0.1)
       rspec (~> 2.0)
       rspec-rails (>= 2.0.1)
       sinatra
@@ -30,7 +27,6 @@ PATH
 GEM
   remote: http://gemcutter.org/
   specs:
-    ZenTest (4.7.0)
     abstract (1.0.0)
     actionmailer (3.0.7)
       actionpack (= 3.0.7)
@@ -59,9 +55,12 @@ GEM
       activesupport (= 3.0.7)
     activesupport (3.0.7)
     addressable (2.2.7)
+    ammeter (0.2.4)
+      activesupport (>= 3.0)
+      railties (>= 3.0)
+      rspec (>= 2.2)
+      rspec-rails (>= 2.2)
     arel (2.0.10)
-    autotest (4.4.6)
-      ZenTest (>= 4.4.1)
     builder (2.1.2)
     capybara (1.1.2)
       mime-types (>= 1.16)
@@ -97,7 +96,6 @@ GEM
     gherkin (2.9.3)
       json (>= 1.4.6)
     git (1.2.5)
-    growl-glue (1.0.7)
     highline (1.6.11)
     i18n (0.5.0)
     jeweler (1.8.3)
@@ -185,6 +183,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ammeter (~> 0.2.0)
   capybara
   cucumber
   cucumber-rails
