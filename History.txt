@@ -1,4 +1,15 @@
-== 1.2.x (git)
+== 1.3.x (git)
+
+== 1.3.0 2011-04-07
+
+Many thanks to Derek Hammer and George Ardeleanu who both spontaneously cleaned up various parts of the project 
+and helped get the release out the door. Yay opensoruce!
+
+ === New features
+  * Launchy is now used to open up the email viewer.  (Matt Burke)
+  * Email Viewer now works in Rails 3 (Woody Peterson)
+  * Email Viewer now works with UTF-8. (Woody Peterson)
+  * Documentation for email matchers. (Derek Hammer)
 
 == 1.2.1 2011-06-20
 
