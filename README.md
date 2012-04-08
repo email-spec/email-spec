@@ -76,7 +76,7 @@ You will then need to include EmailSpec::Helpers and EmailSpec::Matchers in your
 If you want to have access to the helpers and matchers in all of your examples you can do the following in your spec_helper.rb:
 
 ```ruby
-Spec::Runner.configure do |config|
+RSpec.configure do |config|
   config.include(EmailSpec::Helpers)
   config.include(EmailSpec::Matchers)
 end
