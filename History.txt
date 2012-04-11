@@ -1,5 +1,7 @@
 == 1.3.x (git)
 
+  * removing jeweler in favor of just using bundler for all that gem management type stuff
+
 == 1.3.0 2011-04-07
 
 Many thanks to Derek Hammer and George Ardeleanu who both spontaneously cleaned up various parts of the project 
