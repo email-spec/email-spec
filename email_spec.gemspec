@@ -42,7 +42,28 @@ Gem::Specification.new do |s|
   s.rubygems_version = "1.8.10"
   s.summary = "Easily test email in rspec and cucumber"
 
-  s.add_dependency(%q<launchy>, ["~> 2.1"])
-  s.add_dependency(%q<mail>, ["~> 2.2"])
-  s.add_dependency(%q<rspec>, ["~> 2.0"])
+  s.add_runtime_dependency "launchy", ["~> 2.1"]
+  s.add_runtime_dependency "mail", ["~> 2.2"]
+  s.add_runtime_dependency "rspec", ["~> 2.0"]
+
+  s.add_development_dependency "rake", [">= 0.8.7"]
+  s.add_development_dependency "cucumber"
+  s.add_development_dependency "cucumber-rails"
+  s.add_development_dependency "cucumber-sinatra"
+  s.add_development_dependency "rspec-rails", [">= 2.0.1"]
+  s.add_development_dependency 'delayed_job', ['~> 2.0']
+  s.add_development_dependency "pony"
+  s.add_development_dependency "sinatra"
+  s.add_development_dependency "rack-test"
+  s.add_development_dependency "mail"
+  s.add_development_dependency 'rails', ['3.0.7']
+  s.add_development_dependency 'sqlite3'
+  
+  s.add_development_dependency 'capybara'
+  s.add_development_dependency 'database_cleaner'
+
+  s.add_development_dependency "test-unit"
+
+
+  
 end
