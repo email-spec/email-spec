@@ -11,7 +11,7 @@ rerun.txt
 .rvmrc
 bundle
 
-# i guess these are needed to remove some file copying clutter 
+# these are needed to remove some file copying clutter
 # that comes out of testing and is not intended to be checked in
 examples/rails_root/features/step_definitions/email_steps.rb
 examples/rails_root/vendor/plugins/email_spec
