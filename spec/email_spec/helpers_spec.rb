@@ -8,9 +8,29 @@ describe EmailSpec::Helpers do
       parse_email_for_link(email, "Click Here").should == "/path/to/page"
     end
 
+    it "properly finds explicit links with text" do
+      email = Mail.new(:body =>  %(http://host.com/path/to/page))
+      parse_email_for_link(email, "path/to").should == "/path/to/page"
+    end
+
     it "recognizes img alt properties as text" do
       email = Mail.new(:body => %(<a href="/path/to/page"><img src="http://host.com/images/image.gif" alt="an image" /></a>))
       parse_email_for_link(email, "an image").should == "/path/to/page"
+    end
+
+    it "properly finds full url links with text" do
+      email = Mail.new(:body =>  %(<a href="http://host.com/path/to/page">Click Here</a>))
+      parse_email_for_link(email, "Click Here", :path_only => false).should == "http://host.com/path/to/page"
+    end
+
+    it "properly finds explicit full url links with text" do
+      email = Mail.new(:body =>  %(http://host.com/path/to/page))
+      parse_email_for_link(email, "path/to", :path_only => false).should == "http://host.com/path/to/page"
+    end
+
+    it "recognizes full url img alt properties as text" do
+      email = Mail.new(:body => %(<a href="http://host.com/path/to/page"><img src="http://host.com/images/image.gif" alt="an image" /></a>))
+      parse_email_for_link(email, "an image", :path_only => false).should == "http://host.com/path/to/page"
     end
 
     it "causes a spec to fail if the body doesn't contain the text specified to click" do
