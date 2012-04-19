@@ -10,6 +10,7 @@ rerun.txt
 .bundle
 .rvmrc
 bundle
+Gemfile.ignore # http://yehudakatz.com/2010/12/16/clarifying-the-roles-of-the-gemspec-and-gemfile/
 
 # these are needed to remove some file copying clutter
 # that comes out of testing and is not intended to be checked in
