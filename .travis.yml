@@ -2,4 +2,4 @@ rvm:
   - 1.9.2
 branches:
   only:
-    - gemspec_bundler_approach
+    - master
