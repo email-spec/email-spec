@@ -118,6 +118,10 @@ Then /^(?:I|they|he|she) should see the email delivered from "([^"]*?)"$/ do |te
   current_email.should be_delivered_from(text)
 end
 
+Then /^(?:I|they) should see the email reply to "([^"]*?)"$/ do |text|
+  current_email.should have_reply_to(text)
+end
+
 Then /^(?:I|they|he|she) should see "([^\"]*)" in the email "([^"]*?)" header$/ do |text, name|
   current_email.should have_header(name, text)
 end
