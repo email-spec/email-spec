@@ -6,6 +6,10 @@ module EmailSpec
   module Helpers
     include Deliveries
 
+    def current_email_address
+      last_email_address
+    end
+
     def visit_in_email(link_text)
       visit(parse_email_for_link(current_email, link_text))
     end
