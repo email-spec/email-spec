@@ -50,7 +50,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency "cucumber"
   s.add_development_dependency "cucumber-rails"
   s.add_development_dependency "cucumber-sinatra"
-  s.add_development_dependency "rspec-rails", [">= 2.0.1"]
   s.add_development_dependency 'delayed_job', ['~> 2.0']
   s.add_development_dependency "pony"
   s.add_development_dependency "sinatra"
