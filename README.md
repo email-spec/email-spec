@@ -3,7 +3,7 @@
 
 ## Email Spec
 
-A collection of RSpec matchers and Cucumber steps to make testing emails go smoothly.
+A collection of matchers for RSpec/MiniTest and Cucumber steps to make testing emails go smoothly.
 
 This library works with ActionMailer and Pony.  When using it with ActionMailer it works with
 DelayedJob, ActiveRecord Mailer, and action_mailer_cache_delivery.
