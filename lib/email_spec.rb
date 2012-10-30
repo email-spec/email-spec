@@ -5,7 +5,6 @@ end
 
 $LOAD_PATH.unshift(File.expand_path(File.dirname(__FILE__))) unless $LOAD_PATH.include?(File.expand_path(File.dirname(__FILE__)))
 
-require 'rspec'
 require 'mail'
 require 'email_spec/background_processes'
 require 'email_spec/deliveries'
