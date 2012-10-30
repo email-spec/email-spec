@@ -345,5 +345,13 @@ module EmailSpec
     def have_header(name, value)
       HaveHeader.new(name, value)
     end
+
+    def self.included base
+      if base.respond_to? :register_matcher
+        instance_methods.each do |name|
+          base.register_matcher name, name
+        end
+      end
+    end
   end
 end
