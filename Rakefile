@@ -14,8 +14,4 @@ end
 require 'rspec/core/rake_task'
 RSpec::Core::RakeTask.new
 
-task :setup_app do
-  `cd examples/rails3_root/; bundle install`
-end
-
-task :default => [:setup_app, :features, :spec]
+task :default => [:features, :spec]
