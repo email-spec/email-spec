@@ -275,30 +275,52 @@ module EmailSpec
       end
     end
 
-    def mail_headers_hash(email_headers)
-      email_headers.fields.inject({}) { |hash, field| hash[field.field.class::FIELD_NAME] = field.to_s; hash }
-    end
+    class HaveHeader
 
-    RSpec::Matchers.define :have_header do
-      match do |given|
-        given_header = given.header
-        expected_name, expected_value = *expected
+      def initialize(name, value)
+        @expected_name, @expected_value = name, value
+      end
 
-        if expected_value.is_a?(String)
-          description { "have header #{expected_name}: #{expected_value}" }
-
-          failure_message_for_should { "expected the headers to include '#{expected_name}: #{expected_value}' but they were #{mail_headers_hash(given_header).inspect}" }
-          failure_message_for_should_not { "expected the headers not to include '#{expected_name}: #{expected_value}' but they were #{mail_headers_hash(given_header).inspect}" }
-
-          given_header[expected_name].to_s == expected_value
+      def description
+        if @expected_value.is_a?(String)
+          "have header #{@expected_name}: #{@expected_value}"
         else
-          description { "have header #{expected_name} with value matching #{expected_value.inspect}" }
-          failure_message_for_should { "expected the headers to include '#{expected_name}' with a value matching #{expected_value.inspect} but they were #{mail_headers_hash(given_header).inspect}" }
-          failure_message_for_should_not { "expected the headers not to include '#{expected_name}' with a value matching #{expected_value.inspect} but they were #{mail_headers_hash(given_header).inspect}" }
-
-          given_header[expected_name].to_s =~ expected_value
+          "have header #{@expected_name} with value matching #{@expected_value.inspect}"
         end
       end
+
+      def matches?(email)
+        @given_header = email.header
+
+        if @expected_value.is_a?(String)
+          @given_header[@expected_name].to_s == @expected_value
+        else
+          @given_header[@expected_name].to_s =~ @expected_value
+        end      end
+
+      def failure_message
+        if @expected_value.is_a?(String)
+          "expected the headers to include '#{@expected_name}: #{@expected_value}' but they were #{mail_headers_hash(@given_header).inspect}"
+        else
+          "expected the headers to include '#{@expected_name}' with a value matching #{@expected_value.inspect} but they were #{mail_headers_hash(@given_header).inspect}"
+        end
+      end
+
+      def negative_failure_message
+        if @expected_value.is_a?(String)
+          "expected the headers not to include '#{@expected_name}: #{@expected_value}' but they were #{mail_headers_hash(@given_header).inspect}"
+        else
+          "expected the headers not to include '#{@expected_name}' with a value matching #{@expected_value.inspect} but they were #{mail_headers_hash(@given_header).inspect}"
+        end
+      end
+
+      def mail_headers_hash(email_headers)
+        email_headers.fields.inject({}) { |hash, field| hash[field.field.class::FIELD_NAME] = field.to_s; hash }
+      end
+    end
+
+    def have_header(name, value)
+      HaveHeader.new(name, value)
     end
   end
 end
