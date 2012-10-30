@@ -1,10 +1,13 @@
-== 1.3.x (git)
+== 1.4.0 2012-10-30
 
-  * removing jeweler in favor of just using bundler for all that gem management type stuff
+  * removed jeweler in favor of just using bundler for all gem management.
+
+ === New features
+  * MiniTest support! See README for documentation. (Mike Moore)
 
 == 1.3.0 2011-04-07
 
-Many thanks to Derek Hammer and George Ardeleanu who both spontaneously cleaned up various parts of the project 
+Many thanks to Derek Hammer and George Ardeleanu who both spontaneously cleaned up various parts of the project
 and helped get the release out the door. Yay opensoruce!
 
  === New features
