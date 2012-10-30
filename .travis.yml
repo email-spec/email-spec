@@ -1,5 +1,6 @@
 rvm:
   - 1.9.2
+before_install: (cd examples/rails3_root/; bundle install)
 branches:
   only:
     - master
