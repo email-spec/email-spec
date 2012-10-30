@@ -92,6 +92,45 @@ describe "Signup Email" do
 end
 ```
 
+### MiniTest
+
+First you need to require minitest-matchers and email_spec in your test_helper.rb:
+
+```ruby
+require "minitest-matchers"
+require "email_spec"
+```
+
+You will then need to include EmailSpec::Helpers and EmailSpec::Matchers in your test classes.
+If you want to have access to the helpers and matchers in all of your tests you can do the following in your test_helper.rb:
+
+```ruby
+class MiniTest::Unit::TestCase
+  include EmailSpec::Helpers
+  include EmailSpec::Matchers
+end
+```
+
+Otherwise, you will need to include them in the tests where you use them:
+
+```ruby
+class SignupMailerTest < MiniTest::Unit::TestCase
+  include EmailSpec::Helpers
+  include EmailSpec::Matchers
+  ...
+end
+```
+
+Or, if you are using the MiniTest spec DSL, it would look like this:
+
+```ruby
+describe SignupMailer do
+  include EmailSpec::Helpers
+  include EmailSpec::Matchers
+  ...
+end
+```
+
 ## Usage
 
 ### Cucumber
@@ -269,6 +308,30 @@ email.should have_header("X-Campaign", "1234abc")
 #### Using the helpers when not testing in isolation
 
 Don't. :)  Seriously, if you do just take a look at the helpers and use them as you wish.
+
+### MiniTest
+
+You will use EmailSpec in your tests the same way you use it in your specs. The only difference is the use of MiniTest's `must` instead of Rspec's `should`:
+
+```ruby
+email = UserMailer.create_signup("jojo@yahoo.com", "Jojo Binks")
+email.must deliver_to("jojo@yahoo.com")
+```
+
+Or, you can use the matcher as an expectation:
+
+```ruby
+email = UserMailer.create_signup "jojo@yahoo.com", "Jojo Binks"
+email.must_deliver_to "jojo@yahoo.com"
+```
+
+And of course you can use the matcher as an assertion:
+
+```ruby
+email = UserMailer.create_signup "jojo@yahoo.com", "Jojo Binks"
+assert_must_deliver_to "jojo@yahoo.com", email
+```
+
 
 ## Original Authors
 
