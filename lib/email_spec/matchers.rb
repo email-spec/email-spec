@@ -252,27 +252,50 @@ module EmailSpec
       IncludeEmailWithSubject.new(emails.flatten.first)
     end
 
-    RSpec::Matchers.define :have_body_text do
-      match do |given|
-        expected_text = expected.first
+    class HaveBodyText
 
-        if expected_text.is_a?(String)
-          normalized_body = given.default_part_body.to_s.gsub(/\s+/, " ")
-          normalized_expected = expected_text.gsub(/\s+/, " ")
-          description { "have body including #{normalized_expected.inspect}" }
-          failure_message_for_should { "expected the body to contain #{normalized_expected.inspect} but was #{normalized_body.inspect}" }
-          failure_message_for_should_not { "expected the body not to contain #{normalized_expected.inspect} but was #{normalized_body.inspect}" }
+      def initialize(text)
+        @expected_text = text
+      end
 
-          normalized_body.include?(normalized_expected)
+      def description
+        if @expected_text.is_a?(String)
+          "have body including #{@expected_text.inspect}"
         else
-          given_body = given.default_part_body.to_s
-          description { "have body matching #{expected_text.inspect}" }
-          failure_message_for_should { "expected the body to match #{expected_text.inspect}, but did not.  Actual body was: #{given_body.inspect}" }
-          failure_message_for_should_not { "expected the body not to match #{expected_text.inspect} but #{given_body.inspect} does match it." }
-
-          !!(given_body =~ expected_text)
+          "have body matching #{@expected_text.inspect}"
         end
       end
+
+      def matches?(email)
+        if @expected_text.is_a?(String)
+          @given_text = email.default_part_body.to_s.gsub(/\s+/, " ")
+          @expected_text = @expected_text.gsub(/\s+/, " ")
+          @given_text.include?(@expected_text)
+        else
+          @given_text = email.default_part_body.to_s
+          !!(@given_text =~ @expected_text)
+        end
+      end
+
+      def failure_message
+        if @expected_text.is_a?(String)
+          "expected the body to contain #{@expected_text.inspect} but was #{@given_text.inspect}"
+        else
+          "expected the body to match #{@expected_text.inspect}, but did not.  Actual body was: #{@given_text.inspect}"
+        end
+      end
+
+      def negative_failure_message
+        if @expected_text.is_a?(String)
+          "expected the body not to contain #{@expected_text.inspect} but was #{@given_text.inspect}"
+        else
+          "expected the body not to match #{@expected_text.inspect} but #{@given_text.inspect} does match it."
+        end
+      end
+    end
+
+    def have_body_text(text)
+      HaveBodyText.new(text)
     end
 
     class HaveHeader
