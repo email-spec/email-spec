@@ -12,6 +12,9 @@ class Mail::Message
 end
 
 RSpec.configure do |config|
+  config.include EmailSpec::Helpers
+  config.include EmailSpec::Matchers
+
   config.mock_with :rspec
 
   def matcher_failure_message(matcher)
