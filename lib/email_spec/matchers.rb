@@ -208,24 +208,48 @@ module EmailSpec
       HaveSubject.new(subject)
     end
 
-    RSpec::Matchers.define :include_email_with_subject do
-      match do |given_emails|
-        expected_subject = expected.first
+    class IncludeEmailWithSubject
 
-        if expected_subject.is_a?(String)
-          description { "include email with subject of #{expected_subject.inspect}" }
-          failure_message_for_should { "expected at least one email to have the subject #{expected_subject.inspect} but none did. Subjects were #{given_emails.map(&:subject).inspect}" }
-          failure_message_for_should_not { "expected no email with the subject #{expected_subject.inspect} but found at least one. Subjects were #{given_emails.map(&:subject).inspect}" }
+      def initialize(subject)
+        @expected_subject = subject
+      end
 
-          given_emails.map(&:subject).include?(expected_subject)
+      def description
+        if @expected_subject.is_a?(String)
+          "include email with subject of #{@expected_subject.inspect}"
         else
-          description { "include email with subject matching #{expected_subject.inspect}" }
-          failure_message_for_should { "expected at least one email to have a subject matching #{expected_subject.inspect}, but none did. Subjects were #{given_emails.map(&:subject).inspect}" }
-          failure_message_for_should_not { "expected no email to have a subject matching #{expected_subject.inspect} but found at least one. Subjects were #{given_emails.map(&:subject).inspect}" }
-
-          !!(given_emails.any?{ |mail| mail.subject =~ expected_subject })
+          "include email with subject matching #{@expected_subject.inspect}"
         end
       end
+
+      def matches?(emails)
+        @given_emails = emails
+        if @expected_subject.is_a?(String)
+          @given_emails.map(&:subject).include?(@expected_subject)
+        else
+          !!(@given_emails.any?{ |mail| mail.subject =~ @expected_subject })
+        end
+      end
+
+      def failure_message
+        if @expected_subject.is_a?(String)
+          "expected at least one email to have the subject #{@expected_subject.inspect} but none did. Subjects were #{@given_emails.map(&:subject).inspect}"
+        else
+          "expected at least one email to have a subject matching #{@expected_subject.inspect}, but none did. Subjects were #{@given_emails.map(&:subject).inspect}"
+        end
+      end
+
+      def negative_failure_message
+        if @expected_subject.is_a?(String)
+          "expected no email with the subject #{@expected_subject.inspect} but found at least one. Subjects were #{@given_emails.map(&:subject).inspect}"
+        else
+          "expected no email to have a subject matching #{@expected_subject.inspect} but found at least one. Subjects were #{@given_emails.map(&:subject).inspect}"
+        end
+      end
+    end
+
+    def include_email_with_subject(*emails)
+      IncludeEmailWithSubject.new(emails.flatten.first)
     end
 
     RSpec::Matchers.define :have_body_text do
