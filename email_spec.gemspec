@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ben Mabey", "Aaron Gibralter", "Mischa Fierer"]
   s.date = "2012-04-08"
-  s.description = "Easily test email in rspec and cucumber"
+  s.description = "Easily test email in rspec and cucumber and minitest"
   s.email = "ben@benmabey.com"
   s.extra_rdoc_files = [
     "README.md",
@@ -40,7 +40,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.rubyforge_project = "email-spec"
   s.rubygems_version = "1.8.10"
-  s.summary = "Easily test email in rspec and cucumber"
+  s.summary = "Easily test email in rspec and cucumber and minitest"
 
   s.add_runtime_dependency "launchy", ["~> 2.1"]
   s.add_runtime_dependency "mail", ["~> 2.2"]
