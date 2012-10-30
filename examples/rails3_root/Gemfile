@@ -8,11 +8,11 @@ gem 'delayed_job', '~> 2.0'
 gem 'mimetype-fu', :require => 'mimetype_fu'
 
 group :test do
-  gem "test-unit"
   gem "cucumber-rails", :require => false
   gem "database_cleaner"
   gem 'capybara'
-  gem "rspec", ">= 2.0.1"
   gem "rspec-rails", ">= 2.0.1"
+  gem "minitest-rails", ">= 0.2"
+  gem "minitest-matchers", ">= 1.2"
   gem "email_spec", :path => "../../", :require => "email_spec"
 end

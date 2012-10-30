@@ -44,7 +44,6 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency "launchy", ["~> 2.1"]
   s.add_runtime_dependency "mail", ["~> 2.2"]
-  s.add_runtime_dependency "rspec", ["~> 2.0"]
 
   s.add_development_dependency "rake", [">= 0.8.7"]
   s.add_development_dependency "cucumber"
@@ -58,12 +57,12 @@ Gem::Specification.new do |s|
   s.add_development_dependency "mail"
   s.add_development_dependency 'rails', ['3.0.7']
   s.add_development_dependency 'sqlite3'
-  
+
   s.add_development_dependency 'capybara'
   s.add_development_dependency 'database_cleaner'
 
   s.add_development_dependency "test-unit"
 
 
-  
+
 end
