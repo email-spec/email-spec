@@ -6,8 +6,13 @@ module EmailSpec
   module Helpers
     include Deliveries
 
-    def visit_in_email(link_text)
-      visit(parse_email_for_link(current_email, link_text))
+    def visit_in_email(link_text, address = '')
+      if address.nil? || address.empty?
+        email = current_email
+      else
+        email = find_email(address)
+      end
+      visit(parse_email_for_link(email, link_text))
     end
 
     def click_email_link_matching(regex, email = current_email)
