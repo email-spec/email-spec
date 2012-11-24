@@ -2,6 +2,7 @@ rvm:
   - 1.9.2
 before_script:
 - bundle install --gemfile=examples/rails3_root/Gemfile
+- bundle install --gemfile=examples/sinatra_root/Gemfile
 branches:
   only:
     - master
