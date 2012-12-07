@@ -68,8 +68,11 @@ module EmailSpec
       elsif opts[:with_text]
         expected_text = (opts[:with_text].is_a?(String) ? Regexp.escape(opts[:with_text]) : opts[:with_text])
         mailbox_for(address).find { |m| m.default_part_body =~ Regexp.new(expected_text) }
-      else
+      elsif opts[:from]
+        mailbox_for(address).find { |m| m.from.include? opts[:from] }
+      elsif opts.blank?
         mailbox_for(address).first
+      else
       end
     end
 
