@@ -70,9 +70,8 @@ module EmailSpec
         mailbox_for(address).find { |m| m.default_part_body =~ Regexp.new(expected_text) }
       elsif opts[:from]
         mailbox_for(address).find { |m| m.from.include? opts[:from] }
-      elsif opts.blank?
-        mailbox_for(address).first
       else
+        mailbox_for(address).first
       end
     end
 
