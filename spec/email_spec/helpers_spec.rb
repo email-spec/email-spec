@@ -135,6 +135,21 @@ describe EmailSpec::Helpers do
   end
 
   describe '#open_email' do
+
+    describe 'from' do
+
+      before do
+        @to = "jimmy_bean@yahoo.com"
+        @email = Mail::Message.new(:to => @to, :from => "foo@bar.com")
+        stub!(:mailbox_for).with(@to).and_return([@email])
+      end
+
+      it "should open the email from someone" do
+        open_email(@to, :from => "foo@bar.com").should == @email
+      end
+
+    end
+
     describe 'with subject' do
       shared_examples_for 'something that opens the email with subject' do
         before do
