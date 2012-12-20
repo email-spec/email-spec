@@ -88,7 +88,7 @@ module EmailSpec
     def find_email!(address, opts={})
       email = find_email(address, opts)
       if current_email_address.nil?
-        raise EmailSpec::NoEmailAddressProvided, "No email address has been provided. Make sure current_email_address is returning something."  
+        raise EmailSpec::NoEmailAddressProvided, "No email address has been provided. Make sure current_email_address is returning something."
       elsif email.nil?
         error = "#{opts.keys.first.to_s.humanize.downcase unless opts.empty?} #{('"' + opts.values.first.to_s + '"') unless opts.empty?}"
         raise EmailSpec::CouldNotFindEmailError, "Could not find email #{error} in the mailbox for #{current_email_address}. \n Found the following emails:\n\n #{all_emails.to_s}"
@@ -168,6 +168,7 @@ module EmailSpec
 
 
     def mailbox_for(address)
+      address = address.email if address.respond_to?(:email)
       super(convert_address(address)) # super resides in Deliveries
     end
 
