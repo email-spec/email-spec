@@ -2,6 +2,13 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 describe EmailSpec::Helpers do
   include EmailSpec::Helpers
+
+  describe "#visit_in_email" do
+    it "raises an exception when an email is not found" do
+      expect { visit_in_email("Some link", "foo@bar.com") }.to raise_error(EmailSpec::CouldNotFindEmailError)
+    end
+  end
+
   describe "#parse_email_for_link" do
     it "properly finds links with text" do
       email = Mail.new(:body =>  %(<a href="/path/to/page">Click Here</a>))
