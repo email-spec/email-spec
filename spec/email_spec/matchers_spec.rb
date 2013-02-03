@@ -95,6 +95,12 @@ describe EmailSpec::Matchers do
       email = Mail::Message.new(:to => nil)
       deliver_to("jimmy_bean@yahoo.com").should_not match(email)
     end
+    
+    it "should match when the email does not have a recipient and it's checked against nobody" do
+      email = Mail::Message.new
+      deliver_to.should match(email)
+      deliver_to(nil).should match(email)
+    end
 
     it "should not match when the email addresses match but the names do not" do
       email = Mail::Message.new(:to => "Jimmy Bean <jimmy_bean@yahoo.com>")
