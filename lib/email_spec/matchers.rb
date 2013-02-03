@@ -34,10 +34,10 @@ module EmailSpec
     class DeliverTo
       def initialize(expected_email_addresses_or_objects_that_respond_to_email)
         emails = expected_email_addresses_or_objects_that_respond_to_email.map do |email_or_object|
-          email_or_object.kind_of?(String) ? email_or_object : email_or_object.email
+          email_or_object && (email_or_object.kind_of?(String) ? email_or_object : email_or_object.email)
         end
 
-        @expected_recipients = Mail::ToField.new(emails).addrs.map(&:to_s).sort
+        @expected_recipients = Mail::ToField.new(emails.compact).addrs.map(&:to_s).sort
       end
 
       def description
@@ -46,7 +46,7 @@ module EmailSpec
 
       def matches?(email)
         @email = email
-        @actual_recipients = (email.header[:to].addrs || []).map(&:to_s).sort
+        @actual_recipients = ((email.header[:to] && email.header[:to].addrs) || []).map(&:to_s).sort
         @actual_recipients == @expected_recipients
       end
 
