@@ -13,7 +13,7 @@ ExampleSinatraApp.set(:environment, :test)
 Capybara.app = ExampleSinatraApp
 
 class ExampleSinatraAppWorld
-  include Capybara
+  include Capybara::DSL
 end
 
 World do
