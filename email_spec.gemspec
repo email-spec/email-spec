@@ -9,6 +9,7 @@ Gem::Specification.new do |s|
   s.date = "2012-07-22"
   s.description = "Easily test email in RSpec, Cucumber, and MiniTest"
   s.email = "ben@benmabey.com"
+  s.license = 'MIT'
   s.extra_rdoc_files = [
     "README.md",
     "MIT-LICENSE.txt"
