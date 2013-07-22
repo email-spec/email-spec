@@ -148,7 +148,7 @@ describe EmailSpec::Helpers do
       before do
         @to = "jimmy_bean@yahoo.com"
         @email = Mail::Message.new(:to => @to, :from => "foo@bar.com")
-        stub!(:mailbox_for).with(@to).and_return([@email])
+        allow(self).to receive(:mailbox_for).with(@to).and_return([@email])
       end
 
       it "should open the email from someone" do
@@ -162,7 +162,7 @@ describe EmailSpec::Helpers do
         before do
           @to = "jimmy_bean@yahoo.com"
           @email = Mail::Message.new(:to => @to, :subject => @subject)
-          stub!(:mailbox_for).with(@to).and_return([@email])
+          allow(self).to receive(:mailbox_for).with(@to).and_return([@email])
         end
 
         it "should open the email with subject" do
@@ -203,7 +203,7 @@ describe EmailSpec::Helpers do
         before do
           @to = "jimmy_bean@yahoo.com"
           @email = Mail::Message.new(:to => @to, :body => @body)
-          stub!(:mailbox_for).with(@to).and_return([@email])
+          allow(self).to receive(:mailbox_for).with(@to).and_return([@email])
         end
 
         it "should open the email with text" do
