@@ -1,3 +1,15 @@
+== 1.5.0 2012-07-22
+
+  * Upgraded use of Capybara to avoid deprecation warnings.
+  * Upgraded use of RSpec to deal with new expect API (Thomas Drake-Brockman)
+
+ === New features
+  * visit_in_email now works for emails that are not the current_email (Ernesto Tagwerker)
+  * emails can be found based on :from field (John Cant)
+
+ === Bug fixes
+  * Emails that are not found when clicking a link now raise an exception. (Adam Berlin & Alex Kramer)
+
 == 1.4.0 2012-10-30
 
   * removed jeweler in favor of just using bundler for all gem management.
