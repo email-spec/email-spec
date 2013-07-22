@@ -1,4 +1,4 @@
-require 'uri'
+  require 'uri'
 require 'email_spec/deliveries'
 
 module EmailSpec
@@ -106,7 +106,8 @@ module EmailSpec
     end
 
     def parse_email_for_link(email, text_or_regex)
-      email.should have_body_text(text_or_regex)
+      matcher = EmailSpec::Matchers::HaveBodyText.new(text_or_regex)
+      RSpec::Expectations::PositiveExpectationHandler.handle_matcher(email, matcher)
 
       url = parse_email_for_explicit_link(email, text_or_regex)
       url ||= parse_email_for_anchor_text_link(email, text_or_regex)
