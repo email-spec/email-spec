@@ -1,4 +1,4 @@
-  require 'uri'
+require 'uri'
 require 'email_spec/deliveries'
 
 module EmailSpec
@@ -180,4 +180,3 @@ module EmailSpec
 
   end
 end
-
