@@ -77,7 +77,7 @@ describe EmailSpec::Matchers do
       email = Mail::Message.new(:to => addresses)
       deliver_to(addresses).should match(email)
     end
-    
+
     it "should match when the names and email addresses match in any order" do
       addresses = ["James <james@yahoo.com>", "Karen <karen@yahoo.com>"]
       email = Mail::Message.new(:to => addresses.reverse)
@@ -112,6 +112,12 @@ describe EmailSpec::Matchers do
       message.stub(:inspect).and_return("email")
       matcher.matches?(message)
       matcher_failure_message(matcher).should == %{expected email to deliver to ["jimmy_bean@yahoo.com"], but it delivered to ["freddy_noe@yahoo.com"]}
+    end
+
+    it "should deliver to nobody when the email does not perform deliveries" do
+      email = Mail::Message.new(:to => "jimmy_bean@yahoo.com")
+      email.perform_deliveries = false
+      deliver_to("jimmy_bean@yahoo.com").should_not match(email)
     end
 
   end
@@ -153,6 +159,12 @@ describe EmailSpec::Matchers do
       matcher_failure_message(matcher).should =~ /expected .+ to deliver from "jimmy_bean@yahoo\.com", but it delivered from "freddy_noe@yahoo\.com"/
     end
 
+    it "should not deliver from anybody when perform_deliveries is false" do
+      email = Mail::Message.new(:from => "freddy_noe@yahoo.com")
+      email.perform_deliveries = false
+      deliver_from("freddy_noe@yahoo.com").should_not match(email)
+    end
+
   end
 
   describe "#bcc_to" do
@@ -183,6 +195,12 @@ describe EmailSpec::Matchers do
       bcc_to(user).should match(email)
     end
 
+    it "should bcc to nobody when the email does not perform deliveries" do
+      email = Mail::Message.new(:bcc => "jimmy_bean@yahoo.com")
+      email.perform_deliveries = false
+      bcc_to("jimmy_bean@yahoo.com").should_not match(email)
+    end
+
   end
 
   describe "#cc_to" do
@@ -211,6 +229,12 @@ describe EmailSpec::Matchers do
       user = mock("user", :email => "jimmy_bean@yahoo.com")
 
       cc_to(user).should match(email)
+    end
+
+    it "should cc to nobody when the email does not perform deliveries" do
+      email = Mail::Message.new(to: "jimmy_bean@yahoo.com")
+      email.perform_deliveries = false
+      cc_to("jimmy_bean@yahoo.com").should_not match(email)
     end
 
   end
