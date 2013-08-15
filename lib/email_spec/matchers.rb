@@ -46,7 +46,11 @@ module EmailSpec
 
       def matches?(email)
         @email = email
-        @actual_recipients = (email.header[:to].addrs || []).map(&:to_s).sort
+        if email.header[:to].nil?
+          @actual_recipients = (email.header[:bcc].addrs || []).map(&:to_s).sort
+        else
+          @actual_recipients = (email.header[:to].addrs || []).map(&:to_s).sort
+        end 
         @actual_recipients == @expected_recipients
       end
 
