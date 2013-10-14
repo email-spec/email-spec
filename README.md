@@ -329,7 +329,7 @@ And of course you can use the matcher as an assertion:
 
 ```ruby
 email = UserMailer.create_signup "jojo@yahoo.com", "Jojo Binks"
-assert_must_deliver_to "jojo@yahoo.com", email
+assert_must deliver_to("jojo@yahoo.com"), email
 ```
 
 
