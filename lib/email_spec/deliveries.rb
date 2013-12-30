@@ -38,7 +38,7 @@ module EmailSpec
 
     def last_email_sent
       if email = Email.last
-        Mail.read(email.mail)
+        parse_to_mail(email)
       else
         raise("No email has been sent!")
       end
