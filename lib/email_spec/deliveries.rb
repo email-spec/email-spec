@@ -17,10 +17,7 @@ module EmailSpec
     end
 
     def mailbox_for(address)
-      deliveries.select { |email|
-        (email.to && email.to.include?(address)) ||
-        (email.bcc && email.bcc.include?(address)) ||
-        (email.cc && email.cc.include?(address)) }
+      deliveries.select { |email| email.destinations.include?(address) }
     end
 
     protected
@@ -52,10 +49,7 @@ module EmailSpec
     end
 
     def mailbox_for(address)
-      Email.all.select { |email|
-        (email.to && email.to.include?(address)) ||
-        (email.bcc && email.bcc.include?(address)) ||
-        (email.cc && email.cc.include?(address)) }.map{ |email| parse_to_mail(email) }
+      Email.all.select { |email| email.destinations.include?(address) }.map{ |email| parse_to_mail(email) }
     end
 
     def parse_to_mail(email)
