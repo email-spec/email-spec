@@ -131,6 +131,10 @@ describe SignupMailer do
 end
 ```
 
+### Turnip
+
+If you're using [Turnip](https://github.com/jnicklas/turnip), you might be interested in this [conversion of the Cucumber steps into Turnip steps](https://github.com/jmuheim/transition/blob/master/spec/support/steps/email_steps.rb).
+
 ## Usage
 
 ### Cucumber
