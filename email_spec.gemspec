@@ -56,7 +56,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "sinatra"
   s.add_development_dependency "rack-test"
   s.add_development_dependency "mail"
-  s.add_development_dependency 'rails', ['3.0.7']
+  s.add_development_dependency 'rails', ['>= 3.0.7']
   s.add_development_dependency 'sqlite3'
 
   s.add_development_dependency 'capybara'
