@@ -30,9 +30,10 @@ module EmailSpec
         "expected #{@email.inspect} to reply to #{@expected_reply_to.address.inspect}, but it replied to #{@actual_reply_to.inspect}"
       end
 
-      def negative_failure_message
+      def failure_message_when_negated
         "expected #{@email.inspect} not to deliver to #{@expected_reply_to.address.inspect}, but it did"
       end
+      alias negative_failure_message failure_message_when_negated
     end
 
     def reply_to(email)
@@ -64,9 +65,10 @@ module EmailSpec
         "expected #{@email.inspect} to deliver to #{@expected_recipients.inspect}, but it delivered to #{@actual_recipients.inspect}"
       end
 
-      def negative_failure_message
+      def failure_message_when_negated
         "expected #{@email.inspect} not to deliver to #{@expected_recipients.inspect}, but it did"
       end
+      alias negative_failure_message failure_message_when_negated
     end
 
     def deliver_to(*expected_email_addresses_or_objects_that_respond_to_email)
@@ -97,9 +99,10 @@ module EmailSpec
         %(expected #{@email.inspect} to deliver from "#{@expected_sender.to_s}", but it delivered from "#{@actual_sender.to_s}")
       end
 
-      def negative_failure_message
+      def failure_message_when_negated
         %(expected #{@email.inspect} not to deliver from "#{@expected_sender.to_s}", but it did)
       end
+      alias negative_failure_message failure_message_when_negated
     end
 
     def deliver_from(email)
@@ -132,9 +135,10 @@ module EmailSpec
         "expected #{@email.inspect} to bcc to #{@expected_email_addresses.inspect}, but it was bcc'd to #{@actual_recipients.inspect}"
       end
 
-      def negative_failure_message
+      def failure_message_when_negated
         "expected #{@email.inspect} not to bcc to #{@expected_email_addresses.inspect}, but it did"
       end
+      alias negative_failure_message failure_message_when_negated
     end
 
     def bcc_to(*expected_email_addresses_or_objects_that_respond_to_email)
@@ -165,9 +169,10 @@ module EmailSpec
         "expected #{@email.inspect} to cc to #{@expected_email_addresses.inspect}, but it was cc'd to #{@actual_recipients.inspect}"
       end
 
-      def negative_failure_message
+      def failure_message_when_negated
         "expected #{@email.inspect} not to cc to #{@expected_email_addresses.inspect}, but it did"
       end
+      alias negative_failure_message failure_message_when_negated
     end
 
     def cc_to(*expected_email_addresses_or_objects_that_respond_to_email)
@@ -205,13 +210,14 @@ module EmailSpec
         end
       end
 
-      def negative_failure_message
+      def failure_message_when_negated
         if @expected_subject.is_a?(String)
           "expected the subject not to be #{@expected_subject.inspect} but was"
         else
           "expected the subject not to match #{@expected_subject.inspect} but #{@given_subject.inspect} does match it."
         end
       end
+      alias negative_failure_message failure_message_when_negated
     end
 
     def have_subject(subject)
@@ -249,13 +255,14 @@ module EmailSpec
         end
       end
 
-      def negative_failure_message
+      def failure_message_when_negated
         if @expected_subject.is_a?(String)
           "expected no email with the subject #{@expected_subject.inspect} but found at least one. Subjects were #{@given_emails.map(&:subject).inspect}"
         else
           "expected no email to have a subject matching #{@expected_subject.inspect} but found at least one. Subjects were #{@given_emails.map(&:subject).inspect}"
         end
       end
+      alias negative_failure_message failure_message_when_negated
     end
 
     def include_email_with_subject(*emails)
@@ -295,13 +302,14 @@ module EmailSpec
         end
       end
 
-      def negative_failure_message
+      def failure_message_when_negated
         if @expected_text.is_a?(String)
           "expected the body not to contain #{@expected_text.inspect} but was #{@given_text.inspect}"
         else
           "expected the body not to match #{@expected_text.inspect} but #{@given_text.inspect} does match it."
         end
       end
+      alias negative_failure_message failure_message_when_negated
     end
 
     def have_body_text(text)
@@ -339,13 +347,14 @@ module EmailSpec
         end
       end
 
-      def negative_failure_message
+      def failure_message_when_negated
         if @expected_value.is_a?(String)
           "expected the headers not to include '#{@expected_name}: #{@expected_value}' but they were #{mail_headers_hash(@given_header).inspect}"
         else
           "expected the headers not to include '#{@expected_name}' with a value matching #{@expected_value.inspect} but they were #{mail_headers_hash(@given_header).inspect}"
         end
       end
+      alias negative_failure_message failure_message_when_negated
 
       def mail_headers_hash(email_headers)
         email_headers.fields.inject({}) { |hash, field| hash[field.field.class::FIELD_NAME] = field.to_s; hash }

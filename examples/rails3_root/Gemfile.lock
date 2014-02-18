@@ -1,7 +1,7 @@
 PATH
   remote: ../../
   specs:
-    email_spec (1.4.0)
+    email_spec (1.5.0)
       launchy (~> 2.1)
       mail (~> 2.2)
 
@@ -69,7 +69,7 @@ GEM
       json (>= 1.4.6)
     i18n (0.5.0)
     json (1.7.5)
-    launchy (2.1.2)
+    launchy (2.4.2)
       addressable (~> 2.3)
     libwebsocket (0.1.5)
       addressable

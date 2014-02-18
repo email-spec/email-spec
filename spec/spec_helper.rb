@@ -22,7 +22,7 @@ RSpec.configure do |config|
         matcher.failure_message
   end
 
-  def matcher_negative_failure_message(matcher)
+  def matcher_failure_message_when_negated(matcher)
     matcher.respond_to?(:failure_message_for_should_not) ?
         matcher.failure_message_for_should_not :
         matcher.negative_failure_message
