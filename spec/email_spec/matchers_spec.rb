@@ -21,9 +21,10 @@ describe EmailSpec::Matchers do
       "expected #{@matcher.inspect} to match when provided #{@object_to_test_match.inspect}, but it did not"
     end
 
-    def negative_failure_message
+    def failure_message_when_negated
       "expected #{@matcher.inspect} not to match when provided #{@object_to_test_match.inspect}, but it did"
     end
+    alias negative_failure_message failure_message_when_negated
   end
 
   def match(object_to_test_match)
@@ -268,7 +269,7 @@ describe EmailSpec::Matchers do
         matcher = have_subject(/b/)
         matcher.matches?(Mail::Message.new(:subject => "bar"))
 
-        matcher_negative_failure_message(matcher).should == 'expected the subject not to match /b/ but "bar" does match it.'
+        matcher_failure_message_when_negated(matcher).should == 'expected the subject not to match /b/ but "bar" does match it.'
       end
     end
 
@@ -298,18 +299,18 @@ describe EmailSpec::Matchers do
         matcher = have_subject("bar")
         matcher.matches?(Mail::Message.new(:subject => "bar"))
 
-        matcher_negative_failure_message(matcher).should == 'expected the subject not to be "bar" but was'
+        matcher_failure_message_when_negated(matcher).should == 'expected the subject not to be "bar" but was'
       end
     end
   end
 
   describe "#include_email_with_subject" do
-    
+
     describe "when regexps are used" do
-      
+
       it "should match when any email's subject matches passed in regexp" do
         emails = [Mail::Message.new(:subject => "foobar"), Mail::Message.new(:subject => "bazqux")]
-        
+
         include_email_with_subject(/foo/).should match(emails)
         include_email_with_subject(/quux/).should_not match(emails)
       end
@@ -317,52 +318,52 @@ describe EmailSpec::Matchers do
       it "should have a helpful description" do
         matcher = include_email_with_subject(/foo/)
         matcher.matches?([])
-        
+
         matcher.description.should == 'include email with subject matching /foo/'
       end
 
       it "should offer helpful failing messages" do
         matcher = include_email_with_subject(/foo/)
         matcher.matches?([Mail::Message.new(:subject => "bar")])
-        
+
         matcher_failure_message(matcher).should == 'expected at least one email to have a subject matching /foo/, but none did. Subjects were ["bar"]'
       end
 
       it "should offer helpful negative failing messages" do
         matcher = include_email_with_subject(/foo/)
         matcher.matches?([Mail::Message.new(:subject => "foo")])
-        
-        matcher_negative_failure_message(matcher).should == 'expected no email to have a subject matching /foo/ but found at least one. Subjects were ["foo"]'
+
+        matcher_failure_message_when_negated(matcher).should == 'expected no email to have a subject matching /foo/ but found at least one. Subjects were ["foo"]'
       end
     end
-    
+
     describe "when strings are used" do
       it "should match when any email's subject equals passed in subject exactly" do
         emails = [Mail::Message.new(:subject => "foobar"), Mail::Message.new(:subject => "bazqux")]
-        
+
         include_email_with_subject("foobar").should match(emails)
         include_email_with_subject("foo").should_not match(emails)
       end
-      
+
       it "should have a helpful description" do
         matcher = include_email_with_subject("foo")
         matcher.matches?([])
-        
+
         matcher.description.should == 'include email with subject of "foo"'
       end
-      
+
       it "should offer helpful failing messages" do
         matcher = include_email_with_subject("foo")
         matcher.matches?([Mail::Message.new(:subject => "bar")])
-        
+
         matcher_failure_message(matcher).should == 'expected at least one email to have the subject "foo" but none did. Subjects were ["bar"]'
       end
-      
+
       it "should offer helpful negative failing messages" do
         matcher = include_email_with_subject("foo")
         matcher.matches?([Mail::Message.new(:subject => "foo")])
-        
-        matcher_negative_failure_message(matcher).should == 'expected no email with the subject "foo" but found at least one. Subjects were ["foo"]'
+
+        matcher_failure_message_when_negated(matcher).should == 'expected no email with the subject "foo" but found at least one. Subjects were ["foo"]'
       end
     end
   end
@@ -379,14 +380,14 @@ describe EmailSpec::Matchers do
       it "should have a helpful description" do
         matcher = have_body_text(/qux/)
         matcher.matches?(Mail::Message.new(:body => 'foo bar baz'))
-        
+
         matcher.description.should == 'have body matching /qux/'
       end
 
       it "should offer helpful failing messages" do
         matcher = have_body_text(/qux/)
         matcher.matches?(Mail::Message.new(:body => 'foo bar baz'))
-        
+
         matcher_failure_message(matcher).should == 'expected the body to match /qux/, but did not.  Actual body was: "foo bar baz"'
       end
 
@@ -394,37 +395,37 @@ describe EmailSpec::Matchers do
         matcher = have_body_text(/bar/)
         matcher.matches?(Mail::Message.new(:body => 'foo bar baz'))
 
-        matcher_negative_failure_message(matcher).should == 'expected the body not to match /bar/ but "foo bar baz" does match it.'
+        matcher_failure_message_when_negated(matcher).should == 'expected the body not to match /bar/ but "foo bar baz" does match it.'
       end
     end
-    
+
     describe "when strings are used" do
       it "should match when the body includes the text" do
         email = Mail::Message.new(:body => 'foo bar baz')
-        
+
         have_body_text('bar').should match(email)
         have_body_text('qux').should_not match(email)
       end
-      
+
       it "should have a helpful description" do
         matcher = have_body_text('qux')
         matcher.matches?(Mail::Message.new(:body => 'foo bar baz'))
-        
+
         matcher.description.should == 'have body including "qux"'
       end
-      
+
       it "should offer helpful failing messages" do
         matcher = have_body_text('qux')
         matcher.matches?(Mail::Message.new(:body => 'foo bar baz'))
-        
+
         matcher_failure_message(matcher).should == 'expected the body to contain "qux" but was "foo bar baz"'
       end
-      
+
       it "should offer helpful negative failing messages" do
         matcher = have_body_text('bar')
         matcher.matches?(Mail::Message.new(:body => 'foo bar baz'))
-        
-        matcher_negative_failure_message(matcher).should == 'expected the body not to contain "bar" but was "foo bar baz"'
+
+        matcher_failure_message_when_negated(matcher).should == 'expected the body not to contain "bar" but was "foo bar baz"'
       end
     end
 
@@ -448,7 +449,7 @@ describe EmailSpec::Matchers do
     describe "when regexps are used" do
       it "should match when header matches passed in regexp" do
         email = Mail::Message.new(:content_type => "text/html")
-        
+
         have_header(:content_type, /text/).should match(email)
         have_header(:foo, /text/).should_not match(email)
         have_header(:content_type, /bar/).should_not match(email)
@@ -457,53 +458,53 @@ describe EmailSpec::Matchers do
       it "should have a helpful description" do
         matcher = have_header(:content_type, /bar/)
         matcher.matches?(Mail::Message.new(:content_type => "text/html"))
-        
+
         matcher.description.should == 'have header content_type with value matching /bar/'
       end
 
       it "should offer helpful failing messages" do
         matcher = have_header(:content_type, /bar/)
         matcher.matches?(Mail::Message.new(:content_type => "text/html"))
-        
+
         matcher_failure_message(matcher).should == 'expected the headers to include \'content_type\' with a value matching /bar/ but they were {"content-type"=>"text/html"}'
       end
 
       it "should offer helpful negative failing messages" do
         matcher = have_header(:content_type, /text/)
         matcher.matches?(Mail::Message.new(:content_type => "text/html"))
-        
-        matcher_negative_failure_message(matcher).should == 'expected the headers not to include \'content_type\' with a value matching /text/ but they were {"content-type"=>"text/html"}'
+
+        matcher_failure_message_when_negated(matcher).should == 'expected the headers not to include \'content_type\' with a value matching /text/ but they were {"content-type"=>"text/html"}'
       end
     end
-    
+
     describe "when strings are used" do
       it "should match when header equals passed in value exactly" do
         email = Mail::Message.new(:content_type => "text/html")
-        
+
         have_header(:content_type, 'text/html').should match(email)
         have_header(:foo, 'text/html').should_not match(email)
         have_header(:content_type, 'text').should_not match(email)
       end
-      
+
       it "should have a helpful description" do
         matcher = have_header(:content_type, 'text')
         matcher.matches?(Mail::Message.new(:content_type => "text/html"))
-        
+
         matcher.description.should == 'have header content_type: text'
       end
-      
+
       it "should offer helpful failing messages" do
         matcher = have_header(:content_type, 'text')
         matcher.matches?(Mail::Message.new(:content_type => "text/html"))
-        
+
         matcher_failure_message(matcher).should == 'expected the headers to include \'content_type: text\' but they were {"content-type"=>"text/html"}'
       end
-      
+
       it "should offer helpful negative failing messages" do
         matcher = have_header(:content_type, 'text/html')
         matcher.matches?(Mail::Message.new(:content_type => "text/html"))
-        
-        matcher_negative_failure_message(matcher) == 'expected the headers not to include \'content_type: text/html\' but they were {:content_type=>"text/html"}'
+
+        matcher_failure_message_when_negated(matcher) == 'expected the headers not to include \'content_type: text/html\' but they were {:content_type=>"text/html"}'
       end
     end
   end
