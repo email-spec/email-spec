@@ -1,3 +1,10 @@
+== 1.6.0 2014-05-27
+
+  * New RSpec matcher API support (Morton Jonuschat)
+  * Turnip Doc updates (Joshua Muheim)
+  * Use Mail#destination for picking recipients (Lukasz Strzalkowski)
+  * Emails deliver to nobody when perform_deliveries is set to false (Sean Griffin)
+
 == 1.5.0 2013-07-22
 
   * Upgraded use of Capybara to avoid deprecation warnings.
