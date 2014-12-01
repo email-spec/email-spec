@@ -1,6 +1,6 @@
 require "minitest_helper"
 
-class UserMailerTest < MiniTest::Rails::ActionMailer::TestCase
+class UserMailerTest < ActionMailer::TestCase
   def setup
     @email = UserMailer.signup("jojo@yahoo.com", "Jojo Binks")
   end

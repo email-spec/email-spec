@@ -16,4 +16,5 @@ Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
   # config.mock_with :flexmock
   # config.mock_with :rr
   config.mock_with :rspec
+  config.raise_errors_for_deprecations!
 end
