@@ -12,36 +12,36 @@ describe EmailSpec::Helpers do
   describe "#parse_email_for_link" do
     it "properly finds links with text" do
       email = Mail.new(:body =>  %(<a href="/path/to/page">Click Here</a>))
-      parse_email_for_link(email, "Click Here").should == "/path/to/page"
+      expect(parse_email_for_link(email, "Click Here")).to eq("/path/to/page")
     end
 
     it "recognizes img alt properties as text" do
       email = Mail.new(:body => %(<a href="/path/to/page"><img src="http://host.com/images/image.gif" alt="an image" /></a>))
-      parse_email_for_link(email, "an image").should == "/path/to/page"
+      expect(parse_email_for_link(email, "an image")).to eq("/path/to/page")
     end
 
     it "causes a spec to fail if the body doesn't contain the text specified to click" do
       email = Mail.new(:body => "")
-      lambda { parse_email_for_link(email, "non-existent text") }.should raise_error(  RSpec::Expectations::ExpectationNotMetError)
+      expect { parse_email_for_link(email, "non-existent text") }.to raise_error(  RSpec::Expectations::ExpectationNotMetError)
     end
   end
 
   describe "#set_current_email" do
     it "should cope with a nil email" do
-      lambda do
+      expect do
         out = set_current_email(nil)
-        out.should be_nil
-        email_spec_hash[:current_email].should be_nil
-      end.should_not raise_error
+        expect(out).to be_nil
+        expect(email_spec_hash[:current_email]).to be_nil
+      end.not_to raise_error
     end
 
     it "should cope with a real email" do
       email = Mail.new
-      lambda do
+      expect do
         out = set_current_email(email)
-        out.should == email
-        email_spec_hash[:current_email].should == email
-      end.should_not raise_error
+        expect(out).to eq(email)
+        expect(email_spec_hash[:current_email]).to eq(email)
+      end.not_to raise_error
     end
 
     shared_examples_for 'something that sets the current email for recipients' do
@@ -51,33 +51,33 @@ describe EmailSpec::Helpers do
 
       it "should record that the email has been read for that recipient" do
         set_current_email(@email)
-        email_spec_hash[:read_emails]['dave@example.com'].should include(@email)
+        expect(email_spec_hash[:read_emails]['dave@example.com']).to include(@email)
       end
 
       it "should record that the email has been read for all the recipient of that type" do
         @email.send(@recipient_type) << 'dave_2@example.com'
         set_current_email(@email)
-        email_spec_hash[:read_emails]['dave@example.com'].should include(@email)
-        email_spec_hash[:read_emails]['dave_2@example.com'].should include(@email)
+        expect(email_spec_hash[:read_emails]['dave@example.com']).to include(@email)
+        expect(email_spec_hash[:read_emails]['dave_2@example.com']).to include(@email)
       end
 
       it "should record that the email is the current email for the recipient" do
         set_current_email(@email)
-        email_spec_hash[:current_emails]['dave@example.com'].should == @email
+        expect(email_spec_hash[:current_emails]['dave@example.com']).to eq(@email)
       end
 
       it "should record that the email is the current email for all the recipients of that type" do
         @email.send(@recipient_type) << 'dave_2@example.com'
         set_current_email(@email)
-        email_spec_hash[:current_emails]['dave@example.com'].should == @email
-        email_spec_hash[:current_emails]['dave_2@example.com'].should == @email
+        expect(email_spec_hash[:current_emails]['dave@example.com']).to eq(@email)
+        expect(email_spec_hash[:current_emails]['dave_2@example.com']).to eq(@email)
       end
 
       it "should overwrite current email for the recipient with this one" do
         other_mail = Mail.new
         email_spec_hash[:current_emails]['dave@example.com'] = other_mail
         set_current_email(@email)
-        email_spec_hash[:current_emails]['dave@example.com'].should == @email
+        expect(email_spec_hash[:current_emails]['dave@example.com']).to eq(@email)
       end
 
       it "should overwrite the current email for all the recipients of that type" do
@@ -86,32 +86,32 @@ describe EmailSpec::Helpers do
         email_spec_hash[:current_emails]['dave_2@example.com'] = other_mail
         @email.send(@recipient_type) << 'dave_2@example.com'
         set_current_email(@email)
-        email_spec_hash[:current_emails]['dave@example.com'].should == @email
-        email_spec_hash[:current_emails]['dave_2@example.com'].should == @email
+        expect(email_spec_hash[:current_emails]['dave@example.com']).to eq(@email)
+        expect(email_spec_hash[:current_emails]['dave_2@example.com']).to eq(@email)
       end
 
       it "should not complain when the email has recipients of that type" do
         @email.send(:"#{@recipient_type}=", nil)
-        lambda { set_current_email(@email) }.should_not raise_error
+        expect { set_current_email(@email) }.not_to raise_error
       end
     end
 
     describe "#request_uri(link)" do
       context "without query and anchor" do
         it "returns the path" do
-          request_uri('http://www.path.se/to/page').should == '/to/page'
+          expect(request_uri('http://www.path.se/to/page')).to eq('/to/page')
         end
       end
 
       context "with query and anchor" do
         it "returns the path and query and the anchor" do
-          request_uri('http://www.path.se/to/page?q=adam#task').should == '/to/page?q=adam#task'
+          expect(request_uri('http://www.path.se/to/page?q=adam#task')).to eq('/to/page?q=adam#task')
         end
       end
 
       context "with anchor" do
         it "returns the path and query and the anchor" do
-          request_uri('http://www.path.se/to/page#task').should == '/to/page#task'
+          expect(request_uri('http://www.path.se/to/page#task')).to eq('/to/page#task')
         end
       end
     end
@@ -152,7 +152,7 @@ describe EmailSpec::Helpers do
       end
 
       it "should open the email from someone" do
-        open_email(@to, :from => "foo@bar.com").should == @email
+        expect(open_email(@to, :from => "foo@bar.com")).to eq(@email)
       end
 
     end
@@ -166,7 +166,7 @@ describe EmailSpec::Helpers do
         end
 
         it "should open the email with subject" do
-          open_email(@to, :with_subject => @expected).should == @email
+          expect(open_email(@to, :with_subject => @expected)).to eq(@email)
         end
       end
 
@@ -207,7 +207,7 @@ describe EmailSpec::Helpers do
         end
 
         it "should open the email with text" do
-          open_email(@to, :with_text => @text).should == @email
+          expect(open_email(@to, :with_text => @text)).to eq(@email)
         end
       end
 
@@ -242,12 +242,12 @@ describe EmailSpec::Helpers do
     describe "when the email isn't found" do
       it "includes the mailbox that was looked in when an address was provided" do
         @email_address = "foo@bar.com"
-        expect { open_email(@email_address, :with_subject => "baz") }.to raise_error(EmailSpec::CouldNotFindEmailError) { |error| error.message.should include(@email_address) }
+        expect { open_email(@email_address, :with_subject => "baz") }.to raise_error(EmailSpec::CouldNotFindEmailError) { |error| expect(error.message).to include(@email_address) }
       end
 
       it "includes a warning that no mailboxes were searched when no address was provided" do
-        subject.stub(:last_email_address).and_return nil
-        expect { open_email(nil, :with_subject => "baz") }.to raise_error(EmailSpec::NoEmailAddressProvided) { |error| error.message.should == "No email address has been provided. Make sure current_email_address is returning something." }        
+        allow(subject).to receive(:last_email_address).and_return nil
+        expect { open_email(nil, :with_subject => "baz") }.to raise_error(EmailSpec::NoEmailAddressProvided) { |error| expect(error.message).to eq("No email address has been provided. Make sure current_email_address is returning something.") }        
       end
 
       describe "search by with_subject" do
@@ -259,15 +259,15 @@ describe EmailSpec::Helpers do
             @error = e
           end
 
-          @error.should_not be_nil, "expected an error to get thrown so we could test against it, but didn't catch one"
+          expect(@error).not_to be_nil, "expected an error to get thrown so we could test against it, but didn't catch one"
         end
 
         it "includes the subject that wasn't found in the error message" do
-          @error.message.should include(@email_subject)
+          expect(@error.message).to include(@email_subject)
         end
 
         it "includes 'with subject' in the error message" do
-          @error.message.should include('with subject')
+          expect(@error.message).to include('with subject')
         end
       end
 
@@ -280,15 +280,15 @@ describe EmailSpec::Helpers do
             @error = e
           end
 
-          @error.should_not be_nil, "expected an error to get thrown so we could test against it, but didn't catch one"
+          expect(@error).not_to be_nil, "expected an error to get thrown so we could test against it, but didn't catch one"
         end
 
         it "includes the text that wasn't found in the error message" do
-          @error.message.should include(@email_text)
+          expect(@error.message).to include(@email_text)
         end
 
         it "includes 'with text' in the error message" do
-          @error.message.should include('with text')
+          expect(@error.message).to include('with text')
         end
       end
     end

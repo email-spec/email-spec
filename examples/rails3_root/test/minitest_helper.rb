@@ -11,16 +11,9 @@ require "minitest/rails"
 # Uncomment if you want awesome colorful output
 # require "minitest/pride"
 
-class MiniTest::Rails::ActiveSupport::TestCase
-  # Setup all fixtures in test/fixtures/*.(yml|csv) for all tests in alphabetical order.
-  fixtures :all
-
-  # Add more helper methods to be used by all tests here...
-end
-
 require "email_spec"
 
-class MiniTest::Rails::ActionMailer::TestCase
+class ActionMailer::TestCase
   include EmailSpec::Helpers
   include EmailSpec::Matchers
   include ::Rails.application.routes.url_helpers

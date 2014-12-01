@@ -49,15 +49,15 @@ end
 #
 
 Then /^(?:I|they|he|she|"([^"]*?)") should receive (an|no|\d+) emails?$/ do |address, amount|
-  unread_emails_for(address).size.should == parse_email_count(amount)
+  expect(unread_emails_for(address).size).to eql parse_email_count(amount)
 end
 
 Then /^(?:I|they|he|she|"([^"]*?)") should have (an|no|\d+) emails?$/ do |address, amount|
-  mailbox_for(address).size.should == parse_email_count(amount)
+  expect(mailbox_for(address).size).to eql parse_email_count(amount)
 end
 
 Then /^(?:I|they|he|she|"([^"]*?)") should receive (an|no|\d+) emails? with subject "([^"]*?)"$/ do |address, amount, subject|
-  unread_emails_for(address).select { |m| m.subject =~ Regexp.new(Regexp.escape(subject)) }.size.should == parse_email_count(amount)
+  expect(unread_emails_for(address).select { |m| m.subject =~ Regexp.new(Regexp.escape(subject)) }.size).to eql parse_email_count(amount)
 end
 
 Then /^(?:I|they|he|she|"([^"]*?)") should receive an email with the following body:$/ do |address, expected_body|
@@ -86,7 +86,7 @@ end
 #
 
 Then /^(?:I|they|he|she) should see "([^"]*?)" in the email subject$/ do |text|
-  current_email.should have_subject(text)
+  expect(current_email).to have_subject(text)
 end
 
 Then /^(?:I|they|he|she) should see "([^"]*?)" in the email body$/ do |text|
@@ -94,36 +94,36 @@ Then /^(?:I|they|he|she) should see "([^"]*?)" in the email body$/ do |text|
     Then %(I should see "#{text}" in the html part of the email body)
     Then %(I should see "#{text}" in the text part of the email body)
   else
-    current_email.body.should =~ Regexp.new(text)
+    expect(current_email.body).to match Regexp.new(text)
   end
 end
 
 Then /^(?:I|they|he|she) should see "([^"]*?)" in the html part of the email body$/ do |text|
-  current_email.html_part.body.should =~ Regexp.new(text)
+  expect(current_email.html_part.body).to match Regexp.new(text)
 end
 
 Then /^(?:I|they|he|she) should see "([^"]*?)" in the text part of the email body$/ do |text|
-  current_email.text_part.body.should =~ Regexp.new(text)
+  expect(current_email.text_part.body).to match Regexp.new(text)
 end
 
 Then /^(?:I|they|he|she) should see "([^"]*?)" in the email body$/ do |text|
-  current_email.body.should include(text)
+  expect(current_email.body).to include(text)
 end
 
 Then /^(?:I|they|he|she) should see \/([^"]*?)\/ in the email body$/ do |text|
-  current_email.body.should =~ Regexp.new(text)
+  expect(current_email.body).to match Regexp.new(text)
 end
 
 Then /^(?:I|they|he|she) should see the email delivered from "([^"]*?)"$/ do |text|
-  current_email.should be_delivered_from(text)
+  expect(current_email).to be_delivered_from(text)
 end
 
 Then /^(?:I|they|he|she) should see "([^\"]*)" in the email "([^"]*?)" header$/ do |text, name|
-  current_email.should have_header(name, text)
+  expect(current_email).to have_header(name, text)
 end
 
 Then /^(?:I|they|he|she) should see \/([^\"]*)\/ in the email "([^"]*?)" header$/ do |text, name|
-  current_email.should have_header(name, Regexp.new(text))
+  expect(current_email).to have_header(name, Regexp.new(text))
 end
 
 #
@@ -131,28 +131,28 @@ end
 #
 
 Then /^(?:I|they|he|she) should see (an|no|\d+) attachments? with the email$/ do |amount|
-  current_email_attachments.size.should == parse_email_count(amount)
+  expect(current_email_attachments.size).to eql parse_email_count(amount)
 end
 
 Then /^there should be (an|no|\d+) attachments? named "([^"]*?)"$/ do |amount, filename|
-  current_email_attachments.select { |a| a.original_filename == filename }.size.should == parse_email_count(amount)
+  expect(current_email_attachments.select { |a| a.original_filename == filename }.size).to eql parse_email_count(amount)
 end
 
 Then /^attachment (\d+) should be named "([^"]*?)"$/ do |index, filename|
-  current_email_attachments[(index.to_i - 1)].original_filename.should == filename
+  expect(current_email_attachments[(index.to_i - 1)].original_filename).to eql filename
 end
 
 Then /^there should be (an|no|\d+) attachments? of type "([^"]*?)"$/ do |amount, content_type|
-  current_email_attachments.select { |a| a.content_type == content_type }.size.should == parse_email_count(amount)
+  expect(current_email_attachments.select { |a| a.content_type == content_type }.size).to eql parse_email_count(amount)
 end
 
 Then /^attachment (\d+) should be of type "([^"]*?)"$/ do |index, content_type|
-  current_email_attachments[(index.to_i - 1)].content_type.should == content_type
+  expect(current_email_attachments[(index.to_i - 1)].content_type).to eql content_type
 end
 
 Then /^all attachments should not be blank$/ do
   current_email_attachments.each do |attachment|
-    attachment.size.should_not == 0
+    expect(attachment.size).to_not eql 0
   end
 end
 

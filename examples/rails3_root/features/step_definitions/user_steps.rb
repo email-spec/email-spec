@@ -9,15 +9,15 @@ When /^I submit my registration information$/ do
 end
 
 Then /^(?:I|they) should receive an email with a link to a confirmation page$/ do
-  unread_emails_for(current_email_address).size.should == 1
+  expect(unread_emails_for(current_email_address).size).to eql 1
 
   # this call will store the email and you can access it with current_email
   open_last_email_for(last_email_address)
-  current_email.should have_subject(/Account confirmation/)
-  current_email.should have_body_text('Joe Someone')
+  expect(current_email).to have_subject(/Account confirmation/)
+  expect(current_email).to have_body_text('Joe Someone')
 
   click_email_link_matching /confirm/
-  page.should have_content("Confirm your new account")
+  expect(page).to have_content("Confirm your new account")
 end
 
 # Basically aliases "I should see [text]", but for third person

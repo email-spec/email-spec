@@ -10,11 +10,11 @@ end
 
 Then /^the (\w+) app should have the email steps in place$/ do |app_name|
   email_specs_path = "#{root_dir}/examples/#{app_name}_root/features/step_definitions/email_steps.rb"
-  File.exists?(email_specs_path).should == true
+  expect(File.exists?(email_specs_path)).to be true
 end
 
 Then /^I should see the following summary report:$/ do |expected_report|
-  @output.should include(expected_report)
+  expect(@output).to include(expected_report)
 end
 
 Given /^the (\w+) app is setup with the latest generators$/ do |app_name|
@@ -27,7 +27,7 @@ Given /^the (\w+) app is setup with the latest generators$/ do |app_name|
     #make sure we are listed in the bundle
     Dir.chdir(app_dir) do
       output =`bundle list`
-      output.should include('email_spec')
+      expect(output).to include('email_spec')
     end
   else
     FileUtils.mkdir_p("#{app_dir}/vendor/plugins/email_spec")
