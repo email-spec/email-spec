@@ -57,7 +57,8 @@ module EmailSpec
 
       def matches?(email)
         @email = email
-        @actual_recipients = address_array{ email.header[:to].addrs }.map(&:to_s).sort
+        recipients = email.header[:to] || email.header[:bcc]
+        @actual_recipients = address_array{ recipients  && recipients.addrs }.map(&:to_s).sort
         @actual_recipients == @expected_recipients
       end
 
