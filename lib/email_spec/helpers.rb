@@ -52,7 +52,8 @@ module EmailSpec
     end
 
     def unread_emails_for(address)
-      mailbox_for(address) - read_emails_for(address)
+      read_message_ids = read_emails_for(address).map(&:message_id)
+      mailbox_for(address).reject { |m| read_message_ids.include?(m.message_id) }
     end
 
     def read_emails_for(address)
