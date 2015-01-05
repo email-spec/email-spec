@@ -43,7 +43,12 @@ module EmailSpec
     def current_email(address=nil)
       address = convert_address(address)
       email = address ? email_spec_hash[:current_emails][address] : email_spec_hash[:current_email]
-      raise   RSpec::Expectations::ExpectationNotMetError, "Expected an open email but none was found. Did you forget to call open_email?" unless email
+      exception_class = if defined?(RSpec)
+        RSpec::Expectations::ExpectationNotMetError
+      else
+        StandardError
+      end
+      raise exception_class, "Expected an open email but none was found. Did you forget to call open_email?" unless email
       email
     end
 
@@ -108,7 +113,11 @@ module EmailSpec
 
     def parse_email_for_link(email, text_or_regex)
       matcher = EmailSpec::Matchers::HaveBodyText.new(text_or_regex)
-      RSpec::Expectations::PositiveExpectationHandler.handle_matcher(email, matcher)
+      if defined?(RSpec)
+        RSpec::Expectations::PositiveExpectationHandler.handle_matcher(email, matcher)
+      else
+        assert_must matcher, email
+      end
 
       url = parse_email_for_explicit_link(email, text_or_regex)
       url ||= parse_email_for_anchor_text_link(email, text_or_regex)
