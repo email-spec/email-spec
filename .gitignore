@@ -5,12 +5,18 @@
 *.sqlite3
 *.sw?
 **/._*
+# Rubygems
 pkg
+
 rerun.txt
-.bundle
+# RVM
 .rvmrc
+.ruby-version
+
+# Bundler
 bundle
-# http://yehudakatz.com/2010/12/16/clarifying-the-roles-of-the-gemspec-and-gemfile/
+.bundle
+
 Gemfile.lock
 
 # these are needed to remove some file copying clutter
