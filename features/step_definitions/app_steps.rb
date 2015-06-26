@@ -2,8 +2,10 @@ require 'fileutils'
 
 Given /^the (\w+) app is setup with the latest email steps$/ do |app_name|
   app_dir = File.join(root_dir, 'examples',"#{app_name}_root")
-  email_specs_path = File.join(app_dir,'features','step_definitions','email_steps.rb')
-  latest_specs_path = File.join(root_dir,'lib','generators','email_spec','steps','templates','email_steps.rb')
+  email_specs_path = File.join(app_dir, 'features', 'step_definitions',
+                               'email_steps.rb')
+  latest_specs_path = File.join(root_dir, 'lib', 'generators', 'email_spec',
+                                'steps', 'templates','email_steps.rb')
   FileUtils.rm(email_specs_path) if File.exists?(email_specs_path)
   FileUtils.cp_r(latest_specs_path, email_specs_path)
 end
