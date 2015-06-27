@@ -14,17 +14,9 @@ because your test process and server processes are distinct and therefore need a
 intermediate store for the emails.) DelayedJob and ActiveRecord Mailer will also work but
 you generally don't want to include those projects unless you need them in production.
 
-## Setup
-
-```bash
-script/plugin install git://github.com/bmabey/email-spec.git
-```
-
 ### Gem Setup
 
 ```ruby
-gem install email_spec
-
 # Gemfile
 group :test do
   gem 'email_spec'
