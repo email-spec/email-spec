@@ -43,8 +43,9 @@ Gem::Specification.new do |s|
   s.rubygems_version = "1.8.10"
   s.summary = "Easily test email in rspec and cucumber and minitest"
 
-  s.add_runtime_dependency "launchy", "~> 2.1"
-  s.add_runtime_dependency "mail", "~> 2.2"
+  s.add_dependency "htmlentities", '~> 4.3.3'
+  s.add_dependency "launchy", "~> 2.1"
+  s.add_dependency "mail", "~> 2.2"
 
   s.add_development_dependency "rake", ">= 0.8.7"
   s.add_development_dependency "cucumber", '~> 1.3.17'
