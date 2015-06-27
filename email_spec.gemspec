@@ -1,8 +1,9 @@
-# -*- encoding: utf-8 -*-
+# encoding: utf-8
+require File.expand_path("../lib/email_spec/version", __FILE__)
 
 Gem::Specification.new do |s|
   s.name = "email_spec"
-  s.version = "1.6.0"
+  s.version = EmailSpec::VERSION
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ben Mabey", "Aaron Gibralter", "Mischa Fierer"]
