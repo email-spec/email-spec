@@ -25,8 +25,8 @@ I want to verify that the example rails 3 app runs all of it's features as expec
    9 examples, 0 failures
    """
 
-   When I run "bundle exec rake minitest RAILS_ENV=test" in the rails3 app
+   When I run "bundle exec rake test RAILS_ENV=test" in the rails3 app
    Then I should see the following summary report:
    """
-   8 tests, 8 assertions, 0 failures, 0 errors, 0 skips
+   8 runs, 8 assertions, 0 failures, 0 errors, 0 skips
    """
