@@ -3,7 +3,7 @@ rvm:
   - 2.0.0
   - 2.1.0
 before_script:
-- bundle install --gemfile=examples/rails3_root/Gemfile
+- bundle install --gemfile=examples/rails4_root/Gemfile
 - bundle install --gemfile=examples/sinatra_root/Gemfile
 branches:
   only:
