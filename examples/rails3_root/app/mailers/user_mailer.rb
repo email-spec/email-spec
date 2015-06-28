@@ -1,28 +1,28 @@
 class UserMailer < ActionMailer::Base
   default :from => "admin@example.com",
           :sent_on => Time.now.to_s
-  
-  
+
+
   def signup(email, name)
     @name = name
-    
+
     mail :to => email,
          :subject => "Account confirmation"
   end
 
   def newsletter(email, name)
     @name = name
-    
+
     mail :to => email,
          :subject => "Newsletter sent"
   end
 
-  def attachments_mail(email, name)
+  def email_with_attachment(email, name)
     @name = name
-    
+
     add_attachment 'image.png'
     add_attachment 'document.pdf'
-    
+
     mail :to => email,
          :subject => "Attachments test"
   end
