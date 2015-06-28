@@ -1,0 +1,19 @@
+source 'http://rubygems.org'
+
+gem "rake", "~> 10.3.2"
+gem 'rails', '4.2.3'
+gem 'sqlite3'
+
+gem 'delayed_job', '~> 4.0.6'
+gem 'delayed_job_active_record'
+gem 'mimetype-fu', :require => 'mimetype_fu'
+gem "minitest-rails"
+
+group :test do
+  gem "cucumber-rails", :require => false
+  gem "database_cleaner"
+  gem 'capybara'
+  gem "rspec-rails"
+  gem "minitest-matchers"
+  gem "email_spec", :path => "../../", :require => "email_spec"
+end
