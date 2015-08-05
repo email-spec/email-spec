@@ -27,4 +27,6 @@ Rails4Root::Application.configure do
   # like if you have constraints or database-specific column types
   # config.active_record.schema_format = :sql
   config.active_support.deprecation = :stderr
+
+  config.active_support.test_order = :sorted
 end
