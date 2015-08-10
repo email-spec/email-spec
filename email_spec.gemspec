@@ -34,9 +34,7 @@ Gem::Specification.new do |s|
     "lib/email_spec/test_observer.rb",
     "lib/generators/email_spec/steps/USAGE",
     "lib/generators/email_spec/steps/steps_generator.rb",
-    "lib/generators/email_spec/steps/templates/email_steps.rb",
-    "rails_generators/email_spec/email_spec_generator.rb",
-    "rails_generators/email_spec/templates/email_steps.rb"
+    "lib/generators/email_spec/steps/templates/email_steps.rb"
   ]
   s.homepage = "http://github.com/bmabey/email-spec/"
   s.require_paths = ["lib"]

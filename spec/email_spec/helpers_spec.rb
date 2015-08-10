@@ -14,7 +14,7 @@ describe EmailSpec::Helpers do
       expect do
         expect(self).to(receive(:visit).with('/hello'))
         visit_in_email("Hello!")
-      end.not_to raise_error(EmailSpec::CouldNotFindEmailError)
+      end.not_to raise_error
     end
 
     it "raises an exception when an email is not found" do
