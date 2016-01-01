@@ -277,7 +277,7 @@ This checks that one of the given emails' subjects includes the subject.
 ```ruby
 email = UserMailer.create_signup("jojo@yahoo.com", "Jojo Binks")
 email2 = UserMailer.forgot_password("jojo@yahoo.com", "Jojo Binks")
-[email, email2expect(].)sto include_email_with_subject("Welcome!")
+expect([email, email2]).to include_email_with_subject("Welcome!")
 ```
 
 
