@@ -34,9 +34,7 @@ Gem::Specification.new do |s|
     "lib/email_spec/test_observer.rb",
     "lib/generators/email_spec/steps/USAGE",
     "lib/generators/email_spec/steps/steps_generator.rb",
-    "lib/generators/email_spec/steps/templates/email_steps.rb",
-    "rails_generators/email_spec/email_spec_generator.rb",
-    "rails_generators/email_spec/templates/email_steps.rb"
+    "lib/generators/email_spec/steps/templates/email_steps.rb"
   ]
   s.homepage = "http://github.com/bmabey/email-spec/"
   s.require_paths = ["lib"]
@@ -46,7 +44,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "htmlentities", '~> 4.3.3'
   s.add_dependency "launchy", "~> 2.1"
-  s.add_dependency "mail", "~> 2.2"
+  s.add_dependency "mail", "~> 2.6.3"
 
   s.add_development_dependency "rake", ">= 0.8.7"
   s.add_development_dependency "cucumber", '~> 1.3.17'
@@ -56,6 +54,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rspec", '~> 3.1'
 
   s.add_development_dependency 'capybara'
+  s.add_development_dependency 'ammeter'
   s.add_development_dependency 'database_cleaner'
 
   s.add_development_dependency "test-unit"

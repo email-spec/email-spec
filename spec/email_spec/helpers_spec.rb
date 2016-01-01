@@ -4,8 +4,23 @@ describe EmailSpec::Helpers do
   include EmailSpec::Helpers
 
   describe "#visit_in_email" do
+    it "visits the link in the email" do
+      @to = "jimmy_bean@yahoo.com"
+      @body = "<a href='/hello'>Hello!</a>"
+      @email = Mail::Message.new(:to => @to, :from => "foo@bar.com", :body => @body)
+      allow(self).to receive(:mailbox_for).with(@to).and_return([@email])
+      expect(open_email(@to, :from => "foo@bar.com")).to eq(@email)
+
+      expect do
+        expect(self).to(receive(:visit).with('/hello'))
+        visit_in_email("Hello!")
+      end.not_to raise_error
+    end
+
     it "raises an exception when an email is not found" do
-      expect { visit_in_email("Some link", "foo@bar.com") }.to raise_error(EmailSpec::CouldNotFindEmailError)
+      expect do
+        visit_in_email("Hello!", 'jon@example.com')
+      end.to raise_error(EmailSpec::CouldNotFindEmailError)
     end
   end
 
@@ -247,7 +262,7 @@ describe EmailSpec::Helpers do
 
       it "includes a warning that no mailboxes were searched when no address was provided" do
         allow(subject).to receive(:last_email_address).and_return nil
-        expect { open_email(nil, :with_subject => "baz") }.to raise_error(EmailSpec::NoEmailAddressProvided) { |error| expect(error.message).to eq("No email address has been provided. Make sure current_email_address is returning something.") }        
+        expect { open_email(nil, :with_subject => "baz") }.to raise_error(EmailSpec::NoEmailAddressProvided) { |error| expect(error.message).to eq("No email address has been provided. Make sure current_email_address is returning something.") }
       end
 
       describe "search by with_subject" do

@@ -35,7 +35,7 @@ module EmailSpec
           if m.multipart? && text_part = m.parts.detect{ |p| p.content_type.include?('text/plain') }
             if m.respond_to?(:ordered_each) # Rails 2 / TMail
               m.ordered_each{|k,v| f.write "#{k}: #{v}\n" }
-            else # Rails 3 / Mail
+            else # Rails 4 / Mail
               f.write(text_part.header.to_s + "\n")
             end
 
