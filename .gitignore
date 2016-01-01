@@ -26,3 +26,5 @@ examples/rails_root/vendor/plugins/email_spec
 examples/rails4_root/features/step_definitions/email_steps.rb
 examples/rails4_root/vendor/plugins/email_spec
 examples/sinatra_root/features/step_definitions/email_steps.rb
+
+tmp

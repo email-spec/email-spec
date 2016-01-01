@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'action_mailer'
 require 'mail'
+require 'ammeter/init'
 require File.expand_path(File.dirname(__FILE__) + '/../lib/email_spec.rb')
 
 RSpec.configure do |config|
