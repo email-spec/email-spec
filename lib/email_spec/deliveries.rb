@@ -79,7 +79,6 @@ module EmailSpec
       def mailer; ActionMailer::Base; end
       include EmailSpec::MailerDeliveries
     end
-    include EmailSpec::BackgroundProcesses::Compatibility
   end
 end
 
