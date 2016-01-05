@@ -7,7 +7,6 @@ $LOAD_PATH.unshift(File.expand_path(File.dirname(__FILE__))) unless $LOAD_PATH.i
 
 require 'htmlentities'
 require 'mail'
-require 'email_spec/background_processes'
 require 'email_spec/deliveries'
 require 'email_spec/address_converter'
 require 'email_spec/email_viewer'

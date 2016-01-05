@@ -3,15 +3,15 @@
 
 ## Email Spec
 
-A collection of matchers for RSpec/MiniTest and Cucumber steps to make testing emails go smoothly.
+A collection of matchers for RSpec, MiniTest and Cucumber steps to make testing emails go smoothly.
 
 This library works with ActionMailer and Pony.  When using it with ActionMailer it works with
-DelayedJob, ActiveRecord Mailer, and action_mailer_cache_delivery.
+ActiveRecord Mailer, and action_mailer_cache_delivery.
 
 If you are testing emails in conjunction with an automated browser solution, like Selenium,
 you will want to use [action_mailer_cache_delivery](http://rubygems.org/gems/action_mailer_cache_delivery) in your test environment.  (This is
 because your test process and server processes are distinct and therefore need an
-intermediate store for the emails.) DelayedJob and ActiveRecord Mailer will also work but
+intermediate store for the emails.) ActiveRecord Mailer will also work but
 you generally don't want to include those projects unless you need them in production.
 
 ### Gem Setup
@@ -126,6 +126,16 @@ end
 ### Turnip
 
 If you're using [Turnip](https://github.com/jnicklas/turnip), you might be interested in this [conversion of the Cucumber steps into Turnip steps](https://github.com/jmuheim/transition/blob/master/spec/support/steps/email_steps.rb).
+
+## Background Jobs
+
+If you are using a background job, you might need to use a step to process the jobs. Another alternative is to use an inline statement for your scenario.
+
+For example, for DelayedJob:
+
+```ruby
+Delayed::Worker.delay_jobs = false
+```
 
 ## Usage
 
@@ -333,4 +343,4 @@ assert_must deliver_to("jojo@yahoo.com"), email
 
 Ben Mabey, Aaron Gibralter, Mischa Fierer
 
-Please see History.txt for upcoming changsets and other contributors.
+Please see History.txt for upcoming changesets and other contributors.
