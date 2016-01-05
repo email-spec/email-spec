@@ -1,5 +1,5 @@
 
-[![Build Status](https://secure.travis-ci.org/bmabey/email-spec.png)](http://travis-ci.org/bmabey/email-spec)
+[![Build Status](https://secure.travis-ci.org/email-spec/email-spec.png)](http://travis-ci.org/email-spec/email-spec)
 
 ## Email Spec
 
