@@ -2,9 +2,11 @@ rvm:
   - 1.9.3
   - 2.0.0
   - 2.1.0
+before_install:
+  - gem update bundler
 before_script:
-- bundle install --gemfile=examples/rails4_root/Gemfile
-- bundle install --gemfile=examples/sinatra_root/Gemfile
+  - bundle install --gemfile=examples/rails4_root/Gemfile
+  - bundle install --gemfile=examples/sinatra_root/Gemfile
 branches:
   only:
     - master
