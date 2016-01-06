@@ -1,5 +1,5 @@
 
-[![Build Status](https://secure.travis-ci.org/bmabey/email-spec.png)](http://travis-ci.org/bmabey/email-spec)
+[![Build Status](https://secure.travis-ci.org/email-spec/email-spec.png)](http://travis-ci.org/email-spec/email-spec)
 
 ## Email Spec
 
@@ -56,7 +56,7 @@ Scenario: A new person signs up
     And "quentin@example.com" should receive an email   # Specify who should receive the email
 ```
 
-### RSpec
+### RSpec (3.1+)
 
 First you need to require email_spec in your spec_helper.rb:
 
@@ -170,7 +170,7 @@ Verify that the mailer is used correctly in the controller (this would apply to 
 describe "POST /signup (#signup)" do
   it "should deliver the signup email" do
     # expect
-    UserMailer.should_receive(:deliver_signup).with("email@example.com", "Jimmy Bean")
+    expect(UserMailer).to(receive(:deliver_signup).with("email@example.com", "Jimmy Bean"))
     # when
     post :signup, "Email" => "email@example.com", "Name" => "Jimmy Bean"
   end
@@ -191,19 +191,19 @@ describe "Signup Email" do
   end
 
   it "should be set to be delivered to the email passed in" do
-    @email.should deliver_to("jojo@yahoo.com")
+    expect(@email).to deliver_to("jojo@yahoo.com")
   end
 
   it "should contain the user's message in the mail body" do
-    @email.should have_body_text(/Jojo Binks/)
+    expect(@email).to have_body_text(/Jojo Binks/)
   end
 
   it "should contain a link to the confirmation link" do
-    @email.should have_body_text(/#{confirm_account_url}/)
+    expect(@email).to have_body_text(/#{confirm_account_url}/)
   end
 
   it "should have the correct subject" do
-    @email.should have_subject(/Account confirmation/)
+    expect(@email).to have_subject(/Account confirmation/)
   end
 
 end
@@ -219,7 +219,7 @@ This checks that the Reply-To header's email address (the bob@example.com of
 
 ```ruby
 email = UserMailer.create_signup("jojo@yahoo.com", "Jojo Binks")
-email.should reply_to("support@myapp.com")
+expect(email).to reply_to("support@myapp.com")
 ```
 
 
@@ -231,7 +231,7 @@ This checks that the To header's email addresses (the bob@example.com of
 
 ```ruby
 email = UserMailer.create_signup("jojo@yahoo.com", "Jojo Binks")
-email.should deliver_to("jojo@yahoo.com")
+expect(email).to deliver_to("jojo@yahoo.com")
 ```
 
 
@@ -243,7 +243,7 @@ This checks that the From header's email address (the bob@example.com of
 
 ```ruby
 email = UserMailer.create_signup("jojo@yahoo.com", "Jojo Binks")
-email.should deliver_from("sally@yahoo.com")
+expect(email).to deliver_from("sally@yahoo.com")
 ```
 
 
@@ -254,7 +254,7 @@ This checks that the BCC header's email addresses (the bob@example.com of
 
 ```ruby
 email = UserMailer.create_signup("jojo@yahoo.com", "Jojo Binks")
-email.should bcc_to("sue@yahoo.com", "bill@yahoo.com")
+expect(email).to bcc_to("sue@yahoo.com", "bill@yahoo.com")
 ```
 
 
@@ -265,7 +265,7 @@ This checks that the CC header's email addresses (the bob@example.com of
 
 ```ruby
 email = UserMailer.create_signup("jojo@yahoo.com", "Jojo Binks")
-email.should cc_to("sue@yahoo.com", "bill@yahoo.com")
+expect(email).to cc_to("sue@yahoo.com", "bill@yahoo.com")
 ```
 
 
@@ -275,7 +275,7 @@ This checks that the Subject header's value is set to the given subject.
 
 ```ruby
 email = UserMailer.create_signup("jojo@yahoo.com", "Jojo Binks")
-email.should have_subject("Welcome!")
+expect(email).to have_subject("Welcome!")
 ```
 
 
@@ -287,7 +287,7 @@ This checks that one of the given emails' subjects includes the subject.
 ```ruby
 email = UserMailer.create_signup("jojo@yahoo.com", "Jojo Binks")
 email2 = UserMailer.forgot_password("jojo@yahoo.com", "Jojo Binks")
-[email, email2].should include_email_with_subject("Welcome!")
+expect([email, email2]).to include_email_with_subject("Welcome!")
 ```
 
 
@@ -298,7 +298,7 @@ This checks that the text of the body has the given body.
 
 ```ruby
 email = UserMailer.create_signup("jojo@yahoo.com", "Jojo Binks")
-email.should have_body_text(/Hi Jojo Binks,/)
+expect(email).to have_body_text(/Hi Jojo Binks,/)
 ```
 
 
@@ -308,7 +308,7 @@ This checks that the expected key/value pair is in the headers of the email.
 
 ```ruby
 email = UserMailer.create_signup("jojo@yahoo.com", "Jojo Binks")
-email.should have_header("X-Campaign", "1234abc")
+expect(email).to have_header("X-Campaign", "1234abc")
 ```
 
 #### Using the helpers when not testing in isolation
