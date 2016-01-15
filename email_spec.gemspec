@@ -7,7 +7,6 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ben Mabey", "Aaron Gibralter", "Mischa Fierer"]
-  s.date = "2014-05-27"
   s.description = "Easily test email in RSpec, Cucumber, and MiniTest"
   s.email = "ben@benmabey.com"
   s.license = 'MIT'
