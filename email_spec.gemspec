@@ -18,23 +18,10 @@ Gem::Specification.new do |s|
     "README.md",
     "History.txt",
     "MIT-LICENSE.txt",
-    "Rakefile",
-    "lib/email-spec.rb",
-    "lib/email_spec.rb",
-    "lib/email_spec/address_converter.rb",
-    "lib/email_spec/background_processes.rb",
-    "lib/email_spec/cucumber.rb",
-    "lib/email_spec/deliveries.rb",
-    "lib/email_spec/email_viewer.rb",
-    "lib/email_spec/errors.rb",
-    "lib/email_spec/helpers.rb",
-    "lib/email_spec/mail_ext.rb",
-    "lib/email_spec/matchers.rb",
-    "lib/email_spec/test_observer.rb",
-    "lib/generators/email_spec/steps/USAGE",
-    "lib/generators/email_spec/steps/steps_generator.rb",
-    "lib/generators/email_spec/steps/templates/email_steps.rb"
+    "Rakefile"
   ]
+  s.files += Dir['examples/**/*'] + Dir['features/**/*'] + Dir['lib/**/*.rb'] +
+             Dir['spec/**/*']
   s.homepage = "http://github.com/bmabey/email-spec/"
   s.require_paths = ["lib"]
   s.rubyforge_project = "email-spec"
