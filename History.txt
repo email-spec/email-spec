@@ -1,9 +1,6 @@
-== Next
-
-  * Upgraded to RSpec 3.1 (Daniel Doubrovkine)
-
 == 2.0.0 2015-01-15
 
+  * Upgraded to RSpec 3.1 (Daniel Doubrovkine)
   * Remove integration of Delayed Job (@jeroenvandijk)
   * Better coverage for `#reply_to` (@akshayrawat)
   * Decode encoded links (@deadlyicon)
