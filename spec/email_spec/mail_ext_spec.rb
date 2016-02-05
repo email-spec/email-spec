@@ -31,4 +31,27 @@ describe EmailSpec::MailExt do
       expect(email.default_part.body).to eq(email.default_part_body)
     end
   end
+
+  describe "#html" do
+    it "returns the html part body" do
+      email = Mail.new do
+        html_part { body "This is html" }
+      end
+
+      expect(email.html).to eq("This is html")
+    end
+
+    it "returns a String" do
+      email = Mail.new do
+        html_part { body "This is html" }
+      end
+
+      expect(email.html).to be_a(String)
+    end
+
+    it "returns nil for mail with no html part" do
+      email = Mail.new
+      expect(email.html).to be_nil
+    end
+  end
 end
