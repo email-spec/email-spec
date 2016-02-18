@@ -6,6 +6,10 @@ module EmailSpec::MailExt
   def default_part_body
     default_part.body
   end
+
+  def html
+    html_part ? html_part.body.raw_source : nil
+  end
 end
 
 Mail::Message.send(:include, EmailSpec::MailExt)
