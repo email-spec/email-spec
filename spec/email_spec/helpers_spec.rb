@@ -31,7 +31,9 @@ describe EmailSpec::Helpers do
     end
 
     it "properly finds links with text surrounded by tags" do
-      email = Mail.new(:body =>  %(<a href="/path/to/page"><strong>Click Here</strong></a>))
+      email = Mail.new(:body =>  %(
+        <a href="/path/to/app">Welcome</a><a href="/path/to/page"><strong>Click Here</strong></a>))
+
       expect(parse_email_for_link(email, "Click Here")).to eq("/path/to/page")
     end
 
