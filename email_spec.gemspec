@@ -7,7 +7,6 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ben Mabey", "Aaron Gibralter", "Mischa Fierer"]
-  s.date = "2014-05-27"
   s.description = "Easily test email in RSpec, Cucumber, and MiniTest"
   s.email = "ben@benmabey.com"
   s.license = 'MIT'
@@ -19,23 +18,10 @@ Gem::Specification.new do |s|
     "README.md",
     "History.txt",
     "MIT-LICENSE.txt",
-    "Rakefile",
-    "lib/email-spec.rb",
-    "lib/email_spec.rb",
-    "lib/email_spec/address_converter.rb",
-    "lib/email_spec/background_processes.rb",
-    "lib/email_spec/cucumber.rb",
-    "lib/email_spec/deliveries.rb",
-    "lib/email_spec/email_viewer.rb",
-    "lib/email_spec/errors.rb",
-    "lib/email_spec/helpers.rb",
-    "lib/email_spec/mail_ext.rb",
-    "lib/email_spec/matchers.rb",
-    "lib/email_spec/test_observer.rb",
-    "lib/generators/email_spec/steps/USAGE",
-    "lib/generators/email_spec/steps/steps_generator.rb",
-    "lib/generators/email_spec/steps/templates/email_steps.rb"
+    "Rakefile"
   ]
+  s.files += Dir['examples/**/*'] + Dir['features/**/*'] + Dir['lib/**/*.rb'] +
+             Dir['spec/**/*']
   s.homepage = "http://github.com/bmabey/email-spec/"
   s.require_paths = ["lib"]
   s.rubyforge_project = "email-spec"
@@ -48,8 +34,7 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency "rake", ">= 0.8.7"
   s.add_development_dependency "cucumber", '~> 1.3.17'
-  s.add_development_dependency "cucumber-rails", '~> 1.4.2'
-  s.add_development_dependency "cucumber-sinatra", '~> 0.5.0'
+  s.add_development_dependency "actionmailer", "~> 4.2"
   s.add_development_dependency "rack-test"
   s.add_development_dependency "rspec", '~> 3.1'
 

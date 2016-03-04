@@ -118,7 +118,7 @@ Then /^(?:I|they) should see the email delivered from "([^"]*?)"$/ do |text|
 end
 
 Then /^(?:I|they) should see the email reply to "([^"]*?)"$/ do |text|
-  current_email.should have_reply_to(text)
+  expect(current_email).to have_reply_to(text)
 end
 
 Then /^(?:I|they) should see "([^\"]*)" in the email "([^"]*?)" header$/ do |text, name|
