@@ -3,10 +3,9 @@
 
 ## Email Spec
 
-A collection of matchers for RSpec, MiniTest and Cucumber steps to make testing emails go smoothly.
+A collection of matchers for `RSpec`, `MiniTest` and `Cucumber` steps to make testing emails go smoothly.
 
-This library works with ActionMailer and Pony.  When using it with ActionMailer it works with
-ActiveRecord Mailer, and action_mailer_cache_delivery.
+This library works with `ActionMailer` and `Pony`.  When using it with ActionMailer it works with ActiveRecord Mailer, and [action_mailer_cache_delivery](https://rubygems.org/gems/action_mailer_cache_delivery).
 
 If you are testing emails in conjunction with an automated browser solution, like Selenium,
 you will want to use [action_mailer_cache_delivery](http://rubygems.org/gems/action_mailer_cache_delivery) in your test environment.  (This is
@@ -33,8 +32,7 @@ require 'email_spec' # add this line if you use spork
 require 'email_spec/cucumber'
 ```
 
-This will load all the helpers that the steps rely on.
-It will also add a Before hook for Cucumber so that emails are cleared at the start of each scenario.
+This will load all the helpers that the steps rely on. It will also add a `Before` hook for `Cucumber` so that emails are cleared at the start of each scenario.
 
 Then:
 
@@ -42,11 +40,9 @@ Then:
 rails generate email_spec:steps
 ```
 
-This will give you a bunch of steps to get started with in step_definitions/email_steps.rb
+This will give you a bunch of steps to get started with in `step_definitions/email_steps.rb`
 
-By default, the generated file will look for email to example@example.com. You can either change this
-by editing the current_email_address method in email_steps.rb, or by simply specifying the target
-email in your features:
+By default, the generated file will look for email to example@example.com. You can either change this by editing the `current_email_address` method in `email_steps.rb`, or by simply specifying the target email in your features:
 
 ```gherkin
 Scenario: A new person signs up
@@ -62,27 +58,10 @@ First you need to require email_spec in your spec_helper.rb:
 
 ```ruby
 require "email_spec"
+require "email_spec/rspec"
 ```
 
-You will then need to include EmailSpec::Helpers and EmailSpec::Matchers in your example groups.
-If you want to have access to the helpers and matchers in all of your examples you can do the following in your spec_helper.rb:
-
-```ruby
-RSpec.configure do |config|
-  config.include(EmailSpec::Helpers)
-  config.include(EmailSpec::Matchers)
-end
-```
-
-Otherwise, you will need to include them in the example groups you wish to use them:
-
-```ruby
-describe "Signup Email" do
-  include EmailSpec::Helpers
-  include EmailSpec::Matchers
-  ...
-end
-```
+This will load all the helpers that the scenarios can count on. It will also add a `before(:each)` hook so that emails are cleared at the start of each scenario.
 
 ### MiniTest
 
