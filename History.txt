@@ -1,10 +1,20 @@
+== 2.1.0 2016-05-04
+
+  * Add Ruby 2.2.3 and 2.3.0 to Travis (@etagwerker)
+  * Fix decoding of email body before matching (@schmierkov)
+  * Invoke Reset Mailer before each scenario (@etagwerker)
+  * Add html method for email (@eliotsykes)
+  * Added actionmailer and droped cucumber-rails and cucumber-sinatra dependency (@mauro-oto)
+  * Fix regex to improve matching of link text in email (@Hirurg103)
+  * Improved README (@etagwerker)
+
 == 2.0.0 2016-01-15
 
   * Upgraded to RSpec 3.1 (Daniel Doubrovkine)
   * Remove integration of Delayed Job (@jeroenvandijk)
   * Better coverage for `#reply_to` (@akshayrawat)
   * Decode encoded links (@deadlyicon)
-  # Add Ruby 2.1.0 to Travis (@salimane)
+  * Add Ruby 2.1.0 to Travis (@salimane)
   * Upgraded Rspec and Cucumber (@dblock)
   * Don't assume Rspec is always available (@myobie)
   * Fix unread emails for cached deliverys (@thickpaddy)
