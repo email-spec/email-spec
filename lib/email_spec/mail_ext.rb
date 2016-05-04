@@ -4,7 +4,7 @@ module EmailSpec::MailExt
   end
 
   def default_part_body
-    default_part.body
+    HTMLEntities.new.decode(default_part.body)
   end
 
   def html
