@@ -140,9 +140,11 @@ module EmailSpec
       request_uri(url)
     end
 
+    HrefRegex = %r{href=['"]?([^'"]*)['"]?}
+    NotClosingARegex = %r{(?:(?!</a>).)*?}
     # e.g. Click here in  <a href="http://confirm">Click here</a>
     def parse_email_for_anchor_text_link(email, link_text)
-      if textify_images(email.default_part_body) =~ %r{<a[^>]*href=['"]?([^'"]*)['"]?[^>]*?>[^<]*?(.*?)#{link_text}(.*?)[^<]*?</a>}
+      if textify_images(email.default_part_body) =~ %r{<a[^>]*#{HrefRegex}[^>]*>#{NotClosingARegex}#{link_text}#{NotClosingARegex}</a>}
         URI.split($1)[5..-1].compact!.join("?").gsub("&amp;", "&")
         # sub correct ampersand after rails switches it (http://dev.rubyonrails.org/ticket/4002)
       else
