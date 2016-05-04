@@ -402,6 +402,13 @@ describe EmailSpec::Matchers do
     end
 
     describe "when strings are used" do
+      it "should match when the body includes text with symbols" do
+        full_name = "Jermain O'Keefe"
+        email = Mail::Message.new(body: full_name)
+
+        expect(have_body_text(full_name)).to match(email)
+      end
+
       it "should match when the body includes the text" do
         email = Mail::Message.new(:body => 'foo bar baz')
 

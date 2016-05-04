@@ -22,7 +22,7 @@ I want to verify that the example rails 4 app runs all of it's features as expec
    When I run "bundle exec rake spec RAILS_ENV=test" in the rails4 app
    Then I should see the following summary report:
    """
-   9 examples, 0 failures
+   11 examples, 0 failures
    """
 
    When I run "bundle exec rake test RAILS_ENV=test" in the rails4 app
