@@ -16,17 +16,17 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     "README.md",
-    "History.txt",
+    "Changelog.md",
     "MIT-LICENSE.txt",
     "Rakefile"
   ]
   s.files += Dir['examples/**/*'] + Dir['features/**/*'] + Dir['lib/**/*.rb'] +
              Dir['spec/**/*']
-  s.homepage = "http://github.com/bmabey/email-spec/"
+  s.homepage = "http://github.com/email-spec/email-spec/"
   s.require_paths = ["lib"]
   s.rubyforge_project = "email-spec"
   s.rubygems_version = "1.8.10"
-  s.summary = "Easily test email in rspec and cucumber and minitest"
+  s.summary = "Easily test email in RSpec, Cucumber or Minitest"
 
   s.add_dependency "htmlentities", '~> 4.3.3'
   s.add_dependency "launchy", "~> 2.1"
