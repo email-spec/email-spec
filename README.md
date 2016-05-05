@@ -202,7 +202,7 @@ expect(email).to reply_to("support@myapp.com")
 ```
 
 
-##### deliver_to(*email_addresses)
+##### deliver_to(\*email_addresses)
 alias: `be_delivered_to`
 
 This checks that the To header's email addresses (the bob@example.com of
@@ -226,7 +226,7 @@ expect(email).to deliver_from("sally@yahoo.com")
 ```
 
 
-##### bcc_to(*email_addresses)
+##### bcc_to(\*email_addresses)
 
 This checks that the BCC header's email addresses (the bob@example.com of
 "Bob Saget <bob@example.com>") are set to the addresses.
@@ -237,7 +237,7 @@ expect(email).to bcc_to("sue@yahoo.com", "bill@yahoo.com")
 ```
 
 
-##### cc_to(*email_addresses)
+##### cc_to(\*email_addresses)
 
 This checks that the CC header's email addresses (the bob@example.com of
 "Bob Saget <bob@example.com>") are set to the addresses.
@@ -317,9 +317,8 @@ email = UserMailer.create_signup "jojo@yahoo.com", "Jojo Binks"
 assert_must deliver_to("jojo@yahoo.com"), email
 ```
 
-
 ## Original Authors
 
 Ben Mabey, Aaron Gibralter, Mischa Fierer
 
-Please see History.txt for upcoming changesets and other contributors.
+Please see [Changelog.md](Changelog.md) for upcoming changes and other contributors.
