@@ -49,7 +49,7 @@ Scenario: A new person signs up
     Given I am at "/"
     When I fill in "Email" with "quentin@example.com"
     And I press "Sign up"
-    And "quentin@example.com" should receive an email   # Specify who should receive the email
+    Then "quentin@example.com" should receive an email   # Specify who should receive the email
 ```
 
 ### RSpec (3.1+)
