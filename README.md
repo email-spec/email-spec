@@ -104,7 +104,7 @@ end
 
 ### Turnip
 
-If you're using [Turnip](https://github.com/jnicklas/turnip), you might be interested in this [conversion of the Cucumber steps into Turnip steps](https://github.com/jmuheim/transition/blob/master/spec/support/steps/email_steps.rb).
+If you're using [Turnip](https://github.com/jnicklas/turnip), you might be interested in this [conversion of the Cucumber steps into Turnip steps](https://github.com/jmuheim/base/blob/7708873e77165993c2c962894c756621be1b15cc/spec/steps/email_steps.rb).
 
 ## Background Jobs
 
