@@ -37,6 +37,20 @@ describe EmailSpec::Helpers do
       expect(parse_email_for_link(email, "Click Here")).to eq("/path/to/page")
     end
 
+    it "properly finds links with tags and text in new lines" do
+      email = Mail.new(:body =>  <<-HTML
+        <a href="/path/to/app">Welcome</a>
+        <a href="/path/to/page">
+          <strong>
+            Click Here
+          </strong>
+        </a>
+        HTML
+      )
+
+      expect(parse_email_for_link(email, "Click Here")).to eq("/path/to/page")
+    end
+
     it "recognizes img alt properties as text" do
       email = Mail.new(:body => %(<a href="/path/to/page"><img src="http://host.com/images/image.gif" alt="an image" /></a>))
       expect(parse_email_for_link(email, "an image")).to eq("/path/to/page")
