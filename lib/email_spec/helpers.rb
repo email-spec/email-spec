@@ -85,7 +85,7 @@ module EmailSpec
     end
 
     def links_in_email(email)
-      links = URI.extract(email.default_part_body.to_s, ['http', 'https'])
+      links = URI::Parser.new.extract(email.default_part_body.to_s, ['http', 'https'])
       links.map{|url| HTMLEntities.new.decode(url) }.uniq
     end
 
