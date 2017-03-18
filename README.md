@@ -281,6 +281,15 @@ expect(email).to have_body_text(/Hi Jojo Binks,/)
 ```
 
 
+You can specify which part in multipart to check with `in_html_part` or
+`in_text_part`.
+
+```ruby
+email = UserMailer.("jojo@yahoo.com", "Jojo Binks")
+expect(email).to have_body_text(/This is html/).in_html_part
+expect(email).to have_body_text(/This is text/).in_text_part
+```
+
 ##### have_header(key, value)
 
 This checks that the expected key/value pair is in the headers of the email.

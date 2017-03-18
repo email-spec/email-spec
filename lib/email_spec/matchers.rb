@@ -1,3 +1,5 @@
+require_relative 'extractors'
+
 module EmailSpec
   module Matchers
     class EmailMatcher
@@ -274,6 +276,7 @@ module EmailSpec
 
       def initialize(text)
         @expected_text = text
+        @extractor = EmailSpec::Extractors::DefaultPartBody
       end
 
       def description
@@ -284,13 +287,23 @@ module EmailSpec
         end
       end
 
+      def in_html_part
+        @extractor = EmailSpec::Extractors::HtmlPartBody
+        self
+      end
+
+      def in_text_part
+        @extractor = EmailSpec::Extractors::TextPartBody
+        self
+      end
+
       def matches?(email)
         if @expected_text.is_a?(String)
-          @given_text = email.default_part_body.to_s.gsub(/\s+/, " ")
+          @given_text = @extractor.new(email).call.to_s.gsub(/\s+/, " ")
           @expected_text = @expected_text.gsub(/\s+/, " ")
           @given_text.include?(@expected_text)
         else
-          @given_text = email.default_part_body.to_s
+          @given_text = @extractor.new(email).call.to_s
           !!(@given_text =~ @expected_text)
         end
       end

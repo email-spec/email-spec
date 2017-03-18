@@ -454,6 +454,106 @@ describe EmailSpec::Matchers do
     end
   end
 
+  describe "#have_body_text", ".in_html_part" do
+    describe 'when html part is definded in mulitpart' do
+      it 'should match when the body matches regexp' do
+        email = Mail.new do
+          html_part do
+            body 'This is html'
+          end
+        end
+
+        expect(have_body_text(/This is html/).in_html_part).to match(email)
+      end
+    end
+
+    describe 'when text part is definded in mulitpart' do
+      it 'should not look at text part' do
+        email = Mail.new do
+          text_part do
+            body 'This is text'
+          end
+        end
+
+        expect(have_body_text(/This is text/).in_html_part).not_to match(email)
+      end
+    end
+
+    describe 'when html and text parts are definded in mulitpart' do
+      it 'should look at html part' do
+        email = Mail.new do
+          html_part do
+            body 'This is html'
+          end
+          text_part do
+            body 'This is text'
+          end
+        end
+
+        expect(have_body_text(/This is html/).in_html_part).to match(email)
+        expect(have_body_text(/This is text/).in_html_part).not_to match(email)
+      end
+    end
+
+    describe 'when nothing is defined in mulitpart' do
+      it 'should not look at any parts' do
+        email = Mail.new(body: 'This is body')
+
+        expect(have_body_text(/This is body/).in_html_part).not_to match(email)
+      end
+    end
+  end
+
+  describe "#have_body_text", ".in_text_part" do
+    describe 'when text part is definded in mulitpart' do
+      it 'should match when the body matches regexp' do
+        email = Mail.new do
+          text_part do
+            body 'This is text'
+          end
+        end
+
+        expect(have_body_text(/This is text/).in_text_part).to match(email)
+      end
+    end
+
+    describe 'when text and html parts are definded in mulitpart' do
+      it 'should look at text part' do
+        email = Mail.new do
+          text_part do
+            body 'This is text'
+          end
+
+          html_part do
+            body 'This is html'
+          end
+        end
+
+        expect(have_body_text(/This is text/).in_text_part).to match(email)
+        expect(have_body_text(/This is html/).in_text_part).not_to match(email)
+      end
+    end
+
+    describe 'when html part is definded in mulitpart' do
+      it 'should not look at html part' do
+        email = Mail.new do
+          html_part do
+            body "This is html"
+          end
+        end
+
+        expect(have_body_text(/This is html/).in_text_part).not_to match(email)
+      end
+    end
+
+    describe 'when nothing is defined in mulitpart' do
+      it 'should not look at any parts' do
+        email = Mail.new(body: 'This is body')
+
+        expect(have_body_text(/This is body/).in_text_part).not_to match(email)
+      end
+    end
+  end
   describe "#have_header" do
     describe "when regexps are used" do
       it "should match when header matches passed in regexp" do
