@@ -8,6 +8,9 @@ before_install:
 before_script:
   - bundle install --gemfile=examples/rails4_root/Gemfile
   - bundle install --gemfile=examples/sinatra_root/Gemfile
+script:
+  - "bundle exec rake"
+  - "bundle exec spec spec"
 branches:
   only:
     - master
