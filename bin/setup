@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+require 'pathname'
+
+puts "\n== Copying sample files =="
+unless File.exist?(".ruby-version")
+  system "cp .ruby-version.sample .ruby-version"
+  system "cd ."
+end
+
+puts "== Installing dependencies =="
+system "gem install bundler --conservative"
+
+puts "== Installing lib dependencies =="
+system "bundle check || bundle install"
+
+puts "== Installing rails 4 dependencies =="
+system "bundle install --gemfile=examples/rails4_root/Gemfile"
+
+puts "== Installing sinatra dependencies =="
+system "bundle install --gemfile=examples/sinatra_root/Gemfile"
