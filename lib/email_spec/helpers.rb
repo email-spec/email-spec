@@ -6,8 +6,8 @@ module EmailSpec
   module Helpers
     include Deliveries
 
-    A_TAG_BEGIN_REGEX = %r{<a[^>]*href=['"]?([^'"]*)['"]?[^>]*>(?:(?!</a>).)*?}
-    A_TAG_END_REGEX = %r{(?:(?!</a>).)*?</a>}
+    A_TAG_BEGIN_REGEX = %r{<a[^>]*href=['"]?([^'"]*)['"]?[^>]*>\s*(?:(?!</a>).)*?\s*}
+    A_TAG_END_REGEX = %r{\s*(?:(?!</a>).)*?\s*</a>}
 
     def visit_in_email(link_text, address = '')
       if address.nil? || address.empty?
