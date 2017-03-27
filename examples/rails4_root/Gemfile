@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem "rake", "~> 10.3.2"
-gem 'rails', '4.2.3'
+gem 'rails', '4.2.8'
 gem 'sqlite3'
 
 gem 'delayed_job', '~> 4.0.6'
