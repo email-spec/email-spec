@@ -183,6 +183,7 @@ module EmailSpec
 
 
     def mailbox_for(address)
+      address = address.email if address.respond_to?(:email)
       super(convert_address(address)) # super resides in Deliveries
     end
 
