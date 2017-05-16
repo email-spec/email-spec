@@ -1,3 +1,13 @@
+## 2.1.1 2017-05-16
+
+* Add Ruby 2.4 support to Travis:  [https://github.com/email-spec/email-spec/pull/197](https://github.com/email-spec/email-spec/pull/197) (@eitoball)
+* Suppress warnings for URI.extract: [https://github.com/email-spec/email-spec/pull/195](https://github.com/email-spec/email-spec/pull/195) (@koic)
+* Improve Regex to allow space between tags and text: [https://github.com/email-spec/email-spec/pull/194](https://github.com/email-spec/email-spec/pull/194) (@tiagotex)
+* Fix dead link in documentation: [https://github.com/email-spec/email-spec/pull/193](https://github.com/email-spec/email-spec/pull/193) (@kingdonb)
+* Relax the version for the `mail` dependency: [https://github.com/email-spec/email-spec/pull/199](https://github.com/email-spec/email-spec/pull/199) (@thorncp)
+* Add bin/setup to make it easier to get project setup (@etagwerker)
+* Changed documentation in gemspec file (@etagwerker)
+
 ## 2.1.0 2016-05-04
 
 * Add Ruby 2.2.3 and 2.3.0 to Travis (@etagwerker)
