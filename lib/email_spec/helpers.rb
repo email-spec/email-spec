@@ -46,7 +46,7 @@ module EmailSpec
     def current_email(address=nil)
       address = convert_address(address)
       email = address ? email_spec_hash[:current_emails][address] : email_spec_hash[:current_email]
-      exception_class = if defined?(RSpec)
+      exception_class = if defined?(RSpec::Expectations::ExpectationNotMetError)
         RSpec::Expectations::ExpectationNotMetError
       else
         StandardError
