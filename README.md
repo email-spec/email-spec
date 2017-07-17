@@ -70,7 +70,7 @@ end
 
 ### RSpec (3.1+)
 
-First you need to require email_spec in your spec_helper.rb:
+First you need to require `email_spec` in your `spec_helper.rb`:
 
 ```ruby
 require "email_spec"
@@ -78,6 +78,12 @@ require "email_spec/rspec"
 ```
 
 This will load all the helpers that the scenarios can count on. It will also add a `before(:each)` hook so that emails are cleared at the start of each scenario.
+
+If you are upgrading to Rails 5, make sure your `rails_helper.rb` requires `spec_helper` **after** loading the environment. For example:
+```ruby
+require File.expand_path('../../config/environment', __FILE__)
+require 'spec_helper'
+```
 
 ### MiniTest
 
