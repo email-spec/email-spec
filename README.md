@@ -52,6 +52,22 @@ Scenario: A new person signs up
     And "quentin@example.com" should receive an email   # Specify who should receive the email
 ```
 
+### Spinach
+
+To use the helpers and matchers in your Spinach steps, add this to your env.rb:
+
+```ruby
+require 'email_spec/spinach'
+```
+
+Creating shared steps (as for Cucumber above) doesn't fit so well with the Spinach ethos of very compartmentalized steps, so there is no generator for Spinach. It's easy to use the helpers/matchers in your steps. For example:
+
+```ruby
+step 'the last email sent should welcome the user' do
+  expect(last_email_sent).to have_subject('Welcome')
+end
+```
+
 ### RSpec (3.1+)
 
 First you need to require email_spec in your spec_helper.rb:
