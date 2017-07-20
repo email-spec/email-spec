@@ -30,7 +30,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "htmlentities", '~> 4.3.3'
   s.add_dependency "launchy", "~> 2.1"
-  s.add_dependency "mail", "~> 2.6"
+  s.add_dependency "mail", "~> 2.7.0.RC1"
 
   s.add_development_dependency "rake", ">= 0.8.7"
   s.add_development_dependency "cucumber", '~> 1.3.17'
