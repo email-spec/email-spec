@@ -30,6 +30,11 @@ describe EmailSpec::MailExt do
       email = Mail.new(:body => "hi")
       expect(email.default_part.body).to eq(email.default_part_body)
     end
+
+    it "compatible with ActiveSupport::SafeBuffer" do
+      email = Mail.new(:body => ActiveSupport::SafeBuffer.new("bacon &amp; pancake"))
+      expect(email.default_part_body).to eq ("bacon & pancake")
+    end
   end
 
   describe "#html" do
