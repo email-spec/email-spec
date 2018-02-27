@@ -4,7 +4,8 @@ module EmailSpec::MailExt
   end
 
   def default_part_body
-    HTMLEntities.new.decode(default_part.body)
+    # Calling to_str as we want the actual String object
+    HTMLEntities.new.decode(default_part.body.to_s.to_str)
   end
 
   def html
