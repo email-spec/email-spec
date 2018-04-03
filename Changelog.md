@@ -1,3 +1,7 @@
+## 2.2.0 2018-04-03
+
+* Support for `spinach` (@pedantic-git)
+
 ## 2.1.2 2018-04-03
 
 * Fix compatibility issue with `mail` gem (@sikachu)
