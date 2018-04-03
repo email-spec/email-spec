@@ -1,3 +1,11 @@
+## 2.1.1 2017-05-16
+
+* Suppress warnings for URI.extract (@koic)
+* Dead link removal (@kingdonb)
+* Better regexp for link searches (@tiagotex)
+* Relax version requirement for `mail` gem (@thorncp)
+* Add ruby 2.4 to the build matrix (@eitoball)
+
 ## 2.1.0 2016-05-04
 
 * Add Ruby 2.2.3 and 2.3.0 to Travis (@etagwerker)
