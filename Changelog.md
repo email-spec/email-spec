@@ -1,3 +1,8 @@
+## 2.1.2 2018-04-03
+
+* Fix compatibility issue with `mail` gem (@sikachu)
+* Fix cucumber example (@adamdawkins)
+
 ## 2.1.1 2017-05-16
 
 * Suppress warnings for URI.extract (@koic)
