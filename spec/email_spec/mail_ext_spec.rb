@@ -35,6 +35,13 @@ describe EmailSpec::MailExt do
       email = Mail.new(:body => ActiveSupport::SafeBuffer.new("bacon &amp; pancake"))
       expect(email.default_part_body).to eq ("bacon & pancake")
     end
+
+    it "decodes parts before return" do
+      email = Mail.new(:body => "hello\r\nquoted-printable")
+      email.content_transfer_encoding = 'quoted-printable'
+      expect(email.encoded).to include("hello=0D\nquoted-printable")
+      expect(email.default_part_body).to eq("hello\r\nquoted-printable")
+    end
   end
 
   describe "#html" do
