@@ -24,7 +24,6 @@ Gem::Specification.new do |s|
              Dir['spec/**/*']
   s.homepage = "http://github.com/email-spec/email-spec/"
   s.require_paths = ["lib"]
-  s.rubyforge_project = "email-spec"
   s.rubygems_version = "1.8.10"
   s.summary = "Easily test email in RSpec, Cucumber or Minitest"
 
