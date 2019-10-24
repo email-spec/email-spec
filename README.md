@@ -1,4 +1,3 @@
-
 [![Build Status](https://secure.travis-ci.org/email-spec/email-spec.svg)](http://travis-ci.org/email-spec/email-spec)
 
 ## Email Spec
@@ -338,6 +337,10 @@ And of course you can use the matcher as an assertion:
 email = UserMailer.create_signup "jojo@yahoo.com", "Jojo Binks"
 assert_must deliver_to("jojo@yahoo.com"), email
 ```
+
+## Issue triage [![Open Source Helpers](https://www.codetriage.com/email-spec/email-spec/badges/users.svg)](https://www.codetriage.com/email-spec/email-spec)
+
+You can contribute by triaging issues which may include reproducing bug reports or asking for vital information, such as version numbers or reproduction instructions. If you would like to start triaging issues, one easy way to get started is to [subscribe to email-spec on CodeTriage](https://www.codetriage.com/email-spec/email-spec).
 
 ## Original Authors
 
