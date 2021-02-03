@@ -3,6 +3,9 @@ require 'action_mailer'
 require 'mail'
 require File.expand_path(File.dirname(__FILE__) + '/../lib/email_spec.rb')
 
+# Trigger loading ActionMailer::Base
+ActionMailer::Base
+
 RSpec.configure do |config|
   config.include EmailSpec::Helpers
   config.include EmailSpec::Matchers
