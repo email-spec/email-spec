@@ -73,12 +73,19 @@ module EmailSpec
     if defined?(Pony)
       def deliveries; Pony::deliveries ; end
       include EmailSpec::MailerDeliveries
-    elsif ActionMailer::Base.delivery_method == :activerecord
-      include EmailSpec::ARMailerDeliveries
     else
-      def mailer; ActionMailer::Base; end
-      include EmailSpec::MailerDeliveries
+      ActiveSupport.on_load(:action_mailer) do
+        if delivery_method == :activerecord
+          ::EmailSpec::Helpers.include EmailSpec::ARMailerDeliveries
+        else
+          ::EmailSpec::Deliveries.module_eval do
+            def mailer
+              ActionMailer::Base
+            end
+          end
+          ::EmailSpec::Helpers.include ::EmailSpec::MailerDeliveries
+        end
+      end
     end
   end
 end
-
