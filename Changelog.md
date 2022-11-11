@@ -1,3 +1,10 @@
+## 2.2.1 2022-09-12
+
+* [Support to decode part in EmailSpec::MailExt#default_part_body](https://github.com/email-spec/email-spec/pull/211)
+* [Drop rubyforge_project from gemspec](https://github.com/email-spec/email-spec/pull/215)
+* [Avoid eagerly loading ActionMailer::Base](https://github.com/email-spec/email-spec/pull/219)
+* [README: use SVG badges](https://github.com/email-spec/email-spec/pull/217)
+
 ## 2.2.0 2018-04-03
 
 * Support for `spinach` (@pedantic-git)
