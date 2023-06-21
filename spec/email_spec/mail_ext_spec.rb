@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'active_support'
 
 describe EmailSpec::MailExt do
   describe "#default_part" do

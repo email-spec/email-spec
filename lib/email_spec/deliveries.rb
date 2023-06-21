@@ -1,5 +1,5 @@
 module EmailSpec
-  module MailerDeliveries
+  module Deliveries
     def all_emails
       deliveries
     end
@@ -9,7 +9,9 @@ module EmailSpec
     end
 
     def reset_mailer
-      if defined?(ActionMailer) && ActionMailer::Base.delivery_method == :cache
+      if defined?(ActionMailer) && ActionMailer::Base.delivery_method == :activerecord
+        Email.delete_all
+      elsif defined?(ActionMailer) && ActionMailer::Base.delivery_method == :cache
         mailer.clear_cache
       else
         deliveries.clear
@@ -23,36 +25,22 @@ module EmailSpec
     protected
 
     def deliveries
-      if ActionMailer::Base.delivery_method == :cache
+      if defined?(Pony)
+        Pony.deliveries
+      elsif ActionMailer::Base.delivery_method == :activerecord
+        Email.all.map { |email| parse_ar_to_mail(email) }
+      elsif ActionMailer::Base.delivery_method == :cache
         mailer.cached_deliveries
       else
         mailer.deliveries
       end
     end
-  end
 
-  module ARMailerDeliveries
-    def all_emails
-      Email.all.map{ |email| parse_to_mail(email) }
+    def mailer
+      ActionMailer::Base
     end
 
-    def last_email_sent
-      if email = Email.last
-        parse_to_mail(email)
-      else
-        raise("No email has been sent!")
-      end
-    end
-
-    def reset_mailer
-      Email.delete_all
-    end
-
-    def mailbox_for(address)
-      Email.all.select { |email| email.destinations.include?(address) }.map{ |email| parse_to_mail(email) }
-    end
-
-    def parse_to_mail(email)
+    def parse_ar_to_mail(email)
       Mail.read(email.mail)
     end
   end
@@ -65,26 +53,6 @@ module EmailSpec
 
       def self.mail(options)
         deliveries << build_mail(options)
-      end
-    end
-  end
-
-  module Deliveries
-    if defined?(Pony)
-      def deliveries; Pony::deliveries ; end
-      include EmailSpec::MailerDeliveries
-    else
-      ActiveSupport.on_load(:action_mailer) do
-        if delivery_method == :activerecord
-          ::EmailSpec::Helpers.include EmailSpec::ARMailerDeliveries
-        else
-          ::EmailSpec::Deliveries.module_eval do
-            def mailer
-              ActionMailer::Base
-            end
-          end
-          ::EmailSpec::Helpers.include ::EmailSpec::MailerDeliveries
-        end
       end
     end
   end
