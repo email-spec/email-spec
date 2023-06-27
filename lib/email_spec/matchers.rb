@@ -128,7 +128,7 @@ module EmailSpec
 
       def matches?(email)
         @email = email
-        @actual_recipients = address_array{ email.bcc }.sort
+        @actual_recipients = address_array { email[:bcc].formatted }.sort
         @actual_recipients == @expected_email_addresses
       end
 
@@ -162,7 +162,7 @@ module EmailSpec
 
       def matches?(email)
         @email = email
-        @actual_recipients = address_array { email.cc }.sort
+        @actual_recipients = address_array { email[:cc].formatted }.sort
         @actual_recipients == @expected_email_addresses
       end
 

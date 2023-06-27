@@ -178,6 +178,12 @@ describe EmailSpec::Matchers do
       expect(bcc_to("jimmy_bean@yahoo.com")).to match(email)
     end
 
+    it "should match when the email is set to deliver to the specified name and address" do
+      email = Mail::Message.new(:bcc => "Jimmy Bean <jimmy_bean@yahoo.com>")
+
+      expect(bcc_to("Jimmy Bean <jimmy_bean@yahoo.com>")).to match(email)
+    end
+
     it "should match when a list of emails is exact same as all of the email's recipients" do
       email = Mail::Message.new(:bcc => ["james@yahoo.com", "karen@yahoo.com"])
 
@@ -212,6 +218,12 @@ describe EmailSpec::Matchers do
       email = Mail::Message.new(:cc => "jimmy_bean@yahoo.com")
 
       expect(cc_to("jimmy_bean@yahoo.com")).to match(email)
+    end
+
+    it "should match when the email is set to deliver to the specified name and address" do
+      email = Mail::Message.new(:cc => "Jimmy Bean <jimmy_bean@yahoo.com>")
+
+      expect(cc_to("Jimmy Bean <jimmy_bean@yahoo.com>")).to match(email)
     end
 
     it "should match when a list of emails is exact same as all of the email's recipients" do
