@@ -1,3 +1,7 @@
+## 2.2.2 2023-06-26
+
+* [Defer accommodating different delivery methods to runtime](https://github.com/email-spec/email-spec/pull/224)
+
 ## 2.2.1 2022-09-12
 
 * [Support to decode part in EmailSpec::MailExt#default_part_body](https://github.com/email-spec/email-spec/pull/211)
