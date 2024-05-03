@@ -27,18 +27,18 @@ Gem::Specification.new do |s|
   s.rubygems_version = "1.8.10"
   s.summary = "Easily test email in RSpec, Cucumber or Minitest"
 
-  s.add_dependency "htmlentities", '~> 4.3.3'
-  s.add_dependency "launchy", "~> 2.1"
+  s.add_dependency "htmlentities", "~> 4.3.3"
+  s.add_dependency "launchy", ">= 2.1", "< 4.0"
   s.add_dependency "mail", "~> 2.7"
 
   s.add_development_dependency "rake", ">= 0.8.7"
-  s.add_development_dependency "cucumber", '~> 1.3.17'
+  s.add_development_dependency "cucumber", "~> 1.3.17"
   s.add_development_dependency "actionmailer", "~> 4.2"
   s.add_development_dependency "rack-test"
-  s.add_development_dependency "rspec", '~> 3.1'
+  s.add_development_dependency "rspec", "~> 3.1"
 
-  s.add_development_dependency 'capybara'
-  s.add_development_dependency 'database_cleaner'
+  s.add_development_dependency "capybara"
+  s.add_development_dependency "database_cleaner"
 
   s.add_development_dependency "test-unit"
 end
