@@ -358,7 +358,14 @@ module EmailSpec
       alias negative_failure_message failure_message_when_negated
 
       def mail_headers_hash(email_headers)
-        email_headers.fields.inject({}) { |hash, field| hash[field.field.class::FIELD_NAME] = field.to_s; hash }
+        email_headers.fields.inject({}) do |hash, field|
+          if field.field.class.const_defined?('FIELD_NAME')
+            hash[field.field.class::FIELD_NAME] = field.to_s
+          else
+            hash[field.field.class::NAME.downcase] = field.to_s
+          end
+          hash
+        end
       end
     end
 
