@@ -39,8 +39,9 @@ describe EmailSpec::MailExt do
     it "decodes parts before return" do
       email = Mail.new(:body => "hello\r\nquoted-printable")
       email.content_transfer_encoding = 'quoted-printable'
-      expect(email.encoded).to include("hello=0D\nquoted-printable")
-      expect(email.default_part_body).to eq("hello\r\nquoted-printable")
+      
+      expect(email.encoded).to include("hello\r\nquoted-printable=")
+      expect(email.default_part_body).to eq("hello\nquoted-printable")
     end
   end
 

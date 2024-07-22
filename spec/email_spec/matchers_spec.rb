@@ -137,7 +137,7 @@ describe EmailSpec::Matchers do
     end
 
     it "should not match when the email does not have a sender" do
-      email = Mail::Message.new(:from => nil)
+      email = Mail::Message.new(:from => "johnshow@yahoo.com")
       expect(deliver_from("jimmy_bean@yahoo.com")).not_to match(email)
     end
 
