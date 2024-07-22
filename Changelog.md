@@ -1,3 +1,10 @@
+## 2.3.0 2024-07-21
+
+* [Support the specified name and address for bcc_to and cc_to matchers](https://github.com/email-spec/email-spec/pull/212)
+* [Allow launchy 3.x versions](https://github.com/email-spec/email-spec/pull/226)
+* [Replace deprecated/removed File.exists? alias](https://github.com/email-spec/email-spec/pull/223)
+* [Extend have_body_text matcher to be able to specify which part in multipart to check](https://github.com/email-spec/email-spec/pull/196)
+
 ## 2.2.2 2023-06-26
 
 * [Defer accommodating different delivery methods to runtime](https://github.com/email-spec/email-spec/pull/224)
