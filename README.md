@@ -1,6 +1,6 @@
-[![Build Status](https://secure.travis-ci.org/email-spec/email-spec.svg)](http://travis-ci.org/email-spec/email-spec)
+## Email Spec 
 
-## Email Spec
+[![CI](https://github.com/email-spec/email-spec/actions/workflows/main.yml/badge.svg)](https://github.com/email-spec/email-spec/actions/workflows/main.yml)
 
 A collection of matchers for `RSpec`, `MiniTest` and `Cucumber` steps to make testing emails go smoothly.
 
