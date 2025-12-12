@@ -204,6 +204,11 @@ describe EmailSpec::Matchers do
       expect(bcc_to(user)).to match(email)
     end
 
+    it "should bcc to nobody when no BCC is specified" do
+      email = Mail::Message.new(to: "jimmy_bean@yahoo.com")
+      expect(bcc_to("jimmy_bean@yahoo.com")).not_to match(email)
+    end
+
     it "should bcc to nobody when the email does not perform deliveries" do
       email = Mail::Message.new(:bcc => "jimmy_bean@yahoo.com")
       email.perform_deliveries = false
@@ -244,6 +249,11 @@ describe EmailSpec::Matchers do
       user = double("user", :email => "jimmy_bean@yahoo.com")
 
       expect(cc_to(user)).to match(email)
+    end
+
+    it "should cc to nobody when no CC is specified" do
+      email = Mail::Message.new(to: "jimmy_bean@yahoo.com")
+      expect(cc_to("jimmy_bean@yahoo.com")).not_to match(email)
     end
 
     it "should cc to nobody when the email does not perform deliveries" do
