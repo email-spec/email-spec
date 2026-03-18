@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-gem "actionmailer", "~> 7.1.0"
+gem "actionmailer", "~> 8.1.0"
 
 group :development, :test do
   gem "appraisal"

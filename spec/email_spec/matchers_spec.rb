@@ -597,14 +597,14 @@ describe EmailSpec::Matchers do
         matcher = have_header(:content_type, /bar/)
         matcher.matches?(Mail::Message.new(:content_type => "text/html"))
 
-        expect(matcher_failure_message(matcher)).to eq('expected the headers to include \'content_type\' with a value matching /bar/ but they were {"content-type"=>"text/html"}')
+        expect(matcher_failure_message(matcher)).to eq('expected the headers to include \'content_type\' with a value matching /bar/ but they were ' + actual_content_type)
       end
 
       it "should offer helpful negative failing messages" do
         matcher = have_header(:content_type, /text/)
         matcher.matches?(Mail::Message.new(:content_type => "text/html"))
 
-        expect(matcher_failure_message_when_negated(matcher)).to eq('expected the headers not to include \'content_type\' with a value matching /text/ but they were {"content-type"=>"text/html"}')
+        expect(matcher_failure_message_when_negated(matcher)).to eq('expected the headers not to include \'content_type\' with a value matching /text/ but they were ' + actual_content_type)
       end
     end
 
@@ -628,15 +628,21 @@ describe EmailSpec::Matchers do
         matcher = have_header(:content_type, 'text')
         matcher.matches?(Mail::Message.new(:content_type => "text/html"))
 
-        expect(matcher_failure_message(matcher)).to eq('expected the headers to include \'content_type: text\' but they were {"content-type"=>"text/html"}')
+        expect(matcher_failure_message(matcher)).to eq('expected the headers to include \'content_type: text\' but they were ' + actual_content_type)
       end
 
       it "should offer helpful negative failing messages" do
         matcher = have_header(:content_type, 'text/html')
         matcher.matches?(Mail::Message.new(:content_type => "text/html"))
 
-        matcher_failure_message_when_negated(matcher) == 'expected the headers not to include \'content_type: text/html\' but they were {:content_type=>"text/html"}'
+        matcher_failure_message_when_negated(matcher) == 'expected the headers not to include \'content_type: text/html\' but they were ' + actual_content_type
       end
+    end
+
+    def actual_content_type
+      # TODO: Ruby 3.4 changed hash output format to include spaces
+      # Whenever support for 3.3 and earlier is dropped, this can convert back to a string
+      {'content-type' => 'text/html' }.inspect
     end
   end
 end

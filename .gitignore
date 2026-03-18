@@ -18,6 +18,7 @@ bundle
 .bundle
 
 Gemfile.lock
+gemfiles/*.lock
 
 # these are needed to remove some file copying clutter
 # that comes out of testing and is not intended to be checked in
