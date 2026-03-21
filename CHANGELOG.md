@@ -1,3 +1,10 @@
+## 2.3.1 2026-03-21
+
+* [Fix CC/BCC failing on nil `.cc` or `.bcc` values](https://github.com/email-spec/email-spec/pull/229)
+* [Loosen dependency lock on htmlentities](https://github.com/email-spec/email-spec/pull/230)
+* [Drop EOL Rails versions from appraisals, update CI matrix, and version bump](https://github.com/email-spec/email-spec/pull/231)
+* [Update CI Badge in README.md](https://github.com/email-spec/email-spec/commit/eb2844f)
+
 ## 2.3.0 2024-07-21
 
 * [Support the specified name and address for bcc_to and cc_to matchers](https://github.com/email-spec/email-spec/pull/212)
