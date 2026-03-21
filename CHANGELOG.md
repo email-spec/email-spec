@@ -1,4 +1,4 @@
-## 2.3.1 2026-03-18
+## 2.3.1 2026-03-21
 
 * [Fix CC/BCC failing on nil `.cc` or `.bcc` values](https://github.com/email-spec/email-spec/pull/229)
 * [Loosen dependency lock on htmlentities](https://github.com/email-spec/email-spec/pull/230)
